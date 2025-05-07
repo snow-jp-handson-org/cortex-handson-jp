@@ -44,14 +44,6 @@ ANALYST_API_ENDPOINT = "/api/v2/cortex/analyst/message"
 ANALYST_API_TIMEOUT = 50  # 秒
 
 # モデル設定
-# 埋め込みモデル選択肢
-EMBEDDING_MODELS = [
-    "multilingual-e5-large",
-    "voyage-multilingual-2",
-    "snowflake-arctic-embed-l-v2.0",
-    "nv-embed-qa-4"
-]
-
 # COMPLETE関数用のLLMモデル選択肢
 COMPLETE_MODELS = [
     "claude-3-5-sonnet",
@@ -865,12 +857,6 @@ selected_function = st.sidebar.radio(
 st.sidebar.title("モデル設定")
 
 # モデル選択UI
-embedding_model = st.sidebar.selectbox(
-    "Embeddingモデルを選択してください",
-    EMBEDDING_MODELS,
-    index=0
-)
-
 complete_model = st.sidebar.selectbox(
     "Completeモデルを選択してください",
     COMPLETE_MODELS,
