@@ -18,21 +18,21 @@ SELECT SNOWFLAKE.CORTEX.SPLIT_TEXT_RECURSIVE_CHARACTER(
     2        -- オーバーラップの文字数
 ) as split_result;
 
--- Streamlitの271行目付近の『★★★修正対象★★★』を書き換えてみましょう
+-- Streamlitの257行目付近の『★★★修正対象★★★』を書き換えてみましょう
 
 
 
 -- TRANSLATE関数
 SELECT SNOWFLAKE.CORTEX.TRANSLATE('こんにちは！あなたは誰ですか？', '', 'en') as translated;
 
--- Streamlitの259行目付近の『★★★修正対象★★★』を書き換えてみましょう
+-- Streamlitの242行目付近の『★★★修正対象★★★』を書き換えてみましょう
 
 
 
 -- SENTIMENT関数
 SELECT SNOWFLAKE.CORTEX.SENTIMENT('This is really the best!') as score;
 
--- Streamlitの264行目付近の『★★★修正対象★★★』を書き換えてみましょう
+-- Streamlitの247行目付近の『★★★修正対象★★★』を書き換えてみましょう
 
 
 
@@ -40,7 +40,7 @@ SELECT SNOWFLAKE.CORTEX.SENTIMENT('This is really the best!') as score;
 -- (EMBED_TEXT_1024関数)
 SELECT SNOWFLAKE.CORTEX.EMBED_TEXT_1024('multilingual-e5-large', '今日は仕事が忙しいですね。');
 
--- Streamlitの308行目付近の『★★★修正対象★★★』を書き換えてみましょう
+-- Streamlitの291行目付近の『★★★修正対象★★★』を書き換えてみましょう
 
 -- Streamlitで実際にデータ準備をしてみましょう
 
@@ -60,7 +60,7 @@ SELECT
         }
     ) as classification;
 
--- Streamlitの592行目付近の『★★★修正対象★★★』を書き換えてみましょう
+-- Streamlitの575行目付近の『★★★修正対象★★★』を書き換えてみましょう
 
 
 
@@ -114,14 +114,14 @@ SELECT SNOWFLAKE.CORTEX.COMPLETE(
     }
 ) as result;
 
--- Streamlitの708行目付近の『★★★修正対象★★★』を書き換えてみましょう
+-- Streamlitの691行目付近の『★★★修正対象★★★』を書き換えてみましょう
 
 
 
 -- ベクトル類似度関数
 SELECT VECTOR_COSINE_SIMILARITY([0.1, 0.5, 0.2, 0.8]::VECTOR(FLOAT, 4), [-0.1, 0.7, 0.3, -0.4]::VECTOR(FLOAT, 4)) AS similarity;
 
--- Streamlitの1945行目付近の『★★★修正対象★★★』を書き換えてみましょう
+-- Streamlitの1543行目付近の『★★★修正対象★★★』を書き換えてみましょう
 
 -- Streamlitで実際に顧客の声分析を使ってみましょう
 
@@ -134,7 +134,7 @@ SELECT VECTOR_COSINE_SIMILARITY([0.1, 0.5, 0.2, 0.8]::VECTOR(FLOAT, 4), [-0.1, 0
 -- COMPLETE関数
 SELECT SNOWFLAKE.CORTEX.COMPLETE('claude-3-5-sonnet', 'あなたは何ができますか？');
 
--- Streamlitの2070行目付近のCOMPLETE関数を見てみましょう
+-- Streamlitの572行目付近のCOMPLETE関数を見てみましょう
 -- StreamlitではSnowparkのCOMPLETE関数を用いています
 -- 修正は不要です
 
