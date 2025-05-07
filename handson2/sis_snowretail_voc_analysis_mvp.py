@@ -32,7 +32,6 @@ import plotly.express as px
 
 # Snowflake関連ライブラリ
 from snowflake.snowpark.context import get_active_session
-from snowflake.cortex import Complete as CompleteText
 from snowflake.core import Root
 
 # =========================================================
