@@ -66,7 +66,7 @@ SELECT
 
 -- COMPLETE関数 (with 構造化出力)
 SELECT SNOWFLAKE.CORTEX.COMPLETE(
-    'claude-3-5-sonnet',  -- 使用するLLMモデル
+    'claude-4-sonnet',  -- 使用するLLMモデル
     [
         {
             'role': 'system',
@@ -132,7 +132,7 @@ SELECT VECTOR_COSINE_SIMILARITY([0.1, 0.5, 0.2, 0.8]::VECTOR(FLOAT, 4), [-0.1, 0
 
 
 -- COMPLETE関数
-SELECT SNOWFLAKE.CORTEX.COMPLETE('claude-3-5-sonnet', 'あなたは何ができますか？');
+SELECT SNOWFLAKE.CORTEX.COMPLETE('claude-4-sonnet', 'あなたは何ができますか？');
 
 -- Streamlitの572行目付近のCOMPLETE関数を見てみましょう
 -- StreamlitではSnowparkのCOMPLETE関数を用いています

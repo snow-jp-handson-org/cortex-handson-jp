@@ -46,9 +46,13 @@ ANALYST_API_TIMEOUT = 50  # 秒
 # モデル設定
 # COMPLETE関数用のLLMモデル選択肢
 COMPLETE_MODELS = [
+    "claude-4-sonnet",
+    "claude-3-7-sonnet",
     "claude-3-5-sonnet",
+    "claude-4-opus",
     "deepseek-r1",
     "mistral-large2",
+    "llama4-maverick",
     "llama3.3-70b",
     "snowflake-llama-3.3-70b"
 ]
