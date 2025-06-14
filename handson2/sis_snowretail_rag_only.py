@@ -66,6 +66,14 @@ DEFAULT_CATEGORIES = [
     "その他"
 ]
 
+# サンプル質問
+SAMPLE_QUESTIONS = [
+    "品切れを防ぐための在庫管理の方法は？",
+    "返品ポリシーについて教えてください。",
+    "売場の清掃や整理整頓の基準を教えてください。"
+]
+
+
 # =========================================================
 # Snowflake接続と共通ユーティリティ関数
 # =========================================================
@@ -125,6 +133,12 @@ st.info("""
 Cortex Search Serviceはドキュメントの更新に伴うコンピューティングコスト以外にも、インデックス化されたデータサイズに対しての料金も発生します。長期間使用しない場合はCortex Search Serviceを削除するなどをご検討ください。
 """)
 
+# サンプル質問の表示
+st.markdown("#### サンプル質問")
+for q in SAMPLE_QUESTIONS:
+    st.markdown(f"- {q}")
+
+
 # Snowflake Root オブジェクトの初期化
 root = Root(snowflake_session)
 
@@ -159,6 +173,7 @@ for message in st.session_state.rag_messages:
                     **部署**: {doc['department']}  
                     **内容**: {doc['content'][:200]}...
                     """)
+
 
 # ユーザー入力の処理
 if prompt := st.chat_input("質問を入力してください"):
