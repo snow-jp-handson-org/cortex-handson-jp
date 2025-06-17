@@ -11,7 +11,7 @@
 # - ベクトル検索によるレビュー検索
 #
 # Created by Takuya Shoji @Snowflake
-# 最終更新: 2025/05/27
+# 最終更新: 2025/06/17
 # =========================================================
 
 # =========================================================
@@ -47,7 +47,7 @@ EMBEDDING_MODELS = [
     "nv-embed-qa-4"
 ]
 
-# COMPLETE関数用のLLMモデル選択肢
+# AI_COMPLETE関数用のLLMモデル選択肢
 COMPLETE_MODELS = [
     "claude-3-5-sonnet",
     "claude-3-7-sonnet",
@@ -242,23 +242,23 @@ def process_review_chunks() -> bool:
             # ステップ3: レビュー全体の感情分析
             # 全体のレビューテキストを英語に翻訳
             translated_full_text = snowflake_session.sql("""
-                SELECT SNOWFLAKE.CORTEX.『★★★修正対象★★★』(?, '', '『★★★修正対象★★★』') as translated
+                SELECT SNOWFLAKE.CORTEX.★★★修正対象★★★(?, '', '★★★修正対象★★★') as translated
             """, params=[review['REVIEW_TEXT']]).collect()[0]['TRANSLATED']
             
             # レビュー全体の感情分析スコアの計算（英訳したテキストを使用）
             sentiment_score = snowflake_session.sql("""
-                SELECT SNOWFLAKE.CORTEX.『★★★修正対象★★★』(?) as score
+                SELECT SNOWFLAKE.CORTEX.★★★修正対象★★★(?) as score
             """, params=[translated_full_text]).collect()[0]['SCORE']
             
             # ステップ4: テキストをチャンクに分割
             chunks = snowflake_session.sql("""
                 SELECT t.value as chunk
                 FROM (
-                    SELECT SNOWFLAKE.CORTEX.『★★★修正対象★★★』(
+                    SELECT SNOWFLAKE.CORTEX.★★★修正対象★★★(
                         ?,
                         'none',  -- 区切り方法（段落や文など）
-                        『★★★修正対象★★★』,     -- 最大チャンクサイズ（文字数）
-                        『★★★修正対象★★★』        -- オーバーラップの文字数
+                        ★★★修正対象★★★,     -- 最大チャンクサイズ（文字数）
+                        ★★★修正対象★★★        -- オーバーラップの文字数
                     ) as split_result
                 ),
                 LATERAL FLATTEN(input => split_result) t
@@ -291,7 +291,7 @@ def process_review_chunks() -> bool:
                         ?,
                         ?,
                         ?,
-                        SNOWFLAKE.CORTEX.『★★★修正対象★★★』(?, ?),
+                        SNOWFLAKE.CORTEX.★★★修正対象★★★(?, ?),
                         ?
                 """, params=[
                     review['REVIEW_ID'],
@@ -575,12 +575,9 @@ def generate_review_tags() -> bool:
                 # CLASSIFY_TEXT関数を使用してレビューテキストを特定のカテゴリに分類
                 result = snowflake_session.sql("""
                     SELECT 
-                        SNOWFLAKE.CORTEX.『★★★修正対象★★★』(
+                        SNOWFLAKE.CORTEX.★★★修正対象★★★(
                             ?,  -- 分類するテキスト
                             PARSE_JSON(?),  -- 分類カテゴリのリスト
-                            {
-                                '『★★★修正対象★★★』': '『★★★修正対象★★★』'
-                            }
                         ) as classification
                 """, params=[
                     review['REVIEW_TEXT'],
@@ -631,11 +628,11 @@ def extract_important_words() -> bool:
     このプロセスでは以下の処理を行います：
     1. 単語抽出がまだ行われていないレビューを取得
     2. レビューを10件ずつのバッチに分割
-    3. 各バッチ内の複数レビューを一度のCOMPLETE関数呼び出しでまとめて処理
+    3. 各バッチ内の複数レビューを一度のAI_COMPLETE関数呼び出しでまとめて処理
     4. 単語の品詞と出現頻度を分析
     5. 結果をREVIEW_WORDSテーブルに保存
     
-    COMPLETE関数は構造化された出力形式（JSON）を指定して実行され、
+    AI_COMPLETE関数は構造化された出力形式（JSON）を指定して実行され、
     テキスト内の重要な単語、その品詞、出現頻度を抽出します。
     これにより、頻出単語や特徴的な表現を分析できます。
     
@@ -689,66 +686,44 @@ def extract_important_words() -> bool:
                         "text": review['REVIEW_TEXT']
                     })
                 
-                # ステップ2: 複数レビューを一度のCOMPLETE呼び出しで処理
+                # ステップ2: 複数レビューを一度のAI_COMPLETE呼び出しで処理
                 result = snowflake_session.sql("""
-                    SELECT SNOWFLAKE.CORTEX.『★★★修正対象★★★』(
+                    SELECT ★★★修正対象★★★(
                         ?,  -- 使用するLLMモデル
-                        [
-                            {
-                                'role': 'system',
-                                'content': '『★★★修正対象★★★』'
-                            },
-                            {
-                                'role': 'user',
-                                'content': ?  -- 分析する複数レビューテキスト（JSONフォーマット）
-                            }
-                        ],
+                        'テキストから重要な単語を抽出し、品詞と出現回数を分析してください。対象テキスト：明日の東日本は広い範囲で大雪となるでしょう。',  -- プロンプト
                         {
-                            'temperature': 0,  -- 生成結果の多様性（0=決定的な出力）
-                            'max_tokens': 2000,  -- 最大応答トークン数を増やす
-                            'response_format': {
-                                'type': 'json',
-                                'schema': {
-                                    'type': 'object',
-                                    'properties': {
-                                        'reviews_analysis': {
-                                            'type': 'array',
-                                            'items': {
-                                                'type': 'object',
-                                                'properties': {
-                                                    'review_id': {
-                                                        'type': 'string',
-                                                        'description': 'レビューのID'
-                                                    },
-                                                    'words': {
-                                                        'type': 'array',
-                                                        'items': {
-                                                            'type': 'object',
-                                                            'properties': {
-                                                                'word': {
-                                                                    'type': 'string',
-                                                                    'description': '抽出された単語'
-                                                                },
-                                                                'type': {
-                                                                    'type': 'string',
-                                                                    'enum': ['名詞', '動詞', '形容詞'],
-                                                                    'description': '品詞（名詞、動詞、形容詞のいずれか）'
-                                                                },
-                                                                'frequency': {
-                                                                    'type': 'integer',
-                                                                    'description': '単語の出現回数'
-                                                                }
-                                                            },
-                                                            'required': ['word', 'type', 'frequency']
-                                                        }
-                                                    }
+                            'temperature': 0,  -- 生成結果の多様性
+                            'max_tokens': 1000  -- 最大応答トークン数
+                        },
+                        {
+                            'type': 'json',
+                            'schema': {
+                                'type': 'object',
+                                'properties': {
+                                    'words': {
+                                        'type': 'array',
+                                        'items': {
+                                            'type': 'object',
+                                            'properties': {
+                                                'word': {
+                                                    'type': 'string',
+                                                    'description': '抽出された単語'
                                                 },
-                                                'required': ['review_id', 'words']
-                                            }
+                                                'type': {
+                                                    'type': 'string',
+                                                    'enum': ['名詞', '動詞', '形容詞'],
+                                                    'description': '品詞（名詞、動詞、形容詞のいずれか）'
+                                                },
+                                                'frequency': {
+                                                    'type': 'integer',
+                                                    'description': '単語の出現回数'
+                                                }
+                                            },
+                                            'required': ['word', 'type', 'frequency']
                                         }
-                                    },
-                                    'required': ['reviews_analysis']
-                                }
+                                    }
+                                },
+                                'required': ['words']
                             }
                         }
                     ) as result
@@ -1423,14 +1398,14 @@ def render_management_page():
     st.info("""
     レビューテキストから重要な単語を抽出し、その品詞や出現頻度を分析します。
     
-    **使用AI機能**: `COMPLETE関数の構造化出力機能`
+    **使用AI機能**: `AI_COMPLETE関数の構造化出力機能`
     
-    このプロセスでは、COMPLETE関数の構造化出力機能を使用して各レビューから重要な単語 (名詞、動詞、形容詞) を抽出し、
+    このプロセスでは、AI_COMPLETE関数の構造化出力機能を使用して各レビューから重要な単語 (名詞、動詞、形容詞) を抽出し、
     それぞれの出現回数をカウントします。抽出された単語は「単語分析」タブで確認できます。
     
     **処理内容**:
     1. 未処理のレビューデータを取得
-    2. 10件ずつのバッチで処理を実行 (COMPLETE関数の構造化出力機能)
+    2. 10件ずつのバッチで処理を実行 (AI_COMPLETE関数の構造化出力機能)
     3. 重要単語の抽出とその品詞の判定
     4. 単語の出現回数の集計
     5. 結果をREVIEW_WORDSテーブルに保存
@@ -1543,12 +1518,12 @@ def render_vector_search():
                         ca.chunked_text,
                         ca.sentiment_score,
                         t.category_name,
-                        『★★★修正対象★★★』(ca.embedding, (SELECT vector FROM query_embedding)) as similarity_score
+                        ★★★修正対象★★★(ca.embedding, (SELECT vector FROM query_embedding)) as similarity_score
                     FROM CUSTOMER_ANALYSIS ca
                     JOIN CUSTOMER_REVIEWS r ON ca.review_id = r.review_id
                     LEFT JOIN REVIEW_TAGS t ON r.review_id = t.review_id
                     WHERE ca.embedding IS NOT NULL
-                    AND 『★★★修正対象★★★』(ca.embedding, (SELECT vector FROM query_embedding)) >= ?
+                    AND ★★★修正対象★★★(ca.embedding, (SELECT vector FROM query_embedding)) >= ?
                     ORDER BY similarity_score DESC
                     LIMIT ?
                 """, params=[search_query, min_score, top_k]).collect()
