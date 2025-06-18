@@ -70,43 +70,52 @@ SELECT
 -- Streamlitの578行目付近の『★★★修正対象★★★』を書き換えてみましょう
 
 
--- AI_COMPLETE関数による構造化出力
-SELECT AI_COMPLETE(
-    'llama4-maverick',  -- 使用するLLMモデル
-    'テキストから重要な単語を抽出し、品詞と出現回数を分析してください。対象テキスト：明日の東日本は広い範囲で大雪となるでしょう。',  -- プロンプト
+-- COMPLETE関数による構造化出力
+SELECT SNOWFLAKE.CORTEX.COMPLETE(
+    'claude-3-5-sonnet',  -- 使用するLLMモデル
+    [
+        {
+            'role': 'system',
+            'content': 'テキストから重要な単語を抽出し、品詞と出現回数を分析してください。'
+        },
+        {
+            'role': 'user',
+            'content': '明日の東日本は広い範囲で大雪となるでしょう。'  -- 分析するレビューテキスト
+        }
+    ],
     {
-        'temperature': 0,  -- 生成結果の多様性
-        'max_tokens': 1000  -- 最大応答トークン数
-    },
-    {
-        'type': 'json',
-        'schema': {
-            'type': 'object',
-            'properties': {
-                'words': {
-                    'type': 'array',
-                    'items': {
-                        'type': 'object',
-                        'properties': {
-                            'word': {
-                                'type': 'string',
-                                'description': '抽出された単語'
+        'temperature': 0,  -- 生成結果の多様性（0=決定的な出力）
+        'max_tokens': 1000,  -- 最大応答トークン数
+        'response_format': {
+            'type': 'json',
+            'schema': {
+                'type': 'object',
+                'properties': {
+                    'words': {
+                        'type': 'array',
+                        'items': {
+                            'type': 'object',
+                            'properties': {
+                                'word': {
+                                    'type': 'string',
+                                    'description': '抽出された単語'
+                                },
+                                'type': {
+                                    'type': 'string',
+                                    'enum': ['名詞', '動詞', '形容詞'],
+                                    'description': '品詞（名詞、動詞、形容詞のいずれか）'
+                                },
+                                'frequency': {
+                                    'type': 'integer',
+                                    'description': '単語の出現回数'
+                                }
                             },
-                            'type': {
-                                'type': 'string',
-                                'enum': ['名詞', '動詞', '形容詞'],
-                                'description': '品詞（名詞、動詞、形容詞のいずれか）'
-                            },
-                            'frequency': {
-                                'type': 'integer',
-                                'description': '単語の出現回数'
-                            }
-                        },
-                        'required': ['word', 'type', 'frequency']
+                            'required': ['word', 'type', 'frequency']
+                        }
                     }
-                }
-            },
-            'required': ['words']
+                },
+                'required': ['words']
+            }
         }
     }
 ) as result;
