@@ -577,7 +577,7 @@ def generate_review_tags() -> bool:
                     SELECT 
                         SNOWFLAKE.CORTEX.CLASSIFY_TEXT(
                             ?,  -- 分類するテキスト
-                            PARSE_JSON(?),  -- 分類カテゴリのリスト
+                            PARSE_JSON(?)  -- 分類カテゴリのリスト
                         ) as classification
                 """, params=[
                     review['REVIEW_TEXT'],
