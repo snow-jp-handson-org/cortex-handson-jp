@@ -256,12 +256,12 @@ def process_review_chunks() -> bool:
             # ステップ3: レビュー全体の感情分析
             # 全体のレビューテキストを英語に翻訳
             translated_full_text = snowflake_session.sql("""
-                SELECT SNOWFLAKE.CORTEX.『★★★修正対象★★★』(?, '', '『★★★修正対象★★★』') as translated
+                SELECT SNOWFLAKE.CORTEX.★★★修正対象★★★(?, '', '★★★修正対象★★★') as translated
             """, params=[review['REVIEW_TEXT']]).collect()[0]['TRANSLATED']
             
             # レビュー全体の感情分析スコアの計算（英訳したテキストを使用）
             sentiment_score = snowflake_session.sql("""
-                SELECT SNOWFLAKE.CORTEX.『★★★修正対象★★★』(?) as score
+                SELECT SNOWFLAKE.CORTEX.★★★修正対象★★★(?) as score
             """, params=[translated_full_text]).collect()[0]['SCORE']
             
             # ステップ4: テキストをチャンクに分割
