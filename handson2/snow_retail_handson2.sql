@@ -70,24 +70,15 @@ SELECT
 -- Streamlitの578行目付近の『★★★修正対象★★★』を書き換えてみましょう
 
 
-
--- COMPLETE関数 (with 構造化出力)
-SELECT SNOWFLAKE.CORTEX.COMPLETE(
+-- AI_COMPLETE関数による構造化出力
+SELECT AI_COMPLETE(
     'llama4-maverick',  -- 使用するLLMモデル
-    [
-        {
-            'role': 'system',
-            'content': 'テキストから重要な単語を抽出し、品詞と出現回数を分析してください。'
-        },
-        {
-            'role': 'user',
-            'content': '明日の東日本は広い範囲で大雪となるでしょう。'  -- 分析するレビューテキスト
-        }
-    ],
+    'テキストから重要な単語を抽出し、品詞と出現回数を分析してください。対象テキスト：明日の東日本は広い範囲で大雪となるでしょう。',  -- プロンプト
     {
-        'temperature': 0,  -- 生成結果の多様性（0=決定的な出力）
-        'max_tokens': 1000,  -- 最大応答トークン数
-        'response_format': {
+        'temperature': 0,  -- 生成結果の多様性
+        'max_tokens': 1000  -- 最大応答トークン数
+    },
+    {
         'type': 'json',
         'schema': {
             'type': 'object',
@@ -116,7 +107,6 @@ SELECT SNOWFLAKE.CORTEX.COMPLETE(
                 }
             },
             'required': ['words']
-            }
         }
     }
 ) as result;
