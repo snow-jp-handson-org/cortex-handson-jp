@@ -268,11 +268,11 @@ def process_review_chunks() -> bool:
             chunks = snowflake_session.sql("""
                 SELECT t.value as chunk
                 FROM (
-                    SELECT SNOWFLAKE.CORTEX.『★★★修正対象★★★』(
+                    SELECT SNOWFLAKE.CORTEX.★★★修正対象★★★(
                         ?,
                         'none',  -- 区切り方法（段落や文など）
-                        『★★★修正対象★★★』,     -- 最大チャンクサイズ（文字数）
-                        『★★★修正対象★★★』        -- オーバーラップの文字数
+                        ★★★修正対象★★★,     -- 最大チャンクサイズ（文字数）
+                        ★★★修正対象★★★        -- オーバーラップの文字数
                     ) as split_result
                 ),
                 LATERAL FLATTEN(input => split_result) t
@@ -305,7 +305,7 @@ def process_review_chunks() -> bool:
                         ?,
                         ?,
                         ?,
-                        SNOWFLAKE.CORTEX.『★★★修正対象★★★』(?, ?),
+                        SNOWFLAKE.CORTEX.★★★修正対象★★★(?, ?),
                         ?
                 """, params=[
                     review['REVIEW_ID'],
@@ -589,12 +589,9 @@ def generate_review_tags() -> bool:
                 # CLASSIFY_TEXT関数を使用してレビューテキストを特定のカテゴリに分類
                 result = snowflake_session.sql("""
                     SELECT 
-                        SNOWFLAKE.CORTEX.『★★★修正対象★★★』(
+                        SNOWFLAKE.CORTEX.★★★修正対象★★★(
                             ?,  -- 分類するテキスト
                             PARSE_JSON(?),  -- 分類カテゴリのリスト
-                            {
-                                '『★★★修正対象★★★』': '『★★★修正対象★★★』'
-                            }
                         ) as classification
                 """, params=[
                     review['REVIEW_TEXT'],
@@ -705,12 +702,12 @@ def extract_important_words() -> bool:
                 
                 # ステップ2: 複数レビューを一度のCOMPLETE呼び出しで処理
                 result = snowflake_session.sql("""
-                    SELECT SNOWFLAKE.CORTEX.『★★★修正対象★★★』(
+                    SELECT SNOWFLAKE.CORTEX.★★★修正対象★★★(
                         ?,  -- 使用するLLMモデル
                         [
                             {
                                 'role': 'system',
-                                'content': '『★★★修正対象★★★』'
+                                'content': 'テキストから重要な単語を抽出し、品詞と出現回数を分析してください。対象テキスト：明日の東日本は広い範囲で大雪となるでしょう。'
                             },
                             {
                                 'role': 'user',
@@ -1942,12 +1939,12 @@ def render_vector_search():
                         ca.chunked_text,
                         ca.sentiment_score,
                         t.category_name,
-                        『★★★修正対象★★★』(ca.embedding, (SELECT vector FROM query_embedding)) as similarity_score
+                        ★★★修正対象★★★(ca.embedding, (SELECT vector FROM query_embedding)) as similarity_score
                     FROM CUSTOMER_ANALYSIS ca
                     JOIN CUSTOMER_REVIEWS r ON ca.review_id = r.review_id
                     LEFT JOIN REVIEW_TAGS t ON r.review_id = t.review_id
                     WHERE ca.embedding IS NOT NULL
-                    AND 『★★★修正対象★★★』(ca.embedding, (SELECT vector FROM query_embedding)) >= ?
+                    AND ★★★修正対象★★★(ca.embedding, (SELECT vector FROM query_embedding)) >= ?
                     ORDER BY similarity_score DESC
                     LIMIT ?
                 """, params=[search_query, min_score, top_k]).collect()
