@@ -628,11 +628,11 @@ def extract_important_words() -> bool:
     このプロセスでは以下の処理を行います：
     1. 単語抽出がまだ行われていないレビューを取得
     2. レビューを10件ずつのバッチに分割
-    3. 各バッチ内の複数レビューを一度のAI_COMPLETE関数呼び出しでまとめて処理
+    3. 各バッチ内の複数レビューを一度のCOMPLETE関数呼び出しでまとめて処理
     4. 単語の品詞と出現頻度を分析
     5. 結果をREVIEW_WORDSテーブルに保存
     
-    AI_COMPLETE関数は構造化された出力形式（JSON）を指定して実行され、
+    COMPLETE関数は構造化された出力形式（JSON）を指定して実行され、
     テキスト内の重要な単語、その品詞、出現頻度を抽出します。
     これにより、頻出単語や特徴的な表現を分析できます。
     
@@ -686,44 +686,66 @@ def extract_important_words() -> bool:
                         "text": review['REVIEW_TEXT']
                     })
                 
-                # ステップ2: 複数レビューを一度のAI_COMPLETE呼び出しで処理
+                # ステップ2: 複数レビューを一度のCOMPLETE呼び出しで処理
                 result = snowflake_session.sql("""
-                    SELECT ★★★修正対象★★★(
+                    SELECT SNOWFLAKE.CORTEX.★★★修正対象★★★(
                         ?,  -- 使用するLLMモデル
-                        'テキストから重要な単語を抽出し、品詞と出現回数を分析してください。対象テキスト：明日の東日本は広い範囲で大雪となるでしょう。',  -- プロンプト
+                        [
+                            {
+                                'role': 'system',
+                                'content': '複数のレビューテキストから重要な単語を抽出し、品詞と出現回数を分析してください。各レビューごとに分析結果を提供してください。'
+                            },
+                            {
+                                'role': 'user',
+                                'content': ?  -- 分析する複数レビューテキスト（JSONフォーマット）
+                            }
+                        ],
                         {
-                            'temperature': 0,  -- 生成結果の多様性
-                            'max_tokens': 1000  -- 最大応答トークン数
-                        },
-                        {
-                            'type': 'json',
-                            'schema': {
-                                'type': 'object',
-                                'properties': {
-                                    'words': {
-                                        'type': 'array',
-                                        'items': {
-                                            'type': 'object',
-                                            'properties': {
-                                                'word': {
-                                                    'type': 'string',
-                                                    'description': '抽出された単語'
+                            'temperature': 0,  -- 生成結果の多様性（0=決定的な出力）
+                            'max_tokens': 2000,  -- 最大応答トークン数を増やす
+                            'response_format': {
+                                'type': 'json',
+                                'schema': {
+                                    'type': 'object',
+                                    'properties': {
+                                        'reviews_analysis': {
+                                            'type': 'array',
+                                            'items': {
+                                                'type': 'object',
+                                                'properties': {
+                                                    'review_id': {
+                                                        'type': 'string',
+                                                        'description': 'レビューのID'
+                                                    },
+                                                    'words': {
+                                                        'type': 'array',
+                                                        'items': {
+                                                            'type': 'object',
+                                                            'properties': {
+                                                                'word': {
+                                                                    'type': 'string',
+                                                                    'description': '抽出された単語'
+                                                                },
+                                                                'type': {
+                                                                    'type': 'string',
+                                                                    'enum': ['名詞', '動詞', '形容詞'],
+                                                                    'description': '品詞（名詞、動詞、形容詞のいずれか）'
+                                                                },
+                                                                'frequency': {
+                                                                    'type': 'integer',
+                                                                    'description': '単語の出現回数'
+                                                                }
+                                                            },
+                                                            'required': ['word', 'type', 'frequency']
+                                                        }
+                                                    }
                                                 },
-                                                'type': {
-                                                    'type': 'string',
-                                                    'enum': ['名詞', '動詞', '形容詞'],
-                                                    'description': '品詞（名詞、動詞、形容詞のいずれか）'
-                                                },
-                                                'frequency': {
-                                                    'type': 'integer',
-                                                    'description': '単語の出現回数'
-                                                }
-                                            },
-                                            'required': ['word', 'type', 'frequency']
+                                                'required': ['review_id', 'words']
+                                            }
                                         }
-                                    }
-                                },
-                                'required': ['words']
+                                    },
+                                    'required': ['reviews_analysis']
+                                }
                             }
                         }
                     ) as result
@@ -1398,14 +1420,14 @@ def render_management_page():
     st.info("""
     レビューテキストから重要な単語を抽出し、その品詞や出現頻度を分析します。
     
-    **使用AI機能**: `AI_COMPLETE関数の構造化出力機能`
+    **使用AI機能**: `COMPLETE関数の構造化出力機能`
     
-    このプロセスでは、AI_COMPLETE関数の構造化出力機能を使用して各レビューから重要な単語 (名詞、動詞、形容詞) を抽出し、
+    このプロセスでは、COMPLETE関数の構造化出力機能を使用して各レビューから重要な単語 (名詞、動詞、形容詞) を抽出し、
     それぞれの出現回数をカウントします。抽出された単語は「単語分析」タブで確認できます。
     
     **処理内容**:
     1. 未処理のレビューデータを取得
-    2. 10件ずつのバッチで処理を実行 (AI_COMPLETE関数の構造化出力機能)
+    2. 10件ずつのバッチで処理を実行 (COMPLETE関数の構造化出力機能)
     3. 重要単語の抽出とその品詞の判定
     4. 単語の出現回数の集計
     5. 結果をREVIEW_WORDSテーブルに保存
