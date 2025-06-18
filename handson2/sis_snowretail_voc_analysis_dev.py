@@ -11,7 +11,7 @@
 # - ベクトル検索によるレビュー検索
 #
 # Created by Takuya Shoji @Snowflake
-# 最終更新: 2025/05/27
+# 最終更新: 2025/06/17
 # =========================================================
 
 # =========================================================
@@ -47,7 +47,7 @@ EMBEDDING_MODELS = [
     "nv-embed-qa-4"
 ]
 
-# COMPLETE関数用のLLMモデル選択肢
+# AI_COMPLETE関数用のLLMモデル選択肢
 COMPLETE_MODELS = [
     "claude-3-5-sonnet",
     "claude-3-7-sonnet",
@@ -242,23 +242,23 @@ def process_review_chunks() -> bool:
             # ステップ3: レビュー全体の感情分析
             # 全体のレビューテキストを英語に翻訳
             translated_full_text = snowflake_session.sql("""
-                SELECT SNOWFLAKE.CORTEX.『★★★修正対象★★★』(?, '', '『★★★修正対象★★★』') as translated
+                SELECT SNOWFLAKE.CORTEX.★★★修正対象★★★(?, '', '★★★修正対象★★★') as translated
             """, params=[review['REVIEW_TEXT']]).collect()[0]['TRANSLATED']
             
             # レビュー全体の感情分析スコアの計算（英訳したテキストを使用）
             sentiment_score = snowflake_session.sql("""
-                SELECT SNOWFLAKE.CORTEX.『★★★修正対象★★★』(?) as score
+                SELECT SNOWFLAKE.CORTEX.★★★修正対象★★★(?) as score
             """, params=[translated_full_text]).collect()[0]['SCORE']
             
             # ステップ4: テキストをチャンクに分割
             chunks = snowflake_session.sql("""
                 SELECT t.value as chunk
                 FROM (
-                    SELECT SNOWFLAKE.CORTEX.『★★★修正対象★★★』(
+                    SELECT SNOWFLAKE.CORTEX.★★★修正対象★★★(
                         ?,
                         'none',  -- 区切り方法（段落や文など）
-                        『★★★修正対象★★★』,     -- 最大チャンクサイズ（文字数）
-                        『★★★修正対象★★★』        -- オーバーラップの文字数
+                        ★★★修正対象★★★,     -- 最大チャンクサイズ（文字数）
+                        ★★★修正対象★★★        -- オーバーラップの文字数
                     ) as split_result
                 ),
                 LATERAL FLATTEN(input => split_result) t
@@ -291,7 +291,7 @@ def process_review_chunks() -> bool:
                         ?,
                         ?,
                         ?,
-                        SNOWFLAKE.CORTEX.『★★★修正対象★★★』(?, ?),
+                        SNOWFLAKE.CORTEX.★★★修正対象★★★(?, ?),
                         ?
                 """, params=[
                     review['REVIEW_ID'],
@@ -575,12 +575,9 @@ def generate_review_tags() -> bool:
                 # CLASSIFY_TEXT関数を使用してレビューテキストを特定のカテゴリに分類
                 result = snowflake_session.sql("""
                     SELECT 
-                        SNOWFLAKE.CORTEX.『★★★修正対象★★★』(
+                        SNOWFLAKE.CORTEX.★★★修正対象★★★(
                             ?,  -- 分類するテキスト
-                            PARSE_JSON(?),  -- 分類カテゴリのリスト
-                            {
-                                '『★★★修正対象★★★』': '『★★★修正対象★★★』'
-                            }
+                            PARSE_JSON(?)  -- 分類カテゴリのリスト
                         ) as classification
                 """, params=[
                     review['REVIEW_TEXT'],
@@ -691,12 +688,12 @@ def extract_important_words() -> bool:
                 
                 # ステップ2: 複数レビューを一度のCOMPLETE呼び出しで処理
                 result = snowflake_session.sql("""
-                    SELECT SNOWFLAKE.CORTEX.『★★★修正対象★★★』(
+                    SELECT SNOWFLAKE.CORTEX.★★★修正対象★★★(
                         ?,  -- 使用するLLMモデル
                         [
                             {
                                 'role': 'system',
-                                'content': '『★★★修正対象★★★』'
+                                'content': '複数のレビューテキストから重要な単語を抽出し、品詞と出現回数を分析してください。各レビューごとに分析結果を提供してください。'
                             },
                             {
                                 'role': 'user',
@@ -1543,12 +1540,12 @@ def render_vector_search():
                         ca.chunked_text,
                         ca.sentiment_score,
                         t.category_name,
-                        『★★★修正対象★★★』(ca.embedding, (SELECT vector FROM query_embedding)) as similarity_score
+                        ★★★修正対象★★★(ca.embedding, (SELECT vector FROM query_embedding)) as similarity_score
                     FROM CUSTOMER_ANALYSIS ca
                     JOIN CUSTOMER_REVIEWS r ON ca.review_id = r.review_id
                     LEFT JOIN REVIEW_TAGS t ON r.review_id = t.review_id
                     WHERE ca.embedding IS NOT NULL
-                    AND 『★★★修正対象★★★』(ca.embedding, (SELECT vector FROM query_embedding)) >= ?
+                    AND ★★★修正対象★★★(ca.embedding, (SELECT vector FROM query_embedding)) >= ?
                     ORDER BY similarity_score DESC
                     LIMIT ?
                 """, params=[search_query, min_score, top_k]).collect()

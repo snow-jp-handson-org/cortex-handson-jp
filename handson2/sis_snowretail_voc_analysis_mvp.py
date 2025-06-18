@@ -11,7 +11,7 @@
 # - ベクトル検索によるレビュー検索
 #
 # Created by Takuya Shoji @Snowflake
-# 最終更新: 2025/05/07
+# 最終更新: 2025/06/17
 # =========================================================
 
 # =========================================================
@@ -47,7 +47,7 @@ EMBEDDING_MODELS = [
     "nv-embed-qa-4"
 ]
 
-# COMPLETE関数用のLLMモデル選択肢
+# AI_COMPLETE関数用のLLMモデル選択肢
 COMPLETE_MODELS = [
     "claude-3-5-sonnet",
     "claude-3-7-sonnet",
@@ -577,10 +577,7 @@ def generate_review_tags() -> bool:
                     SELECT 
                         SNOWFLAKE.CORTEX.CLASSIFY_TEXT(
                             ?,  -- 分類するテキスト
-                            PARSE_JSON(?),  -- 分類カテゴリのリスト
-                            {
-                                'task_description': 'レビューテキストの内容から最も適切なカテゴリを選択してください。'
-                            }
+                            PARSE_JSON(?)  -- 分類カテゴリのリスト
                         ) as classification
                 """, params=[
                     review['REVIEW_TEXT'],

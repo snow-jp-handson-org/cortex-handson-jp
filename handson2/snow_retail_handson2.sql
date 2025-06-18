@@ -1,3 +1,11 @@
+-- =========================================================
+-- Snowflake Cortex Handson シナリオ#2
+-- AIを用いた顧客の声分析ワークシート
+-- =========================================================
+-- Created by Takuya Shoji @Snowflake
+-- 最終更新: 2025/06/17
+-- =========================================================
+
 -- ロール、DB、スキーマ、ウェアハウスの設定
 USE ROLE accountadmin;
 USE DATABASE snowretail_db;
@@ -5,10 +13,9 @@ USE SCHEMA snowretail_schema;
 USE WAREHOUSE compute_wh;
 
 
-
-// Step1: データ準備
-
-
+-- =========================================================
+-- Step1: データ準備
+-- =========================================================
 
 -- SPLIT_TEXT_RECURSIVE_CHARACTER関数
 SELECT SNOWFLAKE.CORTEX.SPLIT_TEXT_RECURSIVE_CHARACTER(
@@ -21,12 +28,10 @@ SELECT SNOWFLAKE.CORTEX.SPLIT_TEXT_RECURSIVE_CHARACTER(
 -- Streamlitの260行目付近の『★★★修正対象★★★』を書き換えてみましょう
 
 
-
 -- TRANSLATE関数
 SELECT SNOWFLAKE.CORTEX.TRANSLATE('こんにちは！あなたは誰ですか？', '', 'en') as translated;
 
 -- Streamlitの245行目付近の『★★★修正対象★★★』を書き換えてみましょう
-
 
 
 -- SENTIMENT関数
@@ -34,6 +39,12 @@ SELECT SNOWFLAKE.CORTEX.SENTIMENT('This is really the best!') as score;
 
 -- Streamlitの250行目付近の『★★★修正対象★★★』を書き換えてみましょう
 
+
+-- 参考: ENTITY_SENTIMENT関数（エンティティ対応版）- 特定の観点での感情分析が可能
+SELECT SNOWFLAKE.CORTEX.ENTITY_SENTIMENT(
+    'The restaurant food was excellent and the price was reasonable, but the waiting time was too long.',
+    ['food', 'price', 'waiting time']  -- 最大10個のエンティティを指定可能
+) as entity_sentiment;
 
 
 -- EMBEDDING関数
@@ -45,19 +56,15 @@ SELECT SNOWFLAKE.CORTEX.EMBED_TEXT_1024('multilingual-e5-large', '今日は仕�
 -- Streamlitで実際にデータ準備をしてみましょう
 
 
-
-// Step2: 顧客の声分析
-
-
+-- =========================================================
+-- Step2: 顧客の声分析
+-- =========================================================
 
 -- CLASSIFY_TEXT関数
 SELECT 
     SNOWFLAKE.CORTEX.CLASSIFY_TEXT(
-        '週末は観光を楽しんできました。',  -- 分類するテキスト
-        ['食事', '休暇', '仕事', '家事'],  -- 分類カテゴリのリスト
-        {
-            'task_description': 'テキストの内容から最も適切なカテゴリを選択してください。'
-        }
+        '週末は観光を楽しんできました。美味しいレストランで食事もできて最高でした。',  -- 分類するテキスト
+        ['食事', '休暇', '仕事', '家事', '娯楽', '旅行']  -- 分類カテゴリのリスト
     ) as classification;
 
 -- Streamlitの578行目付近の『★★★修正対象★★★』を書き換えてみましょう
@@ -66,7 +73,7 @@ SELECT
 
 -- COMPLETE関数 (with 構造化出力)
 SELECT SNOWFLAKE.CORTEX.COMPLETE(
-    'claude-4-sonnet',  -- 使用するLLMモデル
+    'llama4-maverick',  -- 使用するLLMモデル
     [
         {
             'role': 'system',
@@ -81,34 +88,34 @@ SELECT SNOWFLAKE.CORTEX.COMPLETE(
         'temperature': 0,  -- 生成結果の多様性（0=決定的な出力）
         'max_tokens': 1000,  -- 最大応答トークン数
         'response_format': {
-            'type': 'json',
-            'schema': {
-                'type': 'object',
-                'properties': {
-                    'words': {
-                        'type': 'array',
-                        'items': {
-                            'type': 'object',
-                            'properties': {
-                                'word': {
-                                    'type': 'string',
-                                    'description': '抽出された単語'
-                                },
-                                'type': {
-                                    'type': 'string',
-                                    'enum': ['名詞', '動詞', '形容詞'],
-                                    'description': '品詞（名詞、動詞、形容詞のいずれか）'
-                                },
-                                'frequency': {
-                                    'type': 'integer',
-                                    'description': '単語の出現回数'
-                                }
+        'type': 'json',
+        'schema': {
+            'type': 'object',
+            'properties': {
+                'words': {
+                    'type': 'array',
+                    'items': {
+                        'type': 'object',
+                        'properties': {
+                            'word': {
+                                'type': 'string',
+                                'description': '抽出された単語'
                             },
-                            'required': ['word', 'type', 'frequency']
-                        }
+                            'type': {
+                                'type': 'string',
+                                'enum': ['名詞', '動詞', '形容詞'],
+                                'description': '品詞（名詞、動詞、形容詞のいずれか）'
+                            },
+                            'frequency': {
+                                'type': 'integer',
+                                'description': '単語の出現回数'
+                            }
+                        },
+                        'required': ['word', 'type', 'frequency']
                     }
-                },
-                'required': ['words']
+                }
+            },
+            'required': ['words']
             }
         }
     }
@@ -126,25 +133,22 @@ SELECT VECTOR_COSINE_SIMILARITY([0.1, 0.5, 0.2, 0.8]::VECTOR(FLOAT, 4), [-0.1, 0
 -- Streamlitで実際に顧客の声分析を使ってみましょう
 
 
-
-// Step3: シンプルチャットボット
-
-
+-- =========================================================
+-- Step3: シンプルチャットボット
+-- =========================================================
 
 -- COMPLETE関数
 SELECT SNOWFLAKE.CORTEX.COMPLETE('claude-4-sonnet', 'あなたは何ができますか？');
 
 -- Streamlitの568行目付近のCOMPLETE関数を見てみましょう
--- StreamlitではSnowparkのCOMPLETE関数を用いています
 -- 修正は不要です
 
 -- Streamlitで実際にシンプルチャットボットを使ってみましょう
 
 
-
-// Step4: RAGチャットボット
-
-
+-- =========================================================
+-- Step4: RAGチャットボット
+-- =========================================================
 
 -- 社内ドキュメントの確認
 SELECT * FROM SNOW_RETAIL_DOCUMENTS;
@@ -171,10 +175,9 @@ CREATE OR REPLACE CORTEX SEARCH SERVICE snow_retail_search_service
 -- Streamlitで実際にRAGチャットボットを使ってみましょう
 
 
-
-// Step5: 分析チャットボット
-
-
+-- =========================================================
+-- Step5: 分析チャットボット
+-- =========================================================
 
 -- StudioからCortex分析を開いてセマンティックモデルを確認しましょう
 
