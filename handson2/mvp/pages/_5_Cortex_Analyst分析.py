@@ -4,8 +4,8 @@
 # Step5: Cortex Analyst分析
 # =========================================================
 # 概要: Cortex Analystを使った自然言語データ分析
-# 特徴: セマンティックモデルを活用した高精度なSQL自動生成
-# 使用する機能: Cortex Analyst API、セマンティックモデル
+# 特徴: セマンティックビューとYMLファイルの両方に対応した高精度SQL自動生成
+# 使用する機能: Cortex Analyst API、セマンティックビュー、セマンティックモデルファイル
 # =========================================================
 # Created by Tsubasa Kanno @Snowflake
 # 最終更新: 2025/06/16
@@ -87,38 +87,96 @@ def get_table_count(table_name: str) -> int:
     except:
         return 0
 
-def get_semantic_views() -> list:
+def get_all_semantic_models() -> list:
     """
-    利用可能なセマンティックビュー一覧を取得
+    利用可能なすべてのセマンティックモデル（ビューとYMLファイル）を取得
     
     Returns:
-        list: セマンティックビュー名のリスト（取得失敗時は空リスト）
+        list: セマンティックモデルの統合リスト
+              各要素は {"display_name": "表示名", "actual_name": "実際の名前", "type": "タイプ"}
     """
+    models = []
+    
+    # セマンティックビューの取得
     try:
-        # Snowflake公式ドキュメントに基づく正しいコマンドを使用
         semantic_views = session.sql("""
             SHOW SEMANTIC VIEWS
         """).collect()
         
-        # ビュー名を抽出
-        view_names = []
         for view in semantic_views:
             view_name = view['name']
-            view_names.append(view_name)
+            models.append({
+                "display_name": f"[ビュー] {view_name}",
+                "actual_name": view_name,
+                "type": "semantic_view"
+            })
+    except Exception:
+        # セマンティックビューの取得に失敗した場合は警告なしで継続
+        pass
+    
+    # YMLファイルの取得
+    try:
+        # ステージ内のYMLファイルを検索
+        yml_files = session.sql(f"""
+            LIST @{SEMANTIC_MODEL_STAGE}
+        """).collect()
         
-        return view_names
-        
-    except Exception as e:
-        st.warning(f"セマンティックビューの取得に失敗しました: {str(e)}")
-        return []
+        for file_info in yml_files:
+            file_name = file_info['name']
+            if file_name.lower().endswith('.yml') or file_name.lower().endswith('.yaml'):
+                # ステージパスからファイル名のみを抽出
+                file_name_only = file_name.split('/')[-1]
+                actual_path = f"@{SEMANTIC_MODEL_STAGE}/{file_name_only}"
+                models.append({
+                    "display_name": f"[YML] {file_name_only}",
+                    "actual_name": actual_path,
+                    "type": "semantic_model_file"
+                })
+    except Exception:
+        # ステージアクセスに失敗した場合、カレントディレクトリでYMLファイルを検索
+        try:
+            yml_files = session.sql("""
+                SHOW FILES LIKE '%.yml'
+            """).collect()
+            
+            for file_info in yml_files:
+                file_name = file_info['name']
+                models.append({
+                    "display_name": f"[YML] {file_name}",
+                    "actual_name": file_name,
+                    "type": "semantic_model_file"
+                })
+        except Exception:
+            # YMLファイルの検索にも失敗した場合は警告なしで継続
+            pass
+    
+    return models
 
-def execute_cortex_analyst_query(question: str, semantic_model_name: str) -> dict:
+def get_model_info_from_display_name(display_name: str, models_list: list) -> dict:
+    """
+    表示名から実際のモデル情報を取得
+    
+    Args:
+        display_name: 選択された表示名
+        models_list: モデル一覧
+    Returns:
+        dict: モデル情報（actual_name, type）
+    """
+    for model in models_list:
+        if model["display_name"] == display_name:
+            return {
+                "actual_name": model["actual_name"],
+                "type": model["type"]
+            }
+    return None
+
+def execute_cortex_analyst_query(question: str, model_info: dict) -> dict:
     """
     Cortex Analyst APIを使用して自然言語質問を分析
     
     Args:
         question: 自然言語での質問
-        semantic_model_name: セマンティックビュー名
+        model_info: モデル情報（actual_name, type）
     Returns:
         dict: 分析結果（成功/失敗、データ、SQL、メッセージ）
     """
@@ -131,11 +189,16 @@ def execute_cortex_analyst_query(question: str, semantic_model_name: str) -> dic
             }
         ]
         
-        # リクエストボディの準備（セマンティックビュー使用）
+        # リクエストボディの準備（モデルタイプに応じて使い分け）
         request_body = {
             "messages": messages,
-            "semantic_view": semantic_model_name,
         }
+        
+        # セマンティックモデルのタイプに応じてパラメータを設定
+        if model_info["type"] == "semantic_view":
+            request_body["semantic_view"] = model_info["actual_name"]
+        else:  # semantic_model_file
+            request_body["semantic_model_file"] = model_info["actual_name"]
         
         # Cortex Analyst API呼び出し
         try:
@@ -294,7 +357,9 @@ st.header("企業データを自然言語で分析する高度なAIアシスタ�
 
 st.markdown("""
 このページでは、Snowflake Cortex Analystを使用した高度なデータ分析機能を体験できます。
-Step3・Step4との違いは、**セマンティックビュー**を活用することで、より正確で信頼性の高いSQL生成が可能な点です。
+Step3・Step4との違いは、**セマンティックビューまたはYMLファイル**を活用することで、より正確で信頼性の高いSQL生成が可能な点です。
+
+🚀 **自動検出機能**: 利用可能なセマンティックビューとYMLファイルを自動検出し、統一されたインターフェースで選択できます。
 """)
 
 # =========================================================
@@ -321,30 +386,52 @@ enable_auto_chart = st.sidebar.checkbox(
     help="分析結果を自動的にグラフ化"
 )
 
-# セマンティックビューの選択
+# セマンティックモデルの選択
 st.sidebar.markdown("---")
-st.sidebar.subheader("📊 セマンティックビュー")
+st.sidebar.subheader("📊 セマンティックモデル設定")
 
-semantic_views = get_semantic_views()
+# 利用可能なセマンティックモデルを取得
+all_semantic_models = get_all_semantic_models()
 
-if semantic_views:
-    selected_semantic_view = st.sidebar.selectbox(
-        "使用するセマンティックビュー:",
-        semantic_views,
+if all_semantic_models:
+    selected_semantic_model = st.sidebar.selectbox(
+        "使用するセマンティックモデル:",
+        [model["display_name"] for model in all_semantic_models],
         index=0,
-        help="分析に使用するセマンティックビューを選択"
+        help="分析に使用するセマンティックモデルを選択（セマンティックビューとYMLファイルを自動検出）"
     )
     
-    st.sidebar.success(f"✅ ビュー選択済み")
-    st.sidebar.code(selected_semantic_view, language="sql")
+    st.sidebar.success("✅ セマンティックモデル選択済み")
+    
+    # 選択されたモデルの詳細情報を表示
+    model_info = get_model_info_from_display_name(selected_semantic_model, all_semantic_models)
+    if model_info:
+        if model_info["type"] == "semantic_view":
+            st.sidebar.code(model_info["actual_name"], language="sql")
+            st.sidebar.caption("🏗️ セマンティックビュー形式")
+        else:
+            st.sidebar.code(model_info["actual_name"], language="yaml")
+            st.sidebar.caption("📄 YMLファイル形式")
 else:
-    st.sidebar.error("❌ セマンティックビューが見つかりません")
-    selected_semantic_view = None
+    st.sidebar.error("❌ セマンティックモデルが見つかりません")
+    selected_semantic_model = None
+    model_info = None
+
+# モデル検出結果の表示
+if all_semantic_models:
+    semantic_views_count = len([m for m in all_semantic_models if m["type"] == "semantic_view"])
+    yml_files_count = len([m for m in all_semantic_models if m["type"] == "semantic_model_file"])
+    
+    st.sidebar.info(f"""
+    **検出されたモデル:**
+    🏗️ セマンティックビュー: {semantic_views_count}個
+    📄 YMLファイル: {yml_files_count}個
+    """)
 
 st.sidebar.info(f"""
 **Cortex Analystの仕組み:**
 1. 🧠 自然言語の質問を理解
-2. 📋 セマンティックビューを参照
+2. 📋 セマンティックモデルを参照
 3. 🔧 最適なSQLクエリを生成
 4. 📊 データベースで実行
 5. 📈 結果を分かりやすく表示
@@ -383,27 +470,41 @@ with col1:
 
 with col2:
     st.markdown("#### 🧠 Cortex Analyst")
-    if selected_semantic_view:
-        st.success("✅ セマンティックビュー: 利用可能")
+    if selected_semantic_model and model_info:
+        st.success("✅ セマンティックモデル: 利用可能")
         st.success("✅ Cortex Analyst API: 利用可能")
+        
+        # 選択されたモデルタイプを表示
+        if model_info["type"] == "semantic_view":
+            st.info("🏗️ セマンティックビュー形式を使用中")
+        else:
+            st.info("📄 YMLファイル形式を使用中")
     else:
-        st.error("❌ セマンティックビュー: 未設定")
+        st.error("❌ セマンティックモデル: 未設定")
         st.warning("❌ Cortex Analyst API: 利用不可")
 
 with col3:
     st.markdown("#### ⚙️ 分析設定")
     st.write(f"🤖 **LLMモデル**: {st.session_state.selected_llm_model}")
     st.write(f"📈 **自動グラフ**: {'有効' if enable_auto_chart else '無効'}")
-    if semantic_views:
-        st.write(f"📊 **セマンティックビュー**: {selected_semantic_view}")
+    if all_semantic_models:
+        st.write(f"📋 **選択モデル**: {selected_semantic_model}")
+        # モデル統計情報
+        semantic_views_count = len([m for m in all_semantic_models if m["type"] == "semantic_view"])
+        yml_files_count = len([m for m in all_semantic_models if m["type"] == "semantic_model_file"])
+        st.caption(f"検出: ビュー{semantic_views_count}個・YML{yml_files_count}個")
 
 # 必要な前提条件のチェック
-if not selected_semantic_view:
+if not selected_semantic_model or not model_info:
     st.error(f"""
-    ⚠️ **セマンティックビューが設定されていません**
+    ⚠️ **セマンティックモデルが設定されていません**
     
-    Cortex Analystを使用するには、セマンティックビューが必要です。
-    データベースにセマンティックビューが作成されていることを確認してください。
+    Cortex Analystを使用するには、セマンティックビューまたはYMLファイルが必要です。
+    
+    **確認事項:**
+    - セマンティックビューが作成されているか
+    - YMLファイルがステージ `{SEMANTIC_MODEL_STAGE}` にアップロードされているか
+    - 適切なアクセス権限があるか
     """)
     st.stop()
 
@@ -430,10 +531,11 @@ with col2:
     st.markdown("""
     **Cortex Analyst（Step5）:**
     
-    - ✅ セマンティックビューでデータ理解
+    - ✅ セマンティックモデルでデータ理解
     - ✅ ビジネスルールを考慮したSQL生成
     - ✅ 高精度で信頼性の高いクエリ
     - ✅ 自動的な結果検証と最適化
+    - 📊 セマンティックビューとYMLファイルに対応
     """)
 
 # =========================================================
@@ -491,8 +593,9 @@ if st.button("🚀 Cortex Analyst分析", type="primary", use_container_width=Tr
         st.session_state.analyst_chat_history.append({"role": "user", "content": user_question})
         
         with st.spinner("🧠 Cortex Analystが分析中..."):
-            # Cortex Analyst分析を実行
-            result = execute_cortex_analyst_query(user_question, selected_semantic_view)
+            # Cortex Analyst分析を実行（モデル情報を取得）
+            current_model_info = get_model_info_from_display_name(selected_semantic_model, all_semantic_models)
+            result = execute_cortex_analyst_query(user_question, current_model_info)
             
             if result["success"]:
                 # 成功した場合の処理
@@ -571,7 +674,9 @@ for i, (tab, category) in enumerate(zip([tab1, tab2, tab3], analysis_templates.k
                     st.session_state.analyst_chat_history.append({"role": "user", "content": question})
                     
                     with st.spinner("🧠 Cortex Analystが分析中..."):
-                        result = execute_cortex_analyst_query(question, selected_semantic_view)
+                        # モデル情報を取得してテンプレート分析を実行
+                        template_model_info = get_model_info_from_display_name(selected_semantic_model, all_semantic_models)
+                        result = execute_cortex_analyst_query(question, template_model_info)
                         
                         if result["success"]:
                             response_text = result.get("response_text", "分析が完了しました。")
@@ -642,16 +747,24 @@ st.success("""
 ✅ **Cortex Analyst分析の実装が完了しました！**
 
 **実装した機能:**
+- セマンティックビューとYMLファイルの自動検出・統合選択
 - セマンティックモデルを活用した高精度SQL生成
 - 自然言語による企業データ分析
 - 分析結果の自動可視化
 - よくある分析テンプレート
 - 分析履歴と統計情報
 
+**特徴:**
+- 手動でのモデルタイプ選択が不要
+- 利用可能なモデルを自動検出
+- セマンティックビューとYMLファイルの柔軟な選択
+- 統一されたシンプルなUI
+
 **Step3・Step4との違い:**
 - セマンティックモデルによる正確なデータ理解
 - ビジネスルールを考慮したSQL生成
 - より信頼性の高い分析結果
+- 複数のセマンティックモデル形式に対応
 """)
 
 st.info("🎉 **ワークショップ完了**: 全5ステップのSnowflake Cortex Handsonが完了しました！")

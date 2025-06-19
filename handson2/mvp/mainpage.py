@@ -134,35 +134,35 @@ def render_home_page():
             "title": "データ準備", 
             "description": "テーブル作成、テキスト処理、ベクトル化",
             "functions": ["SPLIT_TEXT_RECURSIVE_CHARACTER", "EMBED_TEXT_1024", "TRANSLATE", "SENTIMENT"],
-            "time": "20分"
+            "time": "10分"
         },
         {
             "step": "Step 2", 
             "title": "顧客の声分析",
             "description": "AI_CLASSIFY, AI_FILTER, AI_AGGを使った分析",
-            "functions": ["AI_CLASSIFY", "AI_FILTER", "AI_AGG", "AI_COMPLETE"],
-            "time": "25分"
+            "functions": ["AI_CLASSIFY", "AI_FILTER", "AI_AGG"],
+            "time": "20分"
         },
         {
             "step": "Step 3",
             "title": "シンプルチャットボット",
             "description": "AI_COMPLETEを使った基本的なチャットボット",
             "functions": ["AI_COMPLETE"],
-            "time": "15分"
+            "time": "10分"
         },
         {
             "step": "Step 4",
             "title": "RAGチャットボット", 
             "description": "Cortex Searchとの組み合わせによる高度なQ&A",
             "functions": ["Cortex Search", "AI_COMPLETE"],
-            "time": "20分"
+            "time": "10分"
         },
         {
             "step": "Step 5",
             "title": "Cortex Analyst分析",
             "description": "自然言語によるデータ分析とダッシュボード",
             "functions": ["Cortex Analyst", "AI_AGG"],
-            "time": "20分"
+            "time": "10分"
         }
     ]
     
