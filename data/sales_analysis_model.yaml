@@ -1,0 +1,241 @@
+name: sales_analysis_model
+description: このセマンティックモデルは実店舗とECサイトの販売データを分析するためのモデルです。商品マスターデータと組み合わせた売上分析が可能です。
+tables:
+  - name: RETAIL_DATA_WITH_PRODUCT_MASTER
+    description: 実店舗での販売データ。商品、日付、数量、金額などの情報を含みます。
+    synonyms:
+      - 店舗販売
+      - 実店舗データ
+      - 店舗売上
+      - 店舗取引データ
+    base_table:
+      database: SNOWRETAIL_DB
+      schema: SNOWRETAIL_SCHEMA
+      table: RETAIL_DATA_WITH_PRODUCT_MASTER
+    primary_key:
+      columns:
+        - transaction_id
+    dimensions:
+      - name: product_id_master
+        description: 商品マスタで定義されている商品ID
+        expr: PRODUCT_ID_MASTER
+        data_type: VARCHAR
+        synonyms:
+          - 商品ID
+          - product_id
+          - プロダクトID
+          - 製品ID
+      - name: product_name_master
+        description: 商品マスタで定義されている商品名
+        expr: PRODUCT_NAME_MASTER
+        data_type: VARCHAR
+        synonyms:
+          - 商品名
+          - 製品名
+          - プロダクト名
+      - name: transaction_id
+        description: トランザクションID
+        expr: TRANSACTION_ID
+        data_type: VARCHAR
+        unique: true
+        synonyms:
+          - 取引ID
+          - 取引番号
+    time_dimensions:
+      - name: transaction_date
+        description: お客様が購入した日
+        expr: TO_DATE(TRANSACTION_DATE)
+        data_type: DATE
+        synonyms:
+          - 取引日
+          - 購入日
+    facts:
+      - name: quantity
+        description: 販売数量
+        expr: QUANTITY
+        data_type: NUMBER
+        synonyms:
+          - 販売数量
+          - 購入数量
+      - name: unit_price
+        description: 販売単価
+        expr: UNIT_PRICE
+        data_type: NUMBER
+        synonyms:
+          - 販売単価
+          - 購入単価
+      - name: total_price
+        description: 販売合計金額
+        expr: TOTAL_PRICE
+        data_type: NUMBER
+        synonyms:
+          - 合計金額
+          - 合計販売金額
+          - 合計購入金額
+    metrics:
+      - name: retail_sales_total
+        description: 実店舗販売合計金額
+        expr: SUM(total_price)
+        synonyms:
+          - 店舗合計売上
+          - 店舗合計販売金額
+      - name: retail_quantity_total
+        description: 実店舗販売合計数量
+        expr: SUM(quantity)
+        synonyms:
+          - 店舗合計売上数
+          - 店舗合計販売数
+      - name: retail_average_order_value
+        description: 実店舗平均注文金額
+        expr: AVG(total_price)
+        synonyms:
+          - 店舗平均売上
+          - 店舗平均販売金額
+  - name: EC_DATA_WITH_PRODUCT_MASTER
+    description: ECサイトでの販売データ。商品、日付、数量、金額などの情報を含みます。
+    synonyms:
+      - ECデータ
+      - オンライン販売
+      - ネット販売
+      - ネット売上
+      - EC取引データ
+    base_table:
+      database: SNOWRETAIL_DB
+      schema: SNOWRETAIL_SCHEMA
+      table: EC_DATA_WITH_PRODUCT_MASTER
+    primary_key:
+      columns:
+        - transaction_id
+    dimensions:
+      - name: product_id_master
+        description: 商品マスタで定義されている商品ID
+        expr: PRODUCT_ID_MASTER
+        data_type: VARCHAR
+        synonyms:
+          - 商品ID
+          - product_id
+          - プロダクトID
+          - 製品ID
+      - name: product_name_master
+        description: 商品マスタで定義されている商品名
+        expr: PRODUCT_NAME_MASTER
+        data_type: VARCHAR
+        synonyms:
+          - 商品名
+          - 製品名
+          - プロダクト名
+      - name: transaction_id
+        description: トランザクションID
+        expr: TRANSACTION_ID
+        data_type: VARCHAR
+        unique: true
+        synonyms:
+          - 取引ID
+          - 取引番号
+    time_dimensions:
+      - name: transaction_date
+        description: お客様が購入した日
+        expr: TO_DATE(TRANSACTION_DATE)
+        data_type: DATE
+        synonyms:
+          - 取引日
+          - 購入日
+    facts:
+      - name: quantity
+        description: 販売数量
+        expr: QUANTITY
+        data_type: NUMBER
+        synonyms:
+          - 販売数量
+          - 購入数量
+      - name: unit_price
+        description: 販売単価
+        expr: UNIT_PRICE
+        data_type: NUMBER
+        synonyms:
+          - 販売単価
+          - 購入単価
+      - name: total_price
+        description: 販売合計金額
+        expr: TOTAL_PRICE
+        data_type: NUMBER
+        synonyms:
+          - 合計金額
+          - 合計販売金額
+          - 合計購入金額
+    metrics:
+      - name: ec_sales_total
+        description: EC販売合計金額
+        expr: SUM(total_price)
+        synonyms:
+          - EC合計売上
+          - EC合計販売金額
+      - name: ec_quantity_total
+        description: EC販売合計数量
+        expr: SUM(quantity)
+        synonyms:
+          - 店舗合計売上数
+          - 店舗合計販売数
+      - name: ec_average_order_value
+        description: EC平均注文金額
+        expr: AVG(total_price)
+        synonyms:
+          - EC平均売上
+          - EC平均販売金額
+relationships:
+  - name: retail_ec_product_relationship
+    left_table: RETAIL_DATA_WITH_PRODUCT_MASTER
+    right_table: EC_DATA_WITH_PRODUCT_MASTER
+    relationship_columns:
+      - left_column: product_id_master
+        right_column: product_id_master
+    join_type: inner
+    relationship_type: many_to_one
+verified_queries:
+  - name: monthly_sales_comparison
+    question: 2023年の月次の実店舗とEC販売の売上合計を比較してください
+    sql: |
+      SELECT 
+        DATE_TRUNC('MONTH', retail.transaction_date) AS month,
+        SUM(retail.total_price) AS retail_sales,
+        SUM(ec.total_price) AS ec_sales
+      FROM RETAIL_DATA_WITH_PRODUCT_MASTER retail
+      FULL OUTER JOIN EC_DATA_WITH_PRODUCT_MASTER ec 
+        ON DATE_TRUNC('MONTH', retail.transaction_date) = DATE_TRUNC('MONTH', ec.transaction_date)
+      WHERE YEAR(retail.transaction_date) = 2023 OR YEAR(ec.transaction_date) = 2023
+      GROUP BY month
+      ORDER BY month
+    verified_at: 1718097600
+    verified_by: データアナリスト
+    use_as_onboarding_question: true
+  - name: top_selling_products
+    question: 販売数量が最も多い商品トップ5を教えてください
+    sql: |
+      WITH combined_sales AS (
+        SELECT product_id_master, product_name_master, SUM(quantity) AS total_quantity
+        FROM (
+          SELECT product_id_master, product_name_master, quantity FROM RETAIL_DATA_WITH_PRODUCT_MASTER
+          UNION ALL
+          SELECT product_id_master, product_name_master, quantity FROM EC_DATA_WITH_PRODUCT_MASTER
+        ) 
+        GROUP BY product_id_master, product_name_master
+      )
+      SELECT 
+        product_id_master,
+        product_name_master,
+        total_quantity
+      FROM combined_sales
+      ORDER BY total_quantity DESC
+      LIMIT 5
+    verified_at: 1718097600
+    verified_by: データアナリスト
+    use_as_onboarding_question: true
+custom_instructions: |
+  このセマンティックモデルは実店舗販売データ（RETAIL_DATA_WITH_PRODUCT_MASTER）とEC販売データ（EC_DATA_WITH_PRODUCT_MASTER）を分析するためのものです。
+
+  以下の点に注意してください：
+  1. 売上金額はTOTAL_PRICEカラムに格納されています
+  2. 商品情報は両テーブルに含まれており、PRODUCT_ID_MASTERで結合可能です
+  3. 日付範囲は2023年のデータを対象としてください
+  4. 金額は日本円で表示され、3桁区切りのカンマを使用してください
+  5. 日付フォーマットはYYYY-MM-DDを使用してください
