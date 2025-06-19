@@ -53,3 +53,9 @@ CREATE OR REPLACE STREAMLIT sis_snowretail_analysis_dev
     FROM @GIT_INTEGRATION_FOR_HANDSON/branches/main/handson2/dev
     MAIN_FILE = 'mainpage.py'
     QUERY_WAREHOUSE = COMPUTE_WH;
+
+-- (Option) MVP版のStreamlit in Snowflakeの作成
+-- CREATE OR REPLACE STREAMLIT sis_snowretail_analysis_mvp
+--     FROM @GIT_INTEGRATION_FOR_HANDSON/branches/main/handson2/mvp
+--     MAIN_FILE = 'mainpage.py'
+--     QUERY_WAREHOUSE = COMPUTE_WH;
