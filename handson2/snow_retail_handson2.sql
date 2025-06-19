@@ -59,7 +59,7 @@ SELECT SNOWFLAKE.CORTEX.EMBED_TEXT_1024('multilingual-e5-large', '今日は仕�
 SELECT 
     AI_CLASSIFY(
         '週末は観光を楽しんできました。美味しいレストランで食事もできて最高でした。',  -- 分類するテキスト
-        ['食事', '休暇', '仕事', '家事', '娯楽', '旅行']  -- 分類カテゴリのリスト
+        ['休暇', '仕事', '家事']  -- 分類カテゴリのリスト
     ) as classification;
 
 -- ※ハンズオン※
@@ -82,7 +82,7 @@ SELECT
     purchase_channel,
     AI_AGG(
         review_text, 
-        'レビューの中で特に言及されていることは何か、単語で答えてください。'
+        '価格に関する内容について簡単に要約してください'
     ) as channel_insights
 FROM CUSTOMER_REVIEWS
 GROUP BY purchase_channel;
