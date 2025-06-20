@@ -4,7 +4,7 @@
 # Step2: 顧客の声分析ページ
 # =========================================================
 # 概要: レビューデータの高度な分析とカテゴリ分類
-# 使用する機能: AI_CLASSIFY, AI_FILTER, AI_AGG, AI_SIMILARITY（AISQL）
+# 使用する機能: AI_CLASSIFY, AI_FILTER, AI_AGG, AI_SUMMARIZE_AGG, AI_SIMILARITY
 # =========================================================
 # Created by Tsubasa Kanno @Snowflake
 # 最終更新: 2025/06/16
@@ -562,7 +562,8 @@ def section_6_integrated():
         with st.spinner("統合分析実行中..."):
             try:
                 # 複数のAISQLを組み合わせた統合分析（全件対象）
-                integrated_query = """
+                # まず基本データを取得
+                base_query = """
                 SELECT 
                     review_id,
                     review_text,
@@ -572,25 +573,56 @@ def section_6_integrated():
                     AI_CLASSIFY(
                         review_text, 
                         ARRAY_CONSTRUCT('商品品質', '配送サービス', '価格', 'カスタマーサービス', '店舗環境', 'その他')
-                    ):labels[0]::string as category,
-                    SNOWFLAKE.CORTEX.TRANSLATE(
-                        SNOWFLAKE.CORTEX.SUMMARIZE(review_text),
-                        '',
-                        'ja'
-                    ) as summary
+                    ):labels[0]::string as category
                 FROM CUSTOMER_REVIEWS 
                 WHERE review_text IS NOT NULL
                 """
                 
-                results = session.sql(integrated_query).collect()
+                # AI_SUMMARIZE_AGGを使用してカテゴリ別要約を取得
+                summary_query = """
+                SELECT 
+                    category,
+                    purchase_channel,
+                    SNOWFLAKE.CORTEX.TRANSLATE(
+                        AI_SUMMARIZE_AGG(review_text),
+                        '',
+                        'ja'
+                    ) as category_summary
+                FROM (
+                    SELECT 
+                        review_text,
+                        purchase_channel,
+                        AI_CLASSIFY(
+                            review_text, 
+                            ARRAY_CONSTRUCT('商品品質', '配送サービス', '価格', 'カスタマーサービス', '店舗環境', 'その他')
+                        ):labels[0]::string as category
+                    FROM CUSTOMER_REVIEWS 
+                    WHERE review_text IS NOT NULL
+                )
+                GROUP BY category, purchase_channel
+                """
                 
-                if results:
-                    df_results = pd.DataFrame([row.as_dict() for row in results])
+                # 基本データを取得
+                base_results = session.sql(base_query).collect()
+                # カテゴリ別要約を取得
+                summary_results = session.sql(summary_query).collect()
+                
+                if base_results and summary_results:
+                    df_base = pd.DataFrame([row.as_dict() for row in base_results])
+                    df_summary = pd.DataFrame([row.as_dict() for row in summary_results])
+                    
+                    # 基本データとサマリーデータを結合
+                    df_results = df_base.merge(
+                        df_summary, 
+                        on=['CATEGORY', 'PURCHASE_CHANNEL'], 
+                        how='left'
+                    )
                     
                     # 統合分析結果をsession_stateに保存
                     st.session_state['integrated_results'] = df_results
+                    st.session_state['category_summaries'] = df_summary
                     
-                    st.success(f"✅ 統合分析完了（{len(results)}件）")
+                    st.success(f"✅ 統合分析完了（{len(base_results)}件のレビュー、{len(summary_results)}のカテゴリ別要約）")
                 
             except Exception as e:
                 st.error(f"❌ 統合分析エラー: {str(e)}")
@@ -718,7 +750,7 @@ def section_6_integrated():
                 most_positive = df_results.loc[df_results['SENTIMENT_SCORE'].idxmax()]
                 st.write(f"感情スコア: {most_positive['SENTIMENT_SCORE']:.3f}")
                 st.write(f"カテゴリ: {most_positive['CATEGORY']}")
-                st.write(f"要約: {most_positive['SUMMARY']}")
+                st.write(f"レビュー: {most_positive['REVIEW_TEXT'][:100]}...")
             
             with col2:
                 st.markdown("**😐 最もニュートラルなレビュー**")
@@ -727,7 +759,7 @@ def section_6_integrated():
                     most_neutral = df_neutral.loc[df_neutral['SENTIMENT_SCORE'].abs().idxmin()]
                     st.write(f"感情スコア: {most_neutral['SENTIMENT_SCORE']:.3f}")
                     st.write(f"カテゴリ: {most_neutral['CATEGORY']}")
-                    st.write(f"要約: {most_neutral['SUMMARY']}")
+                    st.write(f"レビュー: {most_neutral['REVIEW_TEXT'][:100]}...")
                 else:
                     st.write("ニュートラルなレビューがありません")
             
@@ -736,7 +768,7 @@ def section_6_integrated():
                 most_negative = df_results.loc[df_results['SENTIMENT_SCORE'].idxmin()]
                 st.write(f"感情スコア: {most_negative['SENTIMENT_SCORE']:.3f}")
                 st.write(f"カテゴリ: {most_negative['CATEGORY']}")
-                st.write(f"要約: {most_negative['SUMMARY']}")
+                st.write(f"レビュー: {most_negative['REVIEW_TEXT'][:100]}...")
         
         else:
             # 特定カテゴリの詳細分析
@@ -770,6 +802,16 @@ def section_6_integrated():
             end_idx_6 = start_idx_6 + items_per_page_6
             page_data_6 = category_data.iloc[start_idx_6:end_idx_6]
             
+            # カテゴリ別AI要約の表示
+            st.markdown(f"##### 🤖 {analysis_category} カテゴリのAI_SUMMARIZE_AGG要約")
+            if 'category_summaries' in st.session_state:
+                df_summaries = st.session_state['category_summaries']
+                category_summaries = df_summaries[df_summaries['CATEGORY'] == analysis_category]
+                
+                for _, summary_row in category_summaries.iterrows():
+                    with st.info(f"**{summary_row['PURCHASE_CHANNEL']}チャネル**: {summary_row['CATEGORY_SUMMARY']}"):
+                        pass
+            
             # カテゴリ内の全レビュー表示（ページネーション付き）
             st.markdown(f"##### 📝 {analysis_category} カテゴリのレビュー詳細")
             for _, row in page_data_6.iterrows():
@@ -785,14 +827,18 @@ def section_6_integrated():
                     sentiment_label = "ニュートラル"
                 
                 with st.expander(f"{sentiment_emoji} {sentiment_label} ({sentiment:.2f}) | 評価: {row['RATING']} | {row['PURCHASE_CHANNEL']}"):
-                    col1, col2 = st.columns(2)
+                    st.write(f"**レビューID**: {row['REVIEW_ID']}")
+                    st.write(f"**レビュー内容**: {row['REVIEW_TEXT']}")
                     
-                    with col1:
-                        st.write(f"**レビューID**: {row['REVIEW_ID']}")
-                        st.write(f"**元レビュー**: {row['REVIEW_TEXT']}")
-                    
-                    with col2:
-                        st.write(f"**AI要約**: {row['SUMMARY']}")
+                    # 該当するカテゴリ・チャネルの集約要約を表示
+                    if 'category_summaries' in st.session_state:
+                        df_summaries = st.session_state['category_summaries']
+                        matching_summary = df_summaries[
+                            (df_summaries['CATEGORY'] == row['CATEGORY']) & 
+                            (df_summaries['PURCHASE_CHANNEL'] == row['PURCHASE_CHANNEL'])
+                        ]
+                        if not matching_summary.empty:
+                            st.write(f"**このカテゴリ・チャネルのAI集約要約**: {matching_summary.iloc[0]['CATEGORY_SUMMARY']}")
 
 section_6_integrated()
 
@@ -806,13 +852,15 @@ st.success("""
 - `AI_FILTER`: スマートフィルタリング（全件対象・マッチ率可視化）
 - `AI_AGG`: 購入チャネル別集約分析（日本語翻訳付き）
 - `AI_SIMILARITY`: 類似レビュー検出（全件対象・分布可視化）
-- 従来機能: `SENTIMENT`, `SUMMARIZE`（日本語翻訳付き）
+- `AI_SUMMARIZE_AGG`: カテゴリ・チャネル別集約要約（複数レビューを効率的に要約）
+- 従来機能: `SENTIMENT`（感情分析）
 
 **分析の価値:**
 - 全件データに基づく正確な分析
 - カテゴリ別・チャネル別の深掘り分析
 - 感情分析による顧客満足度の可視化
 - 類似レビューによるパターン発見
+- AI_SUMMARIZE_AGGによる複数レビューの効率的な集約要約
 """)
 
 st.info("💡 **次のステップ**: Step3では、シンプルなチャットボットの実装を学習します。")
