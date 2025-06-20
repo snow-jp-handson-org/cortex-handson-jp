@@ -194,20 +194,10 @@ relationships:
 verified_queries:
   - name: monthly_sales_comparison
     question: 2023年の月次の実店舗とEC販売の売上合計を比較してください
-    sql: |
-      SELECT 
-        DATE_TRUNC('MONTH', retail.transaction_date) AS month,
-        SUM(retail.total_price) AS retail_sales,
-        SUM(ec.total_price) AS ec_sales
-      FROM RETAIL_DATA_WITH_PRODUCT_MASTER retail
-      FULL OUTER JOIN EC_DATA_WITH_PRODUCT_MASTER ec 
-        ON DATE_TRUNC('MONTH', retail.transaction_date) = DATE_TRUNC('MONTH', ec.transaction_date)
-      WHERE YEAR(retail.transaction_date) = 2023 OR YEAR(ec.transaction_date) = 2023
-      GROUP BY month
-      ORDER BY month
-    verified_at: 1718097600
-    verified_by: データアナリスト
     use_as_onboarding_question: true
+    sql: SELECT DATE_TRUNC('MONTH', retail.transaction_date) AS month, SUM(retail.total_price) AS retail_sales, SUM(ec.total_price) AS ec_sales FROM retail_data_with_product_master AS retail FULL OUTER JOIN ec_data_with_product_master AS ec ON DATE_TRUNC('MONTH', retail.transaction_date) = DATE_TRUNC('MONTH', ec.transaction_date) WHERE YEAR(retail.transaction_date) = 2023 OR YEAR(ec.transaction_date) = 2023 GROUP BY month ORDER BY month
+    verified_by: Tsubasa Kanno
+    verified_at: 1750385156
   - name: top_selling_products
     question: 販売数量が最も多い商品トップ5を教えてください
     sql: |
@@ -233,15 +223,9 @@ verified_queries:
   - name: top10_selling_products
     question: 売上TOP10の商品とその売上金額を教えて
     use_as_onboarding_question: true
-    sql: WITH combined_sales AS (SELECT product_id_master, product_name_master, SUM(total_price) AS total_sales FROM (SELECT product_id_master, product_name_master, total_price FROM retail_data_with_product_master WHERE YEAR(transaction_date) = 2023 UNION ALL SELECT product_id_master, product_name_master, total_price FROM ec_data_with_product_master WHERE YEAR(transaction_date) = 2023) GROUP BY product_id_master, product_name_master) SELECT product_id_master, product_name_master, TO_CHAR(total_sales, '999,999,999,999') AS formatted_total_sales FROM combined_sales ORDER BY total_sales DESC NULLS LAST LIMIT 10
+    sql: WITH combined_sales AS (SELECT product_id_master, product_name_master, SUM(total_price) AS total_sales FROM (SELECT product_id_master, product_name_master, total_price FROM retail_data_with_product_master WHERE YEAR(transaction_date) = 2023 UNION ALL SELECT product_id_master, product_name_master, total_price FROM ec_data_with_product_master WHERE YEAR(transaction_date) = 2023) GROUP BY product_id_master, product_name_master) SELECT product_id_master, product_name_master, total_sales FROM combined_sales ORDER BY total_sales DESC NULLS LAST LIMIT 10
     verified_by: Tsubasa Kanno
-    verified_at: 1750377860
-  - name: comparing_retail_vs_ec
-    question: 店舗とECの売上を比較して
-    use_as_onboarding_question: true
-    sql: SELECT 'Retail' AS channel, TO_CHAR(SUM(total_price), '999,999,999,999') AS total_sales FROM retail_data_with_product_master WHERE YEAR(transaction_date) = 2023 UNION ALL SELECT 'EC' AS channel, TO_CHAR(SUM(total_price), '999,999,999,999') AS total_sales FROM ec_data_with_product_master WHERE YEAR(transaction_date) = 2023 ORDER BY channel
-    verified_by: Tsubasa Kanno
-    verified_at: 1750378385
+    verified_at: 1750385242
 custom_instructions: |
   このセマンティックモデルは実店舗販売データ（RETAIL_DATA_WITH_PRODUCT_MASTER）とEC販売データ（EC_DATA_WITH_PRODUCT_MASTER）を分析するためのものです。
 
@@ -249,5 +233,5 @@ custom_instructions: |
   1. 売上金額はTOTAL_PRICEカラムに格納されています
   2. 商品情報は両テーブルに含まれており、PRODUCT_ID_MASTERで結合可能です
   3. 日付範囲は2023年のデータを対象としてください
-  4. 金額は日本円で表示され、3桁区切りのカンマを使用してください
+  4. 金額は日本円で表示してください。但しTO_CHAR()などは使わず数値型として扱ってください
   5. 日付フォーマットはYYYY-MM-DDを使用してください
