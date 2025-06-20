@@ -449,8 +449,7 @@ col1, col2, col3 = st.columns(3)
 # 利用可能データの確認
 required_tables = {
     "RETAIL_DATA_WITH_PRODUCT_MASTER": "店舗売上データ",
-    "EC_DATA_WITH_PRODUCT_MASTER": "EC売上データ", 
-    "CUSTOMER_REVIEWS": "顧客レビューデータ"
+    "EC_DATA_WITH_PRODUCT_MASTER": "EC売上データ"
 }
 
 with col1:
@@ -642,25 +641,18 @@ analysis_templates = {
         "売上TOP10の商品とその売上金額を教えて",
         "月別の売上推移を時系列で見せて",
         "店舗とECの売上を比較して",
-        "商品カテゴリ別の売上ランキングを作って"
-    ],
-    "顧客分析": [
-        "顧客満足度の高い商品TOP5とその評価を教えて",
-        "レビュー評価の低い商品とその理由を分析して",
-        "評価4以上の商品の売上合計を計算して",
-        "商品別の平均評価と売上の相関を見せて"
+        "商品別の売上ランキングを作って"
     ],
     "トレンド分析": [
-        "最近3ヶ月で売上が伸びている商品を特定して",
+        "売上の変動が大きい商品を特定して",
         "季節ごとの売上変動パターンを分析して",
-        "前年同月比で売上成長率を計算して",
         "売上が減少傾向にある商品を警告リストで表示して"
     ]
 }
 
-tab1, tab2, tab3 = st.tabs(list(analysis_templates.keys()))
+tab1, tab2 = st.tabs(list(analysis_templates.keys()))
 
-for i, (tab, category) in enumerate(zip([tab1, tab2, tab3], analysis_templates.keys())):
+for i, (tab, category) in enumerate(zip([tab1, tab2], analysis_templates.keys())):
     with tab:
         st.markdown(f"#### {category}に関する分析")
         
