@@ -9,3 +9,5 @@
 - SEMANTIC_MODEL_STAGE
 
 ウェアハウス名: COMPUTE_WH
+
+Cortex Searchサービス名: SNOW_RETAIL_SEARCH_SERVICE
