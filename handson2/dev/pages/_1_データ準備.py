@@ -137,7 +137,7 @@ def process_reviews(embedding_model: str, limit: int = 10):
                 )
                 SELECT 
                     ?, ?, ?, ?, ?, ?, ?, ?, ?,
-                    SNOWFLAKE.CORTEX.E『★★★修正対象★★★』(?, ?),
+                    SNOWFLAKE.CORTEX.『★★★修正対象★★★』(?, ?),
                     ?
             """, params=[
                 review['REVIEW_ID'], review['PRODUCT_ID'], review['CUSTOMER_ID'],
