@@ -1,11 +1,13 @@
 # =========================================================
-# Snowflake Cortex Handson シナリオ#2
-# AIを用いた顧客の声分析アプリケーション
+# Snowflake Discover
+# Snowflake Cortex AI で実現する次世代の VoC (顧客の声) アプリケーション
 # Step3: シンプルチャットボットページ
 # =========================================================
 # 概要: AI_COMPLETEを使った基本的なチャットボットの実装
-# 使用する機能: AI_COMPLETE関数によるAI対話
-# ペルソナ設定、よくある質問、チャット統計を含む
+# 使用する機能: AI_COMPLETE関数
+# =========================================================
+# Created by Tsubasa Kanno @Snowflake
+# 最終更新: 2025/07/06
 # =========================================================
 
 import streamlit as st
@@ -18,6 +20,7 @@ st.set_page_config(layout="wide")
 # Snowflakeセッション取得
 @st.cache_resource
 def get_snowflake_session():
+    """Snowflakeセッションを取得"""
     return get_active_session()
 
 session = get_snowflake_session()
@@ -53,7 +56,26 @@ def get_ai_response(model: str, prompt: str):
         ) as response
         """
         result = session.sql(query).collect()
-        return result[0]['RESPONSE'] if result else "応答を取得できませんでした。"
+        
+        if result and result[0]['RESPONSE']:
+            response = result[0]['RESPONSE']
+            
+            # 応答の後処理
+            # 1. 先頭と末尾のダブルクォーテーションを除去
+            if response.startswith('"') and response.endswith('"'):
+                response = response[1:-1]
+            
+            # 2. エスケープ文字を適切な文字に変換
+            response = response.replace('\\n', '\n')  # 改行文字
+            response = response.replace('\\t', '\t')  # タブ文字
+            response = response.replace('\\"', '"')   # ダブルクォーテーション
+            response = response.replace("\\'", "'")   # シングルクォーテーション
+            response = response.replace('\\\\', '\\') # バックスラッシュ
+            
+            return response
+        else:
+            return "応答を取得できませんでした。"
+            
     except Exception as e:
         return f"エラーが発生しました: {str(e)}"
 
@@ -329,4 +351,4 @@ st.success("""
 st.info("💡 **次のステップ**: Step4では、社内データを活用したRAGチャットボットの実装を学習します。")
 
 st.markdown("---")
-st.markdown(f"**Snowflake Cortex Handson シナリオ#2 | Step3: シンプルチャットボット**") 
+st.markdown("**Snowflake Cortex AI で実現する次世代の VoC (顧客の声) アプリケーション | Step3: シンプルチャットボット**") 
