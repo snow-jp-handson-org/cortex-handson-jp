@@ -1,23 +1,20 @@
 # =========================================================
-# Snowflake Cortex Handson シナリオ#2
-# AIを用いた顧客の声分析アプリケーション
-# Step5: Cortex Analyst分析
+# Snowflake Discover
+# Snowflake Cortex AI で実現する次世代の VoC (顧客の声) アプリケーション
+# Step5: Cortex Analyst分析ページ
 # =========================================================
 # 概要: Cortex Analystを使った自然言語データ分析
-# 特徴: セマンティックビューとYMLファイルの両方に対応した高精度SQL自動生成
 # 使用する機能: Cortex Analyst API、セマンティックビュー、セマンティックモデルファイル
 # =========================================================
 # Created by Tsubasa Kanno @Snowflake
-# 最終更新: 2025/06/16
+# 最終更新: 2025/07/06
 # =========================================================
 
 import streamlit as st
 import pandas as pd
 import json
 import plotly.express as px
-import plotly.graph_objects as go
 from snowflake.snowpark.context import get_active_session
-from datetime import datetime
 
 # ページ設定
 st.set_page_config(layout="wide")
@@ -27,7 +24,7 @@ st.set_page_config(layout="wide")
 # =========================================================
 @st.cache_resource
 def get_snowflake_session():
-    """Snowflakeセッションを取得（キャッシュ付き）"""
+    """Snowflakeセッションを取得"""
     return get_active_session()
 
 session = get_snowflake_session()
@@ -57,7 +54,7 @@ if 'selected_llm_model' not in st.session_state:
 # ユーティリティ関数
 # =========================================================
 def check_table_exists(table_name: str) -> bool:
-    """テーブルが存在するかチェック"""
+    """テーブルの存在確認"""
     try:
         session.sql(f"SELECT 1 FROM {table_name} LIMIT 1").collect()
         return True
@@ -221,11 +218,11 @@ def execute_cortex_analyst_query(question: str, model_info: dict) -> dict:
         }
 
 # =========================================================
-# シンプルなカスタマイズグラフ機能
+# カスタマイズグラフ機能
 # =========================================================
 @st.fragment
 def create_customizable_graph(df: pd.DataFrame, unique_key: str):
-    """ユーザーがカスタマイズ可能なグラフを表示する（シンプル版）"""
+    """ユーザーがカスタマイズ可能なグラフを表示する"""
     if df.empty:
         st.warning("表示するデータがありません")
         return
@@ -349,10 +346,14 @@ st.header("企業データを自然言語で分析する高度なAIアシスタ�
 
 st.markdown("""
 このページでは、Snowflake Cortex Analystを使用した高度なデータ分析機能を体験できます。
+
 Step3・Step4との違いは、**セマンティックビューまたはYMLファイル**を活用することで、より正確で信頼性の高いSQL生成が可能な点です。
 
-🚀 **自動検出機能**: 利用可能なセマンティックビューとYMLファイルを自動検出し、統一されたインターフェースで選択できます。
-📊 **カスタムグラフ**: データに応じてユーザーが自由にグラフを設定でき、売上データを正確に可視化できます。
+🚀 **自動検出機能**  
+利用可能なセマンティックビューとYMLファイルを自動検出し、統一されたインターフェースで選択できます。
+
+📊 **カスタムグラフ**  
+データに応じてユーザーが自由にグラフを設定でき、売上データを正確に可視化できます。
 """)
 
 # =========================================================
@@ -468,7 +469,7 @@ with col3:
 
 # 前提条件のチェック
 if not selected_semantic_model or not model_info:
-    st.error(f"""
+    st.error("""
     ⚠️ **セマンティックモデルが設定されていません**
     
     Cortex Analystを使用するには、セマンティックビューまたはYMLファイルが必要です。
@@ -624,4 +625,4 @@ st.info("🎉 **ワークショップ完了**: 全5ステップのSnowflake Cort
 
 # フッター
 st.markdown("---")
-st.markdown("**Snowflake Cortex Handson シナリオ#2 | Step5: Cortex Analyst分析**")
+st.markdown("**Snowflake Cortex AI で実現する次世代の VoC (顧客の声) アプリケーション | Step5: Cortex Analyst分析**")

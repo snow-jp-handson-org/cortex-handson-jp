@@ -1,20 +1,18 @@
 # =========================================================
-# Snowflake Cortex Handson シナリオ#2
-# AIを用いた顧客の声分析アプリケーション
+# Snowflake Discover
+# Snowflake Cortex AI で実現する次世代の VoC (顧客の声) アプリケーション
 # Step4: RAGチャットボット
 # =========================================================
 # 概要: Cortex SearchとCOMPLETEを使ったRAGチャットボットの実装
-# 特徴: 企業の知識ベースを理解してより正確な回答を生成
+# 使用する機能: Cortex Search, AI_COMPLETE関数
 # =========================================================
 # Created by Tsubasa Kanno @Snowflake
-# 最終更新: 2025/06/16
+# 最終更新: 2025/07/06
 # =========================================================
 
 import streamlit as st
 import pandas as pd
-import json
 from snowflake.snowpark.context import get_active_session
-from datetime import datetime
 from snowflake.core import Root
 
 # ページ設定
@@ -25,7 +23,7 @@ st.set_page_config(layout="wide")
 # =========================================================
 @st.cache_resource
 def get_snowflake_session():
-    """Snowflakeセッションを取得（キャッシュ付き）"""
+    """Snowflakeセッションを取得"""
     return get_active_session()
 
 session = get_snowflake_session()
@@ -54,14 +52,7 @@ if 'selected_llm_model' not in st.session_state:
 # データ・サービス確認関数
 # =========================================================
 def check_table_exists(table_name: str) -> bool:
-    """
-    指定されたテーブルが存在するかを確認
-    
-    Args:
-        table_name: 確認するテーブル名
-    Returns:
-        bool: テーブルが存在すればTrue
-    """
+    """テーブルの存在確認"""
     try:
         session.sql(f"SELECT 1 FROM {table_name} LIMIT 1").collect()
         return True
@@ -69,14 +60,7 @@ def check_table_exists(table_name: str) -> bool:
         return False
 
 def check_cortex_search_service(service_name: str) -> bool:
-    """
-    Cortex Searchサービスが利用可能かを確認
-    
-    Args:
-        service_name: 確認するサービス名
-    Returns:
-        bool: サービスが利用可能ならTrue
-    """
+    """Cortex Searchサービスが利用可能かを確認"""
     try:
         result = session.sql(f"SHOW CORTEX SEARCH SERVICES LIKE '{service_name}'").collect()
         return len(result) > 0
@@ -84,14 +68,7 @@ def check_cortex_search_service(service_name: str) -> bool:
         return False
 
 def get_table_count(table_name: str) -> int:
-    """
-    テーブルのレコード数を取得
-    
-    Args:
-        table_name: カウントするテーブル名
-    Returns:
-        int: レコード数
-    """
+    """テーブルのレコード数を取得"""
     try:
         result = session.sql(f"SELECT COUNT(*) as count FROM {table_name}").collect()
         return result[0]['COUNT']
@@ -106,15 +83,6 @@ def search_documents_with_cortex(query: str, service_name: str = SEARCH_SERVICE_
     """
     Cortex SearchのPython APIを使用してドキュメントを検索（フィルタ機能付き）
     企業の知識ベースから関連情報を高精度で検索
-    
-    Args:
-        query: 検索クエリ
-        service_name: Cortex Searchサービス名
-        limit: 検索結果の上限数
-        department_filter: 部署フィルタ
-        doc_type_filter: ドキュメントタイプフィルタ
-    Returns:
-        list: 検索結果のリスト
     """
     try:
         # 現在のデータベースとスキーマを取得
@@ -176,23 +144,20 @@ def generate_rag_response(question: str, context: str, model: str) -> str:
     """
     検索結果を基にRAG応答を生成
     企業ドメインの知識を活用した正確な回答を生成
-    
-    Args:
-        question: ユーザーの質問
-        context: 検索で取得したコンテキスト情報
-        model: 使用するLLMモデル
-    Returns:
-        str: 生成された回答
     """
     try:
+        # プロンプトのエスケープ処理
+        escaped_question = question.replace("'", "''")
+        escaped_context = context.replace("'", "''")
+        
         # 企業ドメインに特化したプロンプト
         prompt = f"""あなたは企業のカスタマーサポート担当者です。
 以下の企業の公式ドキュメントから得られた情報を基に、お客様の質問に正確にお答えください。
 
 企業ドキュメントの情報:
-{context}
+{escaped_context}
 
-お客様の質問: {question}
+お客様の質問: {escaped_question}
 
 回答の際は以下を心がけてください：
 - 企業ドキュメントの情報を最優先に使用
@@ -200,16 +165,38 @@ def generate_rag_response(question: str, context: str, model: str) -> str:
 - 親切で分かりやすい言葉で回答
 - 必要に応じて手順を番号付きで説明"""
         
+        # プロンプトのエスケープ処理
+        escaped_prompt = prompt.replace("'", "''")
+        
         # Cortex COMPLETEで回答生成
         complete_query = f"""
         SELECT SNOWFLAKE.CORTEX.COMPLETE(
             '{model}',
-            '{prompt}'
+            '{escaped_prompt}'
         ) as response
         """
         
         result = session.sql(complete_query).collect()
-        return result[0]['RESPONSE'] if result else "申し訳ございませんが、回答を生成できませんでした。"
+        
+        if result and result[0]['RESPONSE']:
+            response = result[0]['RESPONSE']
+            
+            # 応答の後処理
+            # 1. 先頭と末尾のダブルクォーテーションを除去
+            if response.startswith('"') and response.endswith('"'):
+                response = response[1:-1]
+            
+            # 2. エスケープ文字を適切な文字に変換
+            response = response.replace('\\n', '\n')  # 改行文字
+            response = response.replace('\\t', '\t')  # タブ文字
+            response = response.replace('\\"', '"')   # ダブルクォーテーション
+            response = response.replace("\\'", "'")   # シングルクォーテーション
+            response = response.replace('\\\\', '\\') # バックスラッシュ
+            
+            return response
+        else:
+            return "申し訳ございませんが、回答を生成できませんでした。"
+            
     except Exception as e:
         return f"エラーが発生しました: {str(e)}"
 
@@ -573,7 +560,6 @@ with col4:
 # RAG統計の追加情報
 if ai_responses > 0:
     # 平均的な利用状況の表示
-    avg_questions_per_session = user_questions / max(1, len(st.session_state.get('session_count', [1])))
     response_rate = (ai_responses / user_questions) * 100 if user_questions > 0 else 0
     st.info(f"📈 **利用状況**: 応答率 {response_rate:.1f}% - RAGシステムが正常に動作している指標")
 
@@ -601,4 +587,4 @@ st.info("💡 **次のステップ**: Step5では、Cortex Analystを使った�
 
 # フッター
 st.markdown("---")
-st.markdown("**Snowflake Cortex Handson シナリオ#2 | Step4: RAGチャットボット**") 
+st.markdown("**Snowflake Cortex AI で実現する次世代の VoC (顧客の声) アプリケーション | Step4: RAGチャットボット**") 

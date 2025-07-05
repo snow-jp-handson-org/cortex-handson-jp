@@ -1,24 +1,19 @@
 # =========================================================
-# Snowflake Cortex Handson シナリオ#2
-# AIを用いた顧客の声分析アプリケーション
+# Snowflake Discover
+# Snowflake Cortex AI で実現する次世代の VoC (顧客の声) アプリケーション
 # Step1: データ準備ページ
 # =========================================================
 # 概要: 既存データの確認とレビューデータの前処理
 # 使用する機能: SPLIT_TEXT_RECURSIVE_CHARACTER, TRANSLATE, SENTIMENT, EMBED_TEXT_1024
 # =========================================================
 # Created by Tsubasa Kanno @Snowflake
-# 最終更新: 2025/06/16
+# 最終更新: 2025/07/06
 # =========================================================
 
 import streamlit as st
 import pandas as pd
-import json
 import plotly.express as px
-import plotly.graph_objects as go
 from snowflake.snowpark.context import get_active_session
-from snowflake.snowpark.functions import col, lit
-from datetime import datetime
-import time
 
 # ページ設定
 st.set_page_config(layout="wide")
@@ -26,6 +21,7 @@ st.set_page_config(layout="wide")
 # Snowflakeセッション取得
 @st.cache_resource
 def get_snowflake_session():
+    """Snowflakeセッションを取得"""
     return get_active_session()
 
 session = get_snowflake_session()
@@ -49,30 +45,12 @@ if 'selected_embedding_model' not in st.session_state:
 # ユーティリティ関数
 # =========================================================
 def check_table_exists(table_name: str) -> bool:
-    """テーブルの存在確認（複数の方法で確認）"""
+    """テーブルの存在確認"""
     try:
-        # 方法1: SHOW TABLESを使用してテーブルの存在を確認
-        result = session.sql(f"SHOW TABLES LIKE '{table_name}'").collect()
-        if len(result) > 0:
-            return True
-    except:
-        pass
-    
-    try:
-        # 方法2: 簡単なSELECTクエリを試行
         session.sql(f"SELECT 1 FROM {table_name} LIMIT 1").collect()
         return True
     except:
-        pass
-    
-    try:
-        # 方法3: DESCRIBE TABLEを試行
-        session.sql(f"DESCRIBE TABLE {table_name}").collect()
-        return True
-    except:
-        pass
-    
-    return False
+        return False
 
 def get_table_count(table_name: str) -> int:
     """テーブルのレコード数を取得"""
@@ -98,9 +76,11 @@ def process_reviews(embedding_model: str, limit: int = 10):
         st.info("処理が必要なレビューはありません。")
         return
     
+    # 進捗表示の初期化
     progress_bar = st.progress(0)
     progress_text = st.empty()
     
+    # 各レビューを処理
     for i, review in enumerate(reviews):
         # 進捗表示
         progress = (i + 1) / len(reviews)
@@ -259,7 +239,7 @@ st.markdown("顧客レビューデータに対してCortex AI機能を使用し�
 if not check_table_exists("CUSTOMER_REVIEWS"):
     st.error("CUSTOMER_REVIEWSテーブルが見つかりません。前準備を確認してください。")
 else:
-    # 前処理テーブルの確認/作成
+    # 前処理の説明
     st.info("""
     **前処理で実行される処理：**
     1. **翻訳・感情分析**: レビューテキスト全体を英語に翻訳し、感情スコアを算出（TRANSLATE, SENTIMENT）
@@ -298,7 +278,7 @@ else:
                 except Exception as e:
                     st.error(f"❌ テーブル作成エラー: {str(e)}")
     else:
-        # 前処理用テーブルが存在する場合のメッセージを横いっぱいに表示
+        # 前処理用テーブルが存在する場合
         st.success("✅ 前処理用テーブル（CUSTOMER_ANALYSIS）が存在します。")
         
         col1, col2 = st.columns(2)
@@ -308,7 +288,6 @@ else:
             st.metric("処理済みチャンク数", f"{processed_count:,}件")
         
         with col2:
-            # 前処理実行ボタン
             # 未処理レビュー数の確認
             try:
                 unprocessed_count = session.sql("""
@@ -421,4 +400,4 @@ st.success("""
 st.info("💡 **次のステップ**: Step2では、AI_CLASSIFY、AI_FILTER、AI_AGGなどのAI関数を使った高度な分析を学習します。")
 
 st.markdown("---")
-st.markdown(f"**Snowflake Cortex Handson シナリオ#2 | Step1: データ準備**") 
+st.markdown("**Snowflake Cortex AI で実現する次世代の VoC (顧客の声) アプリケーション | Step1: データ準備**") 

@@ -1,24 +1,19 @@
 # =========================================================
-# Snowflake Cortex Handson シナリオ#2
-# AIを用いた顧客の声分析アプリケーション
+# Snowflake Discover
+# Snowflake Cortex AI で実現する次世代の VoC (顧客の声) アプリケーション
 # Step2: 顧客の声分析ページ
 # =========================================================
 # 概要: レビューデータの高度な分析とカテゴリ分類
 # 使用する機能: AI_CLASSIFY, AI_FILTER, AI_AGG, AI_SUMMARIZE_AGG, AI_SIMILARITY
 # =========================================================
 # Created by Tsubasa Kanno @Snowflake
-# 最終更新: 2025/06/16
+# 最終更新: 2025/07/06
 # =========================================================
 
 import streamlit as st
 import pandas as pd
-import json
 import plotly.express as px
-import plotly.graph_objects as go
 from snowflake.snowpark.context import get_active_session
-from snowflake.snowpark.functions import col, lit
-from datetime import datetime
-import time
 
 # ページ設定
 st.set_page_config(layout="wide")
@@ -26,6 +21,7 @@ st.set_page_config(layout="wide")
 # Snowflakeセッション取得
 @st.cache_resource
 def get_snowflake_session():
+    """Snowflakeセッションを取得"""
     return get_active_session()
 
 session = get_snowflake_session()
@@ -33,15 +29,13 @@ session = get_snowflake_session()
 # =========================================================
 # 定数設定
 # =========================================================
-
 # 分析カテゴリ
 ANALYSIS_CATEGORIES = [
     "商品品質",
     "配送サービス", 
     "価格",
     "カスタマーサービス",
-    "店舗環境",
-    "その他"
+    "店舗環境"
 ]
 
 # =========================================================
@@ -50,19 +44,10 @@ ANALYSIS_CATEGORIES = [
 def check_table_exists(table_name: str) -> bool:
     """テーブルの存在確認"""
     try:
-        result = session.sql(f"SHOW TABLES LIKE '{table_name}'").collect()
-        if len(result) > 0:
-            return True
-    except:
-        pass
-    
-    try:
         session.sql(f"SELECT 1 FROM {table_name} LIMIT 1").collect()
         return True
     except:
-        pass
-    
-    return False
+        return False
 
 def get_table_count(table_name: str) -> int:
     """テーブルのレコード数を取得"""
@@ -138,6 +123,7 @@ with col1:
     - `AI_CLASSIFY`: マルチラベル分類
     - `AI_FILTER`: 条件フィルタリング
     - `AI_AGG`: 集約分析
+    - `AI_SUMMARIZE_AGG`: 集約データの要約
     - `AI_SIMILARITY`: 類似レビュー検出
     """)
 
@@ -164,7 +150,8 @@ def section_2_classify():
         with st.spinner("レビューの自動分類中..."):
             try:
                 # AI_CLASSIFY関数でカテゴリ分類（:labelsでJSON抽出）
-                category_query = """
+                categories_sql = ', '.join([f"'{cat}'" for cat in ANALYSIS_CATEGORIES])
+                category_query = f"""
                 SELECT 
                     review_id,
                     review_text,
@@ -172,7 +159,7 @@ def section_2_classify():
                     purchase_channel,
                     AI_CLASSIFY(
                         review_text, 
-                        ARRAY_CONSTRUCT('商品品質', '配送サービス', '価格', 'カスタマーサービス', '店舗環境', 'その他')
+                        ARRAY_CONSTRUCT({categories_sql})
                     ):labels[0]::string as category
                 FROM CUSTOMER_REVIEWS 
                 WHERE review_text IS NOT NULL
@@ -563,7 +550,8 @@ def section_6_integrated():
             try:
                 # 複数のAISQLを組み合わせた統合分析（全件対象）
                 # まず基本データを取得
-                base_query = """
+                categories_sql = ', '.join([f"'{cat}'" for cat in ANALYSIS_CATEGORIES])
+                base_query = f"""
                 SELECT 
                     review_id,
                     review_text,
@@ -572,14 +560,14 @@ def section_6_integrated():
                     SNOWFLAKE.CORTEX.SENTIMENT(review_text) as sentiment_score,
                     AI_CLASSIFY(
                         review_text, 
-                        ARRAY_CONSTRUCT('商品品質', '配送サービス', '価格', 'カスタマーサービス', '店舗環境', 'その他')
+                        ARRAY_CONSTRUCT({categories_sql})
                     ):labels[0]::string as category
                 FROM CUSTOMER_REVIEWS 
                 WHERE review_text IS NOT NULL
                 """
                 
                 # AI_SUMMARIZE_AGGを使用してカテゴリ別要約を取得
-                summary_query = """
+                summary_query = f"""
                 SELECT 
                     category,
                     purchase_channel,
@@ -594,7 +582,7 @@ def section_6_integrated():
                         purchase_channel,
                         AI_CLASSIFY(
                             review_text, 
-                            ARRAY_CONSTRUCT('商品品質', '配送サービス', '価格', 'カスタマーサービス', '店舗環境', 'その他')
+                            ARRAY_CONSTRUCT({categories_sql})
                         ):labels[0]::string as category
                     FROM CUSTOMER_REVIEWS 
                     WHERE review_text IS NOT NULL
@@ -784,7 +772,7 @@ def section_6_integrated():
                 avg_sentiment = category_data['SENTIMENT_SCORE'].mean()
                 st.metric("平均感情スコア", f"{avg_sentiment:.3f}")
             
-            # ページネーション機能（セクション2と同様の実装）
+            # ページネーション機能
             items_per_page_6 = st.slider("1ページあたりの表示件数:", 5, 50, 10, key="items_per_page_6")
             total_pages_6 = max(1, (len(category_data) - 1) // items_per_page_6 + 1)
             
@@ -809,8 +797,7 @@ def section_6_integrated():
                 category_summaries = df_summaries[df_summaries['CATEGORY'] == analysis_category]
                 
                 for _, summary_row in category_summaries.iterrows():
-                    with st.info(f"**{summary_row['PURCHASE_CHANNEL']}チャネル**: {summary_row['CATEGORY_SUMMARY']}"):
-                        pass
+                    st.info(f"**{summary_row['PURCHASE_CHANNEL']}チャネル**: {summary_row['CATEGORY_SUMMARY']}")
             
             # カテゴリ内の全レビュー表示（ページネーション付き）
             st.markdown(f"##### 📝 {analysis_category} カテゴリのレビュー詳細")
@@ -866,4 +853,4 @@ st.success("""
 st.info("💡 **次のステップ**: Step3では、シンプルなチャットボットの実装を学習します。")
 
 st.markdown("---")
-st.markdown(f"**Snowflake Cortex Handson シナリオ#2 | Step2: 顧客の声分析**") 
+st.markdown("**Snowflake Cortex AI で実現する次世代の VoC (顧客の声) アプリケーション | Step2: 顧客の声分析**")
