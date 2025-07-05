@@ -122,8 +122,8 @@ def render_workshop_steps():
         {
             "step": "Step 2", 
             "title": "顧客の声分析",
-            "description": "AI_CLASSIFY, AI_FILTER, AI_AGGを使った分析",
-            "functions": ["AI_CLASSIFY", "AI_FILTER", "AI_AGG"],
+            "description": "AI_CLASSIFY, AI_FILTER, AI_AGG, AI_SUMMARIZE_AGG, AI_SIMILARITYを使った分析",
+            "functions": ["AI_CLASSIFY", "AI_FILTER", "AI_AGG", "AI_SUMMARIZE_AGG", "AI_SIMILARITY"],
             "time": "20分"
         },
         {
@@ -144,7 +144,7 @@ def render_workshop_steps():
             "step": "Step 5",
             "title": "Cortex Analyst分析",
             "description": "自然言語によるデータ分析とダッシュボード",
-            "functions": ["Cortex Analyst", "AI_AGG"],
+            "functions": ["Cortex Analyst", "AI_COMPLETE"],
             "time": "10分"
         }
     ]
