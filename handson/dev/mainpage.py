@@ -1,33 +1,26 @@
 # =========================================================
-# Snowflake Cortex Handson シナリオ#2
-# AIを用いた顧客の声分析アプリケーション
+# Snowflake Discover
+# Snowflake Cortex AI で実現する次世代の VoC (顧客の声) アプリケーション
+# メインページ
+# =========================================================
+# 概要: ワークショップの概要とナビゲーションページ
+# 使用する機能: ワークショップ全体のガイダンス
 # =========================================================
 # Created by Tsubasa Kanno @Snowflake
-# 最終更新: 2025/06/16
+# 最終更新: 2025/07/06
 # =========================================================
 
-# =========================================================
-# 必要なライブラリのインポート
-# =========================================================
 import streamlit as st
 import pandas as pd
-import json
-import time
-from datetime import datetime
-import plotly.express as px
-import plotly.graph_objects as go
 from snowflake.snowpark.context import get_active_session
-from snowflake.snowpark.functions import col, call_function, when_matched, when_not_matched
 
-# =========================================================
-# ページ設定とセッション初期化
-# =========================================================
+# ページ設定
 st.set_page_config(
     layout="wide",
     initial_sidebar_state="expanded"
 )
 
-# Snowflakeセッションの取得
+# Snowflakeセッション取得
 @st.cache_resource
 def get_snowflake_session():
     """Snowflakeセッションを取得"""
@@ -36,7 +29,7 @@ def get_snowflake_session():
 session = get_snowflake_session()
 
 # =========================================================
-# 共通関数
+# ユーティリティ関数
 # =========================================================
 def check_table_exists(table_name: str) -> bool:
     """テーブルが存在するかチェック"""
@@ -54,31 +47,17 @@ def get_table_count(table_name: str) -> int:
     except:
         return 0
 
-def display_info_card(title: str, value: str, description: str = ""):
-    """情報カードを表示"""
-    st.metric(
-        label=title,
-        value=value,
-        help=description
-    )
-
-def display_success_message(message: str):
-    """成功メッセージを表示"""
-    st.success(f"✅ {message}")
-
-def display_error_message(message: str):
-    """エラーメッセージを表示"""
-    st.error(f"❌ {message}")
+# =========================================================
+# メインページタイトル
+# =========================================================
+st.title("❄️ Snowflake Cortex Handson シナリオ#2")
+st.header("AIを活用した顧客の声分析")
 
 # =========================================================
-# メインページコンテンツ
+# セクション1: ワークショップについて
 # =========================================================
-def render_home_page():
-    """ホームページを表示"""
-    st.title("❄️ Snowflake Cortex Handson シナリオ#2")
-    st.header("AIを活用した顧客の声分析")
-    
-    # 基本情報を2列で表示
+def render_workshop_overview():
+    """ワークショップ概要セクションを表示"""
     col1, col2 = st.columns(2)
     
     with col1:
@@ -123,11 +102,15 @@ def render_home_page():
         - CS部門の業務効率化
         - データドリブンな意思決定
         """)
-    
-    # ワークショップ手順
-    st.markdown("---")
+
+# =========================================================
+# セクション2: ワークショップ手順
+# =========================================================
+def render_workshop_steps():
+    """ワークショップ手順セクションを表示"""
     st.markdown("### 📚 ワークショップ手順")
     
+    # 各ステップの定義
     steps = [
         {
             "step": "Step 1",
@@ -139,8 +122,8 @@ def render_home_page():
         {
             "step": "Step 2", 
             "title": "顧客の声分析",
-            "description": "AI_CLASSIFY, AI_FILTER, AI_AGGを使った分析",
-            "functions": ["AI_CLASSIFY", "AI_FILTER", "AI_AGG"],
+            "description": "AI_CLASSIFY, AI_FILTER, AI_AGG, AI_SUMMARIZE_AGG, AI_SIMILARITYを使った分析",
+            "functions": ["AI_CLASSIFY", "AI_FILTER", "AI_AGG", "AI_SUMMARIZE_AGG", "AI_SIMILARITY"],
             "time": "20分"
         },
         {
@@ -161,11 +144,12 @@ def render_home_page():
             "step": "Step 5",
             "title": "Cortex Analyst分析",
             "description": "自然言語によるデータ分析とダッシュボード",
-            "functions": ["Cortex Analyst", "AI_AGG"],
+            "functions": ["Cortex Analyst", "AI_COMPLETE"],
             "time": "10分"
         }
     ]
     
+    # 各ステップの詳細表示
     for i, step_info in enumerate(steps):
         with st.expander(f"📍 {step_info['step']}: {step_info['title']} ({step_info['time']})"):
             st.markdown(f"**概要**: {step_info['description']}")
@@ -173,23 +157,25 @@ def render_home_page():
             for func in step_info['functions']:
                 st.write(f"- `{func}`")
 
-    st.markdown("---")
-    st.info("💡 **使い方**: サイドバーから各ステップに進んでハンズオンを開始してください。")
-
 # =========================================================
 # メインアプリケーション
 # =========================================================
 def main():
     """メインアプリケーション"""
     
-    # メインページを表示
-    render_home_page()
+    # ワークショップ概要を表示
+    render_workshop_overview()
     
-    # フッター
     st.markdown("---")
-    st.markdown(
-        "**Snowflake Cortex Handson シナリオ#2 | メインページ**"
-    )
+    
+    # ワークショップ手順を表示
+    render_workshop_steps()
+    
+    st.markdown("---")
+    st.info("💡 **使い方**: サイドバーから各ステップに進んでハンズオンを開始してください。")
 
 if __name__ == "__main__":
-    main() 
+    main()
+
+st.markdown("---")
+st.markdown("**Snowflake Cortex AI で実現する次世代の VoC (顧客の声) アプリケーション | メインページ**") 
