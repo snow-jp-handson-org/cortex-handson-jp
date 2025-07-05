@@ -22,7 +22,7 @@ USE warehouse compute_wh;
 SELECT SNOWFLAKE.CORTEX.TRANSLATE('この食品は価格が高いです。一方で非常においしいのでもっと価格が低いと嬉しいです。', '', 'en') as translated;
 
 -- ※ハンズオン※
--- Streamlitの112行目付近の『★★★修正対象★★★』を書き換えてみましょう
+-- Streamlitの92行目付近の『★★★修正対象★★★』を書き換えてみましょう
 
 
 
@@ -30,7 +30,7 @@ SELECT SNOWFLAKE.CORTEX.TRANSLATE('この食品は価格が高いです。一方
 SELECT SNOWFLAKE.CORTEX.SENTIMENT('This is really the best!') as basic_sentiment;
 
 -- ※ハンズオン※
--- Streamlitの116行目付近の『★★★修正対象★★★』を書き換えてみましょう
+-- Streamlitの96行目付近の『★★★修正対象★★★』を書き換えてみましょう
 
 
 
@@ -51,7 +51,7 @@ SELECT SNOWFLAKE.CORTEX.SPLIT_TEXT_RECURSIVE_CHARACTER(
 ) as split_result;
 
 -- ※ハンズオン※
--- Streamlitの123行目付近の『★★★修正対象★★★』を書き換えてみましょう
+-- Streamlitの103行目付近の『★★★修正対象★★★』を書き換えてみましょう
 
 
 
@@ -59,7 +59,7 @@ SELECT SNOWFLAKE.CORTEX.SPLIT_TEXT_RECURSIVE_CHARACTER(
 SELECT SNOWFLAKE.CORTEX.EMBED_TEXT_1024('multilingual-e5-large', 'ECでの買い物体験は素晴らしかったです。');
 
 -- ※ハンズオン※
--- Streamlitの140行目付近の『★★★修正対象★★★』を書き換えてみましょう
+-- Streamlitの120行目付近の『★★★修正対象★★★』を書き換えてみましょう
 
 
 
@@ -76,7 +76,8 @@ SELECT
     ) as classification;
 
 -- ※ハンズオン※
--- Streamlitの173行目付近の『★★★修正対象★★★』を書き換えてみましょう
+-- Streamlitの160行目付近の『★★★修正対象★★★』を書き換えてみましょう
+-- ここのAI_CLASSIFY関数はシングルラベル分類としています
 
 
 
@@ -90,7 +91,7 @@ WHERE AI_FILTER(CONCAT('商品の品質について言及されているか？: 
 LIMIT 10;
 
 -- ※ハンズオン※
--- Streamlitの314行目付近の『★★★修正対象★★★』を書き換えてみましょう
+-- Streamlitの301行目付近の『★★★修正対象★★★』を書き換えてみましょう
 
 
 
@@ -105,11 +106,13 @@ FROM CUSTOMER_REVIEWS
 GROUP BY purchase_channel;
 
 -- ※ハンズオン※
--- Streamlitの415行目付近の『★★★修正対象★★★』を書き換えてみましょう
+-- Streamlitの402行目付近の『★★★修正対象★★★』を書き換えてみましょう
+-- AI_AGGは原則英語のみのサポートとなりますので、出力結果をTRANSLATE関数で日本語に翻訳しています
 
 
 
 -- AI_SUMMARIZE_AGG関数による要約 (購入チャネル別)
+-- 統合分析レポートの中で使用していますが修正する必要はありません
 SELECT 
     purchase_channel,
     AI_SUMMARIZE_AGG(review_text) as review_summary
@@ -125,7 +128,7 @@ SELECT
     AI_SIMILARITY('今日は良い天気です', '天候が素晴らしいですね') as similarity_score;
 
 -- ※ハンズオン※
--- Streamlitの479行目付近の『★★★修正対象★★★』を書き換えてみましょう
+-- Streamlitの466行目付近の『★★★修正対象★★★』を書き換えてみましょう
 
 
 
@@ -255,10 +258,10 @@ ORDER BY REVIEW_COUNT DESC, AVG_RATING DESC;
 SELECT AI_COMPLETE('llama4-maverick', 'Snowflakeの特徴を端的に教えてください。');
 
 -- ※ハンズオン※
--- Streamlitの50行目付近の『★★★修正対象★★★』を書き換えてみましょう
+-- Streamlitの53行目付近の『★★★修正対象★★★』を書き換えてみましょう
 
 -- ※(Option) ハンズオン※
--- Streamlitの29行目付近を書き換えて他のLLMモデルを追加してみましょう
+-- Streamlitの32行目付近を書き換えて他のLLMモデルを追加してみましょう
 -- <https://docs.snowflake.com/en/sql-reference/functions/ai_complete-single-string#arguments>
 
 
