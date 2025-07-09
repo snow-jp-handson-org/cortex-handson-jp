@@ -148,3 +148,18 @@ CREATE OR REPLACE STREAMLIT sis_snowretail_analysis_dev
 --     FROM @GIT_INTEGRATION_FOR_HANDSON/branches/pub_20250709/handson/mvp
 --     MAIN_FILE = 'mainpage.py'
 --     QUERY_WAREHOUSE = COMPUTE_WH;
+
+
+
+// (Option) 後片付け
+
+-- データベースと関連オブジェクトの削除
+-- Streamlit、Git統合、各種テーブルなどが全て削除されます
+-- DROP DATABASE SNOWRETAIL_DB;
+
+-- API統合の削除
+-- DROP API INTEGRATION git_api_integration;
+
+-- クロスリージョン推論の無効化
+-- (有効のままで問題無ければ実行しなくても構いません)
+-- ALTER ACCOUNT UNSET CORTEX_ENABLED_CROSS_REGION;
