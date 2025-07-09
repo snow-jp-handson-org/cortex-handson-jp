@@ -63,6 +63,12 @@ SELECT SNOWFLAKE.CORTEX.EMBED_TEXT_1024('multilingual-e5-large', 'ECでの買い
 
 
 
+-- (Option) AI_EMBED関数
+-- テキストと画像のベクトル埋め込みに対応する新しいEMBEDDING関数
+SELECT AI_EMBED('multilingual-e5-large', 'ECでの買い物体験は素晴らしかったです。');
+
+
+
 -- =========================================================
 -- Step2: 顧客の声分析
 -- =========================================================
