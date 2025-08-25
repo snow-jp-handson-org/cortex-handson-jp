@@ -53,7 +53,19 @@ def get_ai_response(model: str, prompt: str):
         ) as response
         """
         result = session.sql(query).collect()
-        return result[0]['RESPONSE'] if result else "応答を取得できませんでした。"
+        if result:
+            ai_response = result[0]['RESPONSE']
+            
+            # 文字列を改行コード`\n`に置換
+            cleaned_response = ai_response.replace('\\n', '\n')
+            
+            # 連続する空白や改行を正規化
+            import re
+            normalized_response = re.sub(r'\s{2,}', '\n', cleaned_response)
+            
+            return normalized_response
+        else:
+            return "応答を取得できませんでした。"
     except Exception as e:
         return f"エラーが発生しました: {str(e)}"
 
