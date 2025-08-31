@@ -8,6 +8,7 @@ USE WAREHOUSE COMPUTE_WH;
 ALTER ACCOUNT SET CORTEX_ENABLED_CROSS_REGION = 'ANY_REGION';
 
 
+
 // Step2: 各種オブジェクトの作成 //
 
 -- データベースの作成
@@ -40,8 +41,8 @@ CREATE OR REPLACE GIT REPOSITORY GIT_INTEGRATION_FOR_HANDSON
 ls @GIT_INTEGRATION_FOR_HANDSON/branches/pub_20250709;
 
 -- Githubからファイルを持ってくる
-COPY FILES INTO @SNOWRETAIL_DB.SNOWRETAIL_SCHEMA.FILE FROM @GIT_INTEGRATION_FOR_HANDSON/branches/pub_20250709/data/;
-COPY FILES INTO @SNOWRETAIL_DB.SNOWRETAIL_SCHEMA.SEMANTIC_MODEL_STAGE FROM @GIT_INTEGRATION_FOR_HANDSON/branches/pub_20250709/handson/sales_analysis_model.yaml;
+COPY FILES INTO @SNOWRETAIL_DB.SNOWRETAIL_SCHEMA.FILE FROM @GIT_INTEGRATION_FOR_HANDSON/branches/pri_20250901/data/;
+COPY FILES INTO @SNOWRETAIL_DB.SNOWRETAIL_SCHEMA.SEMANTIC_MODEL_STAGE FROM @GIT_INTEGRATION_FOR_HANDSON/branches/pri_20250901/handson/sales_analysis_model.yaml;
 
 
 
@@ -75,40 +76,10 @@ CREATE OR REPLACE TABLE EC_DATA_WITH_PRODUCT_MASTER (
 	SIMILARITY FLOAT
 );
 
--- カスタマーレビューテーブルの作成
-CREATE OR REPLACE TABLE CUSTOMER_REVIEWS (
-	REVIEW_ID VARCHAR,
-	PRODUCT_ID VARCHAR,
-	CUSTOMER_ID VARCHAR,
-	RATING NUMBER,
-	REVIEW_TEXT VARCHAR,
-	REVIEW_DATE TIMESTAMP_NTZ,
-	PURCHASE_CHANNEL VARCHAR,
-	HELPFUL_VOTES NUMBER
-);
-
--- 社内ドキュメントテーブルの作成
-CREATE OR REPLACE TABLE SNOW_RETAIL_DOCUMENTS (
-	DOCUMENT_ID VARCHAR,
-	TITLE VARCHAR,
-	CONTENT VARCHAR,
-	DOCUMENT_TYPE VARCHAR,
-	DEPARTMENT VARCHAR,
-	CREATED_AT TIMESTAMP_NTZ,
-	UPDATED_AT TIMESTAMP_NTZ,
-	VERSION NUMBER
-);
-
 -- ファイルフォーマットの作成
 CREATE OR REPLACE TEMP FILE FORMAT temp_ff
     TYPE = csv
     SKIP_HEADER = 1
-;
-
-CREATE OR REPLACE TEMP FILE FORMAT temp_ff2
-    TYPE = csv
-    SKIP_HEADER = 1
-    FIELD_OPTIONALLY_ENCLOSED_BY='"'
 ;
 
 -- データロード
@@ -122,32 +93,20 @@ FROM @FILE
 FILE_FORMAT = (FORMAT_NAME = temp_ff)
 FILES = ('ec_data_with_product_master.csv');
 
-COPY INTO CUSTOMER_REVIEWS
-FROM @FILE
-FILE_FORMAT = (FORMAT_NAME = temp_ff)
-FILES = ('customer_reviews.csv');
-
-COPY INTO SNOW_RETAIL_DOCUMENTS
-FROM @FILE
-FILE_FORMAT = (FORMAT_NAME = temp_ff2)
-FILES = ('snow_retail_documents.csv');
 
 
+// Step5: Snowflake Intelligenceの環境準備 //
 
-// Step5: Streamlitを作成 //
+-- Intelligence用のデータベース作成と権限付与
+CREATE DATABASE IF NOT EXISTS snowflake_intelligence;
+GRANT USAGE ON DATABASE snowflake_intelligence TO ROLE PUBLIC;
 
--- Streamlit in Snowflakeの作成
-CREATE OR REPLACE STREAMLIT sis_snowretail_analysis_dev
-    FROM @GIT_INTEGRATION_FOR_HANDSON/branches/pub_20250709/handson/dev
-    MAIN_FILE = 'mainpage.py'
-    QUERY_WAREHOUSE = COMPUTE_WH;
+-- Intelligence用のスキーマ作成と権限付与
+CREATE SCHEMA IF NOT EXISTS snowflake_intelligence.agents;
+GRANT USAGE ON SCHEMA snowflake_intelligence.agents TO ROLE PUBLIC;
 
--- (Option) MVP版のStreamlit in Snowflakeの作成
--- 完成版のアプリを動かしたい場合は以下のコメントアウトを外し実行してください
--- CREATE OR REPLACE STREAMLIT sis_snowretail_analysis_mvp
---     FROM @GIT_INTEGRATION_FOR_HANDSON/branches/pub_20250709/handson/mvp
---     MAIN_FILE = 'mainpage.py'
---     QUERY_WAREHOUSE = COMPUTE_WH;
+-- エージェントを作成する権限をPUBLICロールに付与
+GRANT CREATE AGENT ON SCHEMA snowflake_intelligence.agents TO ROLE PUBLIC;
 
 
 
@@ -156,6 +115,7 @@ CREATE OR REPLACE STREAMLIT sis_snowretail_analysis_dev
 -- データベースと関連オブジェクトの削除
 -- Streamlit、Git統合、各種テーブルなどが全て削除されます
 -- DROP DATABASE SNOWRETAIL_DB;
+-- DROP DATABASE SNOWFLAKE_INTELLIGENCE;
 
 -- API統合の削除
 -- DROP API INTEGRATION git_api_integration;
