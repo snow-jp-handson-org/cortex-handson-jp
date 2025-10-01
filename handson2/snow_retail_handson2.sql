@@ -199,4 +199,23 @@ CREATE OR REPLACE CORTEX SEARCH SERVICE snow_retail_search_service
 
 
 
+-- =========================================================
+-- StepX: Snowflake Intelligence
+-- =========================================================
+
+-- DB作成 / 権限付与
+CREATE DATABASE IF NOT EXISTS snowflake_intelligence;
+GRANT USAGE ON DATABASE snowflake_intelligence TO ROLE PUBLIC;
+
+CREATE SCHEMA IF NOT EXISTS snowflake_intelligence.agents;
+GRANT USAGE ON SCHEMA snowflake_intelligence.agents TO ROLE PUBLIC;
+
+GRANT CREATE AGENT ON SCHEMA snowflake_intelligence.agents TO ROLE PUBLIC;
+
+-- AI/ML StudioでAgentを作成
+-- Cortex Analyst説明 : (自動で作成)
+-- Cortex Search説明 : 企業の知識ベースを理解してより正確な回答を生成
+
+
+
 -- お疲れ様でした！
