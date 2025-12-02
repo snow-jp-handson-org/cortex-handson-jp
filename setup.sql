@@ -25,33 +25,33 @@ CREATE OR REPLACE STAGE SNOWRETAIL_DB.SNOWRETAIL_SCHEMA.SEMANTIC_MODEL_STAGE enc
 -- Git連携のため、API統合を作成する
 CREATE OR REPLACE API INTEGRATION git_api_integration
   API_PROVIDER = git_https_api
-  API_ALLOWED_PREFIXES = ('https://github.com/TadakiKanenari/')
+  API_ALLOWED_PREFIXES = ('https://github.com/snow-jp-handson-org/')
   ENABLED = TRUE;
 
 -- GIT統合の作成
 CREATE OR REPLACE GIT REPOSITORY GIT_INTEGRATION_FOR_HANDSON
   API_INTEGRATION = git_api_integration
-  ORIGIN = 'https://github.com/TadakiKanenari/cortex_handson.git';
+  ORIGIN = 'https://github.com/snow-jp-handson-org/cortex-handson-jp.git';
 
 -- チェックする
-ls @GIT_INTEGRATION_FOR_HANDSON/branches/main;
+ls @GIT_INTEGRATION_FOR_HANDSON/branches/pri_20251205;
 
 -- Githubからファイルを持ってくる
-COPY FILES INTO @SNOWRETAIL_DB.SNOWRETAIL_SCHEMA.FILE FROM @GIT_INTEGRATION_FOR_HANDSON/branches/main/data/ PATTERN ='.*\\.csv$';
-COPY FILES INTO @SNOWRETAIL_DB.SNOWRETAIL_SCHEMA.PDF FROM @GIT_INTEGRATION_FOR_HANDSON/branches/main/data/ PATTERN = '.*\\.pdf$';
-COPY FILES INTO @SNOWRETAIL_DB.SNOWRETAIL_SCHEMA.SEMANTIC_MODEL_STAGE FROM @GIT_INTEGRATION_FOR_HANDSON/branches/main/handson2/sales_analysis_model.yaml;
+COPY FILES INTO @SNOWRETAIL_DB.SNOWRETAIL_SCHEMA.FILE FROM @GIT_INTEGRATION_FOR_HANDSON/branches/pri_20251205/data/ PATTERN ='.*\\.csv$';
+COPY FILES INTO @SNOWRETAIL_DB.SNOWRETAIL_SCHEMA.PDF FROM @GIT_INTEGRATION_FOR_HANDSON/branches/pri_20251205/data/ PATTERN = '.*\\.pdf$';
+COPY FILES INTO @SNOWRETAIL_DB.SNOWRETAIL_SCHEMA.SEMANTIC_MODEL_STAGE FROM @GIT_INTEGRATION_FOR_HANDSON/branches/pri_20251205/handson2/sales_analysis_model.yaml;
 
 // Step4: NotebookとStreamlitを作成 //
 
 -- Streamlit in Snowflakeの作成
 CREATE OR REPLACE STREAMLIT sis_snowretail_analysis_minimal
-    FROM @GIT_INTEGRATION_FOR_HANDSON/branches/main/handson2/minimal
+    FROM @GIT_INTEGRATION_FOR_HANDSON/branches/pri_20251205/handson2/minimal
     MAIN_FILE = 'mainpage.py'
     QUERY_WAREHOUSE = COMPUTE_WH;
 
 -- Notebookの作成
 CREATE OR REPLACE NOTEBOOK cortex_handson_part1_completed
-    FROM @GIT_INTEGRATION_FOR_HANDSON/branches/main/handson1
+    FROM @GIT_INTEGRATION_FOR_HANDSON/branches/pri_20251205/handson1
     MAIN_FILE = 'cortex_handson_seminar_part1_completed.ipynb'
     QUERY_WAREHOUSE = COMPUTE_WH
     WAREHOUSE = COMPUTE_WH;
@@ -133,7 +133,7 @@ CREATE OR REPLACE STAGE BACKUP_STAGE
     DIRECTORY = (ENABLE = TRUE);
 
 -- バックアップCSVをステージにコピー
-COPY FILES INTO @BACKUP_STAGE FROM @GIT_INTEGRATION_FOR_HANDSON/branches/main/data/backup/ PATTERN = '.*_backup\\.csv$';
+COPY FILES INTO @BACKUP_STAGE FROM @GIT_INTEGRATION_FOR_HANDSON/branches/pri_20251205/data/backup/ PATTERN = '.*_backup\\.csv$';
 
 -- CSVファイルフォーマット
 CREATE OR REPLACE FILE FORMAT BACKUP_CSV_FORMAT
