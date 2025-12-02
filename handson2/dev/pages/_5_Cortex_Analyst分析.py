@@ -18,6 +18,12 @@ import plotly.express as px
 import plotly.graph_objects as go
 from snowflake.snowpark.context import get_active_session
 from datetime import datetime
+import sys
+import os
+
+# 親ディレクトリをパスに追加（table_utilsをインポートするため）
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from table_utils import resolve_table_name, check_table_with_fallback, get_table_count_with_fallback
 
 # ページ設定
 st.set_page_config(layout="wide")
@@ -37,8 +43,8 @@ session = get_snowflake_session()
 # =========================================================
 # 利用可能なLLMモデル
 LLM_MODELS = [
-    "llama4-maverick",
-    "claude-4-sonnet", 
+    "claude-haiku-4-5",
+    "claude-haiku-4-5", 
     "mistral-large2"
 ]
 
@@ -433,12 +439,18 @@ required_tables = {
 with col1:
     st.markdown("#### 📄 データソース")
     total_records = 0
+    
     for table_name, description in required_tables.items():
-        exists = check_table_exists(table_name)
-        count = get_table_count(table_name) if exists else 0
+        # フォールバック対応のテーブル確認（透過的）
+        info = check_table_with_fallback(table_name, session)
+        count, actual_table, is_fallback = get_table_count_with_fallback(table_name, session)
         total_records += count
-        status_icon = "✅" if exists else "❌"
-        st.write(f"{status_icon} {description}: **{count:,}件**")
+        
+        # フォールバックでも通常と同じ表示
+        if info["exists"]:
+            st.write(f"✅ {description}: **{count:,}件**")
+        else:
+            st.write(f"❌ {description}: **未作成**")
     
     if total_records > 0:
         st.success(f"合計 {total_records:,} 件のデータが利用可能")

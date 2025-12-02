@@ -1,0 +1,23 @@
+# 作業用ファイル（後で削除）
+data/backup/_work_*
+
+# MacOS
+.DS_Store
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.env
+
+# IDE
+.vscode/
+.idea/
+
+# Snowflake CLI
+.snowflake/
+
+handson1/cortex_handson_seminar_part1.ipynb
+handson2/dev/
+handson2/mvp/
+handson2/snow_retail_handson2.sql

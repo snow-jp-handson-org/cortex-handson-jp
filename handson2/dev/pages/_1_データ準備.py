@@ -19,6 +19,12 @@ from snowflake.snowpark.context import get_active_session
 from snowflake.snowpark.functions import col, lit
 from datetime import datetime
 import time
+import sys
+import os
+
+# 親ディレクトリをパスに追加（table_utilsをインポートするため）
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from table_utils import resolve_table_name, check_table_with_fallback, get_table_count_with_fallback
 
 # ページ設定
 st.set_page_config(layout="wide")
@@ -48,6 +54,15 @@ if 'selected_embedding_model' not in st.session_state:
 # =========================================================
 # ユーティリティ関数
 # =========================================================
+
+# Part1スキップ時の自動SWAP対象テーブル
+SWAP_TARGET_TABLES = [
+    "PRODUCT_MASTER",
+    "PRODUCT_MASTER_EMBED",
+    "EC_DATA_WITH_PRODUCT_MASTER",
+    "RETAIL_DATA_WITH_PRODUCT_MASTER"
+]
+
 def check_table_exists(table_name: str) -> bool:
     """テーブルの存在確認（複数の方法で確認）"""
     try:
@@ -73,6 +88,35 @@ def check_table_exists(table_name: str) -> bool:
         pass
     
     return False
+
+def auto_swap_prebuilt_tables():
+    """
+    Part1をスキップした場合、空のテーブルを検知して_PREBUILTテーブルとSWAPする
+    """
+    swapped = []
+    for table_name in SWAP_TARGET_TABLES:
+        try:
+            if not check_table_exists(table_name):
+                continue
+            result = session.sql(f"SELECT COUNT(*) as cnt FROM {table_name}").collect()
+            count = result[0]['CNT']
+            if count == 0:
+                prebuilt_table = f"{table_name}_PREBUILT"
+                if check_table_exists(prebuilt_table):
+                    prebuilt_result = session.sql(f"SELECT COUNT(*) as cnt FROM {prebuilt_table}").collect()
+                    if prebuilt_result[0]['CNT'] > 0:
+                        session.sql(f"ALTER TABLE {table_name} SWAP WITH {prebuilt_table}").collect()
+                        swapped.append(table_name)
+        except:
+            pass
+    return swapped
+
+# アプリ起動時に自動SWAP実行（session_stateで1回のみ）
+if 'auto_swap_executed' not in st.session_state:
+    swapped_tables = auto_swap_prebuilt_tables()
+    st.session_state.auto_swap_executed = True
+    if swapped_tables:
+        st.session_state.swapped_tables = swapped_tables
 
 def get_table_count(table_name: str) -> int:
     """テーブルのレコード数を取得"""
@@ -179,6 +223,48 @@ st.sidebar.info(f"""
 このモデルがテキストのベクトル化に使用されます。
 """)
 
+# =========================================================
+# データ修復機能（サイドバー）
+# =========================================================
+st.sidebar.markdown("---")
+st.sidebar.header("🔧 データ修復")
+st.sidebar.markdown("""
+Part1を実行せずにPart2から開始する場合、または
+Part1が中途半端な状態の場合は、以下のボタンで
+完成データに置き換えることができます。
+""")
+
+def manual_swap_prebuilt_tables():
+    """手動でPREBUILTテーブルとSWAP"""
+    swapped = []
+    errors = []
+    for table_name in SWAP_TARGET_TABLES:
+        try:
+            prebuilt_table = f"{table_name}_PREBUILT"
+            if check_table_exists(table_name) and check_table_exists(prebuilt_table):
+                session.sql(f"ALTER TABLE {table_name} SWAP WITH {prebuilt_table}").collect()
+                swapped.append(table_name)
+        except Exception as e:
+            errors.append(f"{table_name}: {str(e)}")
+    return swapped, errors
+
+if st.sidebar.button("🔄 完成データに置換", help="Part1の成果物テーブルを完成データに置き換えます"):
+    with st.sidebar:
+        with st.spinner("テーブルを置換中..."):
+            swapped, errors = manual_swap_prebuilt_tables()
+        
+        if swapped:
+            st.success(f"✅ {len(swapped)}個のテーブルを置換しました")
+            for t in swapped:
+                st.write(f"  - {t}")
+            st.rerun()
+        elif errors:
+            st.error("❌ 置換に失敗しました")
+            for e in errors:
+                st.write(f"  - {e}")
+        else:
+            st.info("置換対象のテーブルがありません")
+
 st.markdown("---")
 
 # =========================================================
@@ -187,7 +273,7 @@ st.markdown("---")
 st.subheader("🗄️ セクション1: 既存データの確認")
 st.markdown("ワークショップで使用する既存のテーブルを確認しましょう。")
 
-# 既存テーブルのリスト
+# 既存テーブルのリスト（フォールバック対応テーブルを含む）
 existing_tables = {
     "RETAIL_DATA_WITH_PRODUCT_MASTER": "クレンジング済み店舗データ",
     "EC_DATA_WITH_PRODUCT_MASTER": "クレンジング済みECデータ", 
@@ -200,15 +286,27 @@ tab1, tab2 = st.tabs(["📋 テーブル確認", "🔍 データサンプル"])
 with tab1:
     st.markdown("#### 📋 既存テーブルの状況確認")
     
-    # テーブル存在確認
+    # テーブル存在確認（フォールバック対応 - 透過的）
     table_status = {}
+    
     for table_name, description in existing_tables.items():
-        exists = check_table_exists(table_name)
-        count = get_table_count(table_name) if exists else 0
-        table_status[table_name] = {"exists": exists, "count": count, "description": description}
+        # フォールバック対応のテーブル確認
+        info = check_table_with_fallback(table_name, session)
+        count, actual_table, is_fallback = get_table_count_with_fallback(table_name, session)
         
-        status_icon = "✅" if exists else "❌"
-        st.write(f"{status_icon} **{table_name}** ({description}): {count:,}件")
+        table_status[table_name] = {
+            "exists": info["exists"], 
+            "count": count, 
+            "description": description,
+            "actual_table": actual_table,
+            "is_fallback": is_fallback
+        }
+        
+        # フォールバックでも通常と同じ表示
+        if info["exists"]:
+            st.write(f"✅ **{table_name}** ({description}): {count:,}件")
+        else:
+            st.write(f"❌ **{table_name}** ({description}): 未作成")
     
     # 全テーブルが存在するかチェック
     all_tables_exist = all(status["exists"] for status in table_status.values())

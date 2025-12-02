@@ -96,19 +96,28 @@ def auto_swap_prebuilt_tables():
     swapped = []
     for table_name in SWAP_TARGET_TABLES:
         try:
+            # テーブルが存在するか確認
             if not check_table_exists(table_name):
                 continue
+            
+            # テーブルが空かどうか確認
             result = session.sql(f"SELECT COUNT(*) as cnt FROM {table_name}").collect()
             count = result[0]['CNT']
+            
+            # 空の場合、_PREBUILTテーブルが存在してデータがあればSWAP
             if count == 0:
                 prebuilt_table = f"{table_name}_PREBUILT"
                 if check_table_exists(prebuilt_table):
                     prebuilt_result = session.sql(f"SELECT COUNT(*) as cnt FROM {prebuilt_table}").collect()
-                    if prebuilt_result[0]['CNT'] > 0:
+                    prebuilt_count = prebuilt_result[0]['CNT']
+                    
+                    if prebuilt_count > 0:
                         session.sql(f"ALTER TABLE {table_name} SWAP WITH {prebuilt_table}").collect()
                         swapped.append(table_name)
-        except:
+        except Exception as e:
+            # エラーは無視して続行
             pass
+    
     return swapped
 
 # アプリ起動時に自動SWAP実行（session_stateで1回のみ）

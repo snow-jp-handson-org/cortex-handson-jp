@@ -19,12 +19,6 @@ from snowflake.snowpark.context import get_active_session
 from snowflake.snowpark.functions import col, lit
 from datetime import datetime
 import time
-import sys
-import os
-
-# 親ディレクトリをパスに追加（table_utilsをインポートするため）
-sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from table_utils import resolve_table_name, check_table_with_fallback, get_table_count_with_fallback
 
 # ページ設定
 st.set_page_config(layout="wide")
@@ -176,7 +170,7 @@ def section_2_classify():
                     review_text,
                     rating,
                     purchase_channel,
-                    『★★★修正対象★★★』(
+                    AI_CLASSIFY(
                         review_text, 
                         ARRAY_CONSTRUCT('商品品質', '配送サービス', '価格', 'カスタマーサービス', '店舗環境', 'その他')
                     ):labels[0]::string as category
@@ -317,7 +311,7 @@ def section_3_filter():
                         review_text,
                         rating,
                         purchase_channel,
-                        『★★★修正対象★★★』(CONCAT('{selected_filter}: ', review_text)) as filter_result
+                        AI_FILTER(CONCAT('{selected_filter}: ', review_text)) as filter_result
                     FROM CUSTOMER_REVIEWS 
                     WHERE review_text IS NOT NULL
                     """
@@ -418,7 +412,7 @@ def section_4_agg():
                         COUNT(*) as review_count,
                         AVG(rating) as avg_rating,
                         SNOWFLAKE.CORTEX.TRANSLATE(
-                            『★★★修正対象★★★』(
+                            AI_AGG(
                                 review_text, 
                                 '{selected_agg_prompt}'
                             ),
@@ -482,7 +476,7 @@ def section_5_similarity():
                     review_text,
                     rating,
                     purchase_channel,
-                    『★★★修正対象★★★』('{base_text}', review_text) as similarity_score
+                    AI_SIMILARITY('{base_text}', review_text) as similarity_score
                 FROM CUSTOMER_REVIEWS 
                 WHERE review_text IS NOT NULL
                 ORDER BY similarity_score DESC
@@ -869,7 +863,7 @@ st.success("""
 - AI_SUMMARIZE_AGGによる複数レビューの効率的な集約要約
 """)
 
-st.info("💡 **次のステップ**: Step3では、シンプルなチャットボットの実装を学習します。")
+# st.info("💡 **次のステップ**: Step3では、シンプルなチャットボットの実装を学習します。")
 
 st.markdown("---")
 st.markdown(f"**Snowflake Cortex Handson シナリオ#2 | Step2: 顧客の声分析**") 

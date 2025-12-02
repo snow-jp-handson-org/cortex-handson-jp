@@ -38,8 +38,8 @@ root = Root(session)
 # =========================================================
 # 利用可能なLLMモデル
 LLM_MODELS = [
-    "llama4-maverick",
-    "claude-4-sonnet", 
+    "claude-haiku-4-5",
+    "claude-haiku-4-5", 
     "mistral-large2"
 ]
 
