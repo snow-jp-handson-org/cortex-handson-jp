@@ -273,8 +273,8 @@ SELECT 'setup successfully' AS status;
 // セットアップ完了
 // =========================================================
 -- 以下の順序でハンズオンを進めてください:
--- 1. Part1: cortex_handson_part1 ノートブックを実行
--- 2. Part2: sis_snowretail_analysis_dev Streamlitアプリを使用
+-- 1. Part1: cortex_handson_part1_completed ノートブックを実行
+-- 2. Part2: sis_snowretail_analysis_minimal Streamlitアプリを使用
 -- 
 -- ★Part1をスキップする場合:
 -- Part2のアプリは自動的にフォールバックテーブルを参照するため、
