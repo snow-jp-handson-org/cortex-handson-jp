@@ -10,23 +10,32 @@ Snowflake EC Analytics - 完全自動セットアップスクリプト
 1. データベースとスキーマの作成
 2. ステージの作成（データ格納用）
 3. GitHub連携の設定（API統合とGitリポジトリ）
-4. GitHubからCSVデータの自動取得
-5. 5つのテーブルの作成
-6. CSVデータの一括インポート
+4. GitHubからデータファイルの自動取得
+5. 10個のテーブルの作成
+6. データの一括インポートとAI解析
 
 【生成されるテーブル】
-┌────────────────────────────────────────────────────────────┐
-│ ディメンションテーブル（マスタデータ）                      │
-├────────────────────────────────────────────────────────────┤
-│ 1. dim_customers   - 顧客マスタ（100件）                   │
-│ 2. dim_products    - 商品マスタ（576件）                   │
-│                                                             │
-│ ファクトテーブル（トランザクションデータ）                  │
-├────────────────────────────────────────────────────────────┤
-│ 3. fact_orders     - EC取引データ（500件）                 │
-│ 4. fact_payments   - クレジット決済情報（360件）           │
-│ 5. fact_web_logs   - Webアクセスログ（14,532件）           │
-└────────────────────────────────────────────────────────────┘
+┌──────────────────────────────────────────────────────────────┐
+│ ディメンションテーブル（マスタデータ）                        │
+├──────────────────────────────────────────────────────────────┤
+│ 1. dim_customers             - 顧客マスタ（100件）           │
+│ 2. dim_products              - 商品マスタ（576件）           │
+│                                                               │
+│ ファクトテーブル（トランザクションデータ）                    │
+├──────────────────────────────────────────────────────────────┤
+│ 3. fact_orders               - EC取引データ（500件）         │
+│ 4. fact_payments             - 決済情報（360件）             │
+│ 5. fact_web_logs             - Webログ（14,532件）           │
+│                                                               │
+│ 非構造化データテーブル（AI解析済み）                          │
+├──────────────────────────────────────────────────────────────┤
+│ 6. raw_sns_mentions          - SNS投稿（300件）              │
+│ 7. raw_voice_logs            - 音声ログメタ（10件）          │
+│ 8. raw_voice_messages        - 音声文字起こし（10件）        │
+│ 9. raw_ad_creatives          - 広告データ（15件）            │
+│10. raw_faq_documents_parsed  - FAQ（PDF解析済み）            │
+│11. raw_operation_manuals_parsed - マニュアル（PDF解析済み）  │
+└──────────────────────────────────────────────────────────────┘
 
 【データソース】
 GitHub Repository: https://github.com/snow-jp-handson-org/cortex-handson-jp
@@ -46,6 +55,8 @@ GitHub Repository: https://github.com/snow-jp-handson-org/cortex-handson-jp
 -- ============================================================================
 -- 管理者ロールとコンピュートウェアハウスを使用
 USE ROLE ACCOUNTADMIN;
+
+CREATE WAREHOUSE IF NOT EXISTS COMPUTE_WH;
 USE WAREHOUSE COMPUTE_WH;
 
 SELECT '【Step 1】環境設定が完了しました' AS status;
@@ -96,11 +107,10 @@ SELECT '【Step 4】GitHub連携の設定が完了しました' AS status;
 -- リポジトリの内容を確認
 ls @GIT_INTEGRATION_FOR_HANDSON/branches/main;
 
--- GitHubのdataディレクトリからすべてのCSVファイルをステージにコピー
+-- GitHubのdataディレクトリからすべてのファイルをステージにコピー
 COPY FILES 
   INTO @GLACIERSTYLE_DB.EC_ANALYTICS_SCHEMA.DATA_STAGE 
-  FROM @GIT_INTEGRATION_FOR_HANDSON/branches/main/data/ 
-  PATTERN = '.*\\.csv$';
+  FROM @GIT_INTEGRATION_FOR_HANDSON/branches/main/data/;
 
 -- ステージ内のファイルを確認
 ls @GLACIERSTYLE_DB.EC_ANALYTICS_SCHEMA.DATA_STAGE;
@@ -219,7 +229,96 @@ CREATE OR REPLACE TABLE fact_web_logs (
     product_id VARCHAR                             -- 商品ID（商品ページの場合）
 );
 
-SELECT '【Step 6】テーブル定義の作成が完了しました' AS status;
+-- ----------------------------------------------------------------------------
+-- 6-6. SNS生ログテーブル（raw_sns_mentions）
+-- ----------------------------------------------------------------------------
+CREATE OR REPLACE TABLE raw_sns_mentions (
+    mention_id VARCHAR PRIMARY KEY,                -- メンションID（主キー）
+    platform VARCHAR,                              -- SNSプラットフォーム
+    post_datetime TIMESTAMP,                       -- 投稿日時
+    author_handle VARCHAR,                         -- 投稿者ハンドル
+    author_followers INTEGER,                      -- フォロワー数
+    post_text TEXT,                                -- 投稿本文
+    media_urls ARRAY,                              -- 添付メディアURL
+    hashtags ARRAY,                                -- ハッシュタグ
+    mentioned_accounts ARRAY,                      -- メンションアカウント
+    engagement_likes INTEGER,                      -- いいね数
+    engagement_retweets INTEGER,                   -- RT/シェア数
+    engagement_comments INTEGER,                   -- コメント数
+    language VARCHAR                               -- 言語
+);
+
+-- ----------------------------------------------------------------------------
+-- 6-7. カスタマー音声ログテーブル（raw_voice_logs）
+-- ----------------------------------------------------------------------------
+CREATE OR REPLACE TABLE raw_voice_logs (
+    call_id VARCHAR PRIMARY KEY,                   -- 通話ID（主キー）
+    call_start_time TIMESTAMP,                     -- 通話開始日時
+    call_end_time TIMESTAMP,                       -- 通話終了日時
+    call_duration_sec INTEGER,                     -- 通話時間（秒）
+    agent_id VARCHAR,                              -- オペレーターID
+    customer_phone VARCHAR,                        -- 顧客電話番号
+    customer_id VARCHAR,                           -- 顧客ID（紐付け済みの場合）
+    audio_file_path VARCHAR,                       -- 音声ファイルパス
+    call_type VARCHAR,                             -- 通話種別（inbound/outbound）
+    queue_name VARCHAR,                            -- 受付キュー
+    ivr_path VARCHAR                               -- IVR経路
+);
+
+-- ----------------------------------------------------------------------------
+-- 6-8. 広告クリエイティブテーブル（raw_ad_creatives）
+-- ----------------------------------------------------------------------------
+CREATE OR REPLACE TABLE raw_ad_creatives (
+    creative_id VARCHAR PRIMARY KEY,               -- クリエイティブID（主キー）
+    campaign_id VARCHAR,                           -- キャンペーンID
+    creative_name VARCHAR,                         -- クリエイティブ名
+    creative_type VARCHAR,                         -- 種別（image/video/carousel）
+    image_file_path VARCHAR,                       -- 画像ファイルパス
+    copy_text TEXT,                                -- 広告コピー
+    headline VARCHAR,                              -- 見出し
+    cta_text VARCHAR,                              -- CTAテキスト
+    target_segment VARCHAR,                        -- ターゲットセグメント
+    platform VARCHAR,                              -- 配信プラットフォーム
+    start_date DATE,                               -- 配信開始日
+    end_date DATE,                                 -- 配信終了日
+    impressions INTEGER,                           -- インプレッション数
+    clicks INTEGER,                                -- クリック数
+    conversions INTEGER,                           -- コンバージョン数
+    spend DECIMAL(10,2)                            -- 広告費
+);
+
+-- ----------------------------------------------------------------------------
+-- 6-9. FAQドキュメントテーブル（raw_faq_documents）
+-- ----------------------------------------------------------------------------
+CREATE OR REPLACE TABLE raw_faq_documents (
+    faq_id VARCHAR PRIMARY KEY,                    -- FAQID（主キー）
+    document_path VARCHAR,                         -- ドキュメントパス
+    category VARCHAR,                              -- カテゴリ
+    question TEXT,                                 -- 質問
+    answer TEXT,                                   -- 回答
+    last_updated DATE,                             -- 最終更新日
+    view_count INTEGER,                            -- 閲覧数
+    helpful_count INTEGER,                         -- 役に立った数
+    version VARCHAR                                -- バージョン
+);
+
+-- ----------------------------------------------------------------------------
+-- 6-10. 運営マニュアルテーブル（raw_operation_manuals）
+-- ----------------------------------------------------------------------------
+CREATE OR REPLACE TABLE raw_operation_manuals (
+    manual_id VARCHAR PRIMARY KEY,                 -- マニュアルID（主キー）
+    document_path VARCHAR,                         -- ドキュメントパス
+    title VARCHAR,                                 -- タイトル
+    department VARCHAR,                            -- 対象部門
+    chapter VARCHAR,                               -- 章
+    section VARCHAR,                               -- 節
+    content TEXT,                                  -- 本文
+    last_updated DATE,                             -- 最終更新日
+    version VARCHAR,                               -- バージョン
+    confidentiality VARCHAR                        -- 機密レベル
+);
+
+SELECT '【Step 6】テーブル定義の作成が完了しました（全10テーブル + AI解析用1テーブル）' AS status;
 
 
 -- ============================================================================
@@ -257,11 +356,205 @@ COPY INTO fact_payments
 -- ----------------------------------------------------------------------------
 -- 7-5. Webアクセスログのインポート（14,532件）
 -- ----------------------------------------------------------------------------
-COPY INTO fact_web_logs 
-  FROM @DATA_STAGE/web_logs.csv 
+CREATE OR REPLACE FILE FORMAT JSON_FORMAT
+  TYPE = 'JSON'
+  STRIP_OUTER_ARRAY = TRUE;
+
+INSERT INTO fact_web_logs (
+    log_id, 
+    session_id, 
+    customer_id, 
+    event_timestamp, 
+    event_type, 
+    page_url,
+    page_category,
+    referrer_url,
+    utm_source,
+    utm_medium,
+    utm_campaign,
+    device_type,
+    browser,
+    os,
+    time_on_page,
+    product_id
+)
+SELECT 
+    $1:log_id::VARCHAR,
+    $1:session_id::VARCHAR,
+    $1:customer_id::VARCHAR,
+    $1:event_timestamp::TIMESTAMP,
+    $1:event_type::VARCHAR,
+    $1:page_url::VARCHAR,
+    $1:page_category::VARCHAR,
+    $1:referrer_url::VARCHAR,
+    $1:utm_source::VARCHAR,
+    $1:utm_medium::VARCHAR,
+    $1:utm_campaign::VARCHAR,
+    $1:device_type::VARCHAR,
+    $1:browser::VARCHAR,
+    $1:os::VARCHAR,
+    $1:time_on_page::VARCHAR,
+    $1:product_id::VARCHAR
+FROM @DATA_STAGE/web_logs.json
+(FILE_FORMAT => JSON_FORMAT);
+
+-- ----------------------------------------------------------------------------
+-- 7-6. SNS生ログのインポート（300件）
+-- ----------------------------------------------------------------------------
+INSERT INTO raw_sns_mentions (
+    mention_id,
+    platform,
+    post_datetime,
+    author_handle,
+    author_followers,
+    post_text,
+    media_urls,
+    hashtags,
+    mentioned_accounts,
+    engagement_likes,
+    engagement_retweets,
+    engagement_comments,
+    language
+)
+SELECT 
+    $1:post_id::VARCHAR,
+    $1:platform::VARCHAR,
+    $1:posted_at::TIMESTAMP,
+    $1:username::VARCHAR,
+    $1:author_followers::INTEGER,
+    $1:content::TEXT,
+    $1:media_urls::ARRAY,
+    $1:hashtags::ARRAY,
+    $1:mentioned_products::ARRAY,
+    $1:likes::INTEGER,
+    $1:retweets::INTEGER,
+    $1:replies::INTEGER,
+    $1:language::VARCHAR
+FROM @DATA_STAGE/sns_logs.json
+(FILE_FORMAT => JSON_FORMAT);
+
+-- ----------------------------------------------------------------------------
+-- 7-7. カスタマー音声ログのインポート（10件）
+-- ----------------------------------------------------------------------------
+INSERT INTO raw_voice_logs (
+    call_id, 
+    call_start_time, 
+    call_end_time,
+    call_duration_sec,
+    agent_id,
+    customer_phone,
+    customer_id,
+    audio_file_path,
+    call_type,
+    queue_name,
+    ivr_path
+)
+SELECT
+    $1:call_id::VARCHAR, 
+    $1:call_start_time::TIMESTAMP, 
+    $1:call_end_time::TIMESTAMP,
+    $1:duration_sec::INTEGER,
+    $1:agent_id::VARCHAR,
+    $1:customer_phone::VARCHAR,
+    $1:customer_id::VARCHAR,
+    $1:audio_file_path::VARCHAR,
+    $1:call_type::VARCHAR,
+    $1:queue_name::VARCHAR,
+    $1:ivr_path::VARCHAR
+FROM @DATA_STAGE/voice_logs/voice_logs_metadata.json
+(FILE_FORMAT => JSON_FORMAT);
+
+-- 音声ファイルの文字起こし（AI_TRANSCRIBE使用）
+CREATE OR REPLACE TABLE raw_voice_messages AS
+SELECT 
+    *,
+    AI_TRANSCRIBE(
+        TO_FILE('@DATA_STAGE', relative_path)
+    ) AS transcribed_text 
+FROM DIRECTORY(@DATA_STAGE)
+WHERE REGEXP_LIKE(relative_path, 'voice_logs.*\\.mp3', 'i');
+
+-- ----------------------------------------------------------------------------
+-- 7-8. 広告クリエイティブのインポート（15件）
+-- ----------------------------------------------------------------------------
+COPY INTO raw_ad_creatives 
+  FROM @DATA_STAGE/ad_creatives.csv 
   FILE_FORMAT = (TYPE = 'CSV' SKIP_HEADER = 1 FIELD_OPTIONALLY_ENCLOSED_BY = '"');
 
-SELECT '【Step 7】CSVデータのインポートが完了しました' AS status;
+-- ----------------------------------------------------------------------------
+-- 7-9. FAQドキュメントの解析とインポート
+-- ----------------------------------------------------------------------------
+-- ステージをリフレッシュして最新のファイルを認識
+ALTER STAGE DATA_STAGE REFRESH;
+
+-- FAQドキュメント（PDF）をAI_PARSE_DOCUMENTで解析し、マークダウンヘッダーで分割
+CREATE OR REPLACE TABLE raw_faq_documents_parsed AS
+WITH parsed_doc AS (
+    SELECT 
+        *, 
+        AI_PARSE_DOCUMENT(
+            TO_FILE('@DATA_STAGE', relative_path),
+            {'mode': 'LAYOUT', 'page_split': false}
+        ) AS contents
+    FROM DIRECTORY(@DATA_STAGE)
+    WHERE LOWER(relative_path) = 'faq_document.pdf'
+) 
+SELECT 
+    t.relative_path,
+    t.file_url,
+    t.size,
+    t.last_modified,
+    t2.value AS raw_value,
+    t2.value:headers:header_1::VARCHAR AS category,
+    t2.value:headers:header_2::VARCHAR AS subcategory,
+    t2.value:headers:header_3::VARCHAR AS question,
+    t2.value:headers:header_4::VARCHAR AS detail,
+    t2.value:chunk::TEXT AS content_chunk
+FROM parsed_doc t,
+LATERAL FLATTEN(INPUT => 
+    SNOWFLAKE.CORTEX.SPLIT_TEXT_MARKDOWN_HEADER(
+        t.contents:content, 
+        OBJECT_CONSTRUCT('#', 'header_1', '##', 'header_2', '###', 'header_3', '####', 'header_4'),
+        10000
+    )
+) t2;
+
+-- ----------------------------------------------------------------------------
+-- 7-10. 運営マニュアルの解析とインポート
+-- ----------------------------------------------------------------------------
+-- 運営マニュアル（PDF）をAI_PARSE_DOCUMENTで解析し、マークダウンヘッダーで分割
+CREATE OR REPLACE TABLE raw_operation_manuals_parsed AS
+WITH parsed_doc AS (
+    SELECT 
+        *, 
+        AI_PARSE_DOCUMENT(
+            TO_FILE('@DATA_STAGE', relative_path),
+            {'mode': 'LAYOUT', 'page_split': false}
+        ) AS contents
+    FROM DIRECTORY(@DATA_STAGE)
+    WHERE LOWER(relative_path) = 'operation_manual.pdf'
+) 
+SELECT 
+    t.relative_path,
+    t.file_url,
+    t.size,
+    t.last_modified,
+    t2.value AS raw_value,
+    t2.value:headers:header_1::VARCHAR AS department,
+    t2.value:headers:header_2::VARCHAR AS chapter,
+    t2.value:headers:header_3::VARCHAR AS section,
+    t2.value:headers:header_4::VARCHAR AS subsection,
+    t2.value:chunk::TEXT AS content_chunk
+FROM parsed_doc t,
+LATERAL FLATTEN(INPUT => 
+    SNOWFLAKE.CORTEX.SPLIT_TEXT_MARKDOWN_HEADER(
+        t.contents:content, 
+        OBJECT_CONSTRUCT('#', 'header_1', '##', 'header_2', '###', 'header_3', '####', 'header_4'),
+        10000
+    )
+) t2;
+
+SELECT '【Step 7】全データのインポートが完了しました' AS status;
 
 
 -- ============================================================================
@@ -269,34 +562,106 @@ SELECT '【Step 7】CSVデータのインポートが完了しました' AS stat
 -- ============================================================================
 
 -- 各テーブルのレコード数を確認
-SELECT 'dim_customers' AS table_name, COUNT(*) AS record_count FROM dim_customers
+SELECT 
+    'dim_customers' AS table_name, 
+    COUNT(*) AS record_count,
+    '顧客マスタ' AS description
+FROM dim_customers
 UNION ALL
-SELECT 'dim_products' AS table_name, COUNT(*) AS record_count FROM dim_products
+SELECT 
+    'dim_products' AS table_name, 
+    COUNT(*) AS record_count,
+    '商品マスタ' AS description
+FROM dim_products
 UNION ALL
-SELECT 'fact_orders' AS table_name, COUNT(*) AS record_count FROM fact_orders
+SELECT 
+    'fact_orders' AS table_name, 
+    COUNT(*) AS record_count,
+    'EC取引データ' AS description
+FROM fact_orders
 UNION ALL
-SELECT 'fact_payments' AS table_name, COUNT(*) AS record_count FROM fact_payments
+SELECT 
+    'fact_payments' AS table_name, 
+    COUNT(*) AS record_count,
+    'クレジット決済情報' AS description
+FROM fact_payments
 UNION ALL
-SELECT 'fact_web_logs' AS table_name, COUNT(*) AS record_count FROM fact_web_logs;
+SELECT 
+    'fact_web_logs' AS table_name, 
+    COUNT(*) AS record_count,
+    'Webアクセスログ' AS description
+FROM fact_web_logs
+UNION ALL
+SELECT 
+    'raw_sns_mentions' AS table_name, 
+    COUNT(*) AS record_count,
+    'SNS生ログ' AS description
+FROM raw_sns_mentions
+UNION ALL
+SELECT 
+    'raw_voice_logs' AS table_name, 
+    COUNT(*) AS record_count,
+    'カスタマー音声ログ（メタデータ）' AS description
+FROM raw_voice_logs
+UNION ALL
+SELECT 
+    'raw_voice_messages' AS table_name, 
+    COUNT(*) AS record_count,
+    '音声文字起こしデータ' AS description
+FROM raw_voice_messages
+UNION ALL
+SELECT 
+    'raw_ad_creatives' AS table_name, 
+    COUNT(*) AS record_count,
+    '広告クリエイティブ' AS description
+FROM raw_ad_creatives
+UNION ALL
+SELECT 
+    'raw_faq_documents_parsed' AS table_name, 
+    COUNT(*) AS record_count,
+    'FAQドキュメント（解析済み）' AS description
+FROM raw_faq_documents_parsed
+UNION ALL
+SELECT 
+    'raw_operation_manuals_parsed' AS table_name, 
+    COUNT(*) AS record_count,
+    '運営マニュアル（解析済み）' AS description
+FROM raw_operation_manuals_parsed
+ORDER BY table_name;
 
 
 -- ============================================================================
 -- 完了メッセージ
 -- ============================================================================
 SELECT '
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 🎉 セットアップが完了しました！
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 ✅ データベース: GLACIERSTYLE_DB
 ✅ スキーマ: EC_ANALYTICS_SCHEMA
-✅ テーブル数: 5個
-✅ 総レコード数: 15,568件
+✅ テーブル数: 11個（構造化データ5 + 非構造化データ6）
+
+【構造化データ】
+  • dim_customers (100件) - 顧客マスタ
+  • dim_products (576件) - 商品マスタ
+  • fact_orders (500件) - EC取引データ
+  • fact_payments (360件) - クレジット決済情報
+  • fact_web_logs (14,532件) - Webアクセスログ
+
+【非構造化データ（AI解析済み）】
+  • raw_sns_mentions (300件) - SNS投稿データ
+  • raw_voice_logs (10件) - 音声ログメタデータ
+  • raw_voice_messages (10件) - 音声文字起こしデータ
+  • raw_ad_creatives (15件) - 広告クリエイティブ
+  • raw_faq_documents_parsed - FAQドキュメント（PDF解析済み）
+  • raw_operation_manuals_parsed - 運営マニュアル（PDF解析済み）
 
 次のステップ:
 1. データの確認: SELECT * FROM dim_customers LIMIT 10;
-2. 分析の開始: Snowflake Cortex Analystなどで分析可能
-3. ダッシュボード作成: BIツールと接続
+2. AI機能の活用: Snowflake Cortex AIで分析を開始
+3. Cortex Analystでの対話的分析
+4. ダッシュボード作成: BIツールと接続
 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ' AS "🎉 セットアップ完了";
