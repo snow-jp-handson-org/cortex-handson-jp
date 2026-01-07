@@ -105,12 +105,15 @@ SELECT '【Step 4】GitHub連携の設定が完了しました' AS status;
 -- Step 5: GitHubからデータファイルの取得
 -- ============================================================================
 -- リポジトリの内容を確認
-ls @GIT_INTEGRATION_FOR_HANDSON/branches/main;
+-- ls @GIT_INTEGRATION_FOR_HANDSON/branches/main;
+
+ls @GIT_INTEGRATION_FOR_HANDSON/branches/tmp_new_version_2026;
 
 -- GitHubのdataディレクトリからすべてのファイルをステージにコピー
 COPY FILES 
   INTO @GLACIERSTYLE_DB.EC_ANALYTICS_SCHEMA.DATA_STAGE 
-  FROM @GIT_INTEGRATION_FOR_HANDSON/branches/main/data/;
+  FROM @GIT_INTEGRATION_FOR_HANDSON/branches/tmp_new_version_2026/data/;
+  -- FROM @GIT_INTEGRATION_FOR_HANDSON/branches/main/data/;
 
 -- ステージ内のファイルを確認
 ls @GLACIERSTYLE_DB.EC_ANALYTICS_SCHEMA.DATA_STAGE;
@@ -233,19 +236,19 @@ CREATE OR REPLACE TABLE fact_web_logs (
 -- 6-6. SNS生ログテーブル（raw_sns_mentions）
 -- ----------------------------------------------------------------------------
 CREATE OR REPLACE TABLE raw_sns_mentions (
-    mention_id VARCHAR PRIMARY KEY,                -- メンションID（主キー）
-    platform VARCHAR,                              -- SNSプラットフォーム
-    post_datetime TIMESTAMP,                       -- 投稿日時
-    author_handle VARCHAR,                         -- 投稿者ハンドル
-    author_followers INTEGER,                      -- フォロワー数
-    post_text TEXT,                                -- 投稿本文
-    media_urls ARRAY,                              -- 添付メディアURL
+    post_id VARCHAR PRIMARY KEY,                   -- 投稿ID（主キー）
+    platform VARCHAR,                              -- SNSプラットフォーム（twitter / instagram / facebook）
+    post_type VARCHAR,                             -- 投稿の種類（post / mention / reply）
+    username VARCHAR,                              -- 投稿者ID
+    display_name VARCHAR,                          -- 投稿者ハンドル
+    content VARCHAR,                               -- 投稿本文
+    posted_at TIMESTAMP,                           -- 投稿日時
+    likes INTEGER,                                 -- いいね数
+    retweets INTEGER,                              -- RT/シェア数
+    replies INTEGER,                               -- コメント数
     hashtags ARRAY,                                -- ハッシュタグ
-    mentioned_accounts ARRAY,                      -- メンションアカウント
-    engagement_likes INTEGER,                      -- いいね数
-    engagement_retweets INTEGER,                   -- RT/シェア数
-    engagement_comments INTEGER,                   -- コメント数
-    language VARCHAR                               -- 言語
+    mentioned_products ARRAY,                      -- 対象商品
+    media_urls ARRAY                               -- 添付メディアURL
 );
 
 -- ----------------------------------------------------------------------------
@@ -253,16 +256,17 @@ CREATE OR REPLACE TABLE raw_sns_mentions (
 -- ----------------------------------------------------------------------------
 CREATE OR REPLACE TABLE raw_voice_logs (
     call_id VARCHAR PRIMARY KEY,                   -- 通話ID（主キー）
+    scenario_id VARCHAR,                           -- シナリオID
+    audio_file VARCHAR,                            -- 音声ファイルパス
+    call_duration_sec NUMBER(10,2),                -- 通話時間（秒）
     call_start_time TIMESTAMP,                     -- 通話開始日時
     call_end_time TIMESTAMP,                       -- 通話終了日時
-    call_duration_sec INTEGER,                     -- 通話時間（秒）
+    category VARCHAR,                              -- 問い合わせ種別
     agent_id VARCHAR,                              -- オペレーターID
     customer_phone VARCHAR,                        -- 顧客電話番号
     customer_id VARCHAR,                           -- 顧客ID（紐付け済みの場合）
-    audio_file_path VARCHAR,                       -- 音声ファイルパス
-    call_type VARCHAR,                             -- 通話種別（inbound/outbound）
-    queue_name VARCHAR,                            -- 受付キュー
-    ivr_path VARCHAR                               -- IVR経路
+    call_type VARCHAR,                             -- 通話種別（inbound / outbound）
+    transcribed_text TEXT                          -- 文字起こしテキスト
 );
 
 -- ----------------------------------------------------------------------------
@@ -402,34 +406,34 @@ FROM @DATA_STAGE/web_logs.json
 -- 7-6. SNS生ログのインポート（300件）
 -- ----------------------------------------------------------------------------
 INSERT INTO raw_sns_mentions (
-    mention_id,
+    post_id,
     platform,
-    post_datetime,
-    author_handle,
-    author_followers,
-    post_text,
-    media_urls,
+    post_type,
+    username,
+    display_name,
+    content,
+    posted_at,
+    likes,
+    retweets,
+    replies,
     hashtags,
-    mentioned_accounts,
-    engagement_likes,
-    engagement_retweets,
-    engagement_comments,
-    language
+    mentioned_products,
+    media_urls
 )
 SELECT 
     $1:post_id::VARCHAR,
     $1:platform::VARCHAR,
-    $1:posted_at::TIMESTAMP,
+    $1:post_type::VARCHAR,
     $1:username::VARCHAR,
-    $1:author_followers::INTEGER,
-    $1:content::TEXT,
-    $1:media_urls::ARRAY,
-    $1:hashtags::ARRAY,
-    $1:mentioned_products::ARRAY,
+    $1:display_name::VARCHAR,
+    $1:content::VARCHAR,
+    $1:posted_at::TIMESTAMP,
     $1:likes::INTEGER,
     $1:retweets::INTEGER,
     $1:replies::INTEGER,
-    $1:language::VARCHAR
+    $1:hashtags::ARRAY,
+    $1:mentioned_products::ARRAY,
+    $1:media_urls::ARRAY
 FROM @DATA_STAGE/sns_logs.json
 (FILE_FORMAT => JSON_FORMAT);
 
@@ -438,41 +442,46 @@ FROM @DATA_STAGE/sns_logs.json
 -- ----------------------------------------------------------------------------
 INSERT INTO raw_voice_logs (
     call_id, 
+    scenario_id,
+    audio_file,
+    call_duration_sec,
     call_start_time, 
     call_end_time,
-    call_duration_sec,
+    category,
     agent_id,
     customer_phone,
     customer_id,
-    audio_file_path,
-    call_type,
-    queue_name,
-    ivr_path
+    call_type
 )
 SELECT
     $1:call_id::VARCHAR, 
+    $1:scenario_id::VARCHAR,
+    $1:audio_file::VARCHAR,
+    $1:call_duration_sec::NUMBER(10,2),
     $1:call_start_time::TIMESTAMP, 
     $1:call_end_time::TIMESTAMP,
-    $1:duration_sec::INTEGER,
+    $1:category::VARCHAR,
     $1:agent_id::VARCHAR,
     $1:customer_phone::VARCHAR,
     $1:customer_id::VARCHAR,
-    $1:audio_file_path::VARCHAR,
-    $1:call_type::VARCHAR,
-    $1:queue_name::VARCHAR,
-    $1:ivr_path::VARCHAR
+    $1:call_type::VARCHAR
 FROM @DATA_STAGE/voice_logs/voice_logs_metadata.json
 (FILE_FORMAT => JSON_FORMAT);
 
 -- 音声ファイルの文字起こし（AI_TRANSCRIBE使用）
-CREATE OR REPLACE TABLE raw_voice_messages AS
-SELECT 
-    *,
-    AI_TRANSCRIBE(
-        TO_FILE('@DATA_STAGE', relative_path)
-    ) AS transcribed_text 
-FROM DIRECTORY(@DATA_STAGE)
-WHERE REGEXP_LIKE(relative_path, 'voice_logs.*\\.mp3', 'i');
+MERGE INTO raw_voice_logs AS target
+USING (
+    SELECT 
+        SPLIT_PART(relative_path, '/', -1) AS file_name,
+        AI_TRANSCRIBE(
+            TO_FILE('@DATA_STAGE', relative_path)
+        ):text::TEXT AS transcribed_text
+    FROM DIRECTORY(@DATA_STAGE)
+    WHERE REGEXP_LIKE(relative_path, 'voice_logs.*\\.mp3', 'i')
+) AS source
+ON target.audio_file = source.file_name
+WHEN MATCHED THEN
+    UPDATE SET target.transcribed_text = source.transcribed_text;
 
 -- ----------------------------------------------------------------------------
 -- 7-8. 広告クリエイティブのインポート（15件）
@@ -601,14 +610,8 @@ UNION ALL
 SELECT 
     'raw_voice_logs' AS table_name, 
     COUNT(*) AS record_count,
-    'カスタマー音声ログ（メタデータ）' AS description
+    'カスタマー音声ログ' AS description
 FROM raw_voice_logs
-UNION ALL
-SELECT 
-    'raw_voice_messages' AS table_name, 
-    COUNT(*) AS record_count,
-    '音声文字起こしデータ' AS description
-FROM raw_voice_messages
 UNION ALL
 SELECT 
     'raw_ad_creatives' AS table_name, 
