@@ -105,15 +105,12 @@ SELECT '【Step 4】GitHub連携の設定が完了しました' AS status;
 -- Step 5: GitHubからデータファイルの取得
 -- ============================================================================
 -- リポジトリの内容を確認
--- ls @GIT_INTEGRATION_FOR_HANDSON/branches/main;
-
 ls @GIT_INTEGRATION_FOR_HANDSON/branches/tmp_new_version_2026;
 
 -- GitHubのdataディレクトリからすべてのファイルをステージにコピー
 COPY FILES 
   INTO @GLACIERSTYLE_DB.EC_ANALYTICS_SCHEMA.DATA_STAGE 
   FROM @GIT_INTEGRATION_FOR_HANDSON/branches/tmp_new_version_2026/data/;
-  -- FROM @GIT_INTEGRATION_FOR_HANDSON/branches/main/data/;
 
 -- ステージ内のファイルを確認
 ls @GLACIERSTYLE_DB.EC_ANALYTICS_SCHEMA.DATA_STAGE;
@@ -516,14 +513,14 @@ SELECT
     t2.value AS raw_value,
     t2.value:headers:header_1::VARCHAR AS category,
     t2.value:headers:header_2::VARCHAR AS subcategory,
-    t2.value:headers:header_3::VARCHAR AS question,
-    t2.value:headers:header_4::VARCHAR AS detail,
+    -- t2.value:headers:header_3::VARCHAR AS question,
+    -- t2.value:headers:header_4::VARCHAR AS detail,
     t2.value:chunk::TEXT AS content_chunk
 FROM parsed_doc t,
 LATERAL FLATTEN(INPUT => 
     SNOWFLAKE.CORTEX.SPLIT_TEXT_MARKDOWN_HEADER(
         t.contents:content, 
-        OBJECT_CONSTRUCT('#', 'header_1', '##', 'header_2', '###', 'header_3', '####', 'header_4'),
+        OBJECT_CONSTRUCT('#', 'header_1', '##', 'header_2'),
         10000
     )
 ) t2;
