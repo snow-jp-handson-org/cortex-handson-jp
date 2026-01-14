@@ -11,6 +11,7 @@ Snowflake EC Analytics - 環境セットアップスクリプト
 2. ステージの作成（データ格納用）
 3. GitHub連携の設定（API統合とGitリポジトリ）
 4. GitHubからデータファイルの自動取得
+5. Streamlit in Snowflake アプリのデプロイ
 
 【データソース】
 GitHub Repository: https://github.com/snow-jp-handson-org/cortex-handson-jp
@@ -101,6 +102,24 @@ SELECT '【Step 5】GitHubからのデータ取得が完了しました' AS stat
 
 
 -- ============================================================================
+-- Step 6: Streamlit in Snowflake アプリのデプロイ
+-- ============================================================================
+-- GlacierStyle Analytics アプリをデプロイ
+-- GitHubからStreamlitアプリのファイルを取得してデプロイ
+
+CREATE OR REPLACE STREAMLIT GLACIERSTYLE_ANALYTICS_APP
+    FROM @GIT_INTEGRATION_FOR_HANDSON/branches/tmp_new_version_2026/streamlit_app
+    MAIN_FILE = 'main.py'
+    QUERY_WAREHOUSE = COMPUTE_WH
+    COMMENT = 'GlacierStyle ECサイト分析ダッシュボード - 広告分析・VoC分析・マルチモーダル検索';
+
+-- Streamlitアプリへのアクセス権を付与（必要に応じて）
+-- GRANT USAGE ON STREAMLIT GLACIERSTYLE_ANALYTICS_APP TO ROLE <your_role>;
+
+SELECT '【Step 6】Streamlit in Snowflakeアプリのデプロイが完了しました' AS status;
+
+
+-- ============================================================================
 -- 完了メッセージ
 -- ============================================================================
 SELECT '
@@ -112,9 +131,14 @@ SELECT '
 ✅ スキーマ: EC_ANALYTICS_SCHEMA
 ✅ ステージ: DATA_STAGE（データファイル格納済み）
 ✅ GitHub連携: GIT_INTEGRATION_FOR_HANDSON
+✅ Streamlitアプリ: GLACIERSTYLE_ANALYTICS_APP
 
 【次のステップ】
 part1_data_ingest.ipynb を開いてデータのインポートを実行してください。
+
+【Part 6 完了後】
+Streamlitアプリは「プロジェクト」→「Streamlit」から
+GLACIERSTYLE_ANALYTICS_APP を開いて利用できます。
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ' AS "✅ セットアップ完了";
