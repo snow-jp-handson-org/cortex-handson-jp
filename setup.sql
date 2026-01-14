@@ -33,6 +33,10 @@ GitHub Repository: https://github.com/snow-jp-handson-org/cortex-handson-jp
 -- 管理者ロールとコンピュートウェアハウスを使用
 USE ROLE ACCOUNTADMIN;
 
+-- クロスリージョンコールのパラメータを有効化
+ALTER ACCOUNT SET CORTEX_ENABLED_CROSS_REGION = 'ANY_REGION';
+
+-- ウェアハウスの用意
 CREATE WAREHOUSE IF NOT EXISTS COMPUTE_WH;
 USE WAREHOUSE COMPUTE_WH;
 
@@ -82,8 +86,7 @@ SELECT '【Step 4】GitHub連携の設定が完了しました' AS status;
 -- Step 5: GitHubからデータファイルの取得
 -- ============================================================================
 -- リポジトリの内容を確認
-ls @GIT_INTEGRATION_FOR_HANDSON/branches/tmp_new_version_2026;
--- ls @GIT_INTEGRATION_FOR_HANDSON/branches/main;
+ls @GIT_INTEGRATION_FOR_HANDSON/branches/main;
 
 -- GitHubのdataディレクトリからすべてのファイルをステージにコピー
 COPY FILES 
