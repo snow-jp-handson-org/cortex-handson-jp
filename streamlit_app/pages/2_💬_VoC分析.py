@@ -112,7 +112,8 @@ with tab1:
             st.metric("投稿数", f"{len(filtered_sns):,}")
         
         with col2:
-            positive_pct = (filtered_sns['OVERALL_SENTIMENT'] == 'positive').sum() / len(filtered_sns) * 100
+            positive_count = (filtered_sns['OVERALL_SENTIMENT'] == 'positive').sum()
+            positive_pct = positive_count / len(filtered_sns) * 100 if len(filtered_sns) > 0 else 0
             st.metric("ポジティブ率", f"{positive_pct:.1f}%")
         
         with col3:
@@ -134,8 +135,8 @@ with tab1:
             sentiment_counts.columns = ['Sentiment', 'Count']
             
             color_scale = alt.Scale(
-                domain=['positive', 'neutral', 'negative'],
-                range=['#27ae60', '#95a5a6', '#e74c3c']
+                domain=['positive', 'neutral', 'negative', 'mixed', 'overall'],
+                range=['#27ae60', '#95a5a6', '#e74c3c', '#f39c12', '#3498db']
             )
             
             chart = alt.Chart(sentiment_counts).mark_arc(innerRadius=50).encode(
@@ -164,13 +165,13 @@ with tab1:
         # カテゴリ別感情分析
         st.markdown("### 📊 カテゴリ別感情分析")
         
-        category_sentiment = filtered_sns.groupby(['EXTRACTED_CATEGORY', 'OVERALL_SENTIMENT']).size().reset_index(name='Count')
+        category_sentiment = filtered_sns.groupby(['POST_CATEGORY', 'OVERALL_SENTIMENT']).size().reset_index(name='Count')
         
         chart = alt.Chart(category_sentiment).mark_bar().encode(
-            x=alt.X('EXTRACTED_CATEGORY:N', title='カテゴリ'),
+            x=alt.X('POST_CATEGORY:N', title='カテゴリ'),
             y=alt.Y('Count:Q', title='投稿数'),
             color=alt.Color('OVERALL_SENTIMENT:N', scale=color_scale, title='感情'),
-            tooltip=['EXTRACTED_CATEGORY', 'OVERALL_SENTIMENT', 'Count']
+            tooltip=['POST_CATEGORY', 'OVERALL_SENTIMENT', 'Count']
         ).properties(height=350)
         
         st.altair_chart(chart, use_container_width=True)
@@ -183,7 +184,7 @@ with tab1:
         # 感情でフィルター
         sentiment_filter = st.selectbox(
             "感情でフィルター",
-            options=["すべて", "positive", "neutral", "negative"],
+            options=["すべて"] + sentiments,
             key="sns_list_filter"
         )
         
@@ -194,9 +195,9 @@ with tab1:
         # 投稿表示
         for _, row in display_df.head(10).iterrows():
             sentiment = row['OVERALL_SENTIMENT']
-            emoji = "🟢" if sentiment == 'positive' else "🟡" if sentiment == 'neutral' else "🔴"
+            emoji = "🟢" if sentiment == 'positive' else "🟡" if sentiment in ['neutral', 'mixed'] else "🔴" if sentiment == 'negative' else "🔵"
             
-            with st.container(border=True):
+            with st.container():
                 col1, col2 = st.columns([3, 1])
                 
                 with col1:
@@ -253,7 +254,8 @@ with tab2:
             st.metric("平均通話時間", f"{avg_duration:.0f}秒")
         
         with col3:
-            negative_pct = (voice_df['OVERALL_SENTIMENT'] == 'negative').sum() / len(voice_df) * 100
+            negative_count = (voice_df['OVERALL_SENTIMENT'] == 'negative').sum()
+            negative_pct = negative_count / len(voice_df) * 100 if len(voice_df) > 0 else 0
             st.metric("ネガティブ率", f"{negative_pct:.1f}%")
         
         with col4:
@@ -284,8 +286,8 @@ with tab2:
             sentiment_counts.columns = ['Sentiment', 'Count']
             
             color_scale = alt.Scale(
-                domain=['positive', 'neutral', 'negative'],
-                range=['#27ae60', '#95a5a6', '#e74c3c']
+                domain=['positive', 'neutral', 'negative', 'mixed', 'overall'],
+                range=['#27ae60', '#95a5a6', '#e74c3c', '#f39c12', '#3498db']
             )
             
             chart = alt.Chart(sentiment_counts).mark_arc(innerRadius=50).encode(
@@ -330,7 +332,7 @@ with tab2:
         with col2:
             sentiment_filter = st.selectbox(
                 "感情でフィルター",
-                options=["すべて", "positive", "neutral", "negative"],
+                options=["すべて", "positive", "neutral", "negative", "mixed"],
                 key="voice_sentiment_filter"
             )
         
@@ -343,15 +345,15 @@ with tab2:
         # 通話表示
         for _, row in display_df.head(10).iterrows():
             sentiment = row['OVERALL_SENTIMENT']
-            emoji = "🟢" if sentiment == 'positive' else "🟡" if sentiment == 'neutral' else "🔴"
+            emoji = "🟢" if sentiment == 'positive' else "🟡" if sentiment in ['neutral', 'mixed'] else "🔴" if sentiment == 'negative' else "🔵"
             
-            with st.container(border=True):
+            with st.container():
                 col1, col2 = st.columns([3, 1])
                 
                 with col1:
                     st.markdown(f"**{row['CALL_ID']}**")
                     st.write(row['TRANSCRIBED_TEXT_SUMMARY'] if row['TRANSCRIBED_TEXT_SUMMARY'] else "(要約なし)")
-                    st.caption(f"📅 {row['CALL_START_TIME']} | 🕐 {row['CALL_DURATION_SEC']}秒")
+                    st.caption(f"📅 {row['CALL_START_TIME']} | 🕐 {row['CALL_DURATION_SEC']:.0f}秒")
                 
                 with col2:
                     st.markdown(f"{emoji} **{sentiment}**")

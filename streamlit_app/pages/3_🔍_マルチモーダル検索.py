@@ -219,7 +219,7 @@ if search_button and query:
                     scores = item.get('@scores', {})
                     similarity = scores.get('cosine_similarity', 0)
                     
-                    with st.container(border=True):
+                    with st.container():
                         # ヘッダー
                         header_parts = []
                         for col in config['display_columns']:
@@ -278,7 +278,7 @@ if search_button and query:
                         scores = item.get('@scores', {})
                         similarity = scores.get('cosine_similarity', 0)
                         
-                        with st.container(border=True):
+                        with st.container():
                             # ヘッダー
                             header_parts = []
                             for col in config['display_columns']:
@@ -374,7 +374,7 @@ with st.expander("🎛️ 詳細検索（フィルター付き）", expanded=Fal
                         scores = item.get('@scores', {})
                         similarity = scores.get('cosine_similarity', 0)
                         
-                        with st.container(border=True):
+                        with st.container():
                             header_parts = []
                             for col in config['display_columns']:
                                 if col in item and item[col]:

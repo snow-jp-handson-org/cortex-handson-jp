@@ -2,12 +2,12 @@
 ================================================================================
 広告クリエイティブ分析
 ================================================================================
-広告画像とKPIを並列表示し、パフォーマンスを分析
+広告クリエイティブのKPIを分析
 
 機能:
-- 広告画像のプレビュー表示
 - KPI（CTR, CVR, CPA）のダッシュボード
 - プラットフォーム別・セグメント別分析
+- クリエイティブ詳細表示
 ================================================================================
 """
 
@@ -38,86 +38,85 @@ session = get_session()
 # ヘッダー
 # ============================================================================
 st.title("📢 広告クリエイティブ分析")
-st.markdown("広告画像とKPIを並列表示し、クリエイティブのパフォーマンスを分析します。")
+st.markdown("広告クリエイティブのKPIを分析し、パフォーマンスを可視化します。")
 st.divider()
-
-# ============================================================================
-# フィルター
-# ============================================================================
-with st.sidebar:
-    st.header("🔧 フィルター")
-    
-    # プラットフォーム選択
-    platforms = session.sql("""
-        SELECT DISTINCT PLATFORM FROM AD_CREATIVES ORDER BY PLATFORM
-    """).to_pandas()['PLATFORM'].tolist()
-    
-    selected_platforms = st.multiselect(
-        "プラットフォーム",
-        options=platforms,
-        default=platforms
-    )
-    
-    # ターゲットセグメント選択
-    segments = session.sql("""
-        SELECT DISTINCT TARGET_SEGMENT FROM AD_CREATIVES ORDER BY TARGET_SEGMENT
-    """).to_pandas()['TARGET_SEGMENT'].tolist()
-    
-    selected_segments = st.multiselect(
-        "ターゲットセグメント",
-        options=segments,
-        default=segments
-    )
-    
-    # CTRソート
-    sort_by = st.selectbox(
-        "並び替え",
-        options=["CTR_PERCENT（高い順）", "CTR_PERCENT（低い順）", "CPA（低い順）", "CVR_PERCENT（高い順）"],
-        index=0
-    )
 
 # ============================================================================
 # データ取得
 # ============================================================================
 @st.cache_data(ttl=300)
-def get_ad_creatives(_session, platforms, segments):
-    platforms_str = "', '".join(platforms)
-    segments_str = "', '".join(segments)
-    
-    query = f"""
+def get_ad_creatives(_session):
+    """広告クリエイティブデータを取得"""
+    query = """
         SELECT 
             CREATIVE_ID,
             CREATIVE_NAME,
-            CAMPAIGN_NAME,
+            CREATIVE_TYPE,
+            CAMPAIGN_ID,
             PLATFORM,
-            AD_FORMAT,
             TARGET_SEGMENT,
-            IMAGE_FILE_PATH,
+            COPY_TEXT,
+            HEADLINE,
             IMPRESSIONS,
             CLICKS,
             CONVERSIONS,
-            AD_SPEND,
-            CTR_PERCENT,
-            CVR_PERCENT,
-            CPA
-        FROM AD_CREATIVES
-        WHERE PLATFORM IN ('{platforms_str}')
-          AND TARGET_SEGMENT IN ('{segments_str}')
+            SPEND,
+            CTR,
+            CVR,
+            CPA,
+            IMAGE_STYLE,
+            APPEAL_TYPE
+        FROM GOLD_AD_CREATIVE_ANALYSIS
     """
     return _session.sql(query).to_pandas()
 
-if selected_platforms and selected_segments:
-    df = get_ad_creatives(session, selected_platforms, selected_segments)
+try:
+    df = get_ad_creatives(session)
+    
+    # ============================================================================
+    # フィルター
+    # ============================================================================
+    with st.sidebar:
+        st.header("🔧 フィルター")
+        
+        # プラットフォーム選択
+        platforms = df['PLATFORM'].dropna().unique().tolist()
+        selected_platforms = st.multiselect(
+            "プラットフォーム",
+            options=platforms,
+            default=platforms
+        )
+        
+        # ターゲットセグメント選択
+        segments = df['TARGET_SEGMENT'].dropna().unique().tolist()
+        selected_segments = st.multiselect(
+            "ターゲットセグメント",
+            options=segments,
+            default=segments
+        )
+        
+        # ソート
+        sort_by = st.selectbox(
+            "並び替え",
+            options=["CTR（高い順）", "CTR（低い順）", "CPA（低い順）", "CVR（高い順）"],
+            index=0
+        )
+    
+    # フィルター適用
+    filtered_df = df[
+        (df['PLATFORM'].isin(selected_platforms)) &
+        (df['TARGET_SEGMENT'].isin(selected_segments))
+    ].copy()
     
     # ソート適用
-    if "CTR_PERCENT（高い順）" in sort_by:
-        df = df.sort_values('CTR_PERCENT', ascending=False)
-    elif "CTR_PERCENT（低い順）" in sort_by:
-        df = df.sort_values('CTR_PERCENT', ascending=True)
+    if "CTR（高い順）" in sort_by:
+        filtered_df = filtered_df.sort_values('CTR', ascending=False)
+    elif "CTR（低い順）" in sort_by:
+        filtered_df = filtered_df.sort_values('CTR', ascending=True)
     elif "CPA（低い順）" in sort_by:
-        df = df.sort_values('CPA', ascending=True)
-    elif "CVR_PERCENT（高い順）" in sort_by:
-        df = df.sort_values('CVR_PERCENT', ascending=False)
+        filtered_df = filtered_df.sort_values('CPA', ascending=True)
+    elif "CVR（高い順）" in sort_by:
+        filtered_df = filtered_df.sort_values('CVR', ascending=False)
     
     # ============================================================================
     # サマリーKPI
@@ -127,22 +126,22 @@ if selected_platforms and selected_segments:
     col1, col2, col3, col4, col5 = st.columns(5)
     
     with col1:
-        st.metric("クリエイティブ数", f"{len(df):,}")
+        st.metric("クリエイティブ数", f"{len(filtered_df):,}")
     
     with col2:
-        avg_ctr = df['CTR_PERCENT'].mean()
+        avg_ctr = filtered_df['CTR'].mean()
         st.metric("平均CTR", f"{avg_ctr:.2f}%")
     
     with col3:
-        avg_cvr = df['CVR_PERCENT'].mean()
+        avg_cvr = filtered_df['CVR'].mean()
         st.metric("平均CVR", f"{avg_cvr:.2f}%")
     
     with col4:
-        avg_cpa = df['CPA'].mean()
+        avg_cpa = filtered_df['CPA'].mean()
         st.metric("平均CPA", f"¥{avg_cpa:,.0f}")
     
     with col5:
-        total_spend = df['AD_SPEND'].sum()
+        total_spend = filtered_df['SPEND'].sum()
         st.metric("総広告費", f"¥{total_spend:,.0f}")
     
     st.divider()
@@ -156,17 +155,17 @@ if selected_platforms and selected_segments:
     
     with col1:
         # プラットフォーム別CTR
-        platform_stats = df.groupby('PLATFORM').agg({
-            'CTR_PERCENT': 'mean',
-            'CVR_PERCENT': 'mean',
+        platform_stats = filtered_df.groupby('PLATFORM').agg({
+            'CTR': 'mean',
+            'CVR': 'mean',
             'CPA': 'mean',
-            'AD_SPEND': 'sum'
+            'SPEND': 'sum'
         }).reset_index()
         
         chart_ctr = alt.Chart(platform_stats).mark_bar(color='#4a90a4').encode(
             x=alt.X('PLATFORM:N', title='プラットフォーム'),
-            y=alt.Y('CTR_PERCENT:Q', title='平均CTR (%)'),
-            tooltip=['PLATFORM', alt.Tooltip('CTR_PERCENT:Q', format='.2f')]
+            y=alt.Y('CTR:Q', title='平均CTR (%)'),
+            tooltip=['PLATFORM', alt.Tooltip('CTR:Q', format='.2f')]
         ).properties(title='プラットフォーム別 平均CTR', height=300)
         
         st.altair_chart(chart_ctr, use_container_width=True)
@@ -184,61 +183,77 @@ if selected_platforms and selected_segments:
     st.divider()
     
     # ============================================================================
-    # クリエイティブ一覧（画像付き）
+    # セグメント別分析
+    # ============================================================================
+    st.markdown("### 👥 ターゲットセグメント別パフォーマンス")
+    
+    segment_stats = filtered_df.groupby('TARGET_SEGMENT').agg({
+        'CTR': 'mean',
+        'CVR': 'mean',
+        'CPA': 'mean',
+        'SPEND': 'sum',
+        'CREATIVE_ID': 'count'
+    }).reset_index()
+    segment_stats.columns = ['TARGET_SEGMENT', 'CTR', 'CVR', 'CPA', 'SPEND', 'COUNT']
+    
+    chart_segment = alt.Chart(segment_stats).mark_bar(color='#9b59b6').encode(
+        y=alt.Y('TARGET_SEGMENT:N', title='ターゲットセグメント', sort='-x'),
+        x=alt.X('CTR:Q', title='平均CTR (%)'),
+        tooltip=['TARGET_SEGMENT', alt.Tooltip('CTR:Q', format='.2f'), alt.Tooltip('COUNT:Q', title='件数')]
+    ).properties(title='セグメント別 平均CTR', height=300)
+    
+    st.altair_chart(chart_segment, use_container_width=True)
+    
+    st.divider()
+    
+    # ============================================================================
+    # クリエイティブ一覧
     # ============================================================================
     st.markdown("### 🖼️ クリエイティブ詳細")
-    st.markdown("各広告クリエイティブの画像とKPIを表示します。")
-    
-    # ステージURLのベースパス
-    STAGE_BASE_URL = "@GLACIERSTYLE_DB.EC_ANALYTICS_SCHEMA.DATA_STAGE/ad_images/"
+    st.markdown("各広告クリエイティブのKPIを表示します。")
     
     # 3列表示
-    for i in range(0, len(df), 3):
+    for i in range(0, len(filtered_df), 3):
         cols = st.columns(3)
         
         for j, col in enumerate(cols):
-            if i + j < len(df):
-                row = df.iloc[i + j]
+            if i + j < len(filtered_df):
+                row = filtered_df.iloc[i + j]
                 
                 with col:
-                    with st.container(border=True):
+                    with st.container():
                         # クリエイティブ名
                         st.markdown(f"**{row['CREATIVE_NAME']}**")
-                        st.caption(f"{row['PLATFORM']} | {row['AD_FORMAT']} | {row['TARGET_SEGMENT']}")
+                        st.caption(f"{row['PLATFORM']} | {row['CREATIVE_TYPE']} | {row['TARGET_SEGMENT']}")
                         
-                        # 画像表示（ステージから取得を試みる）
-                        image_file = row['IMAGE_FILE_PATH']
-                        if image_file:
-                            try:
-                                # ステージからの画像表示
-                                image_url = f"{STAGE_BASE_URL}{image_file}"
-                                st.markdown(f"📷 `{image_file}`")
-                                # Note: SiSでは直接ステージ画像を表示するのは制限がある場合があります
-                                # 実際の運用ではPresigned URLやBase64エンコードを使用
-                            except:
-                                st.markdown(f"📷 `{image_file}`")
+                        # 詳細情報
+                        if row['HEADLINE']:
+                            st.markdown(f"📝 _{row['HEADLINE']}_")
                         
-                        # KPI表示
                         st.divider()
                         
+                        # KPI表示
                         kpi_col1, kpi_col2, kpi_col3 = st.columns(3)
                         
                         with kpi_col1:
-                            st.metric("CTR", f"{row['CTR_PERCENT']:.2f}%")
+                            st.metric("CTR", f"{row['CTR']:.2f}%")
                         
                         with kpi_col2:
-                            st.metric("CVR", f"{row['CVR_PERCENT']:.2f}%")
+                            st.metric("CVR", f"{row['CVR']:.2f}%")
                         
                         with kpi_col3:
                             st.metric("CPA", f"¥{row['CPA']:,.0f}")
                         
                         # 詳細
                         with st.expander("詳細を見る"):
-                            st.write(f"**キャンペーン:** {row['CAMPAIGN_NAME']}")
+                            st.write(f"**キャンペーンID:** {row['CAMPAIGN_ID']}")
                             st.write(f"**インプレッション:** {row['IMPRESSIONS']:,}")
                             st.write(f"**クリック数:** {row['CLICKS']:,}")
                             st.write(f"**コンバージョン:** {row['CONVERSIONS']:,}")
-                            st.write(f"**広告費:** ¥{row['AD_SPEND']:,}")
+                            st.write(f"**広告費:** ¥{row['SPEND']:,}")
+                            st.write(f"**画像スタイル:** {row['IMAGE_STYLE']}")
+                            if row['COPY_TEXT']:
+                                st.write(f"**コピー:** {row['COPY_TEXT'][:100]}...")
     
     st.divider()
     
@@ -248,30 +263,19 @@ if selected_platforms and selected_segments:
     st.markdown("### 📋 データ一覧")
     
     with st.expander("全データを表示", expanded=False):
-        st.dataframe(
-            df,
-            use_container_width=True,
-            hide_index=True,
-            column_config={
-                "CREATIVE_ID": "ID",
-                "CREATIVE_NAME": "クリエイティブ名",
-                "CAMPAIGN_NAME": "キャンペーン",
-                "PLATFORM": "プラットフォーム",
-                "AD_FORMAT": "フォーマット",
-                "TARGET_SEGMENT": "セグメント",
-                "IMAGE_FILE_PATH": "画像ファイル",
-                "IMPRESSIONS": st.column_config.NumberColumn("インプレッション", format="%d"),
-                "CLICKS": st.column_config.NumberColumn("クリック", format="%d"),
-                "CONVERSIONS": st.column_config.NumberColumn("CV", format="%d"),
-                "AD_SPEND": st.column_config.NumberColumn("広告費", format="¥%d"),
-                "CTR_PERCENT": st.column_config.NumberColumn("CTR (%)", format="%.2f"),
-                "CVR_PERCENT": st.column_config.NumberColumn("CVR (%)", format="%.2f"),
-                "CPA": st.column_config.NumberColumn("CPA", format="¥%.0f"),
-            }
-        )
+        display_df = filtered_df[['CREATIVE_ID', 'CREATIVE_NAME', 'PLATFORM', 'CREATIVE_TYPE', 
+                                   'TARGET_SEGMENT', 'IMPRESSIONS', 'CLICKS', 'CONVERSIONS', 
+                                   'SPEND', 'CTR', 'CVR', 'CPA']].copy()
+        
+        # カラム名を日本語に変更
+        display_df.columns = ['ID', 'クリエイティブ名', 'プラットフォーム', 'タイプ', 
+                              'セグメント', 'インプレッション', 'クリック', 'CV', 
+                              '広告費', 'CTR(%)', 'CVR(%)', 'CPA']
+        
+        st.dataframe(display_df, use_container_width=True)
         
         # CSVダウンロード
-        csv = df.to_csv(index=False).encode('utf-8')
+        csv = display_df.to_csv(index=False).encode('utf-8')
         st.download_button(
             label="📥 CSVダウンロード",
             data=csv,
@@ -279,5 +283,7 @@ if selected_platforms and selected_segments:
             mime="text/csv"
         )
 
-else:
-    st.warning("フィルターでプラットフォームとセグメントを選択してください。")
+except Exception as e:
+    st.error(f"データの取得に失敗しました。")
+    st.caption(f"エラー詳細: {e}")
+    st.info("Part 1〜3のNotebookを実行してデータを準備してください。")

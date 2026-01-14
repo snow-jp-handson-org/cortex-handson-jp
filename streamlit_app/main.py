@@ -5,7 +5,7 @@ GlacierStyle Analytics App
 GlacierStyle ECサイトの分析ダッシュボード
 
 機能:
-- 広告クリエイティブ分析（画像表示付きKPIダッシュボード）
+- 広告クリエイティブ分析（KPIダッシュボード）
 - VoC分析（顧客の声の可視化）
 - マルチモーダル検索（Cortex Search連携）
 
@@ -108,15 +108,15 @@ try:
     with col1:
         orders_count = session.sql("""
             SELECT COUNT(*) as cnt FROM FACT_ORDERS 
-            WHERE order_datetime >= '2024-12-01' AND order_datetime < '2025-01-01'
+            WHERE ORDER_DATETIME >= '2024-12-01' AND ORDER_DATETIME < '2025-01-01'
         """).collect()[0]['CNT']
         st.metric("注文件数", f"{orders_count:,}")
 
     # 売上合計
     with col2:
         total_sales = session.sql("""
-            SELECT SUM(total_amount) as total FROM FACT_ORDERS 
-            WHERE order_datetime >= '2024-12-01' AND order_datetime < '2025-01-01'
+            SELECT SUM(TOTAL_AMOUNT) as total FROM FACT_ORDERS 
+            WHERE ORDER_DATETIME >= '2024-12-01' AND ORDER_DATETIME < '2025-01-01'
         """).collect()[0]['TOTAL']
         if total_sales:
             st.metric("売上合計", f"¥{total_sales:,.0f}")
@@ -154,8 +154,8 @@ with col1:
     <div class="nav-card">
         <h4>📢 広告クリエイティブ分析</h4>
         <p style="color: #6b7280; font-size: 0.9rem;">
-        広告画像とKPI（CTR、CVR、CPA）を並列表示。
-        プラットフォーム別・セグメント別のパフォーマンスを分析。
+        広告クリエイティブのKPI（CTR、CVR、CPA）を分析。
+        プラットフォーム別・セグメント別のパフォーマンスを可視化。
         </p>
     </div>
     """, unsafe_allow_html=True)
