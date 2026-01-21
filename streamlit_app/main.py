@@ -1,215 +1,170 @@
-"""
-================================================================================
-GlacierStyle Analytics App
-================================================================================
-GlacierStyle ECサイトの分析ダッシュボード
-
-機能:
-- 広告クリエイティブ分析（KPIダッシュボード）
-- VoC分析（顧客の声の可視化）
-- マルチモーダル検索（Cortex Search連携）
-
-※ Streamlit in Snowflake (SiS) で動作
-================================================================================
-"""
+# =========================================================
+# GLACIER CREATIVE STUDIO
+# 広告クリエイティブ分析・企画支援プラットフォーム
+# メインページ
+# =========================================================
+# 概要: アプリケーションの概要とナビゲーション
+# =========================================================
 
 import streamlit as st
 from snowflake.snowpark.context import get_active_session
 
-# ============================================================================
 # ページ設定
-# ============================================================================
 st.set_page_config(
-    page_title="GlacierStyle Analytics",
-    page_icon="🏔️",
     layout="wide",
     initial_sidebar_state="expanded"
 )
 
-# ============================================================================
-# カスタムCSS
-# ============================================================================
-st.markdown("""
-<style>
-    /* メインタイトル */
-    .main-title {
-        font-size: 2.5rem;
-        font-weight: 700;
-        background: linear-gradient(135deg, #1e3a5f 0%, #4a90a4 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        margin-bottom: 0.5rem;
-    }
-    
-    /* サブタイトル */
-    .sub-title {
-        color: #6b7280;
-        font-size: 1.1rem;
-        margin-bottom: 2rem;
-    }
-    
-    /* カード */
-    .metric-card {
-        background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
-        border-radius: 12px;
-        padding: 1.5rem;
-        border-left: 4px solid #4a90a4;
-        margin-bottom: 1rem;
-    }
-    
-    /* ナビゲーションカード */
-    .nav-card {
-        background: white;
-        border-radius: 12px;
-        padding: 1.5rem;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-        transition: transform 0.2s, box-shadow 0.2s;
-        border: 1px solid #e5e7eb;
-    }
-    
-    .nav-card:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(0,0,0,0.12);
-    }
-    
-    /* フッター */
-    .footer {
-        text-align: center;
-        color: #9ca3af;
-        padding: 2rem 0;
-        font-size: 0.875rem;
-    }
-</style>
-""", unsafe_allow_html=True)
-
-# ============================================================================
-# セッション取得
-# ============================================================================
+# Snowflakeセッション取得
 @st.cache_resource
-def get_session():
+def get_snowflake_session():
+    """Snowflakeセッションを取得"""
     return get_active_session()
 
-session = get_session()
+session = get_snowflake_session()
 
-# ============================================================================
-# メインコンテンツ
-# ============================================================================
-# ヘッダー
-st.markdown('<p class="main-title">🏔️ GlacierStyle Analytics</p>', unsafe_allow_html=True)
-st.markdown('<p class="sub-title">ECサイト分析ダッシュボード - 売上・VoC・広告効果を一元管理</p>', unsafe_allow_html=True)
+# =========================================================
+# セッションステートの初期化（モデル選択のキャッシュ）
+# =========================================================
+if "selected_model" not in st.session_state:
+    st.session_state.selected_model = "claude-sonnet-4-5"
 
-# サマリーメトリクス
-st.markdown("### 📊 クイックサマリー（2024年12月）")
+# =========================================================
+# メインページタイトル
+# =========================================================
+st.title("🎨 GLACIER CREATIVE STUDIO")
+st.header("広告クリエイティブ分析・企画支援プラットフォーム")
 
-col1, col2, col3, col4 = st.columns(4)
+st.markdown("""
+Snowflake Intelligenceでは難しい**ビジュアル中心の分析**と**インタラクティブな広告企画支援**を実現します。
+さらに、**AI_AGG、AI_CLASSIFY、AI_SENTIMENT**などの高度なSnowflake AI関数を活用した分析機能を提供します。
+""")
 
-try:
-    # 注文数
-    with col1:
-        orders_count = session.sql("""
-            SELECT COUNT(*) as cnt FROM FACT_ORDERS 
-            WHERE ORDER_DATETIME >= '2024-12-01' AND ORDER_DATETIME < '2025-01-01'
-        """).collect()[0]['CNT']
-        st.metric("注文件数", f"{orders_count:,}")
+st.markdown("---")
 
-    # 売上合計
-    with col2:
-        total_sales = session.sql("""
-            SELECT SUM(TOTAL_AMOUNT) as total FROM FACT_ORDERS 
-            WHERE ORDER_DATETIME >= '2024-12-01' AND ORDER_DATETIME < '2025-01-01'
-        """).collect()[0]['TOTAL']
-        if total_sales:
-            st.metric("売上合計", f"¥{total_sales:,.0f}")
-        else:
-            st.metric("売上合計", "N/A")
-
-    # SNS投稿数
-    with col3:
-        sns_count = session.sql("""
-            SELECT COUNT(*) as cnt FROM GOLD_SNS_MENTIONS_ANALYZED
-        """).collect()[0]['CNT']
-        st.metric("SNS投稿数", f"{sns_count:,}")
-
-    # 音声ログ数
-    with col4:
-        voice_count = session.sql("""
-            SELECT COUNT(*) as cnt FROM GOLD_VOICE_LOGS
-        """).collect()[0]['CNT']
-        st.metric("音声ログ数", f"{voice_count:,}")
-
-except Exception as e:
-    st.warning(f"データ取得中にエラーが発生しました。データのロードが完了しているか確認してください。")
-    st.caption(f"エラー詳細: {e}")
-
-st.divider()
-
-# ナビゲーション
-st.markdown("### 🧭 分析メニュー")
-st.markdown("左のサイドバーから各分析機能にアクセスできます。")
-
-col1, col2, col3 = st.columns(3)
-
-with col1:
-    st.markdown("""
-    <div class="nav-card">
-        <h4>📢 広告クリエイティブ分析</h4>
-        <p style="color: #6b7280; font-size: 0.9rem;">
-        広告クリエイティブのKPI（CTR、CVR、CPA）を分析。
-        プラットフォーム別・セグメント別のパフォーマンスを可視化。
-        </p>
-    </div>
-    """, unsafe_allow_html=True)
-
-with col2:
-    st.markdown("""
-    <div class="nav-card">
-        <h4>💬 VoC分析</h4>
-        <p style="color: #6b7280; font-size: 0.9rem;">
-        SNS投稿と音声ログの感情分析結果を可視化。
-        カテゴリ別・プラットフォーム別の傾向を把握。
-        </p>
-    </div>
-    """, unsafe_allow_html=True)
-
-with col3:
-    st.markdown("""
-    <div class="nav-card">
-        <h4>🔍 マルチモーダル検索</h4>
-        <p style="color: #6b7280; font-size: 0.9rem;">
-        Cortex Searchを使用した統合検索UI。
-        FAQ、マニュアル、音声ログ、SNSを横断検索。
-        </p>
-    </div>
-    """, unsafe_allow_html=True)
-
-st.divider()
-
-# Cortex AI機能の紹介
-st.markdown("### 🤖 使用しているCortex AI機能")
+# =========================================================
+# セクション1: 機能一覧（カードデザイン）
+# =========================================================
+st.subheader("📌 機能一覧")
 
 col1, col2 = st.columns(2)
 
 with col1:
-    st.markdown("""
-    **データ処理・分析**
-    - `AI_SENTIMENT` - 感情分析
-    - `AI_CLASSIFY` - カテゴリ分類
-    - `AI_EXTRACT` - 情報抽出
-    - `AI_COMPLETE` - テキスト生成
-    """)
+    with st.container(border=True):
+        st.markdown("### 📊 ダッシュボード")
+        st.markdown("広告パフォーマンスの全体像を視覚的に把握。")
+        st.markdown("""
+        - KPIサマリー（インプレッション、クリック、CV）
+        - プラットフォーム別パフォーマンス比較
+        - TOP/WORSTクリエイティブランキング
+        """)
+    
+    with st.container(border=True):
+        st.markdown("### 💡 広告企画支援")
+        st.markdown("次の広告制作のためのインサイト提供。")
+        st.markdown("""
+        - 勝ちパターン分析
+        - AIによるキャッチコピー生成
+        - クリエイティブブリーフ作成
+        """)
+    
+    with st.container(border=True):
+        st.markdown("### 📱 SNS分析 🆕")
+        st.markdown("SNS投稿からトレンドを分析。")
+        st.markdown("""
+        - ワードクラウド・キーワード抽出
+        - AI_AGGによる集約分析
+        - AI_CLASSIFY / AI_SENTIMENTによる分類
+        """)
 
 with col2:
+    with st.container(border=True):
+        st.markdown("### 🖼️ クリエイティブ分析")
+        st.markdown("個別クリエイティブの詳細分析。")
+        st.markdown("""
+        - 画像・コピー・KPIの統合表示
+        - AIによる効果要因分析
+        - **マルチモーダル画像分析** 🆕
+        """)
+    
+    with st.container(border=True):
+        st.markdown("### 📁 クリエイティブ管理")
+        st.markdown("広告クリエイティブのアセット管理。")
+        st.markdown("""
+        - 一覧表示・フィルタリング
+        - 新規クリエイティブ登録
+        - CSVエクスポート
+        """)
+
+st.markdown("---")
+
+# =========================================================
+# セクション2: Snowflake AI関数の紹介
+# =========================================================
+st.subheader("🚀 活用しているSnowflake AI関数")
+
+with st.container(border=True):
+    col1, col2, col3 = st.columns(3)
+    
+    with col1:
+        st.markdown("#### 🤖 AI_COMPLETE")
+        st.markdown("""
+        自由形式のプロンプトでAI分析を実行。
+        マルチモーダル対応で画像分析も可能。
+        """)
+    
+    with col2:
+        st.markdown("#### 🔬 AI_AGG")
+        st.markdown("""
+        複数のテキストを集約し、統合的な
+        インサイトを抽出。大量データの分析に最適。
+        """)
+    
+    with col3:
+        st.markdown("#### 🏷️ AI_CLASSIFY")
+        st.markdown("""
+        テキストを指定したカテゴリに
+        自動分類。感情分析にも活用可能。
+        """)
+
+st.markdown("---")
+
+# =========================================================
+# セクション3: クイックスタート
+# =========================================================
+st.subheader("🎯 クイックスタート")
+
+with st.container(border=True):
     st.markdown("""
-    **検索・インテリジェンス**
-    - `Cortex Search` - ハイブリッド検索
-    - `Semantic View` - Text2SQL
-    - `Cortex Agent` - 自然言語分析
+    **はじめての方へ**
+    
+    1. 📊 **ダッシュボード** で全体のパフォーマンスを確認
+    2. 🖼️ **クリエイティブ分析** で個別の広告を深掘り（AI画像分析も！）
+    3. 📱 **SNS分析** でトレンドとユーザーの声を把握
+    4. 💡 **広告企画支援** で次のキャンペーンを企画
+    5. 📁 **クリエイティブ管理** でアセットを整理
+    
+    👈 左側のサイドバーから各ページにアクセスしてください。
     """)
 
-# フッター
 st.markdown("---")
-st.markdown("""
-<div class="footer">
-    GlacierStyle Analytics | Powered by Snowflake Cortex AI & Streamlit in Snowflake
-</div>
-""", unsafe_allow_html=True)
+
+# =========================================================
+# セクション4: データソース
+# =========================================================
+with st.expander("📚 データソースについて"):
+    st.markdown("""
+    このアプリケーションは以下のデータを使用しています：
+    
+    | データソース | 説明 |
+    |-------------|------|
+    | `GOLD_AD_CREATIVE_ANALYSIS` | 広告クリエイティブの分析済みKPI |
+    | `RAW_AD_CREATIVES` | 広告クリエイティブの生データ（画像パス含む） |
+    | `DATA_STAGE/ad_images/` | 広告画像ファイル |
+    | `GOLD_SNS_MENTIONS_ANALYZED` | SNS投稿分析データ（VoC連携用） |
+    
+    データは2024年12月のキャンペーンデータを使用しています。
+    """)
+
+st.markdown("---")
+st.caption("**GLACIER CREATIVE STUDIO** | Powered by Snowflake Cortex AI")
