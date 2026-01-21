@@ -104,17 +104,17 @@ SELECT '【Step 5】GitHubからのデータ取得が完了しました' AS stat
 -- ============================================================================
 -- Step 6: Streamlit in Snowflake アプリのデプロイ
 -- ============================================================================
--- GlacierStyle Analytics アプリをデプロイ
+-- Glacier Creative Studio アプリをデプロイ
 -- GitHubからStreamlitアプリのファイルを取得してデプロイ
 
-CREATE OR REPLACE STREAMLIT GLACIERSTYLE_ANALYTICS_APP
+CREATE OR REPLACE STREAMLIT GLACIER_CREATIVE_STUDIO
     FROM @GIT_INTEGRATION_FOR_HANDSON/branches/tmp_new_version_2026/streamlit_app
     MAIN_FILE = 'main.py'
-    QUERY_WAREHOUSE = COMPUTE_WH
-    COMMENT = 'GlacierStyle ECサイト分析ダッシュボード - 広告分析・VoC分析・マルチモーダル検索';
+    QUERY_WAREHOUSE = GLACIERSTYLE_WH
+    COMMENT = 'GLACIER CREATIVE STUDIO - 広告クリエイティブ分析・企画支援プラットフォーム';
 
 -- Streamlitアプリへのアクセス権を付与（必要に応じて）
--- GRANT USAGE ON STREAMLIT GLACIERSTYLE_ANALYTICS_APP TO ROLE <your_role>;
+-- GRANT USAGE ON STREAMLIT GLACIER_CREATIVE_STUDIO TO ROLE <your_role>;
 
 SELECT '【Step 6】Streamlit in Snowflakeアプリのデプロイが完了しました' AS status;
 
@@ -135,10 +135,6 @@ SELECT '
 
 【次のステップ】
 part1_data_ingest.ipynb を開いてデータのインポートを実行してください。
-
-【Part 6 完了後】
-Streamlitアプリは「プロジェクト」→「Streamlit」から
-GLACIERSTYLE_ANALYTICS_APP を開いて利用できます。
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ' AS "✅ セットアップ完了";
