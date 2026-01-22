@@ -27,7 +27,7 @@ session = get_snowflake_session()
 # セッションステートの初期化（モデル選択のキャッシュ）
 # =========================================================
 if "selected_model" not in st.session_state:
-    st.session_state.selected_model = "claude-sonnet-4-5"
+    st.session_state.selected_model = "llama4-maverick"
 
 # =========================================================
 # メインページタイトル
@@ -74,7 +74,7 @@ with col1:
         st.markdown("""
         - ワードクラウド・キーワード抽出
         - AI_AGGによる集約分析
-        - AI_CLASSIFY / AI_SENTIMENTによる分類
+        - AI_CLASSIFY / AI_SIMILARITYによる分類・類似検索
         """)
 
 with col2:
@@ -104,27 +104,34 @@ st.markdown("---")
 st.subheader("🚀 活用しているSnowflake AI関数")
 
 with st.container(border=True):
-    col1, col2, col3 = st.columns(3)
+    col1, col2, col3, col4 = st.columns(4)
     
     with col1:
         st.markdown("#### 🤖 AI_COMPLETE")
         st.markdown("""
-        自由形式のプロンプトでAI分析を実行。
+        自由形式のプロンプトでAI分析。
         マルチモーダル対応で画像分析も可能。
         """)
     
     with col2:
         st.markdown("#### 🔬 AI_AGG")
         st.markdown("""
-        複数のテキストを集約し、統合的な
-        インサイトを抽出。大量データの分析に最適。
+        複数テキストを集約し、統合的な
+        インサイトを抽出。
         """)
     
     with col3:
         st.markdown("#### 🏷️ AI_CLASSIFY")
         st.markdown("""
         テキストを指定したカテゴリに
-        自動分類。感情分析にも活用可能。
+        自動分類。
+        """)
+    
+    with col4:
+        st.markdown("#### 🔍 AI_SIMILARITY")
+        st.markdown("""
+        テキスト間の意味的類似度を
+        計算。類似検索に活用。
         """)
 
 st.markdown("---")

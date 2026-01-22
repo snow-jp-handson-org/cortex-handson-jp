@@ -100,38 +100,35 @@ def call_cortex_complete(prompt: str, model: str = "claude-sonnet-4-5") -> str:
         return f"エラーが発生しました: {str(e)}"
 
 
-def call_ai_aggregate_with_complete(texts: list, question: str, model: str = "claude-sonnet-4-5") -> str:
-    """AI_COMPLETE + LISTAGGで複数テキストを集約分析（AI_AGGの代替）"""
+def call_ai_agg(sentiment_filter: str, limit: int, instruction: str) -> str:
+    """AI_AGG関数を呼び出してSNS投稿を集約分析"""
     session = get_session()
     
-    # テキストを結合（トークン制限を考慮して最大30件）
-    limited_texts = texts[:30]
-    combined_text = "\n---\n".join([str(t)[:200] for t in limited_texts if pd.notna(t)])
+    where_clause = ""
+    if sentiment_filter != "すべて":
+        escaped_sentiment = sentiment_filter.replace("'", "''")
+        where_clause = f"WHERE SENTIMENT = '{escaped_sentiment}'"
     
-    escaped_question = question.replace("'", "''").replace("\\", "\\\\")
-    escaped_text = combined_text.replace("'", "''").replace("\\", "\\\\")
-    
-    prompt = f"""以下のSNS投稿（{len(limited_texts)}件）を分析し、質問に回答してください。
-
-【質問】
-{escaped_question}
-
-【SNS投稿データ】
-{escaped_text}
-
-日本語で箇条書きで回答してください。"""
+    escaped_instruction = instruction.replace("'", "''").replace("\\", "\\\\")
     
     query = f"""
-    SELECT SNOWFLAKE.CORTEX.AI_COMPLETE(
-        '{model}',
-        '{prompt.replace("'", "''")}'
-    ) AS RESPONSE
+    SELECT AI_AGG(
+        CONTENT,
+        '{escaped_instruction}'
+    ) AS RESULT
+    FROM (
+        SELECT CONTENT
+        FROM GOLD_SNS_MENTIONS_ANALYZED
+        {where_clause}
+        ORDER BY POSTED_AT DESC
+        LIMIT {limit}
+    )
     """
     
     try:
         result = session.sql(query).collect()
-        if result and result[0]['RESPONSE']:
-            return process_ai_response(str(result[0]['RESPONSE']))
+        if result and result[0]['RESULT']:
+            return process_ai_response(str(result[0]['RESULT']))
         return "集約結果を取得できませんでした。"
     except Exception as e:
         return f"エラーが発生しました: {str(e)}"
@@ -142,11 +139,10 @@ def call_ai_classify(text: str, categories: list) -> str:
     session = get_session()
     
     escaped_text = text.replace("'", "''").replace("\\", "\\\\")
-    # カテゴリを配列形式で渡す
     categories_array = ", ".join([f"'{c.replace(chr(39), chr(39)+chr(39))}'" for c in categories])
     
     query = f"""
-    SELECT SNOWFLAKE.CORTEX.AI_CLASSIFY(
+    SELECT AI_CLASSIFY(
         '{escaped_text}',
         ARRAY_CONSTRUCT({categories_array})
     ) AS RESULT
@@ -177,15 +173,12 @@ def call_ai_similarity(text1: str, text2: str) -> float:
     escaped_text2 = text2.replace("'", "''").replace("\\", "\\\\")
     
     query = f"""
-    SELECT VECTOR_COSINE_SIMILARITY(
-        SNOWFLAKE.CORTEX.EMBED_TEXT_1024('voyage-multilingual-2', '{escaped_text1}'),
-        SNOWFLAKE.CORTEX.EMBED_TEXT_1024('voyage-multilingual-2', '{escaped_text2}')
-    ) AS SIMILARITY
+    SELECT AI_SIMILARITY('{escaped_text1}', '{escaped_text2}') AS SIMILARITY
     """
     
     try:
         result = session.sql(query).collect()
-        if result and result[0]['SIMILARITY']:
+        if result and result[0]['SIMILARITY'] is not None:
             return float(result[0]['SIMILARITY'])
         return 0.0
     except Exception as e:
@@ -256,7 +249,7 @@ def extract_mentioned_products(df: pd.DataFrame) -> pd.DataFrame:
 # セッションステートの初期化
 # =========================================================
 if "selected_model" not in st.session_state:
-    st.session_state.selected_model = "claude-sonnet-4-5"
+    st.session_state.selected_model = "llama4-maverick"
 
 if "trend_analysis_result" not in st.session_state:
     st.session_state.trend_analysis_result = None
@@ -281,10 +274,11 @@ st.markdown("---")
 st.sidebar.subheader("🤖 AI設定")
 
 model_options = {
-    "Claude Sonnet 4.5": "claude-sonnet-4-5",
-    "OpenAI GPT-5": "openai-gpt-5",
     "Llama 4 Maverick": "llama4-maverick",
-    "OpenAI GPT OSS 120B": "openai-gpt-oss-120b",
+    "Claude Sonnet 4.5": "claude-sonnet-4-5",
+    "Claude Haiku 4.5": "claude-haiku-4-5",
+    "OpenAI GPT-5": "openai-gpt-5",
+    "OpenAI GPT-5 Mini": "openai-gpt-5-mini",
 }
 
 model_names = list(model_options.keys())
@@ -585,7 +579,7 @@ with tab2:
         st.info("投稿テキストデータがありません。")
 
 # =========================================================
-# タブ3: ハッシュタグ・商品分析（新機能）
+# タブ3: ハッシュタグ・商品分析
 # =========================================================
 with tab3:
     st.subheader("#️⃣ ハッシュタグ・商品メンション分析")
@@ -688,30 +682,35 @@ with tab3:
         st.info("商品別感情データがありません。")
 
 # =========================================================
-# タブ4: AI集約分析（AI_AGGの代替）
+# タブ4: AI集約分析（AI_AGG）
 # =========================================================
 with tab4:
-    st.subheader("🔬 AI集約分析")
+    st.subheader("🔬 AI集約分析（AI_AGG）")
     st.markdown("""
-    複数のSNS投稿をAIがまとめて分析し、統合的なインサイトを抽出します。
-    （`AI_COMPLETE` + `LISTAGG` を使用 - AI_AGGはプレビュー機能のため代替手法を採用）
+    Snowflakeの`AI_AGG`関数を使用して、複数のSNS投稿をAIがまとめて分析し、統合的なインサイトを抽出します。
     """)
     
-    with st.expander("💡 この機能について", expanded=False):
+    with st.expander("💡 AI_AGGとは？", expanded=False):
         st.markdown("""
-        **集約分析とは？**
+        **AI_AGG**は、テキストデータの列を自然言語の指示に基づいて集約するSnowflake Cortex AI関数です。
         
-        個別の投稿を一つずつ分析するのではなく、複数の投稿をまとめてAIに渡し、
-        全体的な傾向やパターンを抽出する手法です。
+        **構文:**
+        ```sql
+        AI_AGG( <expr>, <instruction> )
+        ```
+        
+        **パラメータ:**
+        - `expr`: 集約対象のテキストを含む式（レビュー、トランスクリプトなど）
+        - `instruction`: 集約方法を指定する自然言語の文字列
         
         **活用例:**
         - 大量のレビューから共通の傾向を抽出
         - SNS投稿から主要なトピックを特定
         - 顧客フィードバックから改善ポイントを集約
         
-        **技術的な注意:**
-        - 最大30件の投稿を対象（トークン制限のため）
-        - 各投稿は200文字に制限
+        **特徴:**
+        - LLMのコンテキストウィンドウ制限を超えるデータセットにも対応
+        - GROUP BYと組み合わせて、グループごとの集約が可能
         """)
     
     st.markdown("---")
@@ -733,52 +732,45 @@ with tab4:
                 agg_sentiment = "すべて"
         
         with col2:
-            agg_limit = st.slider("分析する投稿数（最大30件）", 10, 30, 20, key="agg_limit_form")
+            agg_limit = st.slider("分析する投稿数", 10, 100, 30, key="agg_limit_form")
         
         with col3:
             st.write("")
             agg_filter_submitted = st.form_submit_button("適用", use_container_width=True)
     
-    # フィルタ適用
-    agg_df = df.copy()
-    if st.session_state.get('agg_sentiment_form', 'すべて') != "すべて" and 'SENTIMENT' in df.columns:
-        agg_df = agg_df[agg_df['SENTIMENT'] == st.session_state.agg_sentiment_form]
+    # フィルタ適用後の対象件数を表示
+    agg_sentiment_val = st.session_state.get('agg_sentiment_form', 'すべて')
+    agg_limit_val = st.session_state.get('agg_limit_form', 30)
     
-    agg_limit_val = st.session_state.get('agg_limit_form', 20)
-    agg_texts = agg_df.head(agg_limit_val)['CONTENT'].dropna().tolist()
-    
-    st.info(f"📊 分析対象: {len(agg_texts)}件の投稿")
+    st.info(f"📊 分析対象: 最大 {agg_limit_val}件の投稿" + (f"（感情: {agg_sentiment_val}）" if agg_sentiment_val != "すべて" else ""))
     
     st.markdown("---")
-    st.markdown("#### ❓ 質問を入力")
+    st.markdown("#### ❓ 集約指示を入力")
     
-    question_options = [
-        "この投稿群に共通する主要なトピックは何ですか？",
-        "ユーザーが最も評価しているポイントは何ですか？",
-        "ユーザーが改善を求めているポイントは何ですか？",
-        "ブランドに対する全体的な印象はどうですか？",
-        "カスタム質問を入力..."
+    instruction_options = [
+        "SNS投稿の主要なトピックとトレンドを日本語で要約してください",
+        "ユーザーが評価しているポイントと改善要望を日本語でまとめてください",
+        "ブランドに対する全体的な印象と感情傾向を日本語で分析してください",
+        "製品に関するフィードバックを日本語でカテゴリ別に整理してください",
+        "カスタム指示を入力..."
     ]
     
-    selected_question = st.selectbox("質問を選択", question_options, key="agg_question")
+    selected_instruction = st.selectbox("指示を選択", instruction_options, key="agg_instruction")
     
-    if selected_question == "カスタム質問を入力...":
-        custom_question = st.text_input("カスタム質問", placeholder="例: 季節に関する言及はありますか？")
-        final_question = custom_question
+    if selected_instruction == "カスタム指示を入力...":
+        custom_instruction = st.text_input("カスタム指示", placeholder="例: 季節に関する言及をまとめてください")
+        final_instruction = custom_instruction
     else:
-        final_question = selected_question
+        final_instruction = selected_instruction
     
     @st.fragment
     def ai_agg_analysis():
         """AI集約分析（Fragmentで部分更新）"""
-        if st.button("🔬 AIで集約分析", type="primary", disabled=not final_question):
-            if agg_texts:
-                with st.spinner("🤔 AIが複数投稿を集約分析中..."):
-                    st.session_state.ai_agg_result = call_ai_aggregate_with_complete(
-                        agg_texts, final_question, st.session_state.selected_model
-                    )
-            else:
-                st.warning("分析対象の投稿がありません。")
+        if st.button("🔬 AI_AGGで集約分析", type="primary", disabled=not final_instruction):
+            with st.spinner("🤔 AI_AGGが複数投稿を集約分析中..."):
+                st.session_state.ai_agg_result = call_ai_agg(
+                    agg_sentiment_val, agg_limit_val, final_instruction
+                )
         
         if st.session_state.ai_agg_result:
             with st.expander("🔬 集約分析結果", expanded=True):
@@ -902,9 +894,9 @@ with tab5:
     
     st.markdown("---")
     
-    # 類似投稿検索（AI_SIMILARITY / ベクトル検索）
-    st.markdown("#### 🔍 類似投稿検索（ベクトル類似度）")
-    st.markdown("入力したテキストと類似する投稿を検索します（EMBED_TEXT + VECTOR_COSINE_SIMILARITY使用）。")
+    # 類似投稿検索（AI_SIMILARITY）
+    st.markdown("#### 🔍 類似投稿検索（AI_SIMILARITY）")
+    st.markdown("入力したテキストと類似する投稿を検索します。`AI_SIMILARITY`関数でベクトル化と類似度計算を同時に行います。")
     
     search_text = st.text_input("検索テキスト", "デスクライトの品質について知りたい", key="similarity_search")
     

@@ -139,7 +139,6 @@ def call_cortex_complete_with_image(prompt: str, image_file_path: str) -> str:
     
     escaped_prompt = prompt.replace("'", "''").replace("\\", "\\\\")
     
-    # 画像分析はLlama4 Maverickのみ対応（ファイルサイズ制限も緩い）
     model = "llama4-maverick"
     
     # TO_FILE関数を使用してステージから画像を読み込む
@@ -167,7 +166,7 @@ def call_cortex_complete_with_image(prompt: str, image_file_path: str) -> str:
 # セッションステートの初期化
 # =========================================================
 if "selected_model" not in st.session_state:
-    st.session_state.selected_model = "claude-sonnet-4-5"
+    st.session_state.selected_model = "llama4-maverick"
 
 if "chat_history" not in st.session_state:
     st.session_state.chat_history = []
@@ -192,13 +191,13 @@ st.markdown("---")
 st.sidebar.subheader("🤖 AI設定")
 
 model_options = {
-    "Claude Sonnet 4.5": "claude-sonnet-4-5",
-    "OpenAI GPT-5": "openai-gpt-5",
     "Llama 4 Maverick": "llama4-maverick",
-    "OpenAI GPT OSS 120B": "openai-gpt-oss-120b",
+    "Claude Sonnet 4.5": "claude-sonnet-4-5",
+    "Claude Haiku 4.5": "claude-haiku-4-5",
+    "OpenAI GPT-5": "openai-gpt-5",
+    "OpenAI GPT-5 Mini": "openai-gpt-5-mini",
 }
 
-# モデル選択（on_changeで確実に更新）
 model_names = list(model_options.keys())
 
 def update_model():

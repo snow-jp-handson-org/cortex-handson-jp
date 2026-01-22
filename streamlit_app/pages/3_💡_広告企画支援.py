@@ -95,7 +95,7 @@ def call_cortex_complete(prompt: str, model: str = "claude-sonnet-4-5") -> str:
 # セッションステートの初期化
 # =========================================================
 if "selected_model" not in st.session_state:
-    st.session_state.selected_model = "claude-sonnet-4-5"
+    st.session_state.selected_model = "llama4-maverick"
 
 if "generated_copy" not in st.session_state:
     st.session_state.generated_copy = None
@@ -118,18 +118,18 @@ st.markdown("過去の実績分析とAIによる企画立案支援で、次の�
 st.markdown("---")
 
 # =========================================================
-# サイドバー設定（横線1本のみ）
+# サイドバー設定
 # =========================================================
 st.sidebar.subheader("🤖 AI設定")
 
 model_options = {
-    "Claude Sonnet 4.5": "claude-sonnet-4-5",
-    "OpenAI GPT-5": "openai-gpt-5",
     "Llama 4 Maverick": "llama4-maverick",
-    "OpenAI GPT OSS 120B": "openai-gpt-oss-120b",
+    "Claude Sonnet 4.5": "claude-sonnet-4-5",
+    "Claude Haiku 4.5": "claude-haiku-4-5",
+    "OpenAI GPT-5": "openai-gpt-5",
+    "OpenAI GPT-5 Mini": "openai-gpt-5-mini",
 }
 
-# モデル選択（セッションステートと連動）
 model_names = list(model_options.keys())
 current_model_name = [k for k, v in model_options.items() if v == st.session_state.selected_model]
 default_index = model_names.index(current_model_name[0]) if current_model_name else 0
