@@ -87,13 +87,12 @@ SELECT '【Step 4】GitHub連携の設定が完了しました' AS status;
 -- Step 5: GitHubからデータファイルの取得
 -- ============================================================================
 -- リポジトリの内容を確認
-ls @GIT_INTEGRATION_FOR_HANDSON/branches/main;
+ls @GIT_INTEGRATION_FOR_HANDSON/branches/main_v2;
 
 -- GitHubのdataディレクトリからすべてのファイルをステージにコピー
 COPY FILES 
   INTO @GLACIERSTYLE_DB.EC_ANALYTICS_SCHEMA.DATA_STAGE 
-  FROM @GIT_INTEGRATION_FOR_HANDSON/branches/tmp_new_version_2026/data/;
---   FROM @GIT_INTEGRATION_FOR_HANDSON/branches/main/data/;
+  FROM @GIT_INTEGRATION_FOR_HANDSON/branches/main_v2/data/;
 
 -- ステージ内のファイルを確認
 ls @GLACIERSTYLE_DB.EC_ANALYTICS_SCHEMA.DATA_STAGE;
