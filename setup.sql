@@ -7,11 +7,13 @@ Snowflake EC Analytics - 環境セットアップスクリプト
 このスクリプトは、ECサイト分析用のデータベース環境を構築します。
 
 【処理内容】
-1. データベースとスキーマの作成
-2. ステージの作成（データ格納用）
-3. GitHub連携の設定（API統合とGitリポジトリ）
-4. GitHubからデータファイルの自動取得
-5. Streamlit in Snowflake アプリのデプロイ
+1. ウェアハウスなどの環境設定
+2. データベースとスキーマの作成
+3. ステージの作成（データ格納用）
+4. GitHub連携の設定（API統合とGitリポジトリ）
+5. GitHubからデータファイルの自動取得
+6. Streamlit in Snowflake アプリのデプロイ
+7. Snowflake Intelligence オブジェクトの作成
 
 【データソース】
 GitHub Repository: https://github.com/snow-jp-handson-org/cortex-handson-jp
@@ -117,6 +119,14 @@ CREATE OR REPLACE STREAMLIT GLACIER_CREATIVE_STUDIO
 
 SELECT '【Step 6】Streamlit in Snowflakeアプリのデプロイが完了しました' AS status;
 
+
+-- ============================================================================
+-- Step 7: Snowflake Intelligence オブジェクトの作成
+-- ============================================================================
+
+CREATE SNOWFLAKE INTELLIGENCE SNOWFLAKE_INTELLIGENCE_OBJECT_DEFAULT;
+
+SELECT '【Step 7】Snowflake Intelligenceのオブジェクト作成が完了しました' AS status;
 
 -- ============================================================================
 -- 完了メッセージ
