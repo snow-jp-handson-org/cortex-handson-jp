@@ -140,7 +140,7 @@ SELECT '
 ✅ スキーマ: EC_ANALYTICS_SCHEMA
 ✅ ステージ: DATA_STAGE（データファイル格納済み）
 ✅ GitHub連携: GIT_INTEGRATION_FOR_HANDSON
-✅ Streamlitアプリ: GLACIERSTYLE_ANALYTICS_APP
+✅ Streamlitアプリ: GLACIER_CREATIVE_STUDIO
 
 【次のステップ】
 part1_data_ingest.ipynb を開いてデータのインポートを実行してください。
