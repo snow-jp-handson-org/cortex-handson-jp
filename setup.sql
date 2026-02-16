@@ -109,7 +109,7 @@ SELECT '【Step 5】GitHubからのデータ取得が完了しました' AS stat
 -- GitHubからStreamlitアプリのファイルを取得してデプロイ
 
 CREATE OR REPLACE STREAMLIT GLACIER_CREATIVE_STUDIO
-    FROM @GIT_INTEGRATION_FOR_HANDSON/branches/tmp_new_version_2026/streamlit_app
+    FROM @GIT_INTEGRATION_FOR_HANDSON/branches/main_v2/streamlit_app
     MAIN_FILE = 'main.py'
     QUERY_WAREHOUSE = GLACIERSTYLE_WH
     COMMENT = 'GLACIER CREATIVE STUDIO - 広告クリエイティブ分析・企画支援プラットフォーム';
