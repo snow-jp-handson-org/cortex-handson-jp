@@ -65,6 +65,11 @@ CREATE OR REPLACE STAGE GLACIERSTYLE_DB.EC_ANALYTICS_SCHEMA.DATA_STAGE
   encryption = (type = 'snowflake_sse') 
   DIRECTORY = (ENABLE = TRUE);
 
+CREATE OR REPLACE STAGE GLACIERSTYLE_DB.EC_ANALYTICS_SCHEMA.EXTRACTED_IMAGES_STAGE 
+  encryption = (type = 'snowflake_sse') 
+  DIRECTORY = (ENABLE = TRUE);
+
+
 SELECT '【Step 3】データステージの作成が完了しました' AS status;
 
 
@@ -124,7 +129,7 @@ SELECT '【Step 6】Streamlit in Snowflakeアプリのデプロイが完了し�
 -- Step 7: Snowflake Intelligence オブジェクトの作成
 -- ============================================================================
 
-CREATE SNOWFLAKE INTELLIGENCE SNOWFLAKE_INTELLIGENCE_OBJECT_DEFAULT;
+CREATE OR REPLACE SNOWFLAKE INTELLIGENCE SNOWFLAKE_INTELLIGENCE_OBJECT_DEFAULT;
 
 SELECT '【Step 7】Snowflake Intelligenceのオブジェクト作成が完了しました' AS status;
 
