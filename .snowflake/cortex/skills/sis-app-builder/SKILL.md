@@ -19,22 +19,22 @@ Step 3: コード生成・編集
 Step 4: 動作確認
 ```
 
-### Step 1: ソースコード探索
+### Step 1: ソースコード探索 & 状況把握
 
-**目的**: 対象の SiS アプリのソースコードを Workspace 上で見つける。
+**目的**: 対象アプリのソースコードの場所と、デプロイ方式を特定する。
 
 1. 既存アプリがあるか確認:
    ```sql
    SHOW STREAMLIT IN SCHEMA;
    ```
-2. 対象アプリの詳細を確認:
+2. 既存アプリがある場合、詳細を確認:
    ```sql
    DESCRIBE STREAMLIT <アプリ名>;
    ```
-3. ソースファイルの一覧を確認:
+   - `root_location` を見る — ソースの場所がわかる
+3. ソースの場所に応じてファイル一覧を確認:
    ```sql
-   -- embedded stage の場合
-   LIST @<DB>.<SCHEMA>.%<アプリ名>;
+   LIST @<root_location で得たパス>;
    ```
 4. Workspace（Projects > Streamlit）でソースコードを開いて読む
 
@@ -42,6 +42,7 @@ Step 4: 動作確認
 - アプリ名は何か？
 - どのデータベース・スキーマに作りたいか？
 - 新規作成か、既存アプリの修正か？
+- ソースコードはどこにあるか？（Git リポジトリ / ステージ / Workspace 上で直接作成）
 
 ### Step 2: 新規 or 更新を確認
 
@@ -51,7 +52,7 @@ Step 4: 動作確認
 |---------|--------|
 | **既存アプリに新ページ追加** | `pages/` ディレクトリに新ファイルを作成 |
 | **既存ページの修正** | 対象ファイルを直接編集 |
-| **新規アプリ作成** | エントリポイント + 設定ファイルを一式作成 |
+| **新規アプリ作成** | ソースの場所を確認してから作成 |
 
 ### Step 3: コード生成・編集
 
@@ -63,28 +64,18 @@ Step 4: 動作確認
 - `get_active_session()` でセッション取得
 - Plotly でチャート描画
 
-**新規アプリ作成の場合**:
+**新規アプリ作成 / 既存アプリの再デプロイの場合**:
 
-Workspace 上で直接作成を試みる:
-1. Snowsight → Projects → Streamlit → + Streamlit App
-2. エントリポイント（`main.py`）を作成
-3. `environment.yml` で依存パッケージを定義
-4. `.streamlit/config.toml` でテーマ設定
+`references/deploy.md` を読み込む。Step 1 の結果に応じてデプロイ方法を判断:
 
-Workspace 直接作成がうまくいかない場合は `references/stage-deploy.md` を読み込んでステージ経由で作成する。
-
-**Cortex AI 関数を使う場合**:
-
-以下のスキルと連携する:
-
-| やりたいこと | スキル |
+| Step 1 でわかったこと | デプロイ方法 |
 |---|---|
-| AI関数 (AI_COMPLETE, AI_AGG 等) | `$cortex-ai-functions` |
-| データ品質チェック | `$data-quality` |
-| リネージ確認 | `$lineage` |
-| コスト分析 | `$cost-intelligence` |
-| ガバナンス | `$data-governance` |
-| ML モデル連携 | `$machine-learning` |
+| Workspace 上にソースがある、かつ編集した可能性がある | Workspace → ステージ → CREATE STREAMLIT |
+| `DESCRIBE STREAMLIT` の `root_location` が `@GIT_REPO/...` | Git 経由で再デプロイ |
+| `SHOW GIT REPOSITORIES` で Git Integration が見つかった & コードがコミット済み | Git 経由で新規デプロイ |
+| 不明 | **ユーザに聞く** |
+
+> Workspace → ステージ経由が CoCo Snowsight での標準フロー。全て SQL で完結し手動操作は不要。
 
 ### Step 4: 動作確認
 
