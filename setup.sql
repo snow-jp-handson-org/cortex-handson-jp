@@ -1,63 +1,154 @@
-// Step1: テーブル作成 //
+/*
+================================================================================
+Snowflake EC Analytics - 環境セットアップスクリプト
+================================================================================
 
--- ロールの指定
+【概要】
+このスクリプトは、ECサイト分析用のデータベース環境を構築します。
+
+【処理内容】
+1. ウェアハウスなどの環境設定
+2. データベースとスキーマの作成
+3. ステージの作成（データ格納用）
+4. GitHub連携の設定（API統合とGitリポジトリ）
+5. GitHubからデータファイルの自動取得
+6. Streamlit in Snowflake アプリのデプロイ
+7. Snowflake Intelligence オブジェクトの作成
+
+【データソース】
+GitHub Repository: https://github.com/snow-jp-handson-org/cortex-handson-jp
+
+【実行方法】
+このスクリプト全体を選択してSnowflakeで実行してください。
+
+【所要時間】
+約1分
+
+【次のステップ】
+セットアップ完了後、part1_data_ingest.ipynb でデータのインポートを実行してください。
+
+================================================================================
+*/
+
+-- ============================================================================
+-- Step 1: 環境設定
+-- ============================================================================
+-- 管理者ロールとコンピュートウェアハウスを使用
 USE ROLE ACCOUNTADMIN;
-USE WAREHOUSE COMPUTE_WH;
+
+-- クロスリージョンコールのパラメータを有効化
+ALTER ACCOUNT SET CORTEX_ENABLED_CROSS_REGION = 'ANY_REGION';
+
+-- ウェアハウスの用意
+CREATE WAREHOUSE IF NOT EXISTS GLACIERSTYLE_WH;
+USE WAREHOUSE GLACIERSTYLE_WH;
+
+SELECT '【Step 1】環境設定が完了しました' AS status;
 
 
-// Step2: 各種オブジェクトの作成 //
+-- ============================================================================
+-- Step 2: データベースとスキーマの作成
+-- ============================================================================
+-- ECアナリティクス用のデータベースとスキーマを作成
+CREATE OR REPLACE DATABASE GLACIERSTYLE_DB;
+CREATE OR REPLACE SCHEMA GLACIERSTYLE_DB.EC_ANALYTICS_SCHEMA;
+USE SCHEMA GLACIERSTYLE_DB.EC_ANALYTICS_SCHEMA;
 
--- データベースの作成
-CREATE OR REPLACE DATABASE SNOWRETAIL_DB;
--- スキーマの作成
-CREATE OR REPLACE SCHEMA SNOWRETAIL_DB.SNOWRETAIL_SCHEMA;
--- スキーマの指定
-USE SCHEMA SNOWRETAIL_DB.SNOWRETAIL_SCHEMA;
-
--- ステージの作成
-CREATE OR REPLACE STAGE SNOWRETAIL_DB.SNOWRETAIL_SCHEMA.FILE encryption = (type = 'snowflake_sse') DIRECTORY = (ENABLE = TRUE);
-CREATE OR REPLACE STAGE SNOWRETAIL_DB.SNOWRETAIL_SCHEMA.PDF encryption = (type = 'snowflake_sse') DIRECTORY = (ENABLE = TRUE);
-CREATE OR REPLACE STAGE SNOWRETAIL_DB.SNOWRETAIL_SCHEMA.SEMANTIC_MODEL_STAGE encryption = (type = 'snowflake_sse') DIRECTORY = (ENABLE = TRUE);
+SELECT '【Step 2】データベースとスキーマの作成が完了しました' AS status;
 
 
-// Step3: 公開されているGitからデータとスクリプトを取得 //
+-- ============================================================================
+-- Step 3: データステージの作成
+-- ============================================================================
+-- CSVファイルを格納するためのステージを作成（暗号化有効）
+CREATE OR REPLACE STAGE GLACIERSTYLE_DB.EC_ANALYTICS_SCHEMA.DATA_STAGE 
+  encryption = (type = 'snowflake_sse') 
+  DIRECTORY = (ENABLE = TRUE);
 
--- Git連携のため、API統合を作成する
+CREATE OR REPLACE STAGE GLACIERSTYLE_DB.EC_ANALYTICS_SCHEMA.EXTRACTED_IMAGES_STAGE 
+  encryption = (type = 'snowflake_sse') 
+  DIRECTORY = (ENABLE = TRUE);
+
+
+SELECT '【Step 3】データステージの作成が完了しました' AS status;
+
+
+-- ============================================================================
+-- Step 4: GitHub連携の設定
+-- ============================================================================
+-- GitHubからデータを取得するためのAPI統合を作成
 CREATE OR REPLACE API INTEGRATION git_api_integration
   API_PROVIDER = git_https_api
   API_ALLOWED_PREFIXES = ('https://github.com/snow-jp-handson-org/')
   ENABLED = TRUE;
 
--- GIT統合の作成
+-- Gitリポジトリとの統合を作成
 CREATE OR REPLACE GIT REPOSITORY GIT_INTEGRATION_FOR_HANDSON
   API_INTEGRATION = git_api_integration
   ORIGIN = 'https://github.com/snow-jp-handson-org/cortex-handson-jp.git';
 
--- チェックする
-ls @GIT_INTEGRATION_FOR_HANDSON/branches/main;
+SELECT '【Step 4】GitHub連携の設定が完了しました' AS status;
 
--- Githubからファイルを持ってくる
-COPY FILES INTO @SNOWRETAIL_DB.SNOWRETAIL_SCHEMA.FILE FROM @GIT_INTEGRATION_FOR_HANDSON/branches/main/data/ PATTERN ='.*\\.csv$';
-COPY FILES INTO @SNOWRETAIL_DB.SNOWRETAIL_SCHEMA.PDF FROM @GIT_INTEGRATION_FOR_HANDSON/branches/main/data/ PATTERN = '.*\\.pdf$';
-COPY FILES INTO @SNOWRETAIL_DB.SNOWRETAIL_SCHEMA.SEMANTIC_MODEL_STAGE FROM @GIT_INTEGRATION_FOR_HANDSON/branches/main/handson2/sales_analysis_model.yaml;
 
-// Step4: NotebookとStreamlitを作成 //
+-- ============================================================================
+-- Step 5: GitHubからデータファイルの取得
+-- ============================================================================
+-- リポジトリの内容を確認
+ls @GIT_INTEGRATION_FOR_HANDSON/branches/main_v2;
 
--- Notebookの作成
-CREATE OR REPLACE NOTEBOOK cortex_handson_part1
-    FROM @GIT_INTEGRATION_FOR_HANDSON/branches/main/handson1
-    MAIN_FILE = 'cortex_handson_seminar_part1.ipynb'
-    QUERY_WAREHOUSE = COMPUTE_WH
-    WAREHOUSE = COMPUTE_WH;
+-- GitHubのdataディレクトリからすべてのファイルをステージにコピー
+COPY FILES 
+  INTO @GLACIERSTYLE_DB.EC_ANALYTICS_SCHEMA.DATA_STAGE 
+  FROM @GIT_INTEGRATION_FOR_HANDSON/branches/main_v2/data/;
 
--- Streamlit in Snowflakeの作成
-CREATE OR REPLACE STREAMLIT sis_snowretail_analysis_dev
-    FROM @GIT_INTEGRATION_FOR_HANDSON/branches/main/handson2/dev
-    MAIN_FILE = 'mainpage.py'
-    QUERY_WAREHOUSE = COMPUTE_WH;
+-- ステージ内のファイルを確認
+ls @GLACIERSTYLE_DB.EC_ANALYTICS_SCHEMA.DATA_STAGE;
 
--- (Option) MVP版のStreamlit in Snowflakeの作成
--- CREATE OR REPLACE STREAMLIT sis_snowretail_analysis_mvp
---     FROM @GIT_INTEGRATION_FOR_HANDSON/branches/main/handson2/mvp
---     MAIN_FILE = 'mainpage.py'
---     QUERY_WAREHOUSE = COMPUTE_WH;
+SELECT '【Step 5】GitHubからのデータ取得が完了しました' AS status;
+
+
+-- ============================================================================
+-- Step 6: Streamlit in Snowflake アプリのデプロイ
+-- ============================================================================
+-- Glacier Creative Studio アプリをデプロイ
+-- GitHubからStreamlitアプリのファイルを取得してデプロイ
+
+CREATE OR REPLACE STREAMLIT GLACIER_CREATIVE_STUDIO
+    FROM @GIT_INTEGRATION_FOR_HANDSON/branches/main_v2/streamlit_app
+    MAIN_FILE = 'main.py'
+    QUERY_WAREHOUSE = GLACIERSTYLE_WH
+    COMMENT = 'GLACIER CREATIVE STUDIO - 広告クリエイティブ分析・企画支援プラットフォーム';
+
+-- Streamlitアプリへのアクセス権を付与（必要に応じて）
+-- GRANT USAGE ON STREAMLIT GLACIER_CREATIVE_STUDIO TO ROLE <your_role>;
+
+SELECT '【Step 6】Streamlit in Snowflakeアプリのデプロイが完了しました' AS status;
+
+
+-- ============================================================================
+-- Step 7: Snowflake Intelligence オブジェクトの作成
+-- ============================================================================
+
+CREATE OR REPLACE SNOWFLAKE INTELLIGENCE SNOWFLAKE_INTELLIGENCE_OBJECT_DEFAULT;
+
+SELECT '【Step 7】Snowflake Intelligenceのオブジェクト作成が完了しました' AS status;
+
+-- ============================================================================
+-- 完了メッセージ
+-- ============================================================================
+SELECT '
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+✅ 環境セットアップが完了しました！
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+✅ データベース: GLACIERSTYLE_DB
+✅ スキーマ: EC_ANALYTICS_SCHEMA
+✅ ステージ: DATA_STAGE（データファイル格納済み）
+✅ GitHub連携: GIT_INTEGRATION_FOR_HANDSON
+✅ Streamlitアプリ: GLACIER_CREATIVE_STUDIO
+
+【次のステップ】
+part1_data_ingest.ipynb を開いてデータのインポートを実行してください。
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+' AS "✅ セットアップ完了";
