@@ -94,12 +94,12 @@ SELECT '【Step 4】GitHub連携の設定が完了しました' AS status;
 -- Step 5: GitHubからデータファイルの取得
 -- ============================================================================
 -- リポジトリの内容を確認
-ls @GIT_INTEGRATION_FOR_HANDSON/branches/main_v2;
+ls @GIT_INTEGRATION_FOR_HANDSON/branches/main;
 
 -- GitHubのdataディレクトリからすべてのファイルをステージにコピー
 COPY FILES 
   INTO @GLACIERSTYLE_DB.EC_ANALYTICS_SCHEMA.DATA_STAGE 
-  FROM @GIT_INTEGRATION_FOR_HANDSON/branches/main_v2/data/;
+  FROM @GIT_INTEGRATION_FOR_HANDSON/branches/main/data/;
 
 -- ステージ内のファイルを確認
 ls @GLACIERSTYLE_DB.EC_ANALYTICS_SCHEMA.DATA_STAGE;
@@ -114,7 +114,7 @@ SELECT '【Step 5】GitHubからのデータ取得が完了しました' AS stat
 -- GitHubからStreamlitアプリのファイルを取得してデプロイ
 
 CREATE OR REPLACE STREAMLIT GLACIER_CREATIVE_STUDIO
-    FROM @GIT_INTEGRATION_FOR_HANDSON/branches/main_v2/streamlit_app
+    FROM @GIT_INTEGRATION_FOR_HANDSON/branches/main/streamlit_app
     MAIN_FILE = 'main.py'
     QUERY_WAREHOUSE = GLACIERSTYLE_WH
     COMMENT = 'GLACIER CREATIVE STUDIO - 広告クリエイティブ分析・企画支援プラットフォーム';
