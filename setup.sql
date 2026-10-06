@@ -117,6 +117,7 @@ CREATE OR REPLACE STREAMLIT GLACIER_CREATIVE_STUDIO
     FROM @GIT_INTEGRATION_FOR_HANDSON/branches/main/streamlit_app
     MAIN_FILE = 'main.py'
     QUERY_WAREHOUSE = GLACIERSTYLE_WH
+    RUNTIME_NAME = 'SYSTEM$WAREHOUSE_RUNTIME'  -- environment.yml を使うためウェアハウスランタイムを明示
     COMMENT = 'GLACIER CREATIVE STUDIO - 広告クリエイティブ分析・企画支援プラットフォーム';
 
 -- Streamlitアプリへのアクセス権を付与（必要に応じて）
