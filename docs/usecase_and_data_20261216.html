@@ -80,7 +80,7 @@ ul { padding-left:1.3em; }
 <li><strong>逆算したデータ</strong>：そのために配布するデータソースと、ハンズオン中に作るテーブル（Cortex Search 用の統合チャンクテーブルを含む）</li>
 <li><strong>Cortex Search の見せ方</strong>：属性列で絞り込めることを、ユースケースの軸に置く</li>
 </ul>
-<div class="callout">前提：全体4時間のうち実作業180分、Snowflake初心者を含む、AIクレジット $40 以内。データの期間は <strong>2026年6月〜11月</strong>。題材は <strong>EC構造化データ・コールセンター通話・PDF</strong> の3種に絞る（再構成案のとおり）。</div>
+<div class="callout">前提：全体4時間のうち実作業180分、Snowflake初心者を含む、AIクレジット $40 以内。データの期間は <strong>2026年6月〜11月</strong>。題材は <strong>EC構造化データ・コールセンター通話・PDF</strong> の3種に絞る（再構成案のとおり）。SNS と広告は Part2 の補足パートとして残す（8章）。</div>
 
 <h2 id="values">2. 本ハンズオンで伝えたい7つの価値</h2>
 <p class="sub">再構成案（2026-11-13）の確定版。右側は、本資料のどのユースケース・シーンで見せるか。</p>
@@ -334,6 +334,7 @@ SELECT SNOWFLAKE.CORTEX.SEARCH_PREVIEW('KNOWLEDGE_SEARCH', '{
 <p class="sub">色の凡例：灰＝元データ（setup・ステージ）／青＝参加者が作るテーブル／緑＝サービス（セマンティックビュー・Search・Agent）／橙＝利用者の画面（Dashboards・CoWork）。各箱の2行目は使う機能。</p>
 
 <h2 id="sources">8. データソース一覧（配布するもの）</h2>
+<h3>本編</h3>
 <div class="table-wrap"><table>
 <thead><tr><th>種別</th><th>ファイル</th><th>件数（生成結果）</th><th>主な内容</th><th>状態</th></tr></thead>
 <tbody>
@@ -349,8 +350,25 @@ SELECT SNOWFLAKE.CORTEX.SEARCH_PREVIEW('KNOWLEDGE_SEARCH', '{
 <tr><td>PDF</td><td><code>documents/store_report_202606.pdf</code> 〜 <code>202611</code></td><td>6本</td><td>店舗運営部。店舗別売上の表と所感（UC5）</td><td class="new">新規</td></tr>
 <tr><td>正解</td><td><code>tools/expected_document_attributes.csv</code></td><td>11行</td><td>PDF の属性の正解。AI_EXTRACT の結果の確認用で、参加者には配布しない</td><td class="new">新規</td></tr>
 <tr><td>生成</td><td><code>tools/generate_data.py</code>, <code>tools/generate_pdfs.py</code></td><td>—</td><td>固定シードで再生成できる。シグナルを assert で確認</td><td class="new">新規</td></tr>
-<tr><td colspan="4"><code>sns_logs.json</code>, <code>web_logs.json</code>, <code>ad_creatives.csv</code>, <code>ad_images/</code>, <code>payments.csv</code></td><td class="del">このブランチで削除</td></tr>
 </tbody></table></div>
+
+<h3 id="sources-extra">補足パート用（Part2「Cortex AI 関数」の補足。時間が余った人向け）</h3>
+<p class="sub">本編のテーブルからは参照しない（補足を飛ばしても後のパートでエラーにならない）。日付は本編に合わせて2026年に変更済み。</p>
+<div class="table-wrap"><table>
+<thead><tr><th>ファイル</th><th>件数</th><th>見せる AI 関数</th><th>新データへの合わせ方</th></tr></thead>
+<tbody>
+<tr><td><code>sns_logs.json</code></td><td>265件（2026/10/15〜11/30）</td><td>AI_SENTIMENT、AI_CLASSIFY、AI_EXTRACT</td><td>言及商品を新しい商品マスタの名前に置換。LEDデスクライト 調光式 の「ちらつき」の声を8件含み、本編のストーリーとつながる（<code>tools/convert_sns_logs.py</code>）</td></tr>
+<tr><td><code>ad_creatives.csv</code>、<code>ad_images/</code>（画像15枚）</td><td>15件（2026/10〜11）</td><td>画像の解析（AI_COMPLETE に画像を渡す）、AI_CLASSIFY</td><td>配信期間とIDのみ2026年に変更。商品名と画像は画像と一体のため変更していない（新しい商品マスタにない商品も含む）</td></tr>
+</tbody></table></div>
+
+<h3>削除したデータ</h3>
+<div class="table-wrap"><table>
+<thead><tr><th>ファイル</th><th>前回の用途</th><th>削除した理由</th></tr></thead>
+<tbody>
+<tr><td><code>web_logs.json</code></td><td>Web アクセスログ</td><td>構造化データで AI 関数の補足にならない。商品ID・顧客IDが新しいデータと一致しない</td></tr>
+<tr><td><code>payments.csv</code></td><td>クレジット決済</td><td>構造化データで AI 関数と関係がない。注文IDが新しいデータと一致しない</td></tr>
+</tbody></table></div>
+<p class="sub">削除の記録と復元方法は <code>docs/data_changes_20261216.md</code> に残している。元のファイルは main ブランチ（前回版）にある。</p>
 
 <h2 id="tables">9. 作成するテーブル</h2>
 <div class="table-wrap"><table>
