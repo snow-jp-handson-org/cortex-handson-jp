@@ -1,12 +1,12 @@
 [
   {
-    "post_id": "SNS-IG-2024-00086",
+    "post_id": "SNS-IG-2026-00086",
     "platform": "instagram",
     "post_type": "mention",
     "username": "@room_yuki",
     "display_name": "お部屋づくりYuki",
-    "content": "スマートスピーカーのサイズ感が知りたい。実際に使ってる人教えて〜",
-    "posted_at": "2024-12-01T08:09:00+09:00",
+    "content": "アロマディフューザーセットのサイズ感が知りたい。実際に使ってる人教えて〜",
+    "posted_at": "2026-10-15T21:16:00+09:00",
     "likes": 90,
     "retweets": 0,
     "replies": 15,
@@ -17,18 +17,18 @@
       "テック"
     ],
     "mentioned_products": [
-      "スマートスピーカー"
+      "アロマディフューザーセット"
     ],
     "media_urls": []
   },
   {
-    "post_id": "SNS-IG-2024-00192",
+    "post_id": "SNS-IG-2026-00192",
     "platform": "instagram",
     "post_type": "post",
     "username": "@room_daiki",
     "display_name": "お部屋づくりDaiki",
-    "content": "オーガニックコットンTシャツ、期待以上でした✨ リピート決定 #グレイシャースタイル #買ってよかった",
-    "posted_at": "2024-12-01T10:31:00+09:00",
+    "content": "ガーゼパジャマ、期待以上でした✨ リピート決定 #グレイシャースタイル #買ってよかった",
+    "posted_at": "2026-10-16T03:27:00+09:00",
     "likes": 1907,
     "retweets": 0,
     "replies": 69,
@@ -39,20 +39,20 @@
       "グレイシャースタイル"
     ],
     "mentioned_products": [
-      "オーガニックコットンTシャツ"
+      "ガーゼパジャマ"
     ],
     "media_urls": [
       "https://example.com/img/user_post_192.jpg"
     ]
   },
   {
-    "post_id": "SNS-TW-2024-00208",
+    "post_id": "SNS-TW-2026-00208",
     "platform": "twitter",
     "post_type": "post",
     "username": "@simple_life_misaki",
     "display_name": "シンプルライフMisaki",
-    "content": "【レビュー】グレイシャースタイルの北欧風フロアライト使ってみた。\n\n良い点👍\n・デザインが良い\n・機能性◎\n\n気になる点👎\n・サイズがちょっと大きい\n\n総合: 4/5 #グレイシャースタイル #レビュー",
-    "posted_at": "2024-12-01T10:37:00+09:00",
+    "content": "【レビュー】グレイシャースタイルのウッドフロアライト使ってみた。\n\n良い点👍\n・デザインが良い\n・機能性◎\n\n気になる点👎\n・サイズがちょっと大きい\n\n総合: 4/5 #グレイシャースタイル #レビュー",
+    "posted_at": "2026-10-16T03:43:00+09:00",
     "likes": 502,
     "retweets": 49,
     "replies": 62,
@@ -65,37 +65,37 @@
       "レビュー"
     ],
     "mentioned_products": [
-      "北欧風フロアライト"
+      "ウッドフロアライト"
     ],
     "media_urls": [
       "https://example.com/img/review_208.jpg"
     ]
   },
   {
-    "post_id": "SNS-TW-2024-00008",
+    "post_id": "SNS-TW-2026-00008",
     "platform": "twitter",
     "post_type": "mention",
     "username": "@gift_yuji",
     "display_name": "ギフト探しYuji",
-    "content": "オーガニックコットンTシャツって重さはどのくらいですか？ 誰か知ってる人いますか？ #グレイシャースタイル",
-    "posted_at": "2024-12-01T10:56:00+09:00",
+    "content": "ガーゼパジャマって重さはどのくらいですか？ 誰か知ってる人いますか？ #グレイシャースタイル",
+    "posted_at": "2026-10-16T04:32:00+09:00",
     "likes": 2,
     "retweets": 0,
     "replies": 1,
     "hashtags": [],
     "mentioned_products": [
-      "オーガニックコットンTシャツ"
+      "ガーゼパジャマ"
     ],
     "media_urls": []
   },
   {
-    "post_id": "SNS-TW-2024-00203",
+    "post_id": "SNS-TW-2026-00203",
     "platform": "twitter",
     "post_type": "mention",
     "username": "@gift_mai",
     "display_name": "ギフト探しMai",
-    "content": "グレイシャースタイルの収納ボックスセットと収納付きデスクで悩み中…アドバイス求む！",
-    "posted_at": "2024-12-01T13:49:00+09:00",
+    "content": "グレイシャースタイルのファブリック収納ボックス 3個組と収納付きデスクで悩み中…アドバイス求む！",
+    "posted_at": "2026-10-16T12:04:00+09:00",
     "likes": 20,
     "retweets": 12,
     "replies": 17,
@@ -106,18 +106,18 @@
       "グレイシャースタイル"
     ],
     "mentioned_products": [
-      "収納ボックスセット"
+      "ファブリック収納ボックス 3個組"
     ],
     "media_urls": []
   },
   {
-    "post_id": "SNS-TW-2024-00134",
+    "post_id": "SNS-TW-2026-00134",
     "platform": "twitter",
     "post_type": "mention",
     "username": "@review_akiko",
     "display_name": "レビュワーAkiko",
     "content": "@GlacierStyle_JP 注文番号ORD-2024-79417832の件で問い合わせです。返品の手続きについて教えてください",
-    "posted_at": "2024-12-01T13:54:00+09:00",
+    "posted_at": "2026-10-16T12:17:00+09:00",
     "likes": 18,
     "retweets": 0,
     "replies": 4,
@@ -126,13 +126,13 @@
     "media_urls": []
   },
   {
-    "post_id": "SNS-IG-2024-00042",
+    "post_id": "SNS-IG-2026-00042",
     "platform": "instagram",
     "post_type": "mention",
     "username": "@office_takeshi",
     "display_name": "オフィスワークTakeshi",
-    "content": "プレミアムカシミヤセーター、どうしようか迷ってる🤔 使ってる人いる？ #グレイシャースタイル",
-    "posted_at": "2024-12-01T16:38:00+09:00",
+    "content": "カシミヤマフラー、どうしようか迷ってる🤔 使ってる人いる？ #グレイシャースタイル",
+    "posted_at": "2026-10-16T19:25:00+09:00",
     "likes": 48,
     "retweets": 0,
     "replies": 6,
@@ -142,18 +142,18 @@
       "グレイシャースタイル"
     ],
     "mentioned_products": [
-      "プレミアムカシミヤセーター"
+      "カシミヤマフラー"
     ],
     "media_urls": []
   },
   {
-    "post_id": "SNS-TW-2024-00189",
+    "post_id": "SNS-TW-2026-00189",
     "platform": "twitter",
     "post_type": "mention",
     "username": "@home_yuji",
     "display_name": "Yujiのマイホーム記録",
-    "content": "グレイシャースタイルの吊り下げペンダントライト、デザインも機能も◎ 毎日使うのが楽しみ",
-    "posted_at": "2024-12-01T19:02:00+09:00",
+    "content": "グレイシャースタイルのガラスシェードペンダント、デザインも機能も◎ 毎日使うのが楽しみ",
+    "posted_at": "2026-10-17T01:41:00+09:00",
     "likes": 2778,
     "retweets": 154,
     "replies": 46,
@@ -165,20 +165,20 @@
       "ガジェット"
     ],
     "mentioned_products": [
-      "吊り下げペンダントライト"
+      "ガラスシェードペンダント"
     ],
     "media_urls": [
       "https://example.com/img/user_post_189.jpg"
     ]
   },
   {
-    "post_id": "SNS-TW-2024-00255",
+    "post_id": "SNS-TW-2026-00255",
     "platform": "twitter",
     "post_type": "mention",
     "username": "@fashion_hiroshi",
     "display_name": "ファッションHiroshi",
-    "content": "リネンシャツのサイズ感が知りたい。実際に使ってる人教えて〜",
-    "posted_at": "2024-12-01T22:05:00+09:00",
+    "content": "フランネルパジャマのサイズ感が知りたい。実際に使ってる人教えて〜",
+    "posted_at": "2026-10-17T09:39:00+09:00",
     "likes": 99,
     "retweets": 2,
     "replies": 23,
@@ -189,18 +189,18 @@
       "北欧インテリア"
     ],
     "mentioned_products": [
-      "リネンシャツ"
+      "フランネルパジャマ"
     ],
     "media_urls": []
   },
   {
-    "post_id": "SNS-IG-2024-00089",
+    "post_id": "SNS-IG-2026-00089",
     "platform": "instagram",
     "post_type": "mention",
     "username": "@modern_emi",
     "display_name": "モダンリビングEmi",
     "content": "グレイシャースタイルのサイト、ページが重いで困ってる😭",
-    "posted_at": "2024-12-01T22:34:00+09:00",
+    "posted_at": "2026-10-17T10:55:00+09:00",
     "likes": 83,
     "retweets": 0,
     "replies": 7,
@@ -209,13 +209,13 @@
     "media_urls": []
   },
   {
-    "post_id": "SNS-TW-2024-00029",
+    "post_id": "SNS-TW-2026-00029",
     "platform": "twitter",
     "post_type": "mention",
     "username": "@gadget_satoshi",
     "display_name": "ガジェットSatoshi",
     "content": "@GlacierStyle_JP リネンシャツの耐久性について質問です。ギフトラッピングはできますか？",
-    "posted_at": "2024-12-02T07:50:00+09:00",
+    "posted_at": "2026-10-18T11:07:00+09:00",
     "likes": 6,
     "retweets": 0,
     "replies": 10,
@@ -224,38 +224,35 @@
     "media_urls": []
   },
   {
-    "post_id": "SNS-TW-2024-00038",
+    "post_id": "SNS-TW-2026-00038",
     "platform": "twitter",
     "post_type": "mention",
     "username": "@minimal_daiki",
     "display_name": "ミニマリストDaiki",
-    "content": "グレイシャースタイルでLED調光デスクライト買って正解だった👏 買って本当によかった",
-    "posted_at": "2024-12-02T08:27:00+09:00",
+    "content": "LEDデスクライト 調光式、明るさ最大にするとチカチカする。初期不良かな？",
+    "posted_at": "2026-10-18T12:43:00+09:00",
     "likes": 594,
     "retweets": 61,
     "replies": 30,
     "hashtags": [
-      "シンプルライフ",
-      "暮らし",
       "グレイシャースタイル",
-      "ミニマリスト",
-      "インテリア"
+      "デスクライト"
     ],
     "mentioned_products": [
-      "LED調光デスクライト"
+      "LEDデスクライト 調光式"
     ],
     "media_urls": [
       "https://example.com/img/user_post_038.jpg"
     ]
   },
   {
-    "post_id": "SNS-IG-2024-00145",
+    "post_id": "SNS-IG-2026-00145",
     "platform": "instagram",
     "post_type": "post",
     "username": "@minimal_akiko",
     "display_name": "ミニマリストAkiko",
-    "content": "【購入レビュー】モダンデスクライト ⭐5\nデザインがシンプルで使いやすい #GlacierStyle",
-    "posted_at": "2024-12-02T10:49:00+09:00",
+    "content": "【購入レビュー】LEDデスクライト 調光式 ⭐5\nデザインがシンプルで使いやすい #GlacierStyle",
+    "posted_at": "2026-10-18T18:54:00+09:00",
     "likes": 857,
     "retweets": 0,
     "replies": 75,
@@ -268,20 +265,20 @@
       "レビュー"
     ],
     "mentioned_products": [
-      "モダンデスクライト"
+      "LEDデスクライト 調光式"
     ],
     "media_urls": [
       "https://example.com/img/review_145.jpg"
     ]
   },
   {
-    "post_id": "SNS-TW-2024-00221",
+    "post_id": "SNS-TW-2026-00221",
     "platform": "twitter",
     "post_type": "mention",
     "username": "@design_rina",
     "display_name": "デザイン好きRina",
     "content": "@GlacierStyle_JP 注文番号ORD-2024-65685109の件で問い合わせです。配送状況を確認したいです",
-    "posted_at": "2024-12-02T12:41:00+09:00",
+    "posted_at": "2026-10-18T23:47:00+09:00",
     "likes": 25,
     "retweets": 0,
     "replies": 5,
@@ -290,13 +287,13 @@
     "media_urls": []
   },
   {
-    "post_id": "SNS-IG-2024-00012",
+    "post_id": "SNS-IG-2026-00012",
     "platform": "instagram",
     "post_type": "post",
     "username": "@gadget_emi",
     "display_name": "ガジェットEmi",
     "content": "母の日に北欧風ペンダントライトをプレゼント🎁 想像以上のクオリティ #グレイシャースタイル #ギフト",
-    "posted_at": "2024-12-02T13:45:00+09:00",
+    "posted_at": "2026-10-19T02:34:00+09:00",
     "likes": 750,
     "retweets": 0,
     "replies": 11,
@@ -315,13 +312,13 @@
     "media_urls": []
   },
   {
-    "post_id": "SNS-TW-2024-00222",
+    "post_id": "SNS-TW-2026-00222",
     "platform": "twitter",
     "post_type": "reply",
     "username": "@GlacierStyle_JP",
     "display_name": "GlacierStyle公式",
     "content": "@@design_rina お問い合わせありがとうございます。ご満足いただけて嬉しいです！素敵なお写真もありがとうございます📸",
-    "posted_at": "2024-12-02T13:47:00+09:00",
+    "posted_at": "2026-10-19T02:39:00+09:00",
     "likes": 10,
     "retweets": 0,
     "replies": 2,
@@ -330,13 +327,13 @@
     "media_urls": []
   },
   {
-    "post_id": "SNS-TW-2024-00130",
+    "post_id": "SNS-TW-2026-00130",
     "platform": "twitter",
     "post_type": "post",
     "username": "@simple_life_kenji",
     "display_name": "シンプルライフKenji",
-    "content": "グレイシャースタイルでオーガニックコットンTシャツ買って正解だった👏 部屋の雰囲気がガラッと変わった！",
-    "posted_at": "2024-12-02T13:57:00+09:00",
+    "content": "グレイシャースタイルでガーゼパジャマ買って正解だった👏 部屋の雰囲気がガラッと変わった！",
+    "posted_at": "2026-10-19T03:05:00+09:00",
     "likes": 1338,
     "retweets": 154,
     "replies": 28,
@@ -347,20 +344,20 @@
       "グレイシャースタイル"
     ],
     "mentioned_products": [
-      "オーガニックコットンTシャツ"
+      "ガーゼパジャマ"
     ],
     "media_urls": [
       "https://example.com/img/user_post_130.jpg"
     ]
   },
   {
-    "post_id": "SNS-TW-2024-00223",
+    "post_id": "SNS-TW-2026-00223",
     "platform": "twitter",
     "post_type": "mention",
     "username": "@work_from_home_yuko",
     "display_name": "在宅ワーカーYuko",
-    "content": "グレイシャースタイルのスマートスピーカー、デザインも機能も◎ SNSで見て気になってた",
-    "posted_at": "2024-12-02T14:04:00+09:00",
+    "content": "グレイシャースタイルのアロマディフューザーセット、デザインも機能も◎ SNSで見て気になってた",
+    "posted_at": "2026-10-19T03:23:00+09:00",
     "likes": 1077,
     "retweets": 146,
     "replies": 15,
@@ -371,20 +368,20 @@
       "グレイシャースタイル"
     ],
     "mentioned_products": [
-      "スマートスピーカー"
+      "アロマディフューザーセット"
     ],
     "media_urls": [
       "https://example.com/img/user_post_223.jpg"
     ]
   },
   {
-    "post_id": "SNS-TW-2024-00097",
+    "post_id": "SNS-TW-2026-00097",
     "platform": "twitter",
     "post_type": "mention",
     "username": "@nordic_hiroshi",
     "display_name": "北欧好きHiroshi",
     "content": "@GlacierStyle_JP 注文番号ORD-2024-96405909の件で問い合わせです。キャンセルは可能でしょうか",
-    "posted_at": "2024-12-02T14:58:00+09:00",
+    "posted_at": "2026-10-19T05:44:00+09:00",
     "likes": 16,
     "retweets": 0,
     "replies": 8,
@@ -393,30 +390,30 @@
     "media_urls": []
   },
   {
-    "post_id": "SNS-IG-2024-00227",
+    "post_id": "SNS-IG-2026-00227",
     "platform": "instagram",
     "post_type": "mention",
     "username": "@lifestyle_satoshi",
     "display_name": "Satoshi｜暮らしを楽しむ",
-    "content": "収納付きデスクの取っ手がすぐ外れたになった。品質大丈夫？",
-    "posted_at": "2024-12-02T16:27:00+09:00",
+    "content": "昇降式ワークデスクの取っ手がすぐ外れたになった。品質大丈夫？",
+    "posted_at": "2026-10-19T09:37:00+09:00",
     "likes": 80,
     "retweets": 0,
     "replies": 3,
     "hashtags": [],
     "mentioned_products": [
-      "収納付きデスク"
+      "昇降式ワークデスク"
     ],
     "media_urls": []
   },
   {
-    "post_id": "SNS-TW-2024-00009",
+    "post_id": "SNS-TW-2026-00009",
     "platform": "twitter",
     "post_type": "post",
     "username": "@room_yuki",
     "display_name": "お部屋づくりYuki",
-    "content": "【購入レビュー】デザインシーリングライト ⭐4\n買って本当によかった #GlacierStyle",
-    "posted_at": "2024-12-02T16:57:00+09:00",
+    "content": "【購入レビュー】ガラスシェードペンダント ⭐4\n買って本当によかった #GlacierStyle",
+    "posted_at": "2026-10-19T10:55:00+09:00",
     "likes": 994,
     "retweets": 67,
     "replies": 22,
@@ -429,20 +426,20 @@
       "レビュー"
     ],
     "mentioned_products": [
-      "デザインシーリングライト"
+      "ガラスシェードペンダント"
     ],
     "media_urls": [
       "https://example.com/img/review_009.jpg"
     ]
   },
   {
-    "post_id": "SNS-TW-2024-00013",
+    "post_id": "SNS-TW-2026-00013",
     "platform": "twitter",
     "post_type": "post",
     "username": "@gadget_kazuki",
     "display_name": "ガジェットKazuki",
-    "content": "ワイヤレスイヤホンProが届いた！ 思ってた以上にクオリティ高くて大満足😊 #GlacierStyle #グレイシャースタイル",
-    "posted_at": "2024-12-02T17:28:00+09:00",
+    "content": "トラベルポーチ 3点セットが届いた！ 思ってた以上にクオリティ高くて大満足😊 #GlacierStyle #グレイシャースタイル",
+    "posted_at": "2026-10-19T12:16:00+09:00",
     "likes": 663,
     "retweets": 131,
     "replies": 26,
@@ -452,20 +449,20 @@
       "テック"
     ],
     "mentioned_products": [
-      "ワイヤレスイヤホンPro"
+      "トラベルポーチ 3点セット"
     ],
     "media_urls": [
       "https://example.com/img/user_post_013.jpg"
     ]
   },
   {
-    "post_id": "SNS-TW-2024-00209",
+    "post_id": "SNS-TW-2026-00209",
     "platform": "twitter",
     "post_type": "mention",
     "username": "@minimal_daiki",
     "display_name": "ミニマリストDaiki",
-    "content": "デザインシーリングライトのサイズ感が知りたい。実際に使ってる人教えて〜",
-    "posted_at": "2024-12-02T19:13:00+09:00",
+    "content": "ガラスシェードペンダントのサイズ感が知りたい。実際に使ってる人教えて〜",
+    "posted_at": "2026-10-19T16:50:00+09:00",
     "likes": 89,
     "retweets": 14,
     "replies": 13,
@@ -477,18 +474,18 @@
       "インテリア"
     ],
     "mentioned_products": [
-      "デザインシーリングライト"
+      "ガラスシェードペンダント"
     ],
     "media_urls": []
   },
   {
-    "post_id": "SNS-IG-2024-00202",
+    "post_id": "SNS-IG-2026-00202",
     "platform": "instagram",
     "post_type": "story_mention",
     "username": "@home_daiki",
     "display_name": "Daikiのマイホーム記録",
-    "content": "グレイシャースタイルで買った収納ボックスセット、めちゃくちゃ良い✨ コスパ最高 #グレイシャースタイル",
-    "posted_at": "2024-12-02T19:37:00+09:00",
+    "content": "グレイシャースタイルで買ったファブリック収納ボックス 3個組、めちゃくちゃ良い✨ コスパ最高 #グレイシャースタイル",
+    "posted_at": "2026-10-19T17:53:00+09:00",
     "likes": 116,
     "retweets": 0,
     "replies": 62,
@@ -500,20 +497,20 @@
       "インテリア"
     ],
     "mentioned_products": [
-      "収納ボックスセット"
+      "ファブリック収納ボックス 3個組"
     ],
     "media_urls": [
       "https://example.com/img/user_post_202.jpg"
     ]
   },
   {
-    "post_id": "SNS-TW-2024-00046",
+    "post_id": "SNS-TW-2026-00046",
     "platform": "twitter",
     "post_type": "mention",
     "username": "@cozy_mami",
     "display_name": "コージーライフMami",
-    "content": "グレイシャースタイルでオーガニックコットンTシャツ買って正解だった👏 友達にも褒められた",
-    "posted_at": "2024-12-02T22:10:00+09:00",
+    "content": "グレイシャースタイルでガーゼパジャマ買って正解だった👏 友達にも褒められた",
+    "posted_at": "2026-10-20T00:32:00+09:00",
     "likes": 1271,
     "retweets": 169,
     "replies": 53,
@@ -524,18 +521,18 @@
       "スマートホーム"
     ],
     "mentioned_products": [
-      "オーガニックコットンTシャツ"
+      "ガーゼパジャマ"
     ],
     "media_urls": []
   },
   {
-    "post_id": "SNS-TW-2024-00094",
+    "post_id": "SNS-TW-2026-00094",
     "platform": "twitter",
     "post_type": "mention",
     "username": "@tech_emi",
     "display_name": "テック好きEmi",
-    "content": "グレイシャースタイルの北欧インテリア図鑑、デザインも機能も◎ ずっと探してたやつ",
-    "posted_at": "2024-12-02T22:23:00+09:00",
+    "content": "グレイシャースタイルのリングノート A5、デザインも機能も◎ ずっと探してたやつ",
+    "posted_at": "2026-10-20T01:06:00+09:00",
     "likes": 240,
     "retweets": 120,
     "replies": 29,
@@ -545,20 +542,20 @@
       "テック"
     ],
     "mentioned_products": [
-      "北欧インテリア図鑑"
+      "リングノート A5"
     ],
     "media_urls": [
       "https://example.com/img/user_post_094.jpg"
     ]
   },
   {
-    "post_id": "SNS-IG-2024-00177",
+    "post_id": "SNS-IG-2026-00177",
     "platform": "instagram",
     "post_type": "post",
     "username": "@simple_life_emi",
     "display_name": "シンプルライフEmi",
-    "content": "ずっと気になってた耐熱ガラスポット、ついにゲット🎉 家族も気に入ってる #グレイシャースタイル",
-    "posted_at": "2024-12-02T23:56:00+09:00",
+    "content": "ずっと気になってたダブルウォールグラス、ついにゲット🎉 家族も気に入ってる #グレイシャースタイル",
+    "posted_at": "2026-10-20T05:09:00+09:00",
     "likes": 2818,
     "retweets": 0,
     "replies": 31,
@@ -568,20 +565,20 @@
       "グレイシャースタイル"
     ],
     "mentioned_products": [
-      "耐熱ガラスポット"
+      "ダブルウォールグラス"
     ],
     "media_urls": [
       "https://example.com/img/user_post_177.jpg"
     ]
   },
   {
-    "post_id": "SNS-IG-2024-00117",
+    "post_id": "SNS-IG-2026-00117",
     "platform": "instagram",
     "post_type": "post",
     "username": "@office_yuko",
     "display_name": "オフィスワークYuko",
-    "content": "新築祝いにプレミアムカシミヤセーターをプレゼント🎁 コスパ最高 #グレイシャースタイル #ギフト",
-    "posted_at": "2024-12-03T07:19:00+09:00",
+    "content": "新築祝いにカシミヤマフラーをプレゼント🎁 コスパ最高 #グレイシャースタイル #ギフト",
+    "posted_at": "2026-10-21T00:26:00+09:00",
     "likes": 730,
     "retweets": 0,
     "replies": 27,
@@ -594,20 +591,20 @@
       "プレゼント"
     ],
     "mentioned_products": [
-      "プレミアムカシミヤセーター"
+      "カシミヤマフラー"
     ],
     "media_urls": [
       "https://example.com/img/gift_117.jpg"
     ]
   },
   {
-    "post_id": "SNS-TW-2024-00081",
+    "post_id": "SNS-TW-2026-00081",
     "platform": "twitter",
     "post_type": "post",
     "username": "@modern_sho",
     "display_name": "モダンリビングSho",
-    "content": "グレイシャースタイルのスマートスピーカー、デザインも機能も◎ 一目惚れして買った",
-    "posted_at": "2024-12-03T07:48:00+09:00",
+    "content": "グレイシャースタイルのアロマディフューザーセット、デザインも機能も◎ 一目惚れして買った",
+    "posted_at": "2026-10-21T01:42:00+09:00",
     "likes": 106,
     "retweets": 35,
     "replies": 11,
@@ -618,20 +615,20 @@
       "グレイシャースタイル"
     ],
     "mentioned_products": [
-      "スマートスピーカー"
+      "アロマディフューザーセット"
     ],
     "media_urls": [
       "https://example.com/img/user_post_081.jpg"
     ]
   },
   {
-    "post_id": "SNS-IG-2024-00006",
+    "post_id": "SNS-IG-2026-00006",
     "platform": "instagram",
     "post_type": "post",
     "username": "@design_megumi",
     "display_name": "デザイン好きMegumi",
-    "content": "セールで吊り下げペンダントライトをお得にゲット！ ずっと探してたやつ #グレイシャースタイル #お買い得",
-    "posted_at": "2024-12-03T08:41:00+09:00",
+    "content": "セールでガラスシェードペンダントをお得にゲット！ ずっと探してたやつ #グレイシャースタイル #お買い得",
+    "posted_at": "2026-10-21T04:00:00+09:00",
     "likes": 183,
     "retweets": 0,
     "replies": 67,
@@ -643,18 +640,18 @@
       "おしゃれ照明"
     ],
     "mentioned_products": [
-      "吊り下げペンダントライト"
+      "ガラスシェードペンダント"
     ],
     "media_urls": []
   },
   {
-    "post_id": "SNS-IG-2024-00167",
+    "post_id": "SNS-IG-2026-00167",
     "platform": "instagram",
     "post_type": "mention",
     "username": "@coffee_kazuki",
     "display_name": "コーヒー好きKazuki",
-    "content": "グレイシャースタイルのセールっていつ始まる？スタイリッシュデスクライト狙ってる",
-    "posted_at": "2024-12-03T08:51:00+09:00",
+    "content": "グレイシャースタイルのセールっていつ始まる？クリップ式LEDライト狙ってる",
+    "posted_at": "2026-10-21T04:26:00+09:00",
     "likes": 142,
     "retweets": 0,
     "replies": 17,
@@ -666,18 +663,18 @@
       "インテリア"
     ],
     "mentioned_products": [
-      "スタイリッシュデスクライト"
+      "クリップ式LEDライト"
     ],
     "media_urls": []
   },
   {
-    "post_id": "SNS-TW-2024-00010",
+    "post_id": "SNS-TW-2026-00010",
     "platform": "twitter",
     "post_type": "mention",
     "username": "@minimal_naomi",
     "display_name": "ミニマリストNaomi",
-    "content": "ずっと気になってたLED調光デスクライト、ついにゲット🎉 買って本当によかった #グレイシャースタイル",
-    "posted_at": "2024-12-03T11:07:00+09:00",
+    "content": "ずっと気になってたLEDデスクライト 調光式、ついにゲット🎉 買って本当によかった #グレイシャースタイル",
+    "posted_at": "2026-10-21T10:21:00+09:00",
     "likes": 2275,
     "retweets": 177,
     "replies": 56,
@@ -689,20 +686,20 @@
       "お買い物"
     ],
     "mentioned_products": [
-      "LED調光デスクライト"
+      "LEDデスクライト 調光式"
     ],
     "media_urls": [
       "https://example.com/img/user_post_010.jpg"
     ]
   },
   {
-    "post_id": "SNS-TW-2024-00019",
+    "post_id": "SNS-TW-2026-00019",
     "platform": "twitter",
     "post_type": "mention",
     "username": "@tech_mami",
     "display_name": "テック好きMami",
-    "content": "グレイシャースタイルのコーヒーメーカー、本当におすすめ！ 想像以上のクオリティ #インテリア好き",
-    "posted_at": "2024-12-03T11:44:00+09:00",
+    "content": "グレイシャースタイルの電気ケトル 0.8L、本当におすすめ！ 想像以上のクオリティ #インテリア好き",
+    "posted_at": "2026-10-21T11:58:00+09:00",
     "likes": 1347,
     "retweets": 162,
     "replies": 73,
@@ -712,20 +709,20 @@
       "グレイシャースタイル"
     ],
     "mentioned_products": [
-      "コーヒーメーカー"
+      "電気ケトル 0.8L"
     ],
     "media_urls": [
       "https://example.com/img/user_post_019.jpg"
     ]
   },
   {
-    "post_id": "SNS-TW-2024-00027",
+    "post_id": "SNS-TW-2026-00027",
     "platform": "twitter",
     "post_type": "mention",
     "username": "@modern_taro",
     "display_name": "モダンリビングTaro",
-    "content": "デザインシーリングライトのおかげで毎日が楽しくなった✨ グレイシャースタイル最高！",
-    "posted_at": "2024-12-03T13:15:00+09:00",
+    "content": "ガラスシェードペンダントのおかげで毎日が楽しくなった✨ グレイシャースタイル最高！",
+    "posted_at": "2026-10-21T15:55:00+09:00",
     "likes": 1914,
     "retweets": 138,
     "replies": 72,
@@ -737,20 +734,20 @@
       "おしゃれ照明"
     ],
     "mentioned_products": [
-      "デザインシーリングライト"
+      "ガラスシェードペンダント"
     ],
     "media_urls": [
       "https://example.com/img/user_post_027.jpg"
     ]
   },
   {
-    "post_id": "SNS-IG-2024-00135",
+    "post_id": "SNS-IG-2026-00135",
     "platform": "instagram",
     "post_type": "mention",
     "username": "@tech_mami",
     "display_name": "テック好きMami",
-    "content": "ずっと気になってたワイヤレスイヤホンPro、ついにゲット🎉 ずっと探してたやつ #グレイシャースタイル",
-    "posted_at": "2024-12-03T13:48:00+09:00",
+    "content": "ずっと気になってたトラベルポーチ 3点セット、ついにゲット🎉 ずっと探してたやつ #グレイシャースタイル",
+    "posted_at": "2026-10-21T17:22:00+09:00",
     "likes": 139,
     "retweets": 0,
     "replies": 80,
@@ -761,37 +758,37 @@
       "グレイシャースタイル"
     ],
     "mentioned_products": [
-      "ワイヤレスイヤホンPro"
+      "トラベルポーチ 3点セット"
     ],
     "media_urls": [
       "https://example.com/img/user_post_135.jpg"
     ]
   },
   {
-    "post_id": "SNS-TW-2024-00163",
+    "post_id": "SNS-TW-2026-00163",
     "platform": "twitter",
     "post_type": "mention",
     "username": "@interior_kazuki",
     "display_name": "Kazukiのインテリア日記",
-    "content": "北欧インテリア図鑑って他の色はありますか？ 誰か知ってる人いますか？ #グレイシャースタイル",
-    "posted_at": "2024-12-03T14:26:00+09:00",
+    "content": "リングノート A5って他の色はありますか？ 誰か知ってる人いますか？ #グレイシャースタイル",
+    "posted_at": "2026-10-21T19:01:00+09:00",
     "likes": 5,
     "retweets": 0,
     "replies": 7,
     "hashtags": [],
     "mentioned_products": [
-      "北欧インテリア図鑑"
+      "リングノート A5"
     ],
     "media_urls": []
   },
   {
-    "post_id": "SNS-TW-2024-00181",
+    "post_id": "SNS-TW-2026-00181",
     "platform": "twitter",
     "post_type": "mention",
     "username": "@gift_daiki",
     "display_name": "ギフト探しDaiki",
-    "content": "収納付きデスクのサイズ感が知りたい。実際に使ってる人教えて〜",
-    "posted_at": "2024-12-03T14:26:00+09:00",
+    "content": "昇降式ワークデスクのサイズ感が知りたい。実際に使ってる人教えて〜",
+    "posted_at": "2026-10-21T19:01:00+09:00",
     "likes": 78,
     "retweets": 0,
     "replies": 29,
@@ -803,18 +800,18 @@
       "北欧"
     ],
     "mentioned_products": [
-      "収納付きデスク"
+      "昇降式ワークデスク"
     ],
     "media_urls": []
   },
   {
-    "post_id": "SNS-TW-2024-00164",
+    "post_id": "SNS-TW-2026-00164",
     "platform": "twitter",
     "post_type": "reply",
     "username": "@GlacierStyle_JP",
     "display_name": "GlacierStyle公式",
     "content": "@@interior_kazuki ご不便をおかけし申し訳ございません。ご不明点がございましたら、いつでもお問い合わせください。",
-    "posted_at": "2024-12-03T16:09:00+09:00",
+    "posted_at": "2026-10-21T23:30:00+09:00",
     "likes": 17,
     "retweets": 0,
     "replies": 3,
@@ -823,13 +820,13 @@
     "media_urls": []
   },
   {
-    "post_id": "SNS-IG-2024-00182",
+    "post_id": "SNS-IG-2026-00182",
     "platform": "instagram",
     "post_type": "story_mention",
     "username": "@room_yuki",
     "display_name": "お部屋づくりYuki",
-    "content": "グレイシャースタイルでコーヒーメーカー買って正解だった👏 部屋の雰囲気がガラッと変わった！",
-    "posted_at": "2024-12-03T16:32:00+09:00",
+    "content": "グレイシャースタイルで電気ケトル 0.8L買って正解だった👏 部屋の雰囲気がガラッと変わった！",
+    "posted_at": "2026-10-22T00:30:00+09:00",
     "likes": 1959,
     "retweets": 0,
     "replies": 11,
@@ -839,37 +836,37 @@
       "グレイシャースタイル"
     ],
     "mentioned_products": [
-      "コーヒーメーカー"
+      "電気ケトル 0.8L"
     ],
     "media_urls": [
       "https://example.com/img/user_post_182.jpg"
     ]
   },
   {
-    "post_id": "SNS-TW-2024-00088",
+    "post_id": "SNS-TW-2026-00088",
     "platform": "twitter",
     "post_type": "mention",
     "username": "@minimal_mami",
     "display_name": "ミニマリストMami",
-    "content": "配送遅延でメリノウールカーディガンが届くの遅れてる。連絡もないし不安",
-    "posted_at": "2024-12-03T18:58:00+09:00",
+    "content": "配送遅延でウールストールが届くの遅れてる。連絡もないし不安",
+    "posted_at": "2026-10-22T06:51:00+09:00",
     "likes": 15,
     "retweets": 4,
     "replies": 14,
     "hashtags": [],
     "mentioned_products": [
-      "メリノウールカーディガン"
+      "ウールストール"
     ],
     "media_urls": []
   },
   {
-    "post_id": "SNS-TW-2024-00156",
+    "post_id": "SNS-TW-2026-00156",
     "platform": "twitter",
     "post_type": "post",
     "username": "@design_akiko",
     "display_name": "デザイン好きAkiko",
-    "content": "耐熱ガラスポットがお気に入りすぎる🥰 ずっと探してたやつ #GlacierStyle",
-    "posted_at": "2024-12-03T20:15:00+09:00",
+    "content": "ダブルウォールグラスがお気に入りすぎる🥰 ずっと探してたやつ #GlacierStyle",
+    "posted_at": "2026-10-22T10:12:00+09:00",
     "likes": 2431,
     "retweets": 11,
     "replies": 23,
@@ -879,20 +876,20 @@
       "グレイシャースタイル"
     ],
     "mentioned_products": [
-      "耐熱ガラスポット"
+      "ダブルウォールグラス"
     ],
     "media_urls": [
       "https://example.com/img/user_post_156.jpg"
     ]
   },
   {
-    "post_id": "SNS-TW-2024-00160",
+    "post_id": "SNS-TW-2026-00160",
     "platform": "twitter",
     "post_type": "mention",
     "username": "@interior_sho",
     "display_name": "Shoのインテリア日記",
-    "content": "グレイシャースタイルって送料いくらだっけ？北欧インテリア図鑑買いたいんだけど",
-    "posted_at": "2024-12-03T20:28:00+09:00",
+    "content": "グレイシャースタイルって送料いくらだっけ？リングノート A5買いたいんだけど",
+    "posted_at": "2026-10-22T10:46:00+09:00",
     "likes": 65,
     "retweets": 11,
     "replies": 31,
@@ -901,35 +898,35 @@
       "GlacierStyle"
     ],
     "mentioned_products": [
-      "北欧インテリア図鑑"
+      "リングノート A5"
     ],
     "media_urls": []
   },
   {
-    "post_id": "SNS-IG-2024-00247",
+    "post_id": "SNS-IG-2026-00247",
     "platform": "instagram",
     "post_type": "mention",
     "username": "@nordic_yuki",
     "display_name": "北欧好きYuki",
-    "content": "ウォールシェルフ、思ってたのと違った…返品できるかな",
-    "posted_at": "2024-12-03T20:35:00+09:00",
+    "content": "壁面ウッドシェルフ、思ってたのと違った…返品できるかな",
+    "posted_at": "2026-10-22T11:04:00+09:00",
     "likes": 28,
     "retweets": 0,
     "replies": 12,
     "hashtags": [],
     "mentioned_products": [
-      "ウォールシェルフ"
+      "壁面ウッドシェルフ"
     ],
     "media_urls": []
   },
   {
-    "post_id": "SNS-IG-2024-00043",
+    "post_id": "SNS-IG-2026-00043",
     "platform": "instagram",
     "post_type": "mention",
     "username": "@lifestyle_yuji",
     "display_name": "Yuji｜暮らしを楽しむ",
     "content": "ステンレスキッチンツールセット届いたけど、商品に欠品があった。対応してもらえるかな…",
-    "posted_at": "2024-12-03T22:11:00+09:00",
+    "posted_at": "2026-10-22T15:15:00+09:00",
     "likes": 83,
     "retweets": 0,
     "replies": 9,
@@ -938,13 +935,13 @@
     "media_urls": []
   },
   {
-    "post_id": "SNS-TW-2024-00091",
+    "post_id": "SNS-TW-2026-00091",
     "platform": "twitter",
     "post_type": "mention",
     "username": "@coffee_kazuki",
     "display_name": "コーヒー好きKazuki",
-    "content": "メリノウールカーディガン、在庫切れになってた…入荷いつかな",
-    "posted_at": "2024-12-03T23:19:00+09:00",
+    "content": "ウールストール、在庫切れになってた…入荷いつかな",
+    "posted_at": "2026-10-22T18:12:00+09:00",
     "likes": 112,
     "retweets": 18,
     "replies": 21,
@@ -955,18 +952,18 @@
       "グレイシャースタイル"
     ],
     "mentioned_products": [
-      "メリノウールカーディガン"
+      "ウールストール"
     ],
     "media_urls": []
   },
   {
-    "post_id": "SNS-TW-2024-00044",
+    "post_id": "SNS-TW-2026-00044",
     "platform": "twitter",
     "post_type": "reply",
     "username": "@GlacierStyle_JP",
     "display_name": "GlacierStyle公式",
     "content": "@@lifestyle_yuji この度はご連絡いただきありがとうございます。またのご利用をお待ちしております✨",
-    "posted_at": "2024-12-03T23:27:00+09:00",
+    "posted_at": "2026-10-22T18:33:00+09:00",
     "likes": 3,
     "retweets": 0,
     "replies": 2,
@@ -975,13 +972,13 @@
     "media_urls": []
   },
   {
-    "post_id": "SNS-TW-2024-00150",
+    "post_id": "SNS-TW-2026-00150",
     "platform": "twitter",
     "post_type": "post",
     "username": "@tech_yuki",
     "display_name": "テック好きYuki",
-    "content": "グレイシャースタイルで彼氏への新築祝いプレゼント選び中💝 耐熱ガラスポット良さそう！",
-    "posted_at": "2024-12-03T23:33:00+09:00",
+    "content": "グレイシャースタイルで彼氏への新築祝いプレゼント選び中💝 ダブルウォールグラス良さそう！",
+    "posted_at": "2026-10-22T18:49:00+09:00",
     "likes": 459,
     "retweets": 7,
     "replies": 29,
@@ -993,37 +990,37 @@
       "プレゼント"
     ],
     "mentioned_products": [
-      "耐熱ガラスポット"
+      "ダブルウォールグラス"
     ],
     "media_urls": [
       "https://example.com/img/gift_150.jpg"
     ]
   },
   {
-    "post_id": "SNS-TW-2024-00239",
+    "post_id": "SNS-TW-2026-00239",
     "platform": "twitter",
     "post_type": "mention",
     "username": "@nordic_hiroshi",
     "display_name": "北欧好きHiroshi",
-    "content": "グレイシャースタイルのモダンデスクライト、設置は簡単ですか？",
-    "posted_at": "2024-12-04T07:45:00+09:00",
+    "content": "グレイシャースタイルのLEDデスクライト 調光式、設置は簡単ですか？",
+    "posted_at": "2026-10-23T16:14:00+09:00",
     "likes": 20,
     "retweets": 0,
     "replies": 9,
     "hashtags": [],
     "mentioned_products": [
-      "モダンデスクライト"
+      "LEDデスクライト 調光式"
     ],
     "media_urls": []
   },
   {
-    "post_id": "SNS-TW-2024-00144",
+    "post_id": "SNS-TW-2026-00144",
     "platform": "twitter",
     "post_type": "post",
     "username": "@gift_emi",
     "display_name": "ギフト探しEmi",
-    "content": "ウォールシェルフが届いた！ 思ってた以上にクオリティ高くて大満足😊 #GlacierStyle #グレイシャースタイル",
-    "posted_at": "2024-12-04T08:07:00+09:00",
+    "content": "壁面ウッドシェルフが届いた！ 思ってた以上にクオリティ高くて大満足😊 #GlacierStyle #グレイシャースタイル",
+    "posted_at": "2026-10-23T17:11:00+09:00",
     "likes": 1842,
     "retweets": 21,
     "replies": 71,
@@ -1035,18 +1032,18 @@
       "インテリア"
     ],
     "mentioned_products": [
-      "ウォールシェルフ"
+      "壁面ウッドシェルフ"
     ],
     "media_urls": []
   },
   {
-    "post_id": "SNS-IG-2024-00107",
+    "post_id": "SNS-IG-2026-00107",
     "platform": "instagram",
     "post_type": "story_mention",
     "username": "@coffee_akiko",
     "display_name": "コーヒー好きAkiko",
-    "content": "グレイシャースタイルのワイヤレスイヤホンPro、本当におすすめ！ SNSで見て気になってた #インテリア好き",
-    "posted_at": "2024-12-04T14:25:00+09:00",
+    "content": "グレイシャースタイルのトラベルポーチ 3点セット、本当におすすめ！ SNSで見て気になってた #インテリア好き",
+    "posted_at": "2026-10-24T09:38:00+09:00",
     "likes": 2123,
     "retweets": 0,
     "replies": 25,
@@ -1057,18 +1054,18 @@
       "テック"
     ],
     "mentioned_products": [
-      "ワイヤレスイヤホンPro"
+      "トラベルポーチ 3点セット"
     ],
     "media_urls": []
   },
   {
-    "post_id": "SNS-IG-2024-00241",
+    "post_id": "SNS-IG-2026-00241",
     "platform": "instagram",
     "post_type": "story_mention",
     "username": "@office_emi",
     "display_name": "オフィスワークEmi",
-    "content": "リネンシャツ、期待以上でした✨ コスパ最高 #グレイシャースタイル #買ってよかった",
-    "posted_at": "2024-12-04T16:49:00+09:00",
+    "content": "フランネルパジャマ、期待以上でした✨ コスパ最高 #グレイシャースタイル #買ってよかった",
+    "posted_at": "2026-10-24T15:54:00+09:00",
     "likes": 1971,
     "retweets": 0,
     "replies": 35,
@@ -1079,20 +1076,20 @@
       "グレイシャースタイル"
     ],
     "mentioned_products": [
-      "リネンシャツ"
+      "フランネルパジャマ"
     ],
     "media_urls": [
       "https://example.com/img/user_post_241.jpg"
     ]
   },
   {
-    "post_id": "SNS-TW-2024-00016",
+    "post_id": "SNS-TW-2026-00016",
     "platform": "twitter",
     "post_type": "mention",
     "username": "@review_kazuki",
     "display_name": "レビュワーKazuki",
     "content": "配送遅延でオーガニックコットンTシャツが届くの遅れてる。連絡もないし不安",
-    "posted_at": "2024-12-04T18:59:00+09:00",
+    "posted_at": "2026-10-24T21:34:00+09:00",
     "likes": 64,
     "retweets": 17,
     "replies": 14,
@@ -1101,13 +1098,13 @@
     "media_urls": []
   },
   {
-    "post_id": "SNS-TW-2024-00022",
+    "post_id": "SNS-TW-2026-00022",
     "platform": "twitter",
     "post_type": "post",
     "username": "@eco_haruka",
     "display_name": "エコライフHaruka",
-    "content": "【購入レビュー】ステンレスキッチンツールセット ⭐4\n想像以上のクオリティ #GlacierStyle",
-    "posted_at": "2024-12-04T19:56:00+09:00",
+    "content": "【購入レビュー】三徳包丁 ステンレス ⭐4\n想像以上のクオリティ #GlacierStyle",
+    "posted_at": "2026-10-25T00:02:00+09:00",
     "likes": 301,
     "retweets": 100,
     "replies": 74,
@@ -1118,20 +1115,20 @@
       "レビュー"
     ],
     "mentioned_products": [
-      "ステンレスキッチンツールセット"
+      "三徳包丁 ステンレス"
     ],
     "media_urls": [
       "https://example.com/img/review_022.jpg"
     ]
   },
   {
-    "post_id": "SNS-IG-2024-00055",
+    "post_id": "SNS-IG-2026-00055",
     "platform": "instagram",
     "post_type": "post",
     "username": "@gadget_emi",
     "display_name": "ガジェットEmi",
-    "content": "念願の北欧風フロアライトが我が家に！ デザインがシンプルで使いやすい #新生活 #グレイシャースタイル",
-    "posted_at": "2024-12-04T20:07:00+09:00",
+    "content": "念願のウッドフロアライトが我が家に！ デザインがシンプルで使いやすい #新生活 #グレイシャースタイル",
+    "posted_at": "2026-10-25T00:31:00+09:00",
     "likes": 1876,
     "retweets": 0,
     "replies": 37,
@@ -1143,20 +1140,20 @@
       "ステイホーム"
     ],
     "mentioned_products": [
-      "北欧風フロアライト"
+      "ウッドフロアライト"
     ],
     "media_urls": [
       "https://example.com/img/user_post_055.jpg"
     ]
   },
   {
-    "post_id": "SNS-TW-2024-00218",
+    "post_id": "SNS-TW-2026-00218",
     "platform": "twitter",
     "post_type": "mention",
     "username": "@simple_life_kazuki",
     "display_name": "シンプルライフKazuki",
-    "content": "収納ボックスセットのサイズ感が知りたい。実際に使ってる人教えて〜",
-    "posted_at": "2024-12-04T20:57:00+09:00",
+    "content": "ファブリック収納ボックス 3個組のサイズ感が知りたい。実際に使ってる人教えて〜",
+    "posted_at": "2026-10-25T02:42:00+09:00",
     "likes": 56,
     "retweets": 15,
     "replies": 27,
@@ -1168,18 +1165,18 @@
       "インテリア"
     ],
     "mentioned_products": [
-      "収納ボックスセット"
+      "ファブリック収納ボックス 3個組"
     ],
     "media_urls": []
   },
   {
-    "post_id": "SNS-TW-2024-00071",
+    "post_id": "SNS-TW-2026-00071",
     "platform": "twitter",
     "post_type": "post",
     "username": "@home_ayumi",
     "display_name": "Ayumiのマイホーム記録",
-    "content": "ずっと気になってたコーヒーメーカー、ついにゲット🎉 毎日使うのが楽しみ #グレイシャースタイル",
-    "posted_at": "2024-12-04T22:16:00+09:00",
+    "content": "ずっと気になってた電気ケトル 0.8L、ついにゲット🎉 毎日使うのが楽しみ #グレイシャースタイル",
+    "posted_at": "2026-10-25T06:08:00+09:00",
     "likes": 1432,
     "retweets": 152,
     "replies": 59,
@@ -1189,20 +1186,20 @@
       "グレイシャースタイル"
     ],
     "mentioned_products": [
-      "コーヒーメーカー"
+      "電気ケトル 0.8L"
     ],
     "media_urls": [
       "https://example.com/img/user_post_071.jpg"
     ]
   },
   {
-    "post_id": "SNS-IG-2024-00179",
+    "post_id": "SNS-IG-2026-00179",
     "platform": "instagram",
     "post_type": "post",
     "username": "@office_yuko",
     "display_name": "オフィスワークYuko",
-    "content": "グレイシャースタイルで吊り下げペンダントライト買って正解だった👏 ずっと探してたやつ",
-    "posted_at": "2024-12-04T23:38:00+09:00",
+    "content": "グレイシャースタイルでガラスシェードペンダント買って正解だった👏 ずっと探してたやつ",
+    "posted_at": "2026-10-25T09:42:00+09:00",
     "likes": 1792,
     "retweets": 0,
     "replies": 76,
@@ -1214,20 +1211,20 @@
       "ミニマリスト"
     ],
     "mentioned_products": [
-      "吊り下げペンダントライト"
+      "ガラスシェードペンダント"
     ],
     "media_urls": [
       "https://example.com/img/user_post_179.jpg"
     ]
   },
   {
-    "post_id": "SNS-TW-2024-00174",
+    "post_id": "SNS-TW-2026-00174",
     "platform": "twitter",
     "post_type": "post",
     "username": "@interior_taro",
     "display_name": "Taroのインテリア日記",
     "content": "北欧風ペンダントライトを1ヶ月使ってみた感想📝 デザインがシンプルで使いやすい おすすめ度は5点！ #グレイシャースタイル",
-    "posted_at": "2024-12-04T23:47:00+09:00",
+    "posted_at": "2026-10-25T10:06:00+09:00",
     "likes": 1034,
     "retweets": 63,
     "replies": 55,
@@ -1246,13 +1243,13 @@
     ]
   },
   {
-    "post_id": "SNS-IG-2024-00039",
+    "post_id": "SNS-IG-2026-00039",
     "platform": "instagram",
     "post_type": "story_mention",
     "username": "@organic_megumi",
     "display_name": "オーガニックMegumi",
-    "content": "ずっと気になってたデザインシーリングライト、ついにゲット🎉 一目惚れして買った #グレイシャースタイル",
-    "posted_at": "2024-12-05T10:00:00+09:00",
+    "content": "ずっと気になってたガラスシェードペンダント、ついにゲット🎉 一目惚れして買った #グレイシャースタイル",
+    "posted_at": "2026-10-26T12:46:00+09:00",
     "likes": 1952,
     "retweets": 0,
     "replies": 26,
@@ -1263,20 +1260,20 @@
       "グレイシャースタイル"
     ],
     "mentioned_products": [
-      "デザインシーリングライト"
+      "ガラスシェードペンダント"
     ],
     "media_urls": [
       "https://example.com/img/user_post_039.jpg"
     ]
   },
   {
-    "post_id": "SNS-TW-2024-00119",
+    "post_id": "SNS-TW-2026-00119",
     "platform": "twitter",
     "post_type": "mention",
     "username": "@organic_mami",
     "display_name": "オーガニックMami",
     "content": "@GlacierStyle_JP 注文番号ORD-2024-99402635の件で問い合わせです。交換をお願いしたいです",
-    "posted_at": "2024-12-05T10:04:00+09:00",
+    "posted_at": "2026-10-26T12:57:00+09:00",
     "likes": 13,
     "retweets": 0,
     "replies": 10,
@@ -1285,13 +1282,13 @@
     "media_urls": []
   },
   {
-    "post_id": "SNS-IG-2024-00025",
+    "post_id": "SNS-IG-2026-00025",
     "platform": "instagram",
     "post_type": "mention",
     "username": "@interior_kazuki",
     "display_name": "Kazukiのインテリア日記",
-    "content": "モダンデスクライト届いたけど、商品に傷があった。対応してもらえるかな…",
-    "posted_at": "2024-12-05T10:17:00+09:00",
+    "content": "LEDデスクライト 調光式届いたけど、商品に傷があった。対応してもらえるかな…",
+    "posted_at": "2026-10-26T13:31:00+09:00",
     "likes": 48,
     "retweets": 0,
     "replies": 1,
@@ -1299,18 +1296,18 @@
       "グレイシャースタイル"
     ],
     "mentioned_products": [
-      "モダンデスクライト"
+      "LEDデスクライト 調光式"
     ],
     "media_urls": []
   },
   {
-    "post_id": "SNS-IG-2024-00082",
+    "post_id": "SNS-IG-2026-00082",
     "platform": "instagram",
     "post_type": "post",
     "username": "@fashion_ryota",
     "display_name": "ファッションRyota",
     "content": "ずっと気になってた北欧風ペンダントライト、ついにゲット🎉 デザインがシンプルで使いやすい #グレイシャースタイル",
-    "posted_at": "2024-12-05T10:25:00+09:00",
+    "posted_at": "2026-10-26T13:51:00+09:00",
     "likes": 495,
     "retweets": 0,
     "replies": 15,
@@ -1328,13 +1325,13 @@
     ]
   },
   {
-    "post_id": "SNS-TW-2024-00123",
+    "post_id": "SNS-TW-2026-00123",
     "platform": "twitter",
     "post_type": "post",
     "username": "@gadget_sho",
     "display_name": "ガジェットSho",
-    "content": "グレイシャースタイルの収納ボックスセット、デザインも機能も◎ デザインがシンプルで使いやすい",
-    "posted_at": "2024-12-05T10:52:00+09:00",
+    "content": "グレイシャースタイルのファブリック収納ボックス 3個組、デザインも機能も◎ デザインがシンプルで使いやすい",
+    "posted_at": "2026-10-26T15:02:00+09:00",
     "likes": 2890,
     "retweets": 71,
     "replies": 76,
@@ -1346,18 +1343,18 @@
       "カジュアル"
     ],
     "mentioned_products": [
-      "収納ボックスセット"
+      "ファブリック収納ボックス 3個組"
     ],
     "media_urls": []
   },
   {
-    "post_id": "SNS-TW-2024-00120",
+    "post_id": "SNS-TW-2026-00120",
     "platform": "twitter",
     "post_type": "reply",
     "username": "@GlacierStyle_JP",
     "display_name": "GlacierStyle公式",
     "content": "@@organic_mami この度はご連絡いただきありがとうございます。DMにてご注文番号をお知らせいただけますでしょうか。確認させていただきます。",
-    "posted_at": "2024-12-05T11:11:00+09:00",
+    "posted_at": "2026-10-26T15:52:00+09:00",
     "likes": 8,
     "retweets": 0,
     "replies": 1,
@@ -1366,13 +1363,13 @@
     "media_urls": []
   },
   {
-    "post_id": "SNS-TW-2024-00229",
+    "post_id": "SNS-TW-2026-00229",
     "platform": "twitter",
     "post_type": "post",
     "username": "@minimal_hiroshi",
     "display_name": "ミニマリストHiroshi",
-    "content": "コーヒーメーカーをギフトラッピングしてもらった🎀 デザインがシンプルで使いやすい #グレイシャースタイル",
-    "posted_at": "2024-12-05T11:45:00+09:00",
+    "content": "電気ケトル 0.8Lをギフトラッピングしてもらった🎀 デザインがシンプルで使いやすい #グレイシャースタイル",
+    "posted_at": "2026-10-26T17:20:00+09:00",
     "likes": 89,
     "retweets": 5,
     "replies": 5,
@@ -1384,37 +1381,37 @@
       "プレゼント"
     ],
     "mentioned_products": [
-      "コーヒーメーカー"
+      "電気ケトル 0.8L"
     ],
     "media_urls": [
       "https://example.com/img/gift_229.jpg"
     ]
   },
   {
-    "post_id": "SNS-TW-2024-00033",
+    "post_id": "SNS-TW-2026-00033",
     "platform": "twitter",
     "post_type": "mention",
     "username": "@coffee_mai",
     "display_name": "コーヒー好きMai",
-    "content": "メリノウールカーディガンって重さはどのくらいですか？ 誰か知ってる人いますか？ #グレイシャースタイル",
-    "posted_at": "2024-12-05T15:00:00+09:00",
+    "content": "ウールストールって重さはどのくらいですか？ 誰か知ってる人いますか？ #グレイシャースタイル",
+    "posted_at": "2026-10-27T01:50:00+09:00",
     "likes": 7,
     "retweets": 0,
     "replies": 8,
     "hashtags": [],
     "mentioned_products": [
-      "メリノウールカーディガン"
+      "ウールストール"
     ],
     "media_urls": []
   },
   {
-    "post_id": "SNS-TW-2024-00236",
+    "post_id": "SNS-TW-2026-00236",
     "platform": "twitter",
     "post_type": "mention",
     "username": "@minimal_yuji",
     "display_name": "ミニマリストYuji",
-    "content": "グレイシャースタイルのコーヒーメーカーとワイヤレスイヤホンProで悩み中…アドバイス求む！",
-    "posted_at": "2024-12-05T15:08:00+09:00",
+    "content": "グレイシャースタイルの電気ケトル 0.8LとワイヤレスイヤホンProで悩み中…アドバイス求む！",
+    "posted_at": "2026-10-27T02:10:00+09:00",
     "likes": 107,
     "retweets": 4,
     "replies": 27,
@@ -1424,18 +1421,18 @@
       "グレイシャースタイル"
     ],
     "mentioned_products": [
-      "コーヒーメーカー"
+      "電気ケトル 0.8L"
     ],
     "media_urls": []
   },
   {
-    "post_id": "SNS-TW-2024-00060",
+    "post_id": "SNS-TW-2026-00060",
     "platform": "twitter",
     "post_type": "post",
     "username": "@review_yuko",
     "display_name": "レビュワーYuko",
-    "content": "グレイシャースタイルでデザインシーリングライト買って正解だった👏 家族も気に入ってる",
-    "posted_at": "2024-12-05T16:03:00+09:00",
+    "content": "グレイシャースタイルでガラスシェードペンダント買って正解だった👏 家族も気に入ってる",
+    "posted_at": "2026-10-27T04:34:00+09:00",
     "likes": 2426,
     "retweets": 113,
     "replies": 28,
@@ -1447,18 +1444,18 @@
       "インテリア"
     ],
     "mentioned_products": [
-      "デザインシーリングライト"
+      "ガラスシェードペンダント"
     ],
     "media_urls": []
   },
   {
-    "post_id": "SNS-TW-2024-00034",
+    "post_id": "SNS-TW-2026-00034",
     "platform": "twitter",
     "post_type": "reply",
     "username": "@GlacierStyle_JP",
     "display_name": "GlacierStyle公式",
     "content": "@@coffee_mai ご不便をおかけし申し訳ございません。ご満足いただけて嬉しいです！素敵なお写真もありがとうございます📸",
-    "posted_at": "2024-12-05T16:15:00+09:00",
+    "posted_at": "2026-10-27T05:05:00+09:00",
     "likes": 6,
     "retweets": 0,
     "replies": 0,
@@ -1467,13 +1464,13 @@
     "media_urls": []
   },
   {
-    "post_id": "SNS-TW-2024-00183",
+    "post_id": "SNS-TW-2026-00183",
     "platform": "twitter",
     "post_type": "mention",
     "username": "@design_kota",
     "display_name": "デザイン好きKota",
-    "content": "グレイシャースタイルのプレミアムカシミヤセーター、本当におすすめ！ ずっと探してたやつ #インテリア好き",
-    "posted_at": "2024-12-05T19:43:00+09:00",
+    "content": "グレイシャースタイルのカシミヤマフラー、本当におすすめ！ ずっと探してたやつ #インテリア好き",
+    "posted_at": "2026-10-27T14:08:00+09:00",
     "likes": 2677,
     "retweets": 159,
     "replies": 75,
@@ -1483,20 +1480,20 @@
       "グレイシャースタイル"
     ],
     "mentioned_products": [
-      "プレミアムカシミヤセーター"
+      "カシミヤマフラー"
     ],
     "media_urls": [
       "https://example.com/img/user_post_183.jpg"
     ]
   },
   {
-    "post_id": "SNS-TW-2024-00178",
+    "post_id": "SNS-TW-2026-00178",
     "platform": "twitter",
     "post_type": "post",
     "username": "@gift_rina",
     "display_name": "ギフト探しRina",
-    "content": "北欧風フロアライトをギフトラッピングしてもらった🎀 ずっと探してたやつ #グレイシャースタイル",
-    "posted_at": "2024-12-05T19:59:00+09:00",
+    "content": "ウッドフロアライトをギフトラッピングしてもらった🎀 ずっと探してたやつ #グレイシャースタイル",
+    "posted_at": "2026-10-27T14:50:00+09:00",
     "likes": 590,
     "retweets": 38,
     "replies": 39,
@@ -1510,37 +1507,37 @@
       "プレゼント"
     ],
     "mentioned_products": [
-      "北欧風フロアライト"
+      "ウッドフロアライト"
     ],
     "media_urls": [
       "https://example.com/img/gift_178.jpg"
     ]
   },
   {
-    "post_id": "SNS-TW-2024-00225",
+    "post_id": "SNS-TW-2026-00225",
     "platform": "twitter",
     "post_type": "mention",
     "username": "@interior_kota",
     "display_name": "Kotaのインテリア日記",
-    "content": "ワイヤレスイヤホンProの接続部分がすぐ取れたになった。品質大丈夫？",
-    "posted_at": "2024-12-05T20:24:00+09:00",
+    "content": "トラベルポーチ 3点セットの接続部分がすぐ取れたになった。品質大丈夫？",
+    "posted_at": "2026-10-27T15:56:00+09:00",
     "likes": 40,
     "retweets": 12,
     "replies": 18,
     "hashtags": [],
     "mentioned_products": [
-      "ワイヤレスイヤホンPro"
+      "トラベルポーチ 3点セット"
     ],
     "media_urls": []
   },
   {
-    "post_id": "SNS-TW-2024-00140",
+    "post_id": "SNS-TW-2026-00140",
     "platform": "twitter",
     "post_type": "post",
     "username": "@gadget_yuji",
     "display_name": "ガジェットYuji",
-    "content": "念願のコーヒーメーカーが我が家に！ コスパ最高 #新生活 #グレイシャースタイル",
-    "posted_at": "2024-12-05T20:28:00+09:00",
+    "content": "念願の電気ケトル 0.8Lが我が家に！ コスパ最高 #新生活 #グレイシャースタイル",
+    "posted_at": "2026-10-27T16:06:00+09:00",
     "likes": 1608,
     "retweets": 170,
     "replies": 39,
@@ -1550,20 +1547,20 @@
       "グレイシャースタイル"
     ],
     "mentioned_products": [
-      "コーヒーメーカー"
+      "電気ケトル 0.8L"
     ],
     "media_urls": [
       "https://example.com/img/user_post_140.jpg"
     ]
   },
   {
-    "post_id": "SNS-TW-2024-00198",
+    "post_id": "SNS-TW-2026-00198",
     "platform": "twitter",
     "post_type": "post",
     "username": "@room_sho",
     "display_name": "お部屋づくりSho",
-    "content": "引っ越し祝いにウォールシェルフをプレゼント🎁 デザインがシンプルで使いやすい #グレイシャースタイル #ギフト",
-    "posted_at": "2024-12-05T21:09:00+09:00",
+    "content": "引っ越し祝いに壁面ウッドシェルフをプレゼント🎁 デザインがシンプルで使いやすい #グレイシャースタイル #ギフト",
+    "posted_at": "2026-10-27T17:53:00+09:00",
     "likes": 132,
     "retweets": 8,
     "replies": 5,
@@ -1577,20 +1574,20 @@
       "プレゼント"
     ],
     "mentioned_products": [
-      "ウォールシェルフ"
+      "壁面ウッドシェルフ"
     ],
     "media_urls": [
       "https://example.com/img/gift_198.jpg"
     ]
   },
   {
-    "post_id": "SNS-IG-2024-00074",
+    "post_id": "SNS-IG-2026-00074",
     "platform": "instagram",
     "post_type": "mention",
     "username": "@organic_rina",
     "display_name": "オーガニックRina",
     "content": "収納付きデスク届いたけど、商品に破損があった。対応してもらえるかな…",
-    "posted_at": "2024-12-05T21:29:00+09:00",
+    "posted_at": "2026-10-27T18:45:00+09:00",
     "likes": 25,
     "retweets": 0,
     "replies": 19,
@@ -1599,13 +1596,13 @@
     "media_urls": []
   },
   {
-    "post_id": "SNS-TW-2024-00226",
+    "post_id": "SNS-TW-2026-00226",
     "platform": "twitter",
     "post_type": "reply",
     "username": "@GlacierStyle_JP",
     "display_name": "GlacierStyle公式",
     "content": "@@interior_kota お問い合わせありがとうございます。お手数ですが、詳細をDMでお送りください。担当者より折り返しご連絡いたします。",
-    "posted_at": "2024-12-05T21:31:00+09:00",
+    "posted_at": "2026-10-27T18:50:00+09:00",
     "likes": 19,
     "retweets": 0,
     "replies": 2,
@@ -1614,13 +1611,13 @@
     "media_urls": []
   },
   {
-    "post_id": "SNS-TW-2024-00003",
+    "post_id": "SNS-TW-2026-00003",
     "platform": "twitter",
     "post_type": "post",
     "username": "@eco_kenji",
     "display_name": "エコライフKenji",
-    "content": "【レビュー】グレイシャースタイルの北欧風フロアライト使ってみた。\n\n良い点👍\n・サイズ感ぴったり\n・高級感がある\n\n気になる点👎\n・在庫が少ない\n\n総合: 4/5 #グレイシャースタイル #レビュー",
-    "posted_at": "2024-12-05T22:11:00+09:00",
+    "content": "【レビュー】グレイシャースタイルのウッドフロアライト使ってみた。\n\n良い点👍\n・サイズ感ぴったり\n・高級感がある\n\n気になる点👎\n・在庫が少ない\n\n総合: 4/5 #グレイシャースタイル #レビュー",
+    "posted_at": "2026-10-27T20:35:00+09:00",
     "likes": 1010,
     "retweets": 48,
     "replies": 88,
@@ -1633,20 +1630,20 @@
       "レビュー"
     ],
     "mentioned_products": [
-      "北欧風フロアライト"
+      "ウッドフロアライト"
     ],
     "media_urls": [
       "https://example.com/img/review_003.jpg"
     ]
   },
   {
-    "post_id": "SNS-TW-2024-00075",
+    "post_id": "SNS-TW-2026-00075",
     "platform": "twitter",
     "post_type": "reply",
     "username": "@GlacierStyle_JP",
     "display_name": "GlacierStyle公式",
     "content": "@@organic_rina お問い合わせありがとうございます。ご満足いただけて嬉しいです！素敵なお写真もありがとうございます📸",
-    "posted_at": "2024-12-05T22:35:00+09:00",
+    "posted_at": "2026-10-27T21:38:00+09:00",
     "likes": 14,
     "retweets": 0,
     "replies": 1,
@@ -1655,13 +1652,13 @@
     "media_urls": []
   },
   {
-    "post_id": "SNS-TW-2024-00152",
+    "post_id": "SNS-TW-2026-00152",
     "platform": "twitter",
     "post_type": "post",
     "username": "@office_hiroshi",
     "display_name": "オフィスワークHiroshi",
-    "content": "グレイシャースタイルでスタイリッシュデスクライト買って正解だった👏 SNSで見て気になってた",
-    "posted_at": "2024-12-05T22:59:00+09:00",
+    "content": "グレイシャースタイルでクリップ式LEDライト買って正解だった👏 SNSで見て気になってた",
+    "posted_at": "2026-10-27T22:40:00+09:00",
     "likes": 490,
     "retweets": 79,
     "replies": 45,
@@ -1673,18 +1670,18 @@
       "北欧インテリア"
     ],
     "mentioned_products": [
-      "スタイリッシュデスクライト"
+      "クリップ式LEDライト"
     ],
     "media_urls": []
   },
   {
-    "post_id": "SNS-TW-2024-00231",
+    "post_id": "SNS-TW-2026-00231",
     "platform": "twitter",
     "post_type": "post",
     "username": "@lifestyle_hiroshi",
     "display_name": "Hiroshi｜暮らしを楽しむ",
-    "content": "耐熱ガラスポット、期待以上でした✨ 家族も気に入ってる #グレイシャースタイル #買ってよかった",
-    "posted_at": "2024-12-05T23:12:00+09:00",
+    "content": "ダブルウォールグラス、期待以上でした✨ 家族も気に入ってる #グレイシャースタイル #買ってよかった",
+    "posted_at": "2026-10-27T23:14:00+09:00",
     "likes": 2986,
     "retweets": 66,
     "replies": 39,
@@ -1694,20 +1691,20 @@
       "おうち時間"
     ],
     "mentioned_products": [
-      "耐熱ガラスポット"
+      "ダブルウォールグラス"
     ],
     "media_urls": [
       "https://example.com/img/user_post_231.jpg"
     ]
   },
   {
-    "post_id": "SNS-IG-2024-00190",
+    "post_id": "SNS-IG-2026-00190",
     "platform": "instagram",
     "post_type": "post",
     "username": "@nordic_ayumi",
     "display_name": "北欧好きAyumi",
-    "content": "【購入レビュー】デザインシーリングライト ⭐3\nSNSで見て気になってた #GlacierStyle",
-    "posted_at": "2024-12-06T07:56:00+09:00",
+    "content": "【購入レビュー】ガラスシェードペンダント ⭐3\nSNSで見て気になってた #GlacierStyle",
+    "posted_at": "2026-10-28T22:02:00+09:00",
     "likes": 281,
     "retweets": 0,
     "replies": 56,
@@ -1720,20 +1717,20 @@
       "レビュー"
     ],
     "mentioned_products": [
-      "デザインシーリングライト"
+      "ガラスシェードペンダント"
     ],
     "media_urls": [
       "https://example.com/img/review_190.jpg"
     ]
   },
   {
-    "post_id": "SNS-TW-2024-00184",
+    "post_id": "SNS-TW-2026-00184",
     "platform": "twitter",
     "post_type": "post",
     "username": "@work_from_home_haruka",
     "display_name": "在宅ワーカーHaruka",
-    "content": "収納ボックスセットが届いた！ 思ってた以上にクオリティ高くて大満足😊 #GlacierStyle #グレイシャースタイル",
-    "posted_at": "2024-12-06T08:20:00+09:00",
+    "content": "ファブリック収納ボックス 3個組が届いた！ 思ってた以上にクオリティ高くて大満足😊 #GlacierStyle #グレイシャースタイル",
+    "posted_at": "2026-10-28T23:05:00+09:00",
     "likes": 952,
     "retweets": 13,
     "replies": 59,
@@ -1745,18 +1742,18 @@
       "カジュアル"
     ],
     "mentioned_products": [
-      "収納ボックスセット"
+      "ファブリック収納ボックス 3個組"
     ],
     "media_urls": []
   },
   {
-    "post_id": "SNS-TW-2024-00087",
+    "post_id": "SNS-TW-2026-00087",
     "platform": "twitter",
     "post_type": "mention",
     "username": "@home_yuki",
     "display_name": "Yukiのマイホーム記録",
     "content": "グレイシャースタイルのサイト、ログインできないで困ってる😭",
-    "posted_at": "2024-12-06T08:43:00+09:00",
+    "posted_at": "2026-10-29T00:05:00+09:00",
     "likes": 81,
     "retweets": 6,
     "replies": 8,
@@ -1767,13 +1764,13 @@
     "media_urls": []
   },
   {
-    "post_id": "SNS-TW-2024-00062",
+    "post_id": "SNS-TW-2026-00062",
     "platform": "twitter",
     "post_type": "post",
     "username": "@interior_kazuki",
     "display_name": "Kazukiのインテリア日記",
-    "content": "友達にもおすすめしたいワイヤレスイヤホンPro💕 毎日使うのが楽しみ #グレイシャースタイル",
-    "posted_at": "2024-12-06T09:13:00+09:00",
+    "content": "友達にもおすすめしたいトラベルポーチ 3点セット💕 毎日使うのが楽しみ #グレイシャースタイル",
+    "posted_at": "2026-10-29T01:23:00+09:00",
     "likes": 1712,
     "retweets": 109,
     "replies": 49,
@@ -1784,20 +1781,20 @@
       "テック"
     ],
     "mentioned_products": [
-      "ワイヤレスイヤホンPro"
+      "トラベルポーチ 3点セット"
     ],
     "media_urls": [
       "https://example.com/img/user_post_062.jpg"
     ]
   },
   {
-    "post_id": "SNS-IG-2024-00185",
+    "post_id": "SNS-IG-2026-00185",
     "platform": "instagram",
     "post_type": "story_mention",
     "username": "@gadget_ayumi",
     "display_name": "ガジェットAyumi",
-    "content": "グレイシャースタイルでLED調光デスクライト買って正解だった👏 リピート決定",
-    "posted_at": "2024-12-06T10:50:00+09:00",
+    "content": "グレイシャースタイルでLEDデスクライト 調光式買って正解だった👏 リピート決定",
+    "posted_at": "2026-10-29T05:37:00+09:00",
     "likes": 1419,
     "retweets": 0,
     "replies": 37,
@@ -1808,20 +1805,20 @@
       "GlacierStyle"
     ],
     "mentioned_products": [
-      "LED調光デスクライト"
+      "LEDデスクライト 調光式"
     ],
     "media_urls": [
       "https://example.com/img/user_post_185.jpg"
     ]
   },
   {
-    "post_id": "SNS-IG-2024-00148",
+    "post_id": "SNS-IG-2026-00148",
     "platform": "instagram",
     "post_type": "post",
     "username": "@minimal_misaki",
     "display_name": "ミニマリストMisaki",
-    "content": "コーヒーメーカーのおかげで毎日が楽しくなった✨ グレイシャースタイル最高！",
-    "posted_at": "2024-12-06T11:20:00+09:00",
+    "content": "電気ケトル 0.8Lのおかげで毎日が楽しくなった✨ グレイシャースタイル最高！",
+    "posted_at": "2026-10-29T06:55:00+09:00",
     "likes": 1672,
     "retweets": 0,
     "replies": 55,
@@ -1831,18 +1828,18 @@
       "スマートホーム"
     ],
     "mentioned_products": [
-      "コーヒーメーカー"
+      "電気ケトル 0.8L"
     ],
     "media_urls": []
   },
   {
-    "post_id": "SNS-TW-2024-00207",
+    "post_id": "SNS-TW-2026-00207",
     "platform": "twitter",
     "post_type": "post",
     "username": "@interior_sho",
     "display_name": "Shoのインテリア日記",
-    "content": "グレイシャースタイルで上司への母の日プレゼント選び中💝 北欧風フロアライト良さそう！",
-    "posted_at": "2024-12-06T11:35:00+09:00",
+    "content": "グレイシャースタイルで上司への母の日プレゼント選び中💝 ウッドフロアライト良さそう！",
+    "posted_at": "2026-10-29T07:34:00+09:00",
     "likes": 537,
     "retweets": 48,
     "replies": 15,
@@ -1856,18 +1853,18 @@
       "プレゼント"
     ],
     "mentioned_products": [
-      "北欧風フロアライト"
+      "ウッドフロアライト"
     ],
     "media_urls": []
   },
   {
-    "post_id": "SNS-IG-2024-00063",
+    "post_id": "SNS-IG-2026-00063",
     "platform": "instagram",
     "post_type": "post",
     "username": "@coffee_naomi",
     "display_name": "コーヒー好きNaomi",
-    "content": "グレイシャースタイルで買った収納ボックスセット、めちゃくちゃ良い✨ 一目惚れして買った #グレイシャースタイル",
-    "posted_at": "2024-12-06T11:42:00+09:00",
+    "content": "グレイシャースタイルで買ったファブリック収納ボックス 3個組、めちゃくちゃ良い✨ 一目惚れして買った #グレイシャースタイル",
+    "posted_at": "2026-10-29T07:53:00+09:00",
     "likes": 452,
     "retweets": 0,
     "replies": 7,
@@ -1879,18 +1876,18 @@
       "北欧"
     ],
     "mentioned_products": [
-      "収納ボックスセット"
+      "ファブリック収納ボックス 3個組"
     ],
     "media_urls": []
   },
   {
-    "post_id": "SNS-TW-2024-00035",
+    "post_id": "SNS-TW-2026-00035",
     "platform": "twitter",
     "post_type": "mention",
     "username": "@review_haruka",
     "display_name": "レビュワーHaruka",
-    "content": "友達にもおすすめしたいウォールシェルフ💕 ずっと探してたやつ #グレイシャースタイル",
-    "posted_at": "2024-12-06T11:47:00+09:00",
+    "content": "友達にもおすすめしたい壁面ウッドシェルフ💕 ずっと探してたやつ #グレイシャースタイル",
+    "posted_at": "2026-10-29T08:06:00+09:00",
     "likes": 1144,
     "retweets": 3,
     "replies": 51,
@@ -1902,41 +1899,38 @@
       "北欧"
     ],
     "mentioned_products": [
-      "ウォールシェルフ"
+      "壁面ウッドシェルフ"
     ],
     "media_urls": []
   },
   {
-    "post_id": "SNS-IG-2024-00153",
+    "post_id": "SNS-IG-2026-00153",
     "platform": "instagram",
     "post_type": "story_mention",
     "username": "@interior_ryota",
     "display_name": "Ryotaのインテリア日記",
-    "content": "ずっと気になってたLED調光デスクライト、ついにゲット🎉 想像以上のクオリティ #グレイシャースタイル",
-    "posted_at": "2024-12-06T12:28:00+09:00",
+    "content": "先月届いたLEDデスクライト 調光式、夜に急に暗くなったり明るくなったりする。問い合わせ中",
+    "posted_at": "2026-10-29T09:53:00+09:00",
     "likes": 1925,
     "retweets": 0,
     "replies": 64,
     "hashtags": [
-      "部屋づくり",
       "グレイシャースタイル",
-      "間接照明",
-      "ライト",
-      "インテリア"
+      "デスクライト"
     ],
     "mentioned_products": [
-      "LED調光デスクライト"
+      "LEDデスクライト 調光式"
     ],
     "media_urls": []
   },
   {
-    "post_id": "SNS-TW-2024-00162",
+    "post_id": "SNS-TW-2026-00162",
     "platform": "twitter",
     "post_type": "mention",
     "username": "@modern_kazuki",
     "display_name": "モダンリビングKazuki",
-    "content": "グレイシャースタイルのセールっていつ始まる？北欧インテリア図鑑狙ってる",
-    "posted_at": "2024-12-06T13:01:00+09:00",
+    "content": "グレイシャースタイルのセールっていつ始まる？リングノート A5狙ってる",
+    "posted_at": "2026-10-29T11:19:00+09:00",
     "likes": 68,
     "retweets": 4,
     "replies": 27,
@@ -1946,18 +1940,18 @@
       "グレイシャースタイル"
     ],
     "mentioned_products": [
-      "北欧インテリア図鑑"
+      "リングノート A5"
     ],
     "media_urls": []
   },
   {
-    "post_id": "SNS-IG-2024-00194",
+    "post_id": "SNS-IG-2026-00194",
     "platform": "instagram",
     "post_type": "mention",
     "username": "@room_emi",
     "display_name": "お部屋づくりEmi",
-    "content": "グレイシャースタイルのオーガニックコットンTシャツ、本当におすすめ！ リピート決定 #インテリア好き",
-    "posted_at": "2024-12-06T13:55:00+09:00",
+    "content": "グレイシャースタイルのガーゼパジャマ、本当におすすめ！ リピート決定 #インテリア好き",
+    "posted_at": "2026-10-29T13:40:00+09:00",
     "likes": 2841,
     "retweets": 0,
     "replies": 50,
@@ -1968,20 +1962,20 @@
       "スマートホーム"
     ],
     "mentioned_products": [
-      "オーガニックコットンTシャツ"
+      "ガーゼパジャマ"
     ],
     "media_urls": [
       "https://example.com/img/user_post_194.jpg"
     ]
   },
   {
-    "post_id": "SNS-TW-2024-00168",
+    "post_id": "SNS-TW-2026-00168",
     "platform": "twitter",
     "post_type": "mention",
     "username": "@nordic_ken",
     "display_name": "北欧好きKen",
     "content": "プレミアムカシミヤセーターの取っ手がすぐ外れたになった。品質大丈夫？",
-    "posted_at": "2024-12-06T16:17:00+09:00",
+    "posted_at": "2026-10-29T19:51:00+09:00",
     "likes": 37,
     "retweets": 18,
     "replies": 13,
@@ -1992,13 +1986,13 @@
     ]
   },
   {
-    "post_id": "SNS-IG-2024-00151",
+    "post_id": "SNS-IG-2026-00151",
     "platform": "instagram",
     "post_type": "mention",
     "username": "@eco_nana",
     "display_name": "エコライフNana",
-    "content": "グレイシャースタイルのセールっていつ始まる？スマートスピーカー狙ってる",
-    "posted_at": "2024-12-06T17:08:00+09:00",
+    "content": "グレイシャースタイルのセールっていつ始まる？アロマディフューザーセット狙ってる",
+    "posted_at": "2026-10-29T22:04:00+09:00",
     "likes": 115,
     "retweets": 0,
     "replies": 35,
@@ -2008,18 +2002,18 @@
       "テック"
     ],
     "mentioned_products": [
-      "スマートスピーカー"
+      "アロマディフューザーセット"
     ],
     "media_urls": []
   },
   {
-    "post_id": "SNS-IG-2024-00049",
+    "post_id": "SNS-IG-2026-00049",
     "platform": "instagram",
     "post_type": "story_mention",
     "username": "@tech_yuki",
     "display_name": "テック好きYuki",
-    "content": "ずっと気になってたウォールシェルフ、ついにゲット🎉 想像以上のクオリティ #グレイシャースタイル",
-    "posted_at": "2024-12-06T17:22:00+09:00",
+    "content": "ずっと気になってた壁面ウッドシェルフ、ついにゲット🎉 想像以上のクオリティ #グレイシャースタイル",
+    "posted_at": "2026-10-29T22:40:00+09:00",
     "likes": 80,
     "retweets": 0,
     "replies": 25,
@@ -2031,20 +2025,20 @@
       "インテリア"
     ],
     "mentioned_products": [
-      "ウォールシェルフ"
+      "壁面ウッドシェルフ"
     ],
     "media_urls": [
       "https://example.com/img/user_post_049.jpg"
     ]
   },
   {
-    "post_id": "SNS-TW-2024-00105",
+    "post_id": "SNS-TW-2026-00105",
     "platform": "twitter",
     "post_type": "post",
     "username": "@design_yuji",
     "display_name": "デザイン好きYuji",
-    "content": "結婚祝いに収納付きデスクをプレゼント🎁 一目惚れして買った #グレイシャースタイル #ギフト",
-    "posted_at": "2024-12-06T17:34:00+09:00",
+    "content": "結婚祝いに昇降式ワークデスクをプレゼント🎁 一目惚れして買った #グレイシャースタイル #ギフト",
+    "posted_at": "2026-10-29T23:12:00+09:00",
     "likes": 324,
     "retweets": 41,
     "replies": 32,
@@ -2058,20 +2052,20 @@
       "プレゼント"
     ],
     "mentioned_products": [
-      "収納付きデスク"
+      "昇降式ワークデスク"
     ],
     "media_urls": [
       "https://example.com/img/gift_105.jpg"
     ]
   },
   {
-    "post_id": "SNS-TW-2024-00053",
+    "post_id": "SNS-TW-2026-00053",
     "platform": "twitter",
     "post_type": "mention",
     "username": "@cozy_akiko",
     "display_name": "コージーライフAkiko",
     "content": "@GlacierStyle_JP 注文番号ORD-2024-97791634の件で問い合わせです。配送状況を確認したいです",
-    "posted_at": "2024-12-06T18:05:00+09:00",
+    "posted_at": "2026-10-30T00:33:00+09:00",
     "likes": 22,
     "retweets": 0,
     "replies": 8,
@@ -2080,36 +2074,33 @@
     "media_urls": []
   },
   {
-    "post_id": "SNS-TW-2024-00201",
+    "post_id": "SNS-TW-2026-00201",
     "platform": "twitter",
     "post_type": "mention",
     "username": "@modern_hiroshi",
     "display_name": "モダンリビングHiroshi",
-    "content": "ずっと気になってたモダンデスクライト、ついにゲット🎉 毎日使うのが楽しみ #グレイシャースタイル",
-    "posted_at": "2024-12-06T19:28:00+09:00",
+    "content": "GlacierStyleで買ったLEDデスクライト 調光式、使って10分くらいでちらつき始める…目が疲れる",
+    "posted_at": "2026-10-30T04:09:00+09:00",
     "likes": 1427,
     "retweets": 67,
     "replies": 64,
     "hashtags": [
-      "在宅ワーク",
-      "部屋づくり",
-      "暮らし",
-      "リモートワーク",
-      "グレイシャースタイル"
+      "グレイシャースタイル",
+      "デスクライト"
     ],
     "mentioned_products": [
-      "モダンデスクライト"
+      "LEDデスクライト 調光式"
     ],
     "media_urls": []
   },
   {
-    "post_id": "SNS-IG-2024-00147",
+    "post_id": "SNS-IG-2026-00147",
     "platform": "instagram",
     "post_type": "mention",
     "username": "@work_from_home_satoshi",
     "display_name": "在宅ワーカーSatoshi",
     "content": "グレイシャースタイルの北欧風ペンダントライト、本当におすすめ！ SNSで見て気になってた #インテリア好き",
-    "posted_at": "2024-12-06T22:49:00+09:00",
+    "posted_at": "2026-10-30T12:54:00+09:00",
     "likes": 2947,
     "retweets": 0,
     "replies": 46,
@@ -2126,13 +2117,13 @@
     "media_urls": []
   },
   {
-    "post_id": "SNS-IG-2024-00169",
+    "post_id": "SNS-IG-2026-00169",
     "platform": "instagram",
     "post_type": "post",
     "username": "@review_nana",
     "display_name": "レビュワーNana",
-    "content": "メリノウールカーディガン、期待以上でした✨ デザインがシンプルで使いやすい #グレイシャースタイル #買ってよかった",
-    "posted_at": "2024-12-07T07:44:00+09:00",
+    "content": "ウールストール、期待以上でした✨ デザインがシンプルで使いやすい #グレイシャースタイル #買ってよかった",
+    "posted_at": "2026-10-31T12:11:00+09:00",
     "likes": 2065,
     "retweets": 0,
     "replies": 18,
@@ -2143,20 +2134,20 @@
       "グレイシャースタイル"
     ],
     "mentioned_products": [
-      "メリノウールカーディガン"
+      "ウールストール"
     ],
     "media_urls": [
       "https://example.com/img/user_post_169.jpg"
     ]
   },
   {
-    "post_id": "SNS-TW-2024-00076",
+    "post_id": "SNS-TW-2026-00076",
     "platform": "twitter",
     "post_type": "mention",
     "username": "@interior_rina",
     "display_name": "Rinaのインテリア日記",
-    "content": "念願の収納ボックスセットが我が家に！ 買って本当によかった #新生活 #グレイシャースタイル",
-    "posted_at": "2024-12-07T08:53:00+09:00",
+    "content": "念願のファブリック収納ボックス 3個組が我が家に！ 買って本当によかった #新生活 #グレイシャースタイル",
+    "posted_at": "2026-10-31T15:11:00+09:00",
     "likes": 245,
     "retweets": 72,
     "replies": 74,
@@ -2167,20 +2158,20 @@
       "GlacierStyle"
     ],
     "mentioned_products": [
-      "収納ボックスセット"
+      "ファブリック収納ボックス 3個組"
     ],
     "media_urls": [
       "https://example.com/img/user_post_076.jpg"
     ]
   },
   {
-    "post_id": "SNS-IG-2024-00155",
+    "post_id": "SNS-IG-2026-00155",
     "platform": "instagram",
     "post_type": "mention",
     "username": "@home_naomi",
     "display_name": "Naomiのマイホーム記録",
-    "content": "スタイリッシュデスクライトが届いた！ 思ってた以上にクオリティ高くて大満足😊 #GlacierStyle #グレイシャースタイル",
-    "posted_at": "2024-12-07T10:17:00+09:00",
+    "content": "クリップ式LEDライトが届いた！ 思ってた以上にクオリティ高くて大満足😊 #GlacierStyle #グレイシャースタイル",
+    "posted_at": "2026-10-31T18:51:00+09:00",
     "likes": 818,
     "retweets": 0,
     "replies": 23,
@@ -2192,18 +2183,18 @@
       "インテリア"
     ],
     "mentioned_products": [
-      "スタイリッシュデスクライト"
+      "クリップ式LEDライト"
     ],
     "media_urls": []
   },
   {
-    "post_id": "SNS-IG-2024-00206",
+    "post_id": "SNS-IG-2026-00206",
     "platform": "instagram",
     "post_type": "mention",
     "username": "@minimal_emi",
     "display_name": "ミニマリストEmi",
-    "content": "友達にもおすすめしたいワイヤレスイヤホンPro💕 友達にも褒められた #グレイシャースタイル",
-    "posted_at": "2024-12-07T13:02:00+09:00",
+    "content": "友達にもおすすめしたいトラベルポーチ 3点セット💕 友達にも褒められた #グレイシャースタイル",
+    "posted_at": "2026-11-01T02:01:00+09:00",
     "likes": 1864,
     "retweets": 0,
     "replies": 71,
@@ -2214,18 +2205,18 @@
       "テック"
     ],
     "mentioned_products": [
-      "ワイヤレスイヤホンPro"
+      "トラベルポーチ 3点セット"
     ],
     "media_urls": []
   },
   {
-    "post_id": "SNS-IG-2024-00112",
+    "post_id": "SNS-IG-2026-00112",
     "platform": "instagram",
     "post_type": "mention",
     "username": "@cozy_kazuki",
     "display_name": "コージーライフKazuki",
-    "content": "オーガニックコットンTシャツのサイズ感が知りたい。実際に使ってる人教えて〜",
-    "posted_at": "2024-12-07T13:52:00+09:00",
+    "content": "ガーゼパジャマのサイズ感が知りたい。実際に使ってる人教えて〜",
+    "posted_at": "2026-11-01T04:12:00+09:00",
     "likes": 25,
     "retweets": 0,
     "replies": 32,
@@ -2236,18 +2227,18 @@
       "スマートホーム"
     ],
     "mentioned_products": [
-      "オーガニックコットンTシャツ"
+      "ガーゼパジャマ"
     ],
     "media_urls": []
   },
   {
-    "post_id": "SNS-TW-2024-00214",
+    "post_id": "SNS-TW-2026-00214",
     "platform": "twitter",
     "post_type": "mention",
     "username": "@coffee_daiki",
     "display_name": "コーヒー好きDaiki",
-    "content": "セールでコーヒーメーカーをお得にゲット！ 想像以上のクオリティ #グレイシャースタイル #お買い得",
-    "posted_at": "2024-12-07T14:29:00+09:00",
+    "content": "セールで電気ケトル 0.8Lをお得にゲット！ 想像以上のクオリティ #グレイシャースタイル #お買い得",
+    "posted_at": "2026-11-01T05:49:00+09:00",
     "likes": 2803,
     "retweets": 27,
     "replies": 7,
@@ -2257,20 +2248,20 @@
       "おうち時間"
     ],
     "mentioned_products": [
-      "コーヒーメーカー"
+      "電気ケトル 0.8L"
     ],
     "media_urls": [
       "https://example.com/img/user_post_214.jpg"
     ]
   },
   {
-    "post_id": "SNS-IG-2024-00069",
+    "post_id": "SNS-IG-2026-00069",
     "platform": "instagram",
     "post_type": "mention",
     "username": "@gift_nana",
     "display_name": "ギフト探しNana",
-    "content": "グレイシャースタイルって送料いくらだっけ？デザインシーリングライト買いたいんだけど",
-    "posted_at": "2024-12-07T14:35:00+09:00",
+    "content": "グレイシャースタイルって送料いくらだっけ？ガラスシェードペンダント買いたいんだけど",
+    "posted_at": "2026-11-01T06:04:00+09:00",
     "likes": 68,
     "retweets": 0,
     "replies": 33,
@@ -2282,18 +2273,18 @@
       "インテリア"
     ],
     "mentioned_products": [
-      "デザインシーリングライト"
+      "ガラスシェードペンダント"
     ],
     "media_urls": []
   },
   {
-    "post_id": "SNS-TW-2024-00187",
+    "post_id": "SNS-TW-2026-00187",
     "platform": "twitter",
     "post_type": "mention",
     "username": "@simple_life_kota",
     "display_name": "シンプルライフKota",
     "content": "グレイシャースタイルで注文したリネンシャツがまだ届かない…どうなってるの？",
-    "posted_at": "2024-12-07T14:41:00+09:00",
+    "posted_at": "2026-11-01T06:20:00+09:00",
     "likes": 25,
     "retweets": 21,
     "replies": 8,
@@ -2302,13 +2293,13 @@
     "media_urls": []
   },
   {
-    "post_id": "SNS-IG-2024-00061",
+    "post_id": "SNS-IG-2026-00061",
     "platform": "instagram",
     "post_type": "mention",
     "username": "@lifestyle_sho",
     "display_name": "Sho｜暮らしを楽しむ",
-    "content": "収納ボックスセットのサイズ感が知りたい。実際に使ってる人教えて〜",
-    "posted_at": "2024-12-07T15:43:00+09:00",
+    "content": "ファブリック収納ボックス 3個組のサイズ感が知りたい。実際に使ってる人教えて〜",
+    "posted_at": "2026-11-01T09:02:00+09:00",
     "likes": 138,
     "retweets": 0,
     "replies": 4,
@@ -2320,18 +2311,18 @@
       "ガジェット"
     ],
     "mentioned_products": [
-      "収納ボックスセット"
+      "ファブリック収納ボックス 3個組"
     ],
     "media_urls": []
   },
   {
-    "post_id": "SNS-TW-2024-00188",
+    "post_id": "SNS-TW-2026-00188",
     "platform": "twitter",
     "post_type": "reply",
     "username": "@GlacierStyle_JP",
     "display_name": "GlacierStyle公式",
     "content": "@@simple_life_kota 嬉しいお言葉をありがとうございます😊 ご不明点がございましたら、いつでもお問い合わせください。",
-    "posted_at": "2024-12-07T16:21:00+09:00",
+    "posted_at": "2026-11-01T10:41:00+09:00",
     "likes": 12,
     "retweets": 0,
     "replies": 1,
@@ -2340,13 +2331,13 @@
     "media_urls": []
   },
   {
-    "post_id": "SNS-TW-2024-00238",
+    "post_id": "SNS-TW-2026-00238",
     "platform": "twitter",
     "post_type": "post",
     "username": "@modern_ken",
     "display_name": "モダンリビングKen",
-    "content": "友達にもおすすめしたいオーガニックコットンTシャツ💕 リピート決定 #グレイシャースタイル",
-    "posted_at": "2024-12-07T16:43:00+09:00",
+    "content": "友達にもおすすめしたいガーゼパジャマ💕 リピート決定 #グレイシャースタイル",
+    "posted_at": "2026-11-01T11:38:00+09:00",
     "likes": 1110,
     "retweets": 68,
     "replies": 8,
@@ -2357,20 +2348,20 @@
       "おうち時間"
     ],
     "mentioned_products": [
-      "オーガニックコットンTシャツ"
+      "ガーゼパジャマ"
     ],
     "media_urls": [
       "https://example.com/img/user_post_238.jpg"
     ]
   },
   {
-    "post_id": "SNS-TW-2024-00217",
+    "post_id": "SNS-TW-2026-00217",
     "platform": "twitter",
     "post_type": "post",
     "username": "@organic_ayumi",
     "display_name": "オーガニックAyumi",
-    "content": "グレイシャースタイルで買ったメリノウールカーディガン、めちゃくちゃ良い✨ 想像以上のクオリティ #グレイシャースタイル",
-    "posted_at": "2024-12-07T16:51:00+09:00",
+    "content": "グレイシャースタイルで買ったウールストール、めちゃくちゃ良い✨ 想像以上のクオリティ #グレイシャースタイル",
+    "posted_at": "2026-11-01T11:59:00+09:00",
     "likes": 1130,
     "retweets": 152,
     "replies": 79,
@@ -2381,20 +2372,20 @@
       "テック"
     ],
     "mentioned_products": [
-      "メリノウールカーディガン"
+      "ウールストール"
     ],
     "media_urls": [
       "https://example.com/img/user_post_217.jpg"
     ]
   },
   {
-    "post_id": "SNS-TW-2024-00193",
+    "post_id": "SNS-TW-2026-00193",
     "platform": "twitter",
     "post_type": "mention",
     "username": "@gadget_kota",
     "display_name": "ガジェットKota",
-    "content": "リネンシャツ、どうしようか迷ってる🤔 使ってる人いる？ #グレイシャースタイル",
-    "posted_at": "2024-12-07T17:00:00+09:00",
+    "content": "フランネルパジャマ、どうしようか迷ってる🤔 使ってる人いる？ #グレイシャースタイル",
+    "posted_at": "2026-11-01T12:23:00+09:00",
     "likes": 127,
     "retweets": 13,
     "replies": 13,
@@ -2405,18 +2396,18 @@
       "グレイシャースタイル"
     ],
     "mentioned_products": [
-      "リネンシャツ"
+      "フランネルパジャマ"
     ],
     "media_urls": []
   },
   {
-    "post_id": "SNS-IG-2024-00197",
+    "post_id": "SNS-IG-2026-00197",
     "platform": "instagram",
     "post_type": "story_mention",
     "username": "@interior_kota",
     "display_name": "Kotaのインテリア日記",
-    "content": "グレイシャースタイルでデザインシーリングライト買って正解だった👏 ずっと探してたやつ",
-    "posted_at": "2024-12-07T19:15:00+09:00",
+    "content": "グレイシャースタイルでガラスシェードペンダント買って正解だった👏 ずっと探してたやつ",
+    "posted_at": "2026-11-01T18:15:00+09:00",
     "likes": 1802,
     "retweets": 0,
     "replies": 14,
@@ -2428,18 +2419,18 @@
       "インテリア"
     ],
     "mentioned_products": [
-      "デザインシーリングライト"
+      "ガラスシェードペンダント"
     ],
     "media_urls": []
   },
   {
-    "post_id": "SNS-IG-2024-00224",
+    "post_id": "SNS-IG-2026-00224",
     "platform": "instagram",
     "post_type": "post",
     "username": "@nordic_mai",
     "display_name": "北欧好きMai",
-    "content": "収納ボックスセットを1ヶ月使ってみた感想📝 ずっと探してたやつ おすすめ度は4点！ #グレイシャースタイル",
-    "posted_at": "2024-12-07T19:20:00+09:00",
+    "content": "ファブリック収納ボックス 3個組を1ヶ月使ってみた感想📝 ずっと探してたやつ おすすめ度は4点！ #グレイシャースタイル",
+    "posted_at": "2026-11-01T18:28:00+09:00",
     "likes": 484,
     "retweets": 0,
     "replies": 37,
@@ -2451,20 +2442,20 @@
       "レビュー"
     ],
     "mentioned_products": [
-      "収納ボックスセット"
+      "ファブリック収納ボックス 3個組"
     ],
     "media_urls": [
       "https://example.com/img/review_224.jpg"
     ]
   },
   {
-    "post_id": "SNS-TW-2024-00051",
+    "post_id": "SNS-TW-2026-00051",
     "platform": "twitter",
     "post_type": "mention",
     "username": "@review_mami",
     "display_name": "レビュワーMami",
     "content": "@GlacierStyle_JP 収納付きデスクの耐久性について質問です。ギフトラッピングはできますか？",
-    "posted_at": "2024-12-07T20:50:00+09:00",
+    "posted_at": "2026-11-01T22:23:00+09:00",
     "likes": 2,
     "retweets": 0,
     "replies": 8,
@@ -2473,13 +2464,13 @@
     "media_urls": []
   },
   {
-    "post_id": "SNS-TW-2024-00052",
+    "post_id": "SNS-TW-2026-00052",
     "platform": "twitter",
     "post_type": "reply",
     "username": "@GlacierStyle_JP",
     "display_name": "GlacierStyle公式",
     "content": "@@review_mami お問い合わせありがとうございます。お手数ですが、詳細をDMでお送りください。担当者より折り返しご連絡いたします。",
-    "posted_at": "2024-12-07T21:41:00+09:00",
+    "posted_at": "2026-11-02T00:37:00+09:00",
     "likes": 16,
     "retweets": 0,
     "replies": 1,
@@ -2488,13 +2479,13 @@
     "media_urls": []
   },
   {
-    "post_id": "SNS-TW-2024-00205",
+    "post_id": "SNS-TW-2026-00205",
     "platform": "twitter",
     "post_type": "mention",
     "username": "@gift_daiki",
     "display_name": "ギフト探しDaiki",
     "content": "@GlacierStyle_JP 注文番号ORD-2024-69974141の件で問い合わせです。キャンセルは可能でしょうか",
-    "posted_at": "2024-12-07T21:56:00+09:00",
+    "posted_at": "2026-11-02T01:16:00+09:00",
     "likes": 15,
     "retweets": 0,
     "replies": 7,
@@ -2503,13 +2494,13 @@
     "media_urls": []
   },
   {
-    "post_id": "SNS-TW-2024-00220",
+    "post_id": "SNS-TW-2026-00220",
     "platform": "twitter",
     "post_type": "mention",
     "username": "@interior_ryota",
     "display_name": "Ryotaのインテリア日記",
-    "content": "グレイシャースタイルでコーヒーメーカー買って正解だった👏 リピート決定",
-    "posted_at": "2024-12-07T23:55:00+09:00",
+    "content": "グレイシャースタイルで電気ケトル 0.8L買って正解だった👏 リピート決定",
+    "posted_at": "2026-11-02T06:26:00+09:00",
     "likes": 75,
     "retweets": 175,
     "replies": 24,
@@ -2519,18 +2510,18 @@
       "グレイシャースタイル"
     ],
     "mentioned_products": [
-      "コーヒーメーカー"
+      "電気ケトル 0.8L"
     ],
     "media_urls": []
   },
   {
-    "post_id": "SNS-IG-2024-00216",
+    "post_id": "SNS-IG-2026-00216",
     "platform": "instagram",
     "post_type": "story_mention",
     "username": "@office_megumi",
     "display_name": "オフィスワークMegumi",
-    "content": "リネンシャツがお気に入りすぎる🥰 一目惚れして買った #GlacierStyle",
-    "posted_at": "2024-12-08T07:19:00+09:00",
+    "content": "フランネルパジャマがお気に入りすぎる🥰 一目惚れして買った #GlacierStyle",
+    "posted_at": "2026-11-03T01:46:00+09:00",
     "likes": 1847,
     "retweets": 0,
     "replies": 75,
@@ -2541,40 +2532,38 @@
       "グレイシャースタイル"
     ],
     "mentioned_products": [
-      "リネンシャツ"
+      "フランネルパジャマ"
     ],
     "media_urls": []
   },
   {
-    "post_id": "SNS-IG-2024-00258",
+    "post_id": "SNS-IG-2026-00258",
     "platform": "instagram",
     "post_type": "mention",
     "username": "@modern_kazuki",
     "display_name": "モダンリビングKazuki",
-    "content": "グレイシャースタイルって送料いくらだっけ？モダンデスクライト買いたいんだけど",
-    "posted_at": "2024-12-08T09:01:00+09:00",
+    "content": "先月届いたLEDデスクライト 調光式、夜に急に暗くなったり明るくなったりする。問い合わせ中",
+    "posted_at": "2026-11-03T06:12:00+09:00",
     "likes": 72,
     "retweets": 0,
     "replies": 6,
     "hashtags": [
-      "暮らし",
-      "インテリア",
-      "丁寧な暮らし",
-      "グレイシャースタイル"
+      "グレイシャースタイル",
+      "デスクライト"
     ],
     "mentioned_products": [
-      "モダンデスクライト"
+      "LEDデスクライト 調光式"
     ],
     "media_urls": []
   },
   {
-    "post_id": "SNS-TW-2024-00078",
+    "post_id": "SNS-TW-2026-00078",
     "platform": "twitter",
     "post_type": "post",
     "username": "@gift_ayumi",
     "display_name": "ギフト探しAyumi",
-    "content": "ずっと気になってたLED調光デスクライト、ついにゲット🎉 ずっと探してたやつ #グレイシャースタイル",
-    "posted_at": "2024-12-08T09:39:00+09:00",
+    "content": "ずっと気になってたLEDデスクライト 調光式、ついにゲット🎉 ずっと探してたやつ #グレイシャースタイル",
+    "posted_at": "2026-11-03T07:51:00+09:00",
     "likes": 1995,
     "retweets": 154,
     "replies": 40,
@@ -2586,18 +2575,18 @@
       "インテリア"
     ],
     "mentioned_products": [
-      "LED調光デスクライト"
+      "LEDデスクライト 調光式"
     ],
     "media_urls": []
   },
   {
-    "post_id": "SNS-IG-2024-00014",
+    "post_id": "SNS-IG-2026-00014",
     "platform": "instagram",
     "post_type": "mention",
     "username": "@design_nana",
     "display_name": "デザイン好きNana",
-    "content": "北欧インテリア図鑑、どうしようか迷ってる🤔 使ってる人いる？ #グレイシャースタイル",
-    "posted_at": "2024-12-08T12:51:00+09:00",
+    "content": "リングノート A5、どうしようか迷ってる🤔 使ってる人いる？ #グレイシャースタイル",
+    "posted_at": "2026-11-03T16:13:00+09:00",
     "likes": 65,
     "retweets": 0,
     "replies": 15,
@@ -2607,18 +2596,18 @@
       "グレイシャースタイル"
     ],
     "mentioned_products": [
-      "北欧インテリア図鑑"
+      "リングノート A5"
     ],
     "media_urls": []
   },
   {
-    "post_id": "SNS-TW-2024-00157",
+    "post_id": "SNS-TW-2026-00157",
     "platform": "twitter",
     "post_type": "post",
     "username": "@interior_ryota",
     "display_name": "Ryotaのインテリア日記",
-    "content": "グレイシャースタイルのステンレスキッチンツールセット、本当におすすめ！ 買って本当によかった #インテリア好き",
-    "posted_at": "2024-12-08T13:43:00+09:00",
+    "content": "グレイシャースタイルの三徳包丁 ステンレス、本当におすすめ！ 買って本当によかった #インテリア好き",
+    "posted_at": "2026-11-03T18:28:00+09:00",
     "likes": 1790,
     "retweets": 171,
     "replies": 25,
@@ -2628,18 +2617,18 @@
       "グレイシャースタイル"
     ],
     "mentioned_products": [
-      "ステンレスキッチンツールセット"
+      "三徳包丁 ステンレス"
     ],
     "media_urls": []
   },
   {
-    "post_id": "SNS-TW-2024-00122",
+    "post_id": "SNS-TW-2026-00122",
     "platform": "twitter",
     "post_type": "mention",
     "username": "@simple_life_yuji",
     "display_name": "シンプルライフYuji",
-    "content": "プレミアムカシミヤセーター、どうしようか迷ってる🤔 使ってる人いる？ #グレイシャースタイル",
-    "posted_at": "2024-12-08T13:57:00+09:00",
+    "content": "カシミヤマフラー、どうしようか迷ってる🤔 使ってる人いる？ #グレイシャースタイル",
+    "posted_at": "2026-11-03T19:05:00+09:00",
     "likes": 69,
     "retweets": 18,
     "replies": 11,
@@ -2650,18 +2639,18 @@
       "テック"
     ],
     "mentioned_products": [
-      "プレミアムカシミヤセーター"
+      "カシミヤマフラー"
     ],
     "media_urls": []
   },
   {
-    "post_id": "SNS-IG-2024-00133",
+    "post_id": "SNS-IG-2026-00133",
     "platform": "instagram",
     "post_type": "mention",
     "username": "@design_ayumi",
     "display_name": "デザイン好きAyumi",
     "content": "配送遅延でリネンシャツが届くの遅れてる。連絡もないし不安",
-    "posted_at": "2024-12-08T14:45:00+09:00",
+    "posted_at": "2026-11-03T21:10:00+09:00",
     "likes": 21,
     "retweets": 0,
     "replies": 14,
@@ -2672,13 +2661,13 @@
     "media_urls": []
   },
   {
-    "post_id": "SNS-TW-2024-00175",
+    "post_id": "SNS-TW-2026-00175",
     "platform": "twitter",
     "post_type": "post",
     "username": "@cozy_misaki",
     "display_name": "コージーライフMisaki",
-    "content": "【購入レビュー】ステンレスキッチンツールセット ⭐5\nSNSで見て気になってた #GlacierStyle",
-    "posted_at": "2024-12-08T15:11:00+09:00",
+    "content": "【購入レビュー】三徳包丁 ステンレス ⭐5\nSNSで見て気になってた #GlacierStyle",
+    "posted_at": "2026-11-03T22:18:00+09:00",
     "likes": 626,
     "retweets": 133,
     "replies": 28,
@@ -2689,20 +2678,20 @@
       "レビュー"
     ],
     "mentioned_products": [
-      "ステンレスキッチンツールセット"
+      "三徳包丁 ステンレス"
     ],
     "media_urls": [
       "https://example.com/img/review_175.jpg"
     ]
   },
   {
-    "post_id": "SNS-TW-2024-00125",
+    "post_id": "SNS-TW-2026-00125",
     "platform": "twitter",
     "post_type": "post",
     "username": "@interior_yuko",
     "display_name": "Yukoのインテリア日記",
-    "content": "【購入レビュー】北欧風フロアライト ⭐3\nコスパ最高 #GlacierStyle",
-    "posted_at": "2024-12-08T16:26:00+09:00",
+    "content": "【購入レビュー】ウッドフロアライト ⭐3\nコスパ最高 #GlacierStyle",
+    "posted_at": "2026-11-04T01:34:00+09:00",
     "likes": 785,
     "retweets": 133,
     "replies": 33,
@@ -2714,20 +2703,20 @@
       "レビュー"
     ],
     "mentioned_products": [
-      "北欧風フロアライト"
+      "ウッドフロアライト"
     ],
     "media_urls": [
       "https://example.com/img/review_125.jpg"
     ]
   },
   {
-    "post_id": "SNS-IG-2024-00023",
+    "post_id": "SNS-IG-2026-00023",
     "platform": "instagram",
     "post_type": "post",
     "username": "@nordic_taro",
     "display_name": "北欧好きTaro",
     "content": "念願の北欧風ペンダントライトが我が家に！ 買って本当によかった #新生活 #グレイシャースタイル",
-    "posted_at": "2024-12-08T17:14:00+09:00",
+    "posted_at": "2026-11-04T03:39:00+09:00",
     "likes": 2240,
     "retweets": 0,
     "replies": 60,
@@ -2746,13 +2735,13 @@
     ]
   },
   {
-    "post_id": "SNS-IG-2024-00005",
+    "post_id": "SNS-IG-2026-00005",
     "platform": "instagram",
     "post_type": "mention",
     "username": "@interior_naomi",
     "display_name": "Naomiのインテリア日記",
-    "content": "デザインシーリングライトが届いた！ 思ってた以上にクオリティ高くて大満足😊 #GlacierStyle #グレイシャースタイル",
-    "posted_at": "2024-12-08T17:28:00+09:00",
+    "content": "ガラスシェードペンダントが届いた！ 思ってた以上にクオリティ高くて大満足😊 #GlacierStyle #グレイシャースタイル",
+    "posted_at": "2026-11-04T04:16:00+09:00",
     "likes": 554,
     "retweets": 0,
     "replies": 35,
@@ -2764,20 +2753,20 @@
       "ガジェット"
     ],
     "mentioned_products": [
-      "デザインシーリングライト"
+      "ガラスシェードペンダント"
     ],
     "media_urls": [
       "https://example.com/img/user_post_005.jpg"
     ]
   },
   {
-    "post_id": "SNS-TW-2024-00036",
+    "post_id": "SNS-TW-2026-00036",
     "platform": "twitter",
     "post_type": "post",
     "username": "@organic_takeshi",
     "display_name": "オーガニックTakeshi",
-    "content": "吊り下げペンダントライトがお気に入りすぎる🥰 友達にも褒められた #GlacierStyle",
-    "posted_at": "2024-12-08T17:51:00+09:00",
+    "content": "ガラスシェードペンダントがお気に入りすぎる🥰 友達にも褒められた #GlacierStyle",
+    "posted_at": "2026-11-04T05:16:00+09:00",
     "likes": 370,
     "retweets": 106,
     "replies": 23,
@@ -2789,18 +2778,18 @@
       "インテリア"
     ],
     "mentioned_products": [
-      "吊り下げペンダントライト"
+      "ガラスシェードペンダント"
     ],
     "media_urls": []
   },
   {
-    "post_id": "SNS-TW-2024-00126",
+    "post_id": "SNS-TW-2026-00126",
     "platform": "twitter",
     "post_type": "mention",
     "username": "@lifestyle_ayumi",
     "display_name": "Ayumi｜暮らしを楽しむ",
     "content": "@GlacierStyle_JP 注文番号ORD-2024-87987124の件で問い合わせです。キャンセルは可能でしょうか",
-    "posted_at": "2024-12-08T17:51:00+09:00",
+    "posted_at": "2026-11-04T05:16:00+09:00",
     "likes": 11,
     "retweets": 0,
     "replies": 7,
@@ -2809,13 +2798,13 @@
     "media_urls": []
   },
   {
-    "post_id": "SNS-TW-2024-00127",
+    "post_id": "SNS-TW-2026-00127",
     "platform": "twitter",
     "post_type": "reply",
     "username": "@GlacierStyle_JP",
     "display_name": "GlacierStyle公式",
     "content": "@@lifestyle_ayumi この度はご連絡いただきありがとうございます。ご不明点がございましたら、いつでもお問い合わせください。",
-    "posted_at": "2024-12-08T18:29:00+09:00",
+    "posted_at": "2026-11-04T06:55:00+09:00",
     "likes": 15,
     "retweets": 0,
     "replies": 3,
@@ -2824,13 +2813,13 @@
     "media_urls": []
   },
   {
-    "post_id": "SNS-TW-2024-00249",
+    "post_id": "SNS-TW-2026-00249",
     "platform": "twitter",
     "post_type": "post",
     "username": "@lifestyle_megumi",
     "display_name": "Megumi｜暮らしを楽しむ",
-    "content": "ウォールシェルフを1ヶ月使ってみた感想📝 デザインがシンプルで使いやすい おすすめ度は5点！ #グレイシャースタイル",
-    "posted_at": "2024-12-08T21:06:00+09:00",
+    "content": "壁面ウッドシェルフを1ヶ月使ってみた感想📝 デザインがシンプルで使いやすい おすすめ度は5点！ #グレイシャースタイル",
+    "posted_at": "2026-11-04T13:45:00+09:00",
     "likes": 796,
     "retweets": 116,
     "replies": 18,
@@ -2843,20 +2832,20 @@
       "レビュー"
     ],
     "mentioned_products": [
-      "ウォールシェルフ"
+      "壁面ウッドシェルフ"
     ],
     "media_urls": [
       "https://example.com/img/review_249.jpg"
     ]
   },
   {
-    "post_id": "SNS-TW-2024-00056",
+    "post_id": "SNS-TW-2026-00056",
     "platform": "twitter",
     "post_type": "mention",
     "username": "@fashion_sho",
     "display_name": "ファッションSho",
-    "content": "吊り下げペンダントライト、在庫切れになってた…入荷いつかな",
-    "posted_at": "2024-12-08T22:16:00+09:00",
+    "content": "ガラスシェードペンダント、在庫切れになってた…入荷いつかな",
+    "posted_at": "2026-11-04T16:48:00+09:00",
     "likes": 25,
     "retweets": 12,
     "replies": 3,
@@ -2868,18 +2857,18 @@
       "ガジェット"
     ],
     "mentioned_products": [
-      "吊り下げペンダントライト"
+      "ガラスシェードペンダント"
     ],
     "media_urls": []
   },
   {
-    "post_id": "SNS-IG-2024-00212",
+    "post_id": "SNS-IG-2026-00212",
     "platform": "instagram",
     "post_type": "mention",
     "username": "@minimal_ken",
     "display_name": "ミニマリストKen",
-    "content": "グレイシャースタイルで注文した耐熱ガラスポットがまだ届かない…どうなってるの？",
-    "posted_at": "2024-12-08T23:18:00+09:00",
+    "content": "グレイシャースタイルで注文したダブルウォールグラスがまだ届かない…どうなってるの？",
+    "posted_at": "2026-11-04T19:30:00+09:00",
     "likes": 75,
     "retweets": 0,
     "replies": 4,
@@ -2887,20 +2876,20 @@
       "グレイシャースタイル"
     ],
     "mentioned_products": [
-      "耐熱ガラスポット"
+      "ダブルウォールグラス"
     ],
     "media_urls": [
       "https://example.com/img/issue_212.jpg"
     ]
   },
   {
-    "post_id": "SNS-TW-2024-00173",
+    "post_id": "SNS-TW-2026-00173",
     "platform": "twitter",
     "post_type": "mention",
     "username": "@review_ryota",
     "display_name": "レビュワーRyota",
-    "content": "リネンシャツのサイズ感が知りたい。実際に使ってる人教えて〜",
-    "posted_at": "2024-12-09T08:31:00+09:00",
+    "content": "フランネルパジャマのサイズ感が知りたい。実際に使ってる人教えて〜",
+    "posted_at": "2026-11-05T19:34:00+09:00",
     "likes": 106,
     "retweets": 2,
     "replies": 32,
@@ -2910,18 +2899,18 @@
       "GlacierStyle"
     ],
     "mentioned_products": [
-      "リネンシャツ"
+      "フランネルパジャマ"
     ],
     "media_urls": []
   },
   {
-    "post_id": "SNS-IG-2024-00102",
+    "post_id": "SNS-IG-2026-00102",
     "platform": "instagram",
     "post_type": "mention",
     "username": "@design_haruka",
     "display_name": "デザイン好きHaruka",
-    "content": "モダンデスクライト、どうしようか迷ってる🤔 使ってる人いる？ #グレイシャースタイル",
-    "posted_at": "2024-12-09T09:47:00+09:00",
+    "content": "LEDデスクライト 調光式、どうしようか迷ってる🤔 使ってる人いる？ #グレイシャースタイル",
+    "posted_at": "2026-11-05T22:52:00+09:00",
     "likes": 12,
     "retweets": 0,
     "replies": 31,
@@ -2932,18 +2921,18 @@
       "グレイシャースタイル"
     ],
     "mentioned_products": [
-      "モダンデスクライト"
+      "LEDデスクライト 調光式"
     ],
     "media_urls": []
   },
   {
-    "post_id": "SNS-TW-2024-00048",
+    "post_id": "SNS-TW-2026-00048",
     "platform": "twitter",
     "post_type": "mention",
     "username": "@room_taro",
     "display_name": "お部屋づくりTaro",
-    "content": "グレイシャースタイルって送料いくらだっけ？ワイヤレスイヤホンPro買いたいんだけど",
-    "posted_at": "2024-12-09T11:01:00+09:00",
+    "content": "グレイシャースタイルって送料いくらだっけ？トラベルポーチ 3点セット買いたいんだけど",
+    "posted_at": "2026-11-06T02:05:00+09:00",
     "likes": 65,
     "retweets": 13,
     "replies": 38,
@@ -2954,18 +2943,18 @@
       "グレイシャースタイル"
     ],
     "mentioned_products": [
-      "ワイヤレスイヤホンPro"
+      "トラベルポーチ 3点セット"
     ],
     "media_urls": []
   },
   {
-    "post_id": "SNS-TW-2024-00057",
+    "post_id": "SNS-TW-2026-00057",
     "platform": "twitter",
     "post_type": "mention",
     "username": "@interior_kazuki",
     "display_name": "Kazukiのインテリア日記",
-    "content": "ずっと気になってた収納ボックスセット、ついにゲット🎉 ずっと探してたやつ #グレイシャースタイル",
-    "posted_at": "2024-12-09T11:49:00+09:00",
+    "content": "ずっと気になってたファブリック収納ボックス 3個組、ついにゲット🎉 ずっと探してたやつ #グレイシャースタイル",
+    "posted_at": "2026-11-06T04:11:00+09:00",
     "likes": 2670,
     "retweets": 171,
     "replies": 34,
@@ -2977,20 +2966,20 @@
       "インテリア"
     ],
     "mentioned_products": [
-      "収納ボックスセット"
+      "ファブリック収納ボックス 3個組"
     ],
     "media_urls": [
       "https://example.com/img/user_post_057.jpg"
     ]
   },
   {
-    "post_id": "SNS-TW-2024-00257",
+    "post_id": "SNS-TW-2026-00257",
     "platform": "twitter",
     "post_type": "post",
     "username": "@lifestyle_satoshi",
     "display_name": "Satoshi｜暮らしを楽しむ",
-    "content": "念願の収納ボックスセットが我が家に！ デザインがシンプルで使いやすい #新生活 #グレイシャースタイル",
-    "posted_at": "2024-12-09T12:05:00+09:00",
+    "content": "念願のファブリック収納ボックス 3個組が我が家に！ デザインがシンプルで使いやすい #新生活 #グレイシャースタイル",
+    "posted_at": "2026-11-06T04:53:00+09:00",
     "likes": 470,
     "retweets": 52,
     "replies": 46,
@@ -3002,20 +2991,20 @@
       "北欧インテリア"
     ],
     "mentioned_products": [
-      "収納ボックスセット"
+      "ファブリック収納ボックス 3個組"
     ],
     "media_urls": [
       "https://example.com/img/user_post_257.jpg"
     ]
   },
   {
-    "post_id": "SNS-IG-2024-00054",
+    "post_id": "SNS-IG-2026-00054",
     "platform": "instagram",
     "post_type": "mention",
     "username": "@tech_akiko",
     "display_name": "テック好きAkiko",
     "content": "配送遅延でメリノウールカーディガンが届くの遅れてる。連絡もないし不安",
-    "posted_at": "2024-12-09T15:01:00+09:00",
+    "posted_at": "2026-11-06T12:32:00+09:00",
     "likes": 24,
     "retweets": 0,
     "replies": 13,
@@ -3024,13 +3013,13 @@
     "media_urls": []
   },
   {
-    "post_id": "SNS-TW-2024-00228",
+    "post_id": "SNS-TW-2026-00228",
     "platform": "twitter",
     "post_type": "mention",
     "username": "@nordic_yuki",
     "display_name": "北欧好きYuki",
     "content": "@GlacierStyle_JP 注文番号ORD-2024-67609365の件で問い合わせです。配送状況を確認したいです",
-    "posted_at": "2024-12-09T15:19:00+09:00",
+    "posted_at": "2026-11-06T13:19:00+09:00",
     "likes": 29,
     "retweets": 0,
     "replies": 7,
@@ -3039,13 +3028,13 @@
     "media_urls": []
   },
   {
-    "post_id": "SNS-TW-2024-00017",
+    "post_id": "SNS-TW-2026-00017",
     "platform": "twitter",
     "post_type": "mention",
     "username": "@design_taro",
     "display_name": "デザイン好きTaro",
-    "content": "友達にもおすすめしたいプレミアムカシミヤセーター💕 買って本当によかった #グレイシャースタイル",
-    "posted_at": "2024-12-09T16:31:00+09:00",
+    "content": "友達にもおすすめしたいカシミヤマフラー💕 買って本当によかった #グレイシャースタイル",
+    "posted_at": "2026-11-06T16:27:00+09:00",
     "likes": 2893,
     "retweets": 68,
     "replies": 35,
@@ -3056,20 +3045,20 @@
       "北欧インテリア"
     ],
     "mentioned_products": [
-      "プレミアムカシミヤセーター"
+      "カシミヤマフラー"
     ],
     "media_urls": [
       "https://example.com/img/user_post_017.jpg"
     ]
   },
   {
-    "post_id": "SNS-TW-2024-00118",
+    "post_id": "SNS-TW-2026-00118",
     "platform": "twitter",
     "post_type": "post",
     "username": "@work_from_home_ryota",
     "display_name": "在宅ワーカーRyota",
-    "content": "ウォールシェルフのおかげで部屋がおしゃれになった✨ グレイシャースタイル最高！",
-    "posted_at": "2024-12-09T18:03:00+09:00",
+    "content": "壁面ウッドシェルフのおかげで部屋がおしゃれになった✨ グレイシャースタイル最高！",
+    "posted_at": "2026-11-06T20:27:00+09:00",
     "likes": 363,
     "retweets": 52,
     "replies": 32,
@@ -3081,18 +3070,18 @@
       "ガジェット"
     ],
     "mentioned_products": [
-      "ウォールシェルフ"
+      "壁面ウッドシェルフ"
     ],
     "media_urls": []
   },
   {
-    "post_id": "SNS-IG-2024-00256",
+    "post_id": "SNS-IG-2026-00256",
     "platform": "instagram",
     "post_type": "mention",
     "username": "@modern_kota",
     "display_name": "モダンリビングKota",
-    "content": "スタイリッシュデスクライト、期待以上でした✨ 毎日使うのが楽しみ #グレイシャースタイル #買ってよかった",
-    "posted_at": "2024-12-09T19:03:00+09:00",
+    "content": "クリップ式LEDライト、期待以上でした✨ 毎日使うのが楽しみ #グレイシャースタイル #買ってよかった",
+    "posted_at": "2026-11-06T23:04:00+09:00",
     "likes": 706,
     "retweets": 0,
     "replies": 25,
@@ -3104,20 +3093,20 @@
       "ステイホーム"
     ],
     "mentioned_products": [
-      "スタイリッシュデスクライト"
+      "クリップ式LEDライト"
     ],
     "media_urls": [
       "https://example.com/img/user_post_256.jpg"
     ]
   },
   {
-    "post_id": "SNS-IG-2024-00092",
+    "post_id": "SNS-IG-2026-00092",
     "platform": "instagram",
     "post_type": "mention",
     "username": "@eco_kazuki",
     "display_name": "エコライフKazuki",
-    "content": "セールでリネンシャツをお得にゲット！ 一目惚れして買った #グレイシャースタイル #お買い得",
-    "posted_at": "2024-12-09T20:37:00+09:00",
+    "content": "セールでフランネルパジャマをお得にゲット！ 一目惚れして買った #グレイシャースタイル #お買い得",
+    "posted_at": "2026-11-07T03:09:00+09:00",
     "likes": 1851,
     "retweets": 0,
     "replies": 18,
@@ -3128,20 +3117,20 @@
       "テック"
     ],
     "mentioned_products": [
-      "リネンシャツ"
+      "フランネルパジャマ"
     ],
     "media_urls": [
       "https://example.com/img/user_post_092.jpg"
     ]
   },
   {
-    "post_id": "SNS-TW-2024-00085",
+    "post_id": "SNS-TW-2026-00085",
     "platform": "twitter",
     "post_type": "post",
     "username": "@minimal_yuki",
     "display_name": "ミニマリストYuki",
-    "content": "【レビュー】グレイシャースタイルのウォールシェルフ使ってみた。\n\n良い点👍\n・サイズ感ぴったり\n・コスパ◎\n\n気になる点👎\n・サイズがちょっと大きい\n\n総合: 4/5 #グレイシャースタイル #レビュー",
-    "posted_at": "2024-12-09T21:17:00+09:00",
+    "content": "【レビュー】グレイシャースタイルの壁面ウッドシェルフ使ってみた。\n\n良い点👍\n・サイズ感ぴったり\n・コスパ◎\n\n気になる点👎\n・サイズがちょっと大きい\n\n総合: 4/5 #グレイシャースタイル #レビュー",
+    "posted_at": "2026-11-07T04:54:00+09:00",
     "likes": 1180,
     "retweets": 75,
     "replies": 44,
@@ -3153,20 +3142,20 @@
       "レビュー"
     ],
     "mentioned_products": [
-      "ウォールシェルフ"
+      "壁面ウッドシェルフ"
     ],
     "media_urls": [
       "https://example.com/img/review_085.jpg"
     ]
   },
   {
-    "post_id": "SNS-TW-2024-00191",
+    "post_id": "SNS-TW-2026-00191",
     "platform": "twitter",
     "post_type": "post",
     "username": "@lifestyle_hiroshi",
     "display_name": "Hiroshi｜暮らしを楽しむ",
-    "content": "コーヒーメーカーをギフトラッピングしてもらった🎀 リピート決定 #グレイシャースタイル",
-    "posted_at": "2024-12-09T21:52:00+09:00",
+    "content": "電気ケトル 0.8Lをギフトラッピングしてもらった🎀 リピート決定 #グレイシャースタイル",
+    "posted_at": "2026-11-07T06:25:00+09:00",
     "likes": 586,
     "retweets": 41,
     "replies": 40,
@@ -3178,20 +3167,20 @@
       "プレゼント"
     ],
     "mentioned_products": [
-      "コーヒーメーカー"
+      "電気ケトル 0.8L"
     ],
     "media_urls": [
       "https://example.com/img/gift_191.jpg"
     ]
   },
   {
-    "post_id": "SNS-TW-2024-00098",
+    "post_id": "SNS-TW-2026-00098",
     "platform": "twitter",
     "post_type": "mention",
     "username": "@nordic_kazuki",
     "display_name": "北欧好きKazuki",
     "content": "@GlacierStyle_JP 注文番号ORD-2024-90940125の件で問い合わせです。交換をお願いしたいです",
-    "posted_at": "2024-12-09T22:16:00+09:00",
+    "posted_at": "2026-11-07T07:28:00+09:00",
     "likes": 19,
     "retweets": 0,
     "replies": 8,
@@ -3200,13 +3189,13 @@
     "media_urls": []
   },
   {
-    "post_id": "SNS-IG-2024-00146",
+    "post_id": "SNS-IG-2026-00146",
     "platform": "instagram",
     "post_type": "post",
     "username": "@fashion_megumi",
     "display_name": "ファッションMegumi",
-    "content": "グレイシャースタイルで買ったコーヒーメーカー、めちゃくちゃ良い✨ コスパ最高 #グレイシャースタイル",
-    "posted_at": "2024-12-09T22:41:00+09:00",
+    "content": "グレイシャースタイルで買った電気ケトル 0.8L、めちゃくちゃ良い✨ コスパ最高 #グレイシャースタイル",
+    "posted_at": "2026-11-07T08:33:00+09:00",
     "likes": 322,
     "retweets": 0,
     "replies": 57,
@@ -3216,20 +3205,20 @@
       "スマートホーム"
     ],
     "mentioned_products": [
-      "コーヒーメーカー"
+      "電気ケトル 0.8L"
     ],
     "media_urls": [
       "https://example.com/img/user_post_146.jpg"
     ]
   },
   {
-    "post_id": "SNS-TW-2024-00106",
+    "post_id": "SNS-TW-2026-00106",
     "platform": "twitter",
     "post_type": "post",
     "username": "@organic_ayumi",
     "display_name": "オーガニックAyumi",
-    "content": "耐熱ガラスポットが届いた！ 思ってた以上にクオリティ高くて大満足😊 #GlacierStyle #グレイシャースタイル",
-    "posted_at": "2024-12-09T22:55:00+09:00",
+    "content": "ダブルウォールグラスが届いた！ 思ってた以上にクオリティ高くて大満足😊 #GlacierStyle #グレイシャースタイル",
+    "posted_at": "2026-11-07T09:10:00+09:00",
     "likes": 421,
     "retweets": 42,
     "replies": 21,
@@ -3239,18 +3228,18 @@
       "グレイシャースタイル"
     ],
     "mentioned_products": [
-      "耐熱ガラスポット"
+      "ダブルウォールグラス"
     ],
     "media_urls": []
   },
   {
-    "post_id": "SNS-TW-2024-00154",
+    "post_id": "SNS-TW-2026-00154",
     "platform": "twitter",
     "post_type": "mention",
     "username": "@fashion_megumi",
     "display_name": "ファッションMegumi",
-    "content": "グレイシャースタイルのセールっていつ始まる？ステンレスキッチンツールセット狙ってる",
-    "posted_at": "2024-12-09T23:35:00+09:00",
+    "content": "グレイシャースタイルのセールっていつ始まる？三徳包丁 ステンレス狙ってる",
+    "posted_at": "2026-11-07T10:54:00+09:00",
     "likes": 111,
     "retweets": 15,
     "replies": 15,
@@ -3260,18 +3249,18 @@
       "グレイシャースタイル"
     ],
     "mentioned_products": [
-      "ステンレスキッチンツールセット"
+      "三徳包丁 ステンレス"
     ],
     "media_urls": []
   },
   {
-    "post_id": "SNS-IG-2024-00260",
+    "post_id": "SNS-IG-2026-00260",
     "platform": "instagram",
     "post_type": "mention",
     "username": "@eco_kota",
     "display_name": "エコライフKota",
     "content": "グレイシャースタイルのサイト、カートに入れても消えるで困ってる😭",
-    "posted_at": "2024-12-10T07:02:00+09:00",
+    "posted_at": "2026-11-08T06:21:00+09:00",
     "likes": 76,
     "retweets": 0,
     "replies": 13,
@@ -3279,18 +3268,18 @@
       "グレイシャースタイル"
     ],
     "mentioned_products": [
-      "耐熱ガラスポット"
+      "ダブルウォールグラス"
     ],
     "media_urls": []
   },
   {
-    "post_id": "SNS-TW-2024-00128",
+    "post_id": "SNS-TW-2026-00128",
     "platform": "twitter",
     "post_type": "mention",
     "username": "@gadget_takeshi",
     "display_name": "ガジェットTakeshi",
-    "content": "グレイシャースタイルのセールっていつ始まる？ステンレスキッチンツールセット狙ってる",
-    "posted_at": "2024-12-10T09:25:00+09:00",
+    "content": "グレイシャースタイルのセールっていつ始まる？三徳包丁 ステンレス狙ってる",
+    "posted_at": "2026-11-08T12:35:00+09:00",
     "likes": 55,
     "retweets": 16,
     "replies": 36,
@@ -3300,18 +3289,18 @@
       "グレイシャースタイル"
     ],
     "mentioned_products": [
-      "ステンレスキッチンツールセット"
+      "三徳包丁 ステンレス"
     ],
     "media_urls": []
   },
   {
-    "post_id": "SNS-TW-2024-00262",
+    "post_id": "SNS-TW-2026-00262",
     "platform": "twitter",
     "post_type": "mention",
     "username": "@interior_ayumi",
     "display_name": "Ayumiのインテリア日記",
     "content": "@GlacierStyle_JP 北欧風フロアライトのサイズ感について質問です。設置は簡単ですか？",
-    "posted_at": "2024-12-10T12:19:00+09:00",
+    "posted_at": "2026-11-08T20:09:00+09:00",
     "likes": 15,
     "retweets": 0,
     "replies": 3,
@@ -3320,13 +3309,13 @@
     "media_urls": []
   },
   {
-    "post_id": "SNS-TW-2024-00263",
+    "post_id": "SNS-TW-2026-00263",
     "platform": "twitter",
     "post_type": "reply",
     "username": "@GlacierStyle_JP",
     "display_name": "GlacierStyle公式",
     "content": "@@interior_ayumi お問い合わせありがとうございます。DMにてご注文番号をお知らせいただけますでしょうか。確認させていただきます。",
-    "posted_at": "2024-12-10T14:06:00+09:00",
+    "posted_at": "2026-11-09T00:49:00+09:00",
     "likes": 14,
     "retweets": 0,
     "replies": 0,
@@ -3335,13 +3324,13 @@
     "media_urls": []
   },
   {
-    "post_id": "SNS-TW-2024-00001",
+    "post_id": "SNS-TW-2026-00001",
     "platform": "twitter",
     "post_type": "mention",
     "username": "@organic_ayumi",
     "display_name": "オーガニックAyumi",
-    "content": "グレイシャースタイルって送料いくらだっけ？プレミアムカシミヤセーター買いたいんだけど",
-    "posted_at": "2024-12-10T14:55:00+09:00",
+    "content": "グレイシャースタイルって送料いくらだっけ？カシミヤマフラー買いたいんだけど",
+    "posted_at": "2026-11-09T02:56:00+09:00",
     "likes": 86,
     "retweets": 17,
     "replies": 26,
@@ -3352,18 +3341,18 @@
       "グレイシャースタイル"
     ],
     "mentioned_products": [
-      "プレミアムカシミヤセーター"
+      "カシミヤマフラー"
     ],
     "media_urls": []
   },
   {
-    "post_id": "SNS-TW-2024-00103",
+    "post_id": "SNS-TW-2026-00103",
     "platform": "twitter",
     "post_type": "post",
     "username": "@fashion_haruka",
     "display_name": "ファッションHaruka",
-    "content": "スタイリッシュデスクライトのおかげでリラックスできるようになった✨ グレイシャースタイル最高！",
-    "posted_at": "2024-12-10T15:25:00+09:00",
+    "content": "クリップ式LEDライトのおかげでリラックスできるようになった✨ グレイシャースタイル最高！",
+    "posted_at": "2026-11-09T04:15:00+09:00",
     "likes": 683,
     "retweets": 140,
     "replies": 42,
@@ -3375,39 +3364,39 @@
       "インテリア"
     ],
     "mentioned_products": [
-      "スタイリッシュデスクライト"
+      "クリップ式LEDライト"
     ],
     "media_urls": [
       "https://example.com/img/user_post_103.jpg"
     ]
   },
   {
-    "post_id": "SNS-TW-2024-00254",
+    "post_id": "SNS-TW-2026-00254",
     "platform": "twitter",
     "post_type": "mention",
     "username": "@cozy_hiroshi",
     "display_name": "コージーライフHiroshi",
     "content": "グレイシャースタイルのサイト、決済エラーが出るで困ってる😭",
-    "posted_at": "2024-12-10T15:58:00+09:00",
+    "posted_at": "2026-11-09T05:41:00+09:00",
     "likes": 12,
     "retweets": 16,
     "replies": 13,
     "hashtags": [],
     "mentioned_products": [
-      "スタイリッシュデスクライト"
+      "クリップ式LEDライト"
     ],
     "media_urls": [
       "https://example.com/img/issue_254.jpg"
     ]
   },
   {
-    "post_id": "SNS-IG-2024-00015",
+    "post_id": "SNS-IG-2026-00015",
     "platform": "instagram",
     "post_type": "post",
     "username": "@modern_nana",
     "display_name": "モダンリビングNana",
-    "content": "セールでワイヤレスイヤホンProをお得にゲット！ 家族も気に入ってる #グレイシャースタイル #お買い得",
-    "posted_at": "2024-12-10T16:54:00+09:00",
+    "content": "セールでトラベルポーチ 3点セットをお得にゲット！ 家族も気に入ってる #グレイシャースタイル #お買い得",
+    "posted_at": "2026-11-09T08:07:00+09:00",
     "likes": 455,
     "retweets": 0,
     "replies": 30,
@@ -3418,20 +3407,20 @@
       "テック"
     ],
     "mentioned_products": [
-      "ワイヤレスイヤホンPro"
+      "トラベルポーチ 3点セット"
     ],
     "media_urls": [
       "https://example.com/img/user_post_015.jpg"
     ]
   },
   {
-    "post_id": "SNS-TW-2024-00138",
+    "post_id": "SNS-TW-2026-00138",
     "platform": "twitter",
     "post_type": "post",
     "username": "@room_mami",
     "display_name": "お部屋づくりMami",
-    "content": "セールでリネンシャツをお得にゲット！ SNSで見て気になってた #グレイシャースタイル #お買い得",
-    "posted_at": "2024-12-10T23:00:00+09:00",
+    "content": "セールでフランネルパジャマをお得にゲット！ SNSで見て気になってた #グレイシャースタイル #お買い得",
+    "posted_at": "2026-11-10T00:03:00+09:00",
     "likes": 1954,
     "retweets": 178,
     "replies": 75,
@@ -3442,20 +3431,20 @@
       "スマートホーム"
     ],
     "mentioned_products": [
-      "リネンシャツ"
+      "フランネルパジャマ"
     ],
     "media_urls": [
       "https://example.com/img/user_post_138.jpg"
     ]
   },
   {
-    "post_id": "SNS-TW-2024-00067",
+    "post_id": "SNS-TW-2026-00067",
     "platform": "twitter",
     "post_type": "mention",
     "username": "@nordic_nana",
     "display_name": "北欧好きNana",
     "content": "グレイシャースタイル、凹みで残念。もう少し改善してほしい",
-    "posted_at": "2024-12-11T08:35:00+09:00",
+    "posted_at": "2026-11-11T01:04:00+09:00",
     "likes": 74,
     "retweets": 13,
     "replies": 1,
@@ -3466,13 +3455,13 @@
     "media_urls": []
   },
   {
-    "post_id": "SNS-TW-2024-00068",
+    "post_id": "SNS-TW-2026-00068",
     "platform": "twitter",
     "post_type": "reply",
     "username": "@GlacierStyle_JP",
     "display_name": "GlacierStyle公式",
     "content": "@@nordic_nana この度はご連絡いただきありがとうございます。DMにてご注文番号をお知らせいただけますでしょうか。確認させていただきます。",
-    "posted_at": "2024-12-11T09:15:00+09:00",
+    "posted_at": "2026-11-11T02:49:00+09:00",
     "likes": 6,
     "retweets": 0,
     "replies": 1,
@@ -3481,32 +3470,32 @@
     "media_urls": []
   },
   {
-    "post_id": "SNS-TW-2024-00139",
+    "post_id": "SNS-TW-2026-00139",
     "platform": "twitter",
     "post_type": "mention",
     "username": "@fashion_mai",
     "display_name": "ファッションMai",
-    "content": "配送遅延で収納ボックスセットが届くの遅れてる。連絡もないし不安",
-    "posted_at": "2024-12-11T09:43:00+09:00",
+    "content": "配送遅延でファブリック収納ボックス 3個組が届くの遅れてる。連絡もないし不安",
+    "posted_at": "2026-11-11T04:02:00+09:00",
     "likes": 90,
     "retweets": 23,
     "replies": 17,
     "hashtags": [],
     "mentioned_products": [
-      "収納ボックスセット"
+      "ファブリック収納ボックス 3個組"
     ],
     "media_urls": [
       "https://example.com/img/issue_139.jpg"
     ]
   },
   {
-    "post_id": "SNS-TW-2024-00121",
+    "post_id": "SNS-TW-2026-00121",
     "platform": "twitter",
     "post_type": "post",
     "username": "@minimal_rina",
     "display_name": "ミニマリストRina",
-    "content": "リネンシャツを1ヶ月使ってみた感想📝 部屋の雰囲気がガラッと変わった！ おすすめ度は4点！ #グレイシャースタイル",
-    "posted_at": "2024-12-11T12:43:00+09:00",
+    "content": "フランネルパジャマを1ヶ月使ってみた感想📝 部屋の雰囲気がガラッと変わった！ おすすめ度は4点！ #グレイシャースタイル",
+    "posted_at": "2026-11-11T11:52:00+09:00",
     "likes": 1315,
     "retweets": 180,
     "replies": 32,
@@ -3518,20 +3507,20 @@
       "レビュー"
     ],
     "mentioned_products": [
-      "リネンシャツ"
+      "フランネルパジャマ"
     ],
     "media_urls": [
       "https://example.com/img/review_121.jpg"
     ]
   },
   {
-    "post_id": "SNS-IG-2024-00242",
+    "post_id": "SNS-IG-2026-00242",
     "platform": "instagram",
     "post_type": "story_mention",
     "username": "@lifestyle_hiroshi",
     "display_name": "Hiroshi｜暮らしを楽しむ",
-    "content": "念願の北欧風フロアライトが我が家に！ SNSで見て気になってた #新生活 #グレイシャースタイル",
-    "posted_at": "2024-12-11T13:23:00+09:00",
+    "content": "念願のウッドフロアライトが我が家に！ SNSで見て気になってた #新生活 #グレイシャースタイル",
+    "posted_at": "2026-11-11T13:36:00+09:00",
     "likes": 2202,
     "retweets": 0,
     "replies": 59,
@@ -3543,18 +3532,18 @@
       "インテリア"
     ],
     "mentioned_products": [
-      "北欧風フロアライト"
+      "ウッドフロアライト"
     ],
     "media_urls": []
   },
   {
-    "post_id": "SNS-IG-2024-00045",
+    "post_id": "SNS-IG-2026-00045",
     "platform": "instagram",
     "post_type": "story_mention",
     "username": "@work_from_home_megumi",
     "display_name": "在宅ワーカーMegumi",
-    "content": "グレイシャースタイルのオーガニックコットンTシャツ、デザインも機能も◎ 一目惚れして買った",
-    "posted_at": "2024-12-11T16:38:00+09:00",
+    "content": "グレイシャースタイルのガーゼパジャマ、デザインも機能も◎ 一目惚れして買った",
+    "posted_at": "2026-11-11T22:05:00+09:00",
     "likes": 836,
     "retweets": 0,
     "replies": 47,
@@ -3565,20 +3554,20 @@
       "ネットショッピング"
     ],
     "mentioned_products": [
-      "オーガニックコットンTシャツ"
+      "ガーゼパジャマ"
     ],
     "media_urls": [
       "https://example.com/img/user_post_045.jpg"
     ]
   },
   {
-    "post_id": "SNS-IG-2024-00161",
+    "post_id": "SNS-IG-2026-00161",
     "platform": "instagram",
     "post_type": "mention",
     "username": "@lifestyle_yuji",
     "display_name": "Yuji｜暮らしを楽しむ",
-    "content": "グレイシャースタイルのモダンデスクライト、本当におすすめ！ ずっと探してたやつ #インテリア好き",
-    "posted_at": "2024-12-11T17:17:00+09:00",
+    "content": "グレイシャースタイルのLEDデスクライト 調光式、本当におすすめ！ ずっと探してたやつ #インテリア好き",
+    "posted_at": "2026-11-11T23:47:00+09:00",
     "likes": 1719,
     "retweets": 0,
     "replies": 11,
@@ -3590,18 +3579,18 @@
       "北欧インテリア"
     ],
     "mentioned_products": [
-      "モダンデスクライト"
+      "LEDデスクライト 調光式"
     ],
     "media_urls": []
   },
   {
-    "post_id": "SNS-IG-2024-00196",
+    "post_id": "SNS-IG-2026-00196",
     "platform": "instagram",
     "post_type": "story_mention",
     "username": "@room_satoshi",
     "display_name": "お部屋づくりSatoshi",
     "content": "北欧風ペンダントライト、期待以上でした✨ 一目惚れして買った #グレイシャースタイル #買ってよかった",
-    "posted_at": "2024-12-11T17:58:00+09:00",
+    "posted_at": "2026-11-12T01:34:00+09:00",
     "likes": 776,
     "retweets": 0,
     "replies": 7,
@@ -3620,13 +3609,13 @@
     ]
   },
   {
-    "post_id": "SNS-TW-2024-00026",
+    "post_id": "SNS-TW-2026-00026",
     "platform": "twitter",
     "post_type": "mention",
     "username": "@work_from_home_satoshi",
     "display_name": "在宅ワーカーSatoshi",
-    "content": "念願の耐熱ガラスポットが我が家に！ コスパ最高 #新生活 #グレイシャースタイル",
-    "posted_at": "2024-12-11T19:03:00+09:00",
+    "content": "念願のダブルウォールグラスが我が家に！ コスパ最高 #新生活 #グレイシャースタイル",
+    "posted_at": "2026-11-12T04:24:00+09:00",
     "likes": 259,
     "retweets": 17,
     "replies": 20,
@@ -3636,20 +3625,20 @@
       "グレイシャースタイル"
     ],
     "mentioned_products": [
-      "耐熱ガラスポット"
+      "ダブルウォールグラス"
     ],
     "media_urls": [
       "https://example.com/img/user_post_026.jpg"
     ]
   },
   {
-    "post_id": "SNS-IG-2024-00059",
+    "post_id": "SNS-IG-2026-00059",
     "platform": "instagram",
     "post_type": "post",
     "username": "@work_from_home_kenji",
     "display_name": "在宅ワーカーKenji",
-    "content": "北欧インテリア図鑑をギフトラッピングしてもらった🎀 友達にも褒められた #グレイシャースタイル",
-    "posted_at": "2024-12-12T07:50:00+09:00",
+    "content": "リングノート A5をギフトラッピングしてもらった🎀 友達にも褒められた #グレイシャースタイル",
+    "posted_at": "2026-11-13T13:47:00+09:00",
     "likes": 202,
     "retweets": 0,
     "replies": 36,
@@ -3661,35 +3650,38 @@
       "プレゼント"
     ],
     "mentioned_products": [
-      "北欧インテリア図鑑"
+      "リングノート A5"
     ],
     "media_urls": []
   },
   {
-    "post_id": "SNS-TW-2024-00030",
+    "post_id": "SNS-TW-2026-00030",
     "platform": "twitter",
     "post_type": "mention",
     "username": "@tech_naomi",
     "display_name": "テック好きNaomi",
-    "content": "グレイシャースタイルのLED調光デスクライト、重さはどのくらいですか？",
-    "posted_at": "2024-12-12T08:05:00+09:00",
+    "content": "LEDデスクライト 調光式のちらつき、同じ症状の人いる？サポートに電話したけど解決してない",
+    "posted_at": "2026-11-13T14:26:00+09:00",
     "likes": 30,
     "retweets": 0,
     "replies": 3,
-    "hashtags": [],
+    "hashtags": [
+      "グレイシャースタイル",
+      "デスクライト"
+    ],
     "mentioned_products": [
-      "LED調光デスクライト"
+      "LEDデスクライト 調光式"
     ],
     "media_urls": []
   },
   {
-    "post_id": "SNS-TW-2024-00040",
+    "post_id": "SNS-TW-2026-00040",
     "platform": "twitter",
     "post_type": "mention",
     "username": "@work_from_home_akiko",
     "display_name": "在宅ワーカーAkiko",
     "content": "@GlacierStyle_JP 注文番号ORD-2024-53061640の件で問い合わせです。交換をお願いしたいです",
-    "posted_at": "2024-12-12T08:41:00+09:00",
+    "posted_at": "2026-11-13T16:00:00+09:00",
     "likes": 29,
     "retweets": 0,
     "replies": 9,
@@ -3698,13 +3690,13 @@
     "media_urls": []
   },
   {
-    "post_id": "SNS-IG-2024-00204",
+    "post_id": "SNS-IG-2026-00204",
     "platform": "instagram",
     "post_type": "mention",
     "username": "@modern_yuji",
     "display_name": "モダンリビングYuji",
-    "content": "プレミアムカシミヤセーターの耐久性ってどうなんだろう？買おうか検討中",
-    "posted_at": "2024-12-12T09:23:00+09:00",
+    "content": "カシミヤマフラーの耐久性ってどうなんだろう？買おうか検討中",
+    "posted_at": "2026-11-13T17:50:00+09:00",
     "likes": 122,
     "retweets": 0,
     "replies": 5,
@@ -3715,18 +3707,18 @@
       "グレイシャースタイル"
     ],
     "mentioned_products": [
-      "プレミアムカシミヤセーター"
+      "カシミヤマフラー"
     ],
     "media_urls": []
   },
   {
-    "post_id": "SNS-TW-2024-00143",
+    "post_id": "SNS-TW-2026-00143",
     "platform": "twitter",
     "post_type": "mention",
     "username": "@organic_yuko",
     "display_name": "オーガニックYuko",
-    "content": "グレイシャースタイルで買った北欧インテリア図鑑、めちゃくちゃ良い✨ 部屋の雰囲気がガラッと変わった！ #グレイシャースタイル",
-    "posted_at": "2024-12-12T11:28:00+09:00",
+    "content": "グレイシャースタイルで買ったリングノート A5、めちゃくちゃ良い✨ 部屋の雰囲気がガラッと変わった！ #グレイシャースタイル",
+    "posted_at": "2026-11-13T23:16:00+09:00",
     "likes": 614,
     "retweets": 18,
     "replies": 36,
@@ -3736,20 +3728,20 @@
       "グレイシャースタイル"
     ],
     "mentioned_products": [
-      "北欧インテリア図鑑"
+      "リングノート A5"
     ],
     "media_urls": [
       "https://example.com/img/user_post_143.jpg"
     ]
   },
   {
-    "post_id": "SNS-IG-2024-00137",
+    "post_id": "SNS-IG-2026-00137",
     "platform": "instagram",
     "post_type": "post",
     "username": "@interior_takeshi",
     "display_name": "Takeshiのインテリア日記",
-    "content": "グレイシャースタイルのステンレスキッチンツールセット、デザインも機能も◎ 家族も気に入ってる",
-    "posted_at": "2024-12-12T14:55:00+09:00",
+    "content": "グレイシャースタイルの三徳包丁 ステンレス、デザインも機能も◎ 家族も気に入ってる",
+    "posted_at": "2026-11-14T08:16:00+09:00",
     "likes": 2309,
     "retweets": 0,
     "replies": 8,
@@ -3759,20 +3751,20 @@
       "グレイシャースタイル"
     ],
     "mentioned_products": [
-      "ステンレスキッチンツールセット"
+      "三徳包丁 ステンレス"
     ],
     "media_urls": [
       "https://example.com/img/user_post_137.jpg"
     ]
   },
   {
-    "post_id": "SNS-IG-2024-00158",
+    "post_id": "SNS-IG-2026-00158",
     "platform": "instagram",
     "post_type": "mention",
     "username": "@room_mami",
     "display_name": "お部屋づくりMami",
-    "content": "グレイシャースタイルって送料いくらだっけ？耐熱ガラスポット買いたいんだけど",
-    "posted_at": "2024-12-12T15:10:00+09:00",
+    "content": "グレイシャースタイルって送料いくらだっけ？ダブルウォールグラス買いたいんだけど",
+    "posted_at": "2026-11-14T08:56:00+09:00",
     "likes": 125,
     "retweets": 0,
     "replies": 26,
@@ -3782,18 +3774,18 @@
       "グレイシャースタイル"
     ],
     "mentioned_products": [
-      "耐熱ガラスポット"
+      "ダブルウォールグラス"
     ],
     "media_urls": []
   },
   {
-    "post_id": "SNS-TW-2024-00141",
+    "post_id": "SNS-TW-2026-00141",
     "platform": "twitter",
     "post_type": "post",
     "username": "@office_daiki",
     "display_name": "オフィスワークDaiki",
-    "content": "グレイシャースタイルで買ったオーガニックコットンTシャツ、めちゃくちゃ良い✨ リピート決定 #グレイシャースタイル",
-    "posted_at": "2024-12-12T15:54:00+09:00",
+    "content": "グレイシャースタイルで買ったガーゼパジャマ、めちゃくちゃ良い✨ リピート決定 #グレイシャースタイル",
+    "posted_at": "2026-11-14T10:51:00+09:00",
     "likes": 1945,
     "retweets": 199,
     "replies": 23,
@@ -3804,20 +3796,20 @@
       "グレイシャースタイル"
     ],
     "mentioned_products": [
-      "オーガニックコットンTシャツ"
+      "ガーゼパジャマ"
     ],
     "media_urls": [
       "https://example.com/img/user_post_141.jpg"
     ]
   },
   {
-    "post_id": "SNS-IG-2024-00108",
+    "post_id": "SNS-IG-2026-00108",
     "platform": "instagram",
     "post_type": "post",
     "username": "@coffee_akiko",
     "display_name": "コーヒー好きAkiko",
-    "content": "スマートスピーカーのおかげで生活が快適になった✨ グレイシャースタイル最高！",
-    "posted_at": "2024-12-12T16:00:00+09:00",
+    "content": "アロマディフューザーセットのおかげで生活が快適になった✨ グレイシャースタイル最高！",
+    "posted_at": "2026-11-14T11:06:00+09:00",
     "likes": 1719,
     "retweets": 0,
     "replies": 54,
@@ -3828,20 +3820,20 @@
       "グレイシャースタイル"
     ],
     "mentioned_products": [
-      "スマートスピーカー"
+      "アロマディフューザーセット"
     ],
     "media_urls": [
       "https://example.com/img/user_post_108.jpg"
     ]
   },
   {
-    "post_id": "SNS-TW-2024-00109",
+    "post_id": "SNS-TW-2026-00109",
     "platform": "twitter",
     "post_type": "mention",
     "username": "@office_akiko",
     "display_name": "オフィスワークAkiko",
-    "content": "収納付きデスクの耐久性ってどうなんだろう？買おうか検討中",
-    "posted_at": "2024-12-12T17:00:00+09:00",
+    "content": "昇降式ワークデスクの耐久性ってどうなんだろう？買おうか検討中",
+    "posted_at": "2026-11-14T13:43:00+09:00",
     "likes": 17,
     "retweets": 3,
     "replies": 35,
@@ -3853,18 +3845,18 @@
       "ホームオフィス"
     ],
     "mentioned_products": [
-      "収納付きデスク"
+      "昇降式ワークデスク"
     ],
     "media_urls": []
   },
   {
-    "post_id": "SNS-TW-2024-00235",
+    "post_id": "SNS-TW-2026-00235",
     "platform": "twitter",
     "post_type": "post",
     "username": "@fashion_yuji",
     "display_name": "ファッションYuji",
-    "content": "セールでウォールシェルフをお得にゲット！ コスパ最高 #グレイシャースタイル #お買い得",
-    "posted_at": "2024-12-12T17:14:00+09:00",
+    "content": "セールで壁面ウッドシェルフをお得にゲット！ コスパ最高 #グレイシャースタイル #お買い得",
+    "posted_at": "2026-11-14T14:19:00+09:00",
     "likes": 2032,
     "retweets": 96,
     "replies": 39,
@@ -3875,20 +3867,20 @@
       "グレイシャースタイル"
     ],
     "mentioned_products": [
-      "ウォールシェルフ"
+      "壁面ウッドシェルフ"
     ],
     "media_urls": [
       "https://example.com/img/user_post_235.jpg"
     ]
   },
   {
-    "post_id": "SNS-IG-2024-00021",
+    "post_id": "SNS-IG-2026-00021",
     "platform": "instagram",
     "post_type": "mention",
     "username": "@lifestyle_naomi",
     "display_name": "Naomi｜暮らしを楽しむ",
-    "content": "グレイシャースタイルって送料いくらだっけ？収納付きデスク買いたいんだけど",
-    "posted_at": "2024-12-12T19:10:00+09:00",
+    "content": "グレイシャースタイルって送料いくらだっけ？昇降式ワークデスク買いたいんだけど",
+    "posted_at": "2026-11-14T19:22:00+09:00",
     "likes": 66,
     "retweets": 0,
     "replies": 22,
@@ -3900,52 +3892,52 @@
       "北欧インテリア"
     ],
     "mentioned_products": [
-      "収納付きデスク"
+      "昇降式ワークデスク"
     ],
     "media_urls": []
   },
   {
-    "post_id": "SNS-TW-2024-00072",
+    "post_id": "SNS-TW-2026-00072",
     "platform": "twitter",
     "post_type": "mention",
     "username": "@cozy_mami",
     "display_name": "コージーライフMami",
-    "content": "ウォールシェルフって他の色はありますか？ 誰か知ってる人いますか？ #グレイシャースタイル",
-    "posted_at": "2024-12-12T21:21:00+09:00",
+    "content": "壁面ウッドシェルフって他の色はありますか？ 誰か知ってる人いますか？ #グレイシャースタイル",
+    "posted_at": "2026-11-15T01:04:00+09:00",
     "likes": 28,
     "retweets": 0,
     "replies": 8,
     "hashtags": [],
     "mentioned_products": [
-      "ウォールシェルフ"
+      "壁面ウッドシェルフ"
     ],
     "media_urls": []
   },
   {
-    "post_id": "SNS-TW-2024-00234",
+    "post_id": "SNS-TW-2026-00234",
     "platform": "twitter",
     "post_type": "mention",
     "username": "@coffee_ayumi",
     "display_name": "コーヒー好きAyumi",
     "content": "カスタマーサポートに繋がらない…急ぎで確認したいのに",
-    "posted_at": "2024-12-12T22:01:00+09:00",
+    "posted_at": "2026-11-15T02:49:00+09:00",
     "likes": 68,
     "retweets": 24,
     "replies": 13,
     "hashtags": [],
     "mentioned_products": [
-      "収納付きデスク"
+      "昇降式ワークデスク"
     ],
     "media_urls": []
   },
   {
-    "post_id": "SNS-TW-2024-00073",
+    "post_id": "SNS-TW-2026-00073",
     "platform": "twitter",
     "post_type": "reply",
     "username": "@GlacierStyle_JP",
     "display_name": "GlacierStyle公式",
     "content": "@@cozy_mami ご不便をおかけし申し訳ございません。またのご利用をお待ちしております✨",
-    "posted_at": "2024-12-12T22:38:00+09:00",
+    "posted_at": "2026-11-15T04:25:00+09:00",
     "likes": 17,
     "retweets": 0,
     "replies": 0,
@@ -3954,13 +3946,13 @@
     "media_urls": []
   },
   {
-    "post_id": "SNS-IG-2024-00170",
+    "post_id": "SNS-IG-2026-00170",
     "platform": "instagram",
     "post_type": "post",
     "username": "@review_haruka",
     "display_name": "レビュワーHaruka",
-    "content": "セールでLED調光デスクライトをお得にゲット！ 部屋の雰囲気がガラッと変わった！ #グレイシャースタイル #お買い得",
-    "posted_at": "2024-12-12T23:07:00+09:00",
+    "content": "セールでLEDデスクライト 調光式をお得にゲット！ 部屋の雰囲気がガラッと変わった！ #グレイシャースタイル #お買い得",
+    "posted_at": "2026-11-15T05:41:00+09:00",
     "likes": 2377,
     "retweets": 0,
     "replies": 49,
@@ -3972,18 +3964,18 @@
       "おうち時間"
     ],
     "mentioned_products": [
-      "LED調光デスクライト"
+      "LEDデスクライト 調光式"
     ],
     "media_urls": []
   },
   {
-    "post_id": "SNS-IG-2024-00240",
+    "post_id": "SNS-IG-2026-00240",
     "platform": "instagram",
     "post_type": "mention",
     "username": "@eco_kazuki",
     "display_name": "エコライフKazuki",
-    "content": "デザインシーリングライトが届いた！ 思ってた以上にクオリティ高くて大満足😊 #GlacierStyle #グレイシャースタイル",
-    "posted_at": "2024-12-12T23:13:00+09:00",
+    "content": "ガラスシェードペンダントが届いた！ 思ってた以上にクオリティ高くて大満足😊 #GlacierStyle #グレイシャースタイル",
+    "posted_at": "2026-11-15T05:57:00+09:00",
     "likes": 2956,
     "retweets": 0,
     "replies": 28,
@@ -3994,18 +3986,18 @@
       "GlacierStyle"
     ],
     "mentioned_products": [
-      "デザインシーリングライト"
+      "ガラスシェードペンダント"
     ],
     "media_urls": []
   },
   {
-    "post_id": "SNS-TW-2024-00210",
+    "post_id": "SNS-TW-2026-00210",
     "platform": "twitter",
     "post_type": "post",
     "username": "@home_daiki",
     "display_name": "Daikiのマイホーム記録",
-    "content": "コーヒーメーカーをギフトラッピングしてもらった🎀 リピート決定 #グレイシャースタイル",
-    "posted_at": "2024-12-12T23:23:00+09:00",
+    "content": "電気ケトル 0.8Lをギフトラッピングしてもらった🎀 リピート決定 #グレイシャースタイル",
+    "posted_at": "2026-11-15T06:23:00+09:00",
     "likes": 712,
     "retweets": 47,
     "replies": 16,
@@ -4017,20 +4009,20 @@
       "プレゼント"
     ],
     "mentioned_products": [
-      "コーヒーメーカー"
+      "電気ケトル 0.8L"
     ],
     "media_urls": [
       "https://example.com/img/gift_210.jpg"
     ]
   },
   {
-    "post_id": "SNS-TW-2024-00066",
+    "post_id": "SNS-TW-2026-00066",
     "platform": "twitter",
     "post_type": "post",
     "username": "@home_naomi",
     "display_name": "Naomiのマイホーム記録",
-    "content": "【購入レビュー】北欧インテリア図鑑 ⭐3\n友達にも褒められた #GlacierStyle",
-    "posted_at": "2024-12-12T23:43:00+09:00",
+    "content": "【購入レビュー】リングノート A5 ⭐3\n友達にも褒められた #GlacierStyle",
+    "posted_at": "2026-11-15T07:15:00+09:00",
     "likes": 527,
     "retweets": 151,
     "replies": 28,
@@ -4041,20 +4033,20 @@
       "レビュー"
     ],
     "mentioned_products": [
-      "北欧インテリア図鑑"
+      "リングノート A5"
     ],
     "media_urls": [
       "https://example.com/img/review_066.jpg"
     ]
   },
   {
-    "post_id": "SNS-TW-2024-00099",
+    "post_id": "SNS-TW-2026-00099",
     "platform": "twitter",
     "post_type": "mention",
     "username": "@tech_taro",
     "display_name": "テック好きTaro",
-    "content": "ウォールシェルフ、どうしようか迷ってる🤔 使ってる人いる？ #グレイシャースタイル",
-    "posted_at": "2024-12-13T09:35:00+09:00",
+    "content": "壁面ウッドシェルフ、どうしようか迷ってる🤔 使ってる人いる？ #グレイシャースタイル",
+    "posted_at": "2026-11-16T09:01:00+09:00",
     "likes": 138,
     "retweets": 9,
     "replies": 17,
@@ -4066,18 +4058,18 @@
       "お買い物"
     ],
     "mentioned_products": [
-      "ウォールシェルフ"
+      "壁面ウッドシェルフ"
     ],
     "media_urls": []
   },
   {
-    "post_id": "SNS-IG-2024-00101",
+    "post_id": "SNS-IG-2026-00101",
     "platform": "instagram",
     "post_type": "post",
     "username": "@room_takeshi",
     "display_name": "お部屋づくりTakeshi",
-    "content": "オーガニックコットンTシャツを1ヶ月使ってみた感想📝 買って本当によかった おすすめ度は3点！ #グレイシャースタイル",
-    "posted_at": "2024-12-13T11:32:00+09:00",
+    "content": "ガーゼパジャマを1ヶ月使ってみた感想📝 買って本当によかった おすすめ度は3点！ #グレイシャースタイル",
+    "posted_at": "2026-11-16T14:06:00+09:00",
     "likes": 670,
     "retweets": 0,
     "replies": 29,
@@ -4089,20 +4081,20 @@
       "レビュー"
     ],
     "mentioned_products": [
-      "オーガニックコットンTシャツ"
+      "ガーゼパジャマ"
     ],
     "media_urls": [
       "https://example.com/img/review_101.jpg"
     ]
   },
   {
-    "post_id": "SNS-IG-2024-00090",
+    "post_id": "SNS-IG-2026-00090",
     "platform": "instagram",
     "post_type": "post",
     "username": "@modern_sho",
     "display_name": "モダンリビングSho",
-    "content": "セールでプレミアムカシミヤセーターをお得にゲット！ 家族も気に入ってる #グレイシャースタイル #お買い得",
-    "posted_at": "2024-12-13T12:04:00+09:00",
+    "content": "セールでカシミヤマフラーをお得にゲット！ 家族も気に入ってる #グレイシャースタイル #お買い得",
+    "posted_at": "2026-11-16T15:30:00+09:00",
     "likes": 2241,
     "retweets": 0,
     "replies": 79,
@@ -4112,20 +4104,20 @@
       "グレイシャースタイル"
     ],
     "mentioned_products": [
-      "プレミアムカシミヤセーター"
+      "カシミヤマフラー"
     ],
     "media_urls": [
       "https://example.com/img/user_post_090.jpg"
     ]
   },
   {
-    "post_id": "SNS-IG-2024-00180",
+    "post_id": "SNS-IG-2026-00180",
     "platform": "instagram",
     "post_type": "mention",
     "username": "@gadget_rina",
     "display_name": "ガジェットRina",
-    "content": "グレイシャースタイルって送料いくらだっけ？LED調光デスクライト買いたいんだけど",
-    "posted_at": "2024-12-13T13:23:00+09:00",
+    "content": "グレイシャースタイルって送料いくらだっけ？LEDデスクライト 調光式買いたいんだけど",
+    "posted_at": "2026-11-16T18:56:00+09:00",
     "likes": 43,
     "retweets": 0,
     "replies": 35,
@@ -4137,18 +4129,18 @@
       "カジュアル"
     ],
     "mentioned_products": [
-      "LED調光デスクライト"
+      "LEDデスクライト 調光式"
     ],
     "media_urls": []
   },
   {
-    "post_id": "SNS-TW-2024-00114",
+    "post_id": "SNS-TW-2026-00114",
     "platform": "twitter",
     "post_type": "post",
     "username": "@minimal_akiko",
     "display_name": "ミニマリストAkiko",
-    "content": "ずっと気になってた吊り下げペンダントライト、ついにゲット🎉 SNSで見て気になってた #グレイシャースタイル",
-    "posted_at": "2024-12-13T13:37:00+09:00",
+    "content": "ずっと気になってたガラスシェードペンダント、ついにゲット🎉 SNSで見て気になってた #グレイシャースタイル",
+    "posted_at": "2026-11-16T19:33:00+09:00",
     "likes": 958,
     "retweets": 45,
     "replies": 48,
@@ -4159,20 +4151,20 @@
       "グレイシャースタイル"
     ],
     "mentioned_products": [
-      "吊り下げペンダントライト"
+      "ガラスシェードペンダント"
     ],
     "media_urls": [
       "https://example.com/img/user_post_114.jpg"
     ]
   },
   {
-    "post_id": "SNS-IG-2024-00213",
+    "post_id": "SNS-IG-2026-00213",
     "platform": "instagram",
     "post_type": "mention",
     "username": "@modern_emi",
     "display_name": "モダンリビングEmi",
-    "content": "念願のリネンシャツが我が家に！ デザインがシンプルで使いやすい #新生活 #グレイシャースタイル",
-    "posted_at": "2024-12-13T15:22:00+09:00",
+    "content": "念願のフランネルパジャマが我が家に！ デザインがシンプルで使いやすい #新生活 #グレイシャースタイル",
+    "posted_at": "2026-11-17T00:07:00+09:00",
     "likes": 439,
     "retweets": 0,
     "replies": 23,
@@ -4183,18 +4175,18 @@
       "おうち時間"
     ],
     "mentioned_products": [
-      "リネンシャツ"
+      "フランネルパジャマ"
     ],
     "media_urls": []
   },
   {
-    "post_id": "SNS-TW-2024-00261",
+    "post_id": "SNS-TW-2026-00261",
     "platform": "twitter",
     "post_type": "mention",
     "username": "@coffee_nana",
     "display_name": "コーヒー好きNana",
     "content": "@GlacierStyle_JP オーガニックコットンTシャツの色味について質問です。ギフトラッピングはできますか？",
-    "posted_at": "2024-12-13T16:19:00+09:00",
+    "posted_at": "2026-11-17T02:36:00+09:00",
     "likes": 30,
     "retweets": 0,
     "replies": 9,
@@ -4203,13 +4195,13 @@
     "media_urls": []
   },
   {
-    "post_id": "SNS-TW-2024-00100",
+    "post_id": "SNS-TW-2026-00100",
     "platform": "twitter",
     "post_type": "mention",
     "username": "@lifestyle_akiko",
     "display_name": "Akiko｜暮らしを楽しむ",
     "content": "@GlacierStyle_JP 注文番号ORD-2024-69810064の件で問い合わせです。返品の手続きについて教えてください",
-    "posted_at": "2024-12-13T16:25:00+09:00",
+    "posted_at": "2026-11-17T02:51:00+09:00",
     "likes": 24,
     "retweets": 0,
     "replies": 3,
@@ -4218,13 +4210,13 @@
     "media_urls": []
   },
   {
-    "post_id": "SNS-IG-2024-00024",
+    "post_id": "SNS-IG-2026-00024",
     "platform": "instagram",
     "post_type": "mention",
     "username": "@office_haruka",
     "display_name": "オフィスワークHaruka",
     "content": "収納ボックスセット、思ってたのと違った…返品できるかな",
-    "posted_at": "2024-12-13T16:43:00+09:00",
+    "posted_at": "2026-11-17T03:38:00+09:00",
     "likes": 28,
     "retweets": 0,
     "replies": 11,
@@ -4233,13 +4225,13 @@
     "media_urls": []
   },
   {
-    "post_id": "SNS-IG-2024-00104",
+    "post_id": "SNS-IG-2026-00104",
     "platform": "instagram",
     "post_type": "post",
     "username": "@design_kenji",
     "display_name": "デザイン好きKenji",
-    "content": "LED調光デスクライトをギフトラッピングしてもらった🎀 デザインがシンプルで使いやすい #グレイシャースタイル",
-    "posted_at": "2024-12-13T19:55:00+09:00",
+    "content": "LEDデスクライト 調光式をギフトラッピングしてもらった🎀 デザインがシンプルで使いやすい #グレイシャースタイル",
+    "posted_at": "2026-11-17T12:00:00+09:00",
     "likes": 92,
     "retweets": 0,
     "replies": 23,
@@ -4253,20 +4245,20 @@
       "プレゼント"
     ],
     "mentioned_products": [
-      "LED調光デスクライト"
+      "LEDデスクライト 調光式"
     ],
     "media_urls": [
       "https://example.com/img/gift_104.jpg"
     ]
   },
   {
-    "post_id": "SNS-IG-2024-00233",
+    "post_id": "SNS-IG-2026-00233",
     "platform": "instagram",
     "post_type": "post",
     "username": "@office_hiroshi",
     "display_name": "オフィスワークHiroshi",
-    "content": "【購入レビュー】ウォールシェルフ ⭐4\nデザインがシンプルで使いやすい #GlacierStyle",
-    "posted_at": "2024-12-13T19:56:00+09:00",
+    "content": "【購入レビュー】壁面ウッドシェルフ ⭐4\nデザインがシンプルで使いやすい #GlacierStyle",
+    "posted_at": "2026-11-17T12:02:00+09:00",
     "likes": 105,
     "retweets": 0,
     "replies": 37,
@@ -4279,20 +4271,20 @@
       "レビュー"
     ],
     "mentioned_products": [
-      "ウォールシェルフ"
+      "壁面ウッドシェルフ"
     ],
     "media_urls": [
       "https://example.com/img/review_233.jpg"
     ]
   },
   {
-    "post_id": "SNS-TW-2024-00199",
+    "post_id": "SNS-TW-2026-00199",
     "platform": "twitter",
     "post_type": "post",
     "username": "@gift_haruka",
     "display_name": "ギフト探しHaruka",
     "content": "友達にもおすすめしたい北欧風ペンダントライト💕 買って本当によかった #グレイシャースタイル",
-    "posted_at": "2024-12-13T20:23:00+09:00",
+    "posted_at": "2026-11-17T13:13:00+09:00",
     "likes": 2350,
     "retweets": 155,
     "replies": 73,
@@ -4311,13 +4303,13 @@
     ]
   },
   {
-    "post_id": "SNS-TW-2024-00110",
+    "post_id": "SNS-TW-2026-00110",
     "platform": "twitter",
     "post_type": "post",
     "username": "@gift_taro",
     "display_name": "ギフト探しTaro",
-    "content": "オーガニックコットンTシャツを1ヶ月使ってみた感想📝 想像以上のクオリティ おすすめ度は4点！ #グレイシャースタイル",
-    "posted_at": "2024-12-13T22:48:00+09:00",
+    "content": "ガーゼパジャマを1ヶ月使ってみた感想📝 想像以上のクオリティ おすすめ度は4点！ #グレイシャースタイル",
+    "posted_at": "2026-11-17T19:32:00+09:00",
     "likes": 732,
     "retweets": 117,
     "replies": 98,
@@ -4329,20 +4321,20 @@
       "レビュー"
     ],
     "mentioned_products": [
-      "オーガニックコットンTシャツ"
+      "ガーゼパジャマ"
     ],
     "media_urls": [
       "https://example.com/img/review_110.jpg"
     ]
   },
   {
-    "post_id": "SNS-IG-2024-00065",
+    "post_id": "SNS-IG-2026-00065",
     "platform": "instagram",
     "post_type": "mention",
     "username": "@office_kota",
     "display_name": "オフィスワークKota",
-    "content": "収納付きデスク、どうしようか迷ってる🤔 使ってる人いる？ #グレイシャースタイル",
-    "posted_at": "2024-12-14T07:46:00+09:00",
+    "content": "昇降式ワークデスク、どうしようか迷ってる🤔 使ってる人いる？ #グレイシャースタイル",
+    "posted_at": "2026-11-18T18:56:00+09:00",
     "likes": 37,
     "retweets": 0,
     "replies": 15,
@@ -4354,18 +4346,18 @@
       "インテリア"
     ],
     "mentioned_products": [
-      "収納付きデスク"
+      "昇降式ワークデスク"
     ],
     "media_urls": []
   },
   {
-    "post_id": "SNS-TW-2024-00149",
+    "post_id": "SNS-TW-2026-00149",
     "platform": "twitter",
     "post_type": "post",
     "username": "@simple_life_nana",
     "display_name": "シンプルライフNana",
-    "content": "グレイシャースタイルのスマートスピーカー、デザインも機能も◎ 部屋の雰囲気がガラッと変わった！",
-    "posted_at": "2024-12-14T07:51:00+09:00",
+    "content": "グレイシャースタイルのアロマディフューザーセット、デザインも機能も◎ 部屋の雰囲気がガラッと変わった！",
+    "posted_at": "2026-11-18T19:09:00+09:00",
     "likes": 360,
     "retweets": 55,
     "replies": 31,
@@ -4375,20 +4367,20 @@
       "スマートホーム"
     ],
     "mentioned_products": [
-      "スマートスピーカー"
+      "アロマディフューザーセット"
     ],
     "media_urls": [
       "https://example.com/img/user_post_149.jpg"
     ]
   },
   {
-    "post_id": "SNS-TW-2024-00215",
+    "post_id": "SNS-TW-2026-00215",
     "platform": "twitter",
     "post_type": "mention",
     "username": "@organic_takeshi",
     "display_name": "オーガニックTakeshi",
-    "content": "念願の収納ボックスセットが我が家に！ 家族も気に入ってる #新生活 #グレイシャースタイル",
-    "posted_at": "2024-12-14T07:59:00+09:00",
+    "content": "念願のファブリック収納ボックス 3個組が我が家に！ 家族も気に入ってる #新生活 #グレイシャースタイル",
+    "posted_at": "2026-11-18T19:30:00+09:00",
     "likes": 2120,
     "retweets": 118,
     "replies": 45,
@@ -4399,20 +4391,20 @@
       "GlacierStyle"
     ],
     "mentioned_products": [
-      "収納ボックスセット"
+      "ファブリック収納ボックス 3個組"
     ],
     "media_urls": [
       "https://example.com/img/user_post_215.jpg"
     ]
   },
   {
-    "post_id": "SNS-TW-2024-00232",
+    "post_id": "SNS-TW-2026-00232",
     "platform": "twitter",
     "post_type": "post",
     "username": "@coffee_yuki",
     "display_name": "コーヒー好きYuki",
-    "content": "念願のメリノウールカーディガンが我が家に！ SNSで見て気になってた #新生活 #グレイシャースタイル",
-    "posted_at": "2024-12-14T09:59:00+09:00",
+    "content": "念願のウールストールが我が家に！ SNSで見て気になってた #新生活 #グレイシャースタイル",
+    "posted_at": "2026-11-19T00:44:00+09:00",
     "likes": 1566,
     "retweets": 164,
     "replies": 37,
@@ -4423,20 +4415,20 @@
       "北欧インテリア"
     ],
     "mentioned_products": [
-      "メリノウールカーディガン"
+      "ウールストール"
     ],
     "media_urls": [
       "https://example.com/img/user_post_232.jpg"
     ]
   },
   {
-    "post_id": "SNS-TW-2024-00031",
+    "post_id": "SNS-TW-2026-00031",
     "platform": "twitter",
     "post_type": "mention",
     "username": "@eco_misaki",
     "display_name": "エコライフMisaki",
     "content": "@GlacierStyle_JP 注文番号ORD-2024-83876681の件で問い合わせです。キャンセルは可能でしょうか",
-    "posted_at": "2024-12-14T10:03:00+09:00",
+    "posted_at": "2026-11-19T00:54:00+09:00",
     "likes": 15,
     "retweets": 0,
     "replies": 5,
@@ -4445,13 +4437,13 @@
     "media_urls": []
   },
   {
-    "post_id": "SNS-IG-2024-00250",
+    "post_id": "SNS-IG-2026-00250",
     "platform": "instagram",
     "post_type": "story_mention",
     "username": "@organic_satoshi",
     "display_name": "オーガニックSatoshi",
-    "content": "ずっと気になってた収納ボックスセット、ついにゲット🎉 リピート決定 #グレイシャースタイル",
-    "posted_at": "2024-12-14T10:10:00+09:00",
+    "content": "ずっと気になってたファブリック収納ボックス 3個組、ついにゲット🎉 リピート決定 #グレイシャースタイル",
+    "posted_at": "2026-11-19T01:12:00+09:00",
     "likes": 118,
     "retweets": 0,
     "replies": 26,
@@ -4462,20 +4454,20 @@
       "グレイシャースタイル"
     ],
     "mentioned_products": [
-      "収納ボックスセット"
+      "ファブリック収納ボックス 3個組"
     ],
     "media_urls": [
       "https://example.com/img/user_post_250.jpg"
     ]
   },
   {
-    "post_id": "SNS-TW-2024-00037",
+    "post_id": "SNS-TW-2026-00037",
     "platform": "twitter",
     "post_type": "mention",
     "username": "@fashion_mami",
     "display_name": "ファッションMami",
     "content": "グレイシャースタイル、凹みで残念。もう少し改善してほしい",
-    "posted_at": "2024-12-14T10:45:00+09:00",
+    "posted_at": "2026-11-19T02:44:00+09:00",
     "likes": 18,
     "retweets": 13,
     "replies": 7,
@@ -4488,13 +4480,13 @@
     ]
   },
   {
-    "post_id": "SNS-TW-2024-00007",
+    "post_id": "SNS-TW-2026-00007",
     "platform": "twitter",
     "post_type": "mention",
     "username": "@room_takeshi",
     "display_name": "お部屋づくりTakeshi",
-    "content": "ずっと気になってたデザインシーリングライト、ついにゲット🎉 毎日使うのが楽しみ #グレイシャースタイル",
-    "posted_at": "2024-12-14T10:57:00+09:00",
+    "content": "ずっと気になってたガラスシェードペンダント、ついにゲット🎉 毎日使うのが楽しみ #グレイシャースタイル",
+    "posted_at": "2026-11-19T03:15:00+09:00",
     "likes": 246,
     "retweets": 72,
     "replies": 52,
@@ -4506,20 +4498,20 @@
       "ガジェット"
     ],
     "mentioned_products": [
-      "デザインシーリングライト"
+      "ガラスシェードペンダント"
     ],
     "media_urls": [
       "https://example.com/img/user_post_007.jpg"
     ]
   },
   {
-    "post_id": "SNS-TW-2024-00032",
+    "post_id": "SNS-TW-2026-00032",
     "platform": "twitter",
     "post_type": "reply",
     "username": "@GlacierStyle_JP",
     "display_name": "GlacierStyle公式",
     "content": "@@eco_misaki お問い合わせありがとうございます。またのご利用をお待ちしております✨",
-    "posted_at": "2024-12-14T11:00:00+09:00",
+    "posted_at": "2026-11-19T03:23:00+09:00",
     "likes": 2,
     "retweets": 0,
     "replies": 0,
@@ -4528,13 +4520,13 @@
     "media_urls": []
   },
   {
-    "post_id": "SNS-IG-2024-00064",
+    "post_id": "SNS-IG-2026-00064",
     "platform": "instagram",
     "post_type": "mention",
     "username": "@simple_life_mami",
     "display_name": "シンプルライフMami",
     "content": "グレイシャースタイルのセールっていつ始まる？北欧風ペンダントライト狙ってる",
-    "posted_at": "2024-12-14T13:03:00+09:00",
+    "posted_at": "2026-11-19T08:44:00+09:00",
     "likes": 61,
     "retweets": 0,
     "replies": 17,
@@ -4551,13 +4543,13 @@
     "media_urls": []
   },
   {
-    "post_id": "SNS-TW-2024-00096",
+    "post_id": "SNS-TW-2026-00096",
     "platform": "twitter",
     "post_type": "mention",
     "username": "@lifestyle_daiki",
     "display_name": "Daiki｜暮らしを楽しむ",
     "content": "グレイシャースタイルのサイト、ログインできないで困ってる😭",
-    "posted_at": "2024-12-14T14:32:00+09:00",
+    "posted_at": "2026-11-19T12:36:00+09:00",
     "likes": 40,
     "retweets": 8,
     "replies": 2,
@@ -4566,13 +4558,13 @@
     "media_urls": []
   },
   {
-    "post_id": "SNS-IG-2024-00264",
+    "post_id": "SNS-IG-2026-00264",
     "platform": "instagram",
     "post_type": "post",
     "username": "@tech_taro",
     "display_name": "テック好きTaro",
-    "content": "グレイシャースタイルで買ったプレミアムカシミヤセーター、めちゃくちゃ良い✨ 友達にも褒められた #グレイシャースタイル",
-    "posted_at": "2024-12-14T14:55:00+09:00",
+    "content": "グレイシャースタイルで買ったカシミヤマフラー、めちゃくちゃ良い✨ 友達にも褒められた #グレイシャースタイル",
+    "posted_at": "2026-11-19T13:36:00+09:00",
     "likes": 2011,
     "retweets": 0,
     "replies": 18,
@@ -4582,18 +4574,18 @@
       "グレイシャースタイル"
     ],
     "mentioned_products": [
-      "プレミアムカシミヤセーター"
+      "カシミヤマフラー"
     ],
     "media_urls": []
   },
   {
-    "post_id": "SNS-IG-2024-00080",
+    "post_id": "SNS-IG-2026-00080",
     "platform": "instagram",
     "post_type": "mention",
     "username": "@lifestyle_daiki",
     "display_name": "Daiki｜暮らしを楽しむ",
-    "content": "ウォールシェルフ、期待以上でした✨ 買って本当によかった #グレイシャースタイル #買ってよかった",
-    "posted_at": "2024-12-14T14:56:00+09:00",
+    "content": "壁面ウッドシェルフ、期待以上でした✨ 買って本当によかった #グレイシャースタイル #買ってよかった",
+    "posted_at": "2026-11-19T13:39:00+09:00",
     "likes": 2050,
     "retweets": 0,
     "replies": 49,
@@ -4605,18 +4597,18 @@
       "北欧"
     ],
     "mentioned_products": [
-      "ウォールシェルフ"
+      "壁面ウッドシェルフ"
     ],
     "media_urls": []
   },
   {
-    "post_id": "SNS-IG-2024-00020",
+    "post_id": "SNS-IG-2026-00020",
     "platform": "instagram",
     "post_type": "mention",
     "username": "@review_megumi",
     "display_name": "レビュワーMegumi",
     "content": "デザインシーリングライト、思ってたのと違った…返品できるかな",
-    "posted_at": "2024-12-14T15:19:00+09:00",
+    "posted_at": "2026-11-19T14:39:00+09:00",
     "likes": 84,
     "retweets": 0,
     "replies": 10,
@@ -4627,13 +4619,13 @@
     "media_urls": []
   },
   {
-    "post_id": "SNS-IG-2024-00165",
+    "post_id": "SNS-IG-2026-00165",
     "platform": "instagram",
     "post_type": "post",
     "username": "@home_taro",
     "display_name": "Taroのマイホーム記録",
-    "content": "リネンシャツを1ヶ月使ってみた感想📝 デザインがシンプルで使いやすい おすすめ度は5点！ #グレイシャースタイル",
-    "posted_at": "2024-12-14T16:31:00+09:00",
+    "content": "フランネルパジャマを1ヶ月使ってみた感想📝 デザインがシンプルで使いやすい おすすめ度は5点！ #グレイシャースタイル",
+    "posted_at": "2026-11-19T17:47:00+09:00",
     "likes": 153,
     "retweets": 0,
     "replies": 43,
@@ -4644,20 +4636,20 @@
       "レビュー"
     ],
     "mentioned_products": [
-      "リネンシャツ"
+      "フランネルパジャマ"
     ],
     "media_urls": [
       "https://example.com/img/review_165.jpg"
     ]
   },
   {
-    "post_id": "SNS-IG-2024-00004",
+    "post_id": "SNS-IG-2026-00004",
     "platform": "instagram",
     "post_type": "mention",
     "username": "@interior_haruka",
     "display_name": "Harukaのインテリア日記",
-    "content": "メリノウールカーディガンのサイズ感が知りたい。実際に使ってる人教えて〜",
-    "posted_at": "2024-12-14T19:26:00+09:00",
+    "content": "ウールストールのサイズ感が知りたい。実際に使ってる人教えて〜",
+    "posted_at": "2026-11-20T01:24:00+09:00",
     "likes": 126,
     "retweets": 0,
     "replies": 5,
@@ -4668,18 +4660,18 @@
       "グレイシャースタイル"
     ],
     "mentioned_products": [
-      "メリノウールカーディガン"
+      "ウールストール"
     ],
     "media_urls": []
   },
   {
-    "post_id": "SNS-TW-2024-00237",
+    "post_id": "SNS-TW-2026-00237",
     "platform": "twitter",
     "post_type": "mention",
     "username": "@work_from_home_kota",
     "display_name": "在宅ワーカーKota",
-    "content": "グレイシャースタイルの北欧風フロアライト、デザインも機能も◎ 友達にも褒められた",
-    "posted_at": "2024-12-14T21:34:00+09:00",
+    "content": "グレイシャースタイルのウッドフロアライト、デザインも機能も◎ 友達にも褒められた",
+    "posted_at": "2026-11-20T06:58:00+09:00",
     "likes": 1678,
     "retweets": 42,
     "replies": 67,
@@ -4690,45 +4682,42 @@
       "グレイシャースタイル"
     ],
     "mentioned_products": [
-      "北欧風フロアライト"
+      "ウッドフロアライト"
     ],
     "media_urls": [
       "https://example.com/img/user_post_237.jpg"
     ]
   },
   {
-    "post_id": "SNS-IG-2024-00248",
+    "post_id": "SNS-IG-2026-00248",
     "platform": "instagram",
     "post_type": "mention",
     "username": "@design_kota",
     "display_name": "デザイン好きKota",
-    "content": "モダンデスクライトが届いた！ 思ってた以上にクオリティ高くて大満足😊 #GlacierStyle #グレイシャースタイル",
-    "posted_at": "2024-12-14T22:12:00+09:00",
+    "content": "LEDデスクライト 調光式、明るさ最大にするとチカチカする。初期不良かな？",
+    "posted_at": "2026-11-20T08:38:00+09:00",
     "likes": 2411,
     "retweets": 0,
     "replies": 25,
     "hashtags": [
-      "部屋づくり",
-      "暮らし",
-      "整理整頓",
       "グレイシャースタイル",
-      "ミニマリスト"
+      "デスクライト"
     ],
     "mentioned_products": [
-      "モダンデスクライト"
+      "LEDデスクライト 調光式"
     ],
     "media_urls": [
       "https://example.com/img/user_post_248.jpg"
     ]
   },
   {
-    "post_id": "SNS-IG-2024-00124",
+    "post_id": "SNS-IG-2026-00124",
     "platform": "instagram",
     "post_type": "post",
     "username": "@simple_life_ken",
     "display_name": "シンプルライフKen",
-    "content": "北欧インテリア図鑑が届いた！ 思ってた以上にクオリティ高くて大満足😊 #GlacierStyle #グレイシャースタイル",
-    "posted_at": "2024-12-14T23:02:00+09:00",
+    "content": "リングノート A5が届いた！ 思ってた以上にクオリティ高くて大満足😊 #GlacierStyle #グレイシャースタイル",
+    "posted_at": "2026-11-20T10:48:00+09:00",
     "likes": 2730,
     "retweets": 0,
     "replies": 12,
@@ -4738,20 +4727,20 @@
       "グレイシャースタイル"
     ],
     "mentioned_products": [
-      "北欧インテリア図鑑"
+      "リングノート A5"
     ],
     "media_urls": [
       "https://example.com/img/user_post_124.jpg"
     ]
   },
   {
-    "post_id": "SNS-IG-2024-00142",
+    "post_id": "SNS-IG-2026-00142",
     "platform": "instagram",
     "post_type": "post",
     "username": "@minimal_satoshi",
     "display_name": "ミニマリストSatoshi",
-    "content": "グレイシャースタイルのワイヤレスイヤホンPro、デザインも機能も◎ 友達にも褒められた",
-    "posted_at": "2024-12-14T23:58:00+09:00",
+    "content": "グレイシャースタイルのトラベルポーチ 3点セット、デザインも機能も◎ 友達にも褒められた",
+    "posted_at": "2026-11-20T13:14:00+09:00",
     "likes": 562,
     "retweets": 0,
     "replies": 12,
@@ -4761,20 +4750,20 @@
       "スマートホーム"
     ],
     "mentioned_products": [
-      "ワイヤレスイヤホンPro"
+      "トラベルポーチ 3点セット"
     ],
     "media_urls": [
       "https://example.com/img/user_post_142.jpg"
     ]
   },
   {
-    "post_id": "SNS-TW-2024-00011",
+    "post_id": "SNS-TW-2026-00011",
     "platform": "twitter",
     "post_type": "mention",
     "username": "@cozy_naomi",
     "display_name": "コージーライフNaomi",
-    "content": "グレイシャースタイルって送料いくらだっけ？ステンレスキッチンツールセット買いたいんだけど",
-    "posted_at": "2024-12-15T07:43:00+09:00",
+    "content": "グレイシャースタイルって送料いくらだっけ？三徳包丁 ステンレス買いたいんだけど",
+    "posted_at": "2026-11-21T09:28:00+09:00",
     "likes": 149,
     "retweets": 9,
     "replies": 27,
@@ -4784,35 +4773,35 @@
       "ネットショッピング"
     ],
     "mentioned_products": [
-      "ステンレスキッチンツールセット"
+      "三徳包丁 ステンレス"
     ],
     "media_urls": []
   },
   {
-    "post_id": "SNS-TW-2024-00219",
+    "post_id": "SNS-TW-2026-00219",
     "platform": "twitter",
     "post_type": "mention",
     "username": "@interior_daiki",
     "display_name": "Daikiのインテリア日記",
-    "content": "吊り下げペンダントライトのカバーがすぐ外れたになった。品質大丈夫？",
-    "posted_at": "2024-12-15T09:40:00+09:00",
+    "content": "ガラスシェードペンダントのカバーがすぐ外れたになった。品質大丈夫？",
+    "posted_at": "2026-11-21T14:34:00+09:00",
     "likes": 68,
     "retweets": 19,
     "replies": 10,
     "hashtags": [],
     "mentioned_products": [
-      "吊り下げペンダントライト"
+      "ガラスシェードペンダント"
     ],
     "media_urls": []
   },
   {
-    "post_id": "SNS-TW-2024-00093",
+    "post_id": "SNS-TW-2026-00093",
     "platform": "twitter",
     "post_type": "mention",
     "username": "@tech_kazuki",
     "display_name": "テック好きKazuki",
-    "content": "グレイシャースタイルって送料いくらだっけ？収納付きデスク買いたいんだけど",
-    "posted_at": "2024-12-15T10:49:00+09:00",
+    "content": "グレイシャースタイルって送料いくらだっけ？昇降式ワークデスク買いたいんだけど",
+    "posted_at": "2026-11-21T17:34:00+09:00",
     "likes": 32,
     "retweets": 10,
     "replies": 21,
@@ -4824,18 +4813,18 @@
       "ガジェット"
     ],
     "mentioned_products": [
-      "収納付きデスク"
+      "昇降式ワークデスク"
     ],
     "media_urls": []
   },
   {
-    "post_id": "SNS-TW-2024-00186",
+    "post_id": "SNS-TW-2026-00186",
     "platform": "twitter",
     "post_type": "mention",
     "username": "@modern_mami",
     "display_name": "モダンリビングMami",
-    "content": "メリノウールカーディガンのおかげで生活が快適になった✨ グレイシャースタイル最高！",
-    "posted_at": "2024-12-15T11:11:00+09:00",
+    "content": "ウールストールのおかげで生活が快適になった✨ グレイシャースタイル最高！",
+    "posted_at": "2026-11-21T18:32:00+09:00",
     "likes": 1347,
     "retweets": 156,
     "replies": 27,
@@ -4846,20 +4835,20 @@
       "北欧インテリア"
     ],
     "mentioned_products": [
-      "メリノウールカーディガン"
+      "ウールストール"
     ],
     "media_urls": [
       "https://example.com/img/user_post_186.jpg"
     ]
   },
   {
-    "post_id": "SNS-IG-2024-00116",
+    "post_id": "SNS-IG-2026-00116",
     "platform": "instagram",
     "post_type": "mention",
     "username": "@gift_satoshi",
     "display_name": "ギフト探しSatoshi",
-    "content": "グレイシャースタイルって送料いくらだっけ？オーガニックコットンTシャツ買いたいんだけど",
-    "posted_at": "2024-12-15T13:00:00+09:00",
+    "content": "グレイシャースタイルって送料いくらだっけ？ガーゼパジャマ買いたいんだけど",
+    "posted_at": "2026-11-21T23:16:00+09:00",
     "likes": 133,
     "retweets": 0,
     "replies": 38,
@@ -4870,18 +4859,18 @@
       "グレイシャースタイル"
     ],
     "mentioned_products": [
-      "オーガニックコットンTシャツ"
+      "ガーゼパジャマ"
     ],
     "media_urls": []
   },
   {
-    "post_id": "SNS-IG-2024-00259",
+    "post_id": "SNS-IG-2026-00259",
     "platform": "instagram",
     "post_type": "post",
     "username": "@work_from_home_akiko",
     "display_name": "在宅ワーカーAkiko",
-    "content": "セールで北欧風フロアライトをお得にゲット！ 想像以上のクオリティ #グレイシャースタイル #お買い得",
-    "posted_at": "2024-12-15T15:58:00+09:00",
+    "content": "セールでウッドフロアライトをお得にゲット！ 想像以上のクオリティ #グレイシャースタイル #お買い得",
+    "posted_at": "2026-11-22T07:01:00+09:00",
     "likes": 2383,
     "retweets": 0,
     "replies": 24,
@@ -4893,20 +4882,20 @@
       "インテリア"
     ],
     "mentioned_products": [
-      "北欧風フロアライト"
+      "ウッドフロアライト"
     ],
     "media_urls": [
       "https://example.com/img/user_post_259.jpg"
     ]
   },
   {
-    "post_id": "SNS-TW-2024-00079",
+    "post_id": "SNS-TW-2026-00079",
     "platform": "twitter",
     "post_type": "post",
     "username": "@interior_mai",
     "display_name": "Maiのインテリア日記",
-    "content": "リネンシャツのおかげで集中力がアップした✨ グレイシャースタイル最高！",
-    "posted_at": "2024-12-15T16:12:00+09:00",
+    "content": "フランネルパジャマのおかげで集中力がアップした✨ グレイシャースタイル最高！",
+    "posted_at": "2026-11-22T07:38:00+09:00",
     "likes": 2435,
     "retweets": 94,
     "replies": 50,
@@ -4917,20 +4906,20 @@
       "ネットショッピング"
     ],
     "mentioned_products": [
-      "リネンシャツ"
+      "フランネルパジャマ"
     ],
     "media_urls": [
       "https://example.com/img/user_post_079.jpg"
     ]
   },
   {
-    "post_id": "SNS-IG-2024-00058",
+    "post_id": "SNS-IG-2026-00058",
     "platform": "instagram",
     "post_type": "story_mention",
     "username": "@work_from_home_kazuki",
     "display_name": "在宅ワーカーKazuki",
-    "content": "念願の収納ボックスセットが我が家に！ デザインがシンプルで使いやすい #新生活 #グレイシャースタイル",
-    "posted_at": "2024-12-15T16:38:00+09:00",
+    "content": "念願のファブリック収納ボックス 3個組が我が家に！ デザインがシンプルで使いやすい #新生活 #グレイシャースタイル",
+    "posted_at": "2026-11-22T08:45:00+09:00",
     "likes": 486,
     "retweets": 0,
     "replies": 24,
@@ -4942,41 +4931,42 @@
       "グレイシャースタイル"
     ],
     "mentioned_products": [
-      "収納ボックスセット"
+      "ファブリック収納ボックス 3個組"
     ],
     "media_urls": [
       "https://example.com/img/user_post_058.jpg"
     ]
   },
   {
-    "post_id": "SNS-TW-2024-00265",
+    "post_id": "SNS-TW-2026-00265",
     "platform": "twitter",
     "post_type": "mention",
     "username": "@design_emi",
     "display_name": "デザイン好きEmi",
-    "content": "グレイシャースタイルのサイト、カートに入れても消えるで困ってる😭",
-    "posted_at": "2024-12-15T19:16:00+09:00",
+    "content": "LEDデスクライト 調光式、明るさ最大にするとチカチカする。初期不良かな？",
+    "posted_at": "2026-11-22T15:38:00+09:00",
     "likes": 53,
     "retweets": 16,
     "replies": 13,
     "hashtags": [
-      "グレイシャースタイル"
+      "グレイシャースタイル",
+      "デスクライト"
     ],
     "mentioned_products": [
-      "モダンデスクライト"
+      "LEDデスクライト 調光式"
     ],
     "media_urls": [
       "https://example.com/img/issue_265.jpg"
     ]
   },
   {
-    "post_id": "SNS-IG-2024-00211",
+    "post_id": "SNS-IG-2026-00211",
     "platform": "instagram",
     "post_type": "post",
     "username": "@gadget_naomi",
     "display_name": "ガジェットNaomi",
-    "content": "コーヒーメーカーをギフトラッピングしてもらった🎀 コスパ最高 #グレイシャースタイル",
-    "posted_at": "2024-12-15T21:45:00+09:00",
+    "content": "電気ケトル 0.8Lをギフトラッピングしてもらった🎀 コスパ最高 #グレイシャースタイル",
+    "posted_at": "2026-11-22T22:07:00+09:00",
     "likes": 791,
     "retweets": 0,
     "replies": 40,
@@ -4988,20 +4978,20 @@
       "プレゼント"
     ],
     "mentioned_products": [
-      "コーヒーメーカー"
+      "電気ケトル 0.8L"
     ],
     "media_urls": [
       "https://example.com/img/gift_211.jpg"
     ]
   },
   {
-    "post_id": "SNS-IG-2024-00050",
+    "post_id": "SNS-IG-2026-00050",
     "platform": "instagram",
     "post_type": "mention",
     "username": "@cozy_yuki",
     "display_name": "コージーライフYuki",
-    "content": "グレイシャースタイルで買ったウォールシェルフ、めちゃくちゃ良い✨ リピート決定 #グレイシャースタイル",
-    "posted_at": "2024-12-16T09:09:00+09:00",
+    "content": "グレイシャースタイルで買った壁面ウッドシェルフ、めちゃくちゃ良い✨ リピート決定 #グレイシャースタイル",
+    "posted_at": "2026-11-24T03:53:00+09:00",
     "likes": 1434,
     "retweets": 0,
     "replies": 23,
@@ -5013,18 +5003,18 @@
       "お買い物"
     ],
     "mentioned_products": [
-      "ウォールシェルフ"
+      "壁面ウッドシェルフ"
     ],
     "media_urls": []
   },
   {
-    "post_id": "SNS-TW-2024-00131",
+    "post_id": "SNS-TW-2026-00131",
     "platform": "twitter",
     "post_type": "post",
     "username": "@coffee_kazuki",
     "display_name": "コーヒー好きKazuki",
-    "content": "グレイシャースタイルのLED調光デスクライト、デザインも機能も◎ リピート決定",
-    "posted_at": "2024-12-16T11:07:00+09:00",
+    "content": "グレイシャースタイルのLEDデスクライト 調光式、デザインも機能も◎ リピート決定",
+    "posted_at": "2026-11-24T09:01:00+09:00",
     "likes": 278,
     "retweets": 46,
     "replies": 31,
@@ -5036,18 +5026,18 @@
       "ガジェット"
     ],
     "mentioned_products": [
-      "LED調光デスクライト"
+      "LEDデスクライト 調光式"
     ],
     "media_urls": []
   },
   {
-    "post_id": "SNS-IG-2024-00070",
+    "post_id": "SNS-IG-2026-00070",
     "platform": "instagram",
     "post_type": "mention",
     "username": "@tech_haruka",
     "display_name": "テック好きHaruka",
-    "content": "北欧風フロアライトのサイズ感が知りたい。実際に使ってる人教えて〜",
-    "posted_at": "2024-12-16T12:00:00+09:00",
+    "content": "ウッドフロアライトのサイズ感が知りたい。実際に使ってる人教えて〜",
+    "posted_at": "2026-11-24T11:20:00+09:00",
     "likes": 113,
     "retweets": 0,
     "replies": 14,
@@ -5058,18 +5048,18 @@
       "グレイシャースタイル"
     ],
     "mentioned_products": [
-      "北欧風フロアライト"
+      "ウッドフロアライト"
     ],
     "media_urls": []
   },
   {
-    "post_id": "SNS-TW-2024-00159",
+    "post_id": "SNS-TW-2026-00159",
     "platform": "twitter",
     "post_type": "mention",
     "username": "@review_haruka",
     "display_name": "レビュワーHaruka",
-    "content": "吊り下げペンダントライト、期待以上でした✨ 部屋の雰囲気がガラッと変わった！ #グレイシャースタイル #買ってよかった",
-    "posted_at": "2024-12-16T14:33:00+09:00",
+    "content": "ガラスシェードペンダント、期待以上でした✨ 部屋の雰囲気がガラッと変わった！ #グレイシャースタイル #買ってよかった",
+    "posted_at": "2026-11-24T17:59:00+09:00",
     "likes": 275,
     "retweets": 71,
     "replies": 32,
@@ -5081,20 +5071,20 @@
       "おうち時間"
     ],
     "mentioned_products": [
-      "吊り下げペンダントライト"
+      "ガラスシェードペンダント"
     ],
     "media_urls": [
       "https://example.com/img/user_post_159.jpg"
     ]
   },
   {
-    "post_id": "SNS-TW-2024-00251",
+    "post_id": "SNS-TW-2026-00251",
     "platform": "twitter",
     "post_type": "mention",
     "username": "@eco_akiko",
     "display_name": "エコライフAkiko",
-    "content": "念願のスタイリッシュデスクライトが我が家に！ SNSで見て気になってた #新生活 #グレイシャースタイル",
-    "posted_at": "2024-12-16T16:27:00+09:00",
+    "content": "念願のクリップ式LEDライトが我が家に！ SNSで見て気になってた #新生活 #グレイシャースタイル",
+    "posted_at": "2026-11-24T22:57:00+09:00",
     "likes": 2838,
     "retweets": 189,
     "replies": 52,
@@ -5106,20 +5096,20 @@
       "ガジェット"
     ],
     "mentioned_products": [
-      "スタイリッシュデスクライト"
+      "クリップ式LEDライト"
     ],
     "media_urls": [
       "https://example.com/img/user_post_251.jpg"
     ]
   },
   {
-    "post_id": "SNS-TW-2024-00095",
+    "post_id": "SNS-TW-2026-00095",
     "platform": "twitter",
     "post_type": "mention",
     "username": "@organic_rina",
     "display_name": "オーガニックRina",
-    "content": "耐熱ガラスポットがお気に入りすぎる🥰 想像以上のクオリティ #GlacierStyle",
-    "posted_at": "2024-12-16T16:59:00+09:00",
+    "content": "ダブルウォールグラスがお気に入りすぎる🥰 想像以上のクオリティ #GlacierStyle",
+    "posted_at": "2026-11-25T00:20:00+09:00",
     "likes": 1883,
     "retweets": 192,
     "replies": 45,
@@ -5129,20 +5119,20 @@
       "グレイシャースタイル"
     ],
     "mentioned_products": [
-      "耐熱ガラスポット"
+      "ダブルウォールグラス"
     ],
     "media_urls": [
       "https://example.com/img/user_post_095.jpg"
     ]
   },
   {
-    "post_id": "SNS-TW-2024-00002",
+    "post_id": "SNS-TW-2026-00002",
     "platform": "twitter",
     "post_type": "post",
     "username": "@tech_ryota",
     "display_name": "テック好きRyota",
-    "content": "北欧インテリア図鑑を1ヶ月使ってみた感想📝 家族も気に入ってる おすすめ度は4点！ #グレイシャースタイル",
-    "posted_at": "2024-12-16T17:17:00+09:00",
+    "content": "リングノート A5を1ヶ月使ってみた感想📝 家族も気に入ってる おすすめ度は4点！ #グレイシャースタイル",
+    "posted_at": "2026-11-25T01:07:00+09:00",
     "likes": 503,
     "retweets": 75,
     "replies": 74,
@@ -5153,20 +5143,20 @@
       "レビュー"
     ],
     "mentioned_products": [
-      "北欧インテリア図鑑"
+      "リングノート A5"
     ],
     "media_urls": [
       "https://example.com/img/review_002.jpg"
     ]
   },
   {
-    "post_id": "SNS-IG-2024-00047",
+    "post_id": "SNS-IG-2026-00047",
     "platform": "instagram",
     "post_type": "mention",
     "username": "@interior_emi",
     "display_name": "Emiのインテリア日記",
-    "content": "グレイシャースタイルのLED調光デスクライトとモダンデスクライトで悩み中…アドバイス求む！",
-    "posted_at": "2024-12-16T17:49:00+09:00",
+    "content": "グレイシャースタイルのLEDデスクライト 調光式とモダンデスクライトで悩み中…アドバイス求む！",
+    "posted_at": "2026-11-25T02:31:00+09:00",
     "likes": 11,
     "retweets": 0,
     "replies": 31,
@@ -5178,18 +5168,18 @@
       "インテリア"
     ],
     "mentioned_products": [
-      "LED調光デスクライト"
+      "LEDデスクライト 調光式"
     ],
     "media_urls": []
   },
   {
-    "post_id": "SNS-IG-2024-00230",
+    "post_id": "SNS-IG-2026-00230",
     "platform": "instagram",
     "post_type": "mention",
     "username": "@minimal_satoshi",
     "display_name": "ミニマリストSatoshi",
-    "content": "ウォールシェルフがお気に入りすぎる🥰 毎日使うのが楽しみ #GlacierStyle",
-    "posted_at": "2024-12-16T18:51:00+09:00",
+    "content": "壁面ウッドシェルフがお気に入りすぎる🥰 毎日使うのが楽しみ #GlacierStyle",
+    "posted_at": "2026-11-25T05:13:00+09:00",
     "likes": 1811,
     "retweets": 0,
     "replies": 75,
@@ -5201,18 +5191,18 @@
       "おうち時間"
     ],
     "mentioned_products": [
-      "ウォールシェルフ"
+      "壁面ウッドシェルフ"
     ],
     "media_urls": []
   },
   {
-    "post_id": "SNS-IG-2024-00176",
+    "post_id": "SNS-IG-2026-00176",
     "platform": "instagram",
     "post_type": "mention",
     "username": "@gadget_rina",
     "display_name": "ガジェットRina",
-    "content": "グレイシャースタイルって送料いくらだっけ？モダンデスクライト買いたいんだけど",
-    "posted_at": "2024-12-16T20:07:00+09:00",
+    "content": "グレイシャースタイルって送料いくらだっけ？LEDデスクライト 調光式買いたいんだけど",
+    "posted_at": "2026-11-25T08:31:00+09:00",
     "likes": 130,
     "retweets": 0,
     "replies": 22,
@@ -5223,35 +5213,35 @@
       "GlacierStyle"
     ],
     "mentioned_products": [
-      "モダンデスクライト"
+      "LEDデスクライト 調光式"
     ],
     "media_urls": []
   },
   {
-    "post_id": "SNS-TW-2024-00244",
+    "post_id": "SNS-TW-2026-00244",
     "platform": "twitter",
     "post_type": "mention",
     "username": "@organic_haruka",
     "display_name": "オーガニックHaruka",
-    "content": "グレイシャースタイルの吊り下げペンダントライト、他の色はありますか？",
-    "posted_at": "2024-12-16T21:38:00+09:00",
+    "content": "グレイシャースタイルのガラスシェードペンダント、他の色はありますか？",
+    "posted_at": "2026-11-25T12:29:00+09:00",
     "likes": 4,
     "retweets": 0,
     "replies": 8,
     "hashtags": [],
     "mentioned_products": [
-      "吊り下げペンダントライト"
+      "ガラスシェードペンダント"
     ],
     "media_urls": []
   },
   {
-    "post_id": "SNS-TW-2024-00252",
+    "post_id": "SNS-TW-2026-00252",
     "platform": "twitter",
     "post_type": "mention",
     "username": "@gift_nana",
     "display_name": "ギフト探しNana",
     "content": "@GlacierStyle_JP 注文番号ORD-2024-92739141の件で問い合わせです。キャンセルは可能でしょうか",
-    "posted_at": "2024-12-16T22:07:00+09:00",
+    "posted_at": "2026-11-25T13:44:00+09:00",
     "likes": 20,
     "retweets": 0,
     "replies": 6,
@@ -5260,13 +5250,13 @@
     "media_urls": []
   },
   {
-    "post_id": "SNS-TW-2024-00253",
+    "post_id": "SNS-TW-2026-00253",
     "platform": "twitter",
     "post_type": "reply",
     "username": "@GlacierStyle_JP",
     "display_name": "GlacierStyle公式",
     "content": "@@gift_nana お問い合わせありがとうございます。お手数ですが、詳細をDMでお送りください。担当者より折り返しご連絡いたします。",
-    "posted_at": "2024-12-16T23:55:00+09:00",
+    "posted_at": "2026-11-25T18:26:00+09:00",
     "likes": 20,
     "retweets": 0,
     "replies": 0,
@@ -5275,13 +5265,13 @@
     "media_urls": []
   },
   {
-    "post_id": "SNS-IG-2024-00083",
+    "post_id": "SNS-IG-2026-00083",
     "platform": "instagram",
     "post_type": "mention",
     "username": "@tech_satoshi",
     "display_name": "テック好きSatoshi",
-    "content": "ワイヤレスイヤホンPro、在庫切れになってた…入荷いつかな",
-    "posted_at": "2024-12-17T08:26:00+09:00",
+    "content": "トラベルポーチ 3点セット、在庫切れになってた…入荷いつかな",
+    "posted_at": "2026-11-26T16:41:00+09:00",
     "likes": 44,
     "retweets": 0,
     "replies": 14,
@@ -5291,18 +5281,18 @@
       "GlacierStyle"
     ],
     "mentioned_products": [
-      "ワイヤレスイヤホンPro"
+      "トラベルポーチ 3点セット"
     ],
     "media_urls": []
   },
   {
-    "post_id": "SNS-IG-2024-00136",
+    "post_id": "SNS-IG-2026-00136",
     "platform": "instagram",
     "post_type": "story_mention",
     "username": "@minimal_rina",
     "display_name": "ミニマリストRina",
-    "content": "セールでLED調光デスクライトをお得にゲット！ 毎日使うのが楽しみ #グレイシャースタイル #お買い得",
-    "posted_at": "2024-12-17T12:39:00+09:00",
+    "content": "セールでLEDデスクライト 調光式をお得にゲット！ 毎日使うのが楽しみ #グレイシャースタイル #お買い得",
+    "posted_at": "2026-11-27T03:41:00+09:00",
     "likes": 2456,
     "retweets": 0,
     "replies": 47,
@@ -5314,20 +5304,20 @@
       "EC"
     ],
     "mentioned_products": [
-      "LED調光デスクライト"
+      "LEDデスクライト 調光式"
     ],
     "media_urls": [
       "https://example.com/img/user_post_136.jpg"
     ]
   },
   {
-    "post_id": "SNS-TW-2024-00111",
+    "post_id": "SNS-TW-2026-00111",
     "platform": "twitter",
     "post_type": "mention",
     "username": "@nordic_nana",
     "display_name": "北欧好きNana",
     "content": "@GlacierStyle_JP 注文番号ORD-2024-57830179の件で問い合わせです。返品の手続きについて教えてください",
-    "posted_at": "2024-12-17T13:37:00+09:00",
+    "posted_at": "2026-11-27T06:13:00+09:00",
     "likes": 29,
     "retweets": 0,
     "replies": 3,
@@ -5336,40 +5326,35 @@
     "media_urls": []
   },
   {
-    "post_id": "SNS-TW-2024-00084",
+    "post_id": "SNS-TW-2026-00084",
     "platform": "twitter",
     "post_type": "post",
     "username": "@coffee_kazuki",
     "display_name": "コーヒー好きKazuki",
-    "content": "グレイシャースタイルで彼氏への新築祝いプレゼント選び中💝 LED調光デスクライト良さそう！",
-    "posted_at": "2024-12-17T15:50:00+09:00",
+    "content": "GlacierStyleで買ったLEDデスクライト 調光式、使って10分くらいでちらつき始める…目が疲れる",
+    "posted_at": "2026-11-27T12:00:00+09:00",
     "likes": 590,
     "retweets": 38,
     "replies": 25,
     "hashtags": [
-      "部屋づくり",
-      "購入品",
       "グレイシャースタイル",
-      "インテリア",
-      "お買い物",
-      "ギフト",
-      "プレゼント"
+      "デスクライト"
     ],
     "mentioned_products": [
-      "LED調光デスクライト"
+      "LEDデスクライト 調光式"
     ],
     "media_urls": [
       "https://example.com/img/gift_084.jpg"
     ]
   },
   {
-    "post_id": "SNS-IG-2024-00200",
+    "post_id": "SNS-IG-2026-00200",
     "platform": "instagram",
     "post_type": "mention",
     "username": "@office_hiroshi",
     "display_name": "オフィスワークHiroshi",
-    "content": "念願の北欧インテリア図鑑が我が家に！ SNSで見て気になってた #新生活 #グレイシャースタイル",
-    "posted_at": "2024-12-17T18:07:00+09:00",
+    "content": "念願のリングノート A5が我が家に！ SNSで見て気になってた #新生活 #グレイシャースタイル",
+    "posted_at": "2026-11-27T17:58:00+09:00",
     "likes": 1565,
     "retweets": 0,
     "replies": 10,
@@ -5379,20 +5364,20 @@
       "グレイシャースタイル"
     ],
     "mentioned_products": [
-      "北欧インテリア図鑑"
+      "リングノート A5"
     ],
     "media_urls": [
       "https://example.com/img/user_post_200.jpg"
     ]
   },
   {
-    "post_id": "SNS-IG-2024-00195",
+    "post_id": "SNS-IG-2026-00195",
     "platform": "instagram",
     "post_type": "story_mention",
     "username": "@modern_yuko",
     "display_name": "モダンリビングYuko",
-    "content": "耐熱ガラスポットのおかげで家で過ごす時間が好きになった✨ グレイシャースタイル最高！",
-    "posted_at": "2024-12-17T20:24:00+09:00",
+    "content": "ダブルウォールグラスのおかげで家で過ごす時間が好きになった✨ グレイシャースタイル最高！",
+    "posted_at": "2026-11-27T23:56:00+09:00",
     "likes": 956,
     "retweets": 0,
     "replies": 41,
@@ -5402,20 +5387,20 @@
       "ネットショッピング"
     ],
     "mentioned_products": [
-      "耐熱ガラスポット"
+      "ダブルウォールグラス"
     ],
     "media_urls": [
       "https://example.com/img/user_post_195.jpg"
     ]
   },
   {
-    "post_id": "SNS-IG-2024-00077",
+    "post_id": "SNS-IG-2026-00077",
     "platform": "instagram",
     "post_type": "mention",
     "username": "@modern_sho",
     "display_name": "モダンリビングSho",
     "content": "耐熱ガラスポット、思ってたのと違った…返品できるかな",
-    "posted_at": "2024-12-17T20:29:00+09:00",
+    "posted_at": "2026-11-28T00:09:00+09:00",
     "likes": 80,
     "retweets": 0,
     "replies": 15,
@@ -5424,13 +5409,13 @@
     "media_urls": []
   },
   {
-    "post_id": "SNS-TW-2024-00246",
+    "post_id": "SNS-TW-2026-00246",
     "platform": "twitter",
     "post_type": "post",
     "username": "@modern_kenji",
     "display_name": "モダンリビングKenji",
-    "content": "【購入レビュー】プレミアムカシミヤセーター ⭐5\nデザインがシンプルで使いやすい #GlacierStyle",
-    "posted_at": "2024-12-18T07:08:00+09:00",
+    "content": "【購入レビュー】カシミヤマフラー ⭐5\nデザインがシンプルで使いやすい #GlacierStyle",
+    "posted_at": "2026-11-29T03:57:00+09:00",
     "likes": 323,
     "retweets": 178,
     "replies": 74,
@@ -5442,20 +5427,20 @@
       "レビュー"
     ],
     "mentioned_products": [
-      "プレミアムカシミヤセーター"
+      "カシミヤマフラー"
     ],
     "media_urls": [
       "https://example.com/img/review_246.jpg"
     ]
   },
   {
-    "post_id": "SNS-IG-2024-00018",
+    "post_id": "SNS-IG-2026-00018",
     "platform": "instagram",
     "post_type": "post",
     "username": "@cozy_takeshi",
     "display_name": "コージーライフTakeshi",
-    "content": "【レビュー】グレイシャースタイルのプレミアムカシミヤセーター使ってみた。\n\n良い点👍\n・梱包が丁寧\n・想像通りの色\n\n気になる点👎\n・色の選択肢が少ない\n\n総合: 4/5 #グレイシャースタイル #レビュー",
-    "posted_at": "2024-12-18T08:19:00+09:00",
+    "content": "【レビュー】グレイシャースタイルのカシミヤマフラー使ってみた。\n\n良い点👍\n・梱包が丁寧\n・想像通りの色\n\n気になる点👎\n・色の選択肢が少ない\n\n総合: 4/5 #グレイシャースタイル #レビュー",
+    "posted_at": "2026-11-29T07:02:00+09:00",
     "likes": 1402,
     "retweets": 0,
     "replies": 24,
@@ -5467,20 +5452,20 @@
       "レビュー"
     ],
     "mentioned_products": [
-      "プレミアムカシミヤセーター"
+      "カシミヤマフラー"
     ],
     "media_urls": [
       "https://example.com/img/review_018.jpg"
     ]
   },
   {
-    "post_id": "SNS-IG-2024-00028",
+    "post_id": "SNS-IG-2026-00028",
     "platform": "instagram",
     "post_type": "post",
     "username": "@fashion_satoshi",
     "display_name": "ファッションSatoshi",
-    "content": "デザインシーリングライトのおかげでリラックスできるようになった✨ グレイシャースタイル最高！",
-    "posted_at": "2024-12-18T08:32:00+09:00",
+    "content": "ガラスシェードペンダントのおかげでリラックスできるようになった✨ グレイシャースタイル最高！",
+    "posted_at": "2026-11-29T07:36:00+09:00",
     "likes": 1305,
     "retweets": 0,
     "replies": 51,
@@ -5492,20 +5477,20 @@
       "グレイシャースタイル"
     ],
     "mentioned_products": [
-      "デザインシーリングライト"
+      "ガラスシェードペンダント"
     ],
     "media_urls": [
       "https://example.com/img/user_post_028.jpg"
     ]
   },
   {
-    "post_id": "SNS-IG-2024-00132",
+    "post_id": "SNS-IG-2026-00132",
     "platform": "instagram",
     "post_type": "mention",
     "username": "@eco_taro",
     "display_name": "エコライフTaro",
-    "content": "グレイシャースタイルで注文したスマートスピーカーがまだ届かない…どうなってるの？",
-    "posted_at": "2024-12-18T12:30:00+09:00",
+    "content": "グレイシャースタイルで注文したアロマディフューザーセットがまだ届かない…どうなってるの？",
+    "posted_at": "2026-11-29T17:58:00+09:00",
     "likes": 75,
     "retweets": 0,
     "replies": 3,
@@ -5513,18 +5498,18 @@
       "グレイシャースタイル"
     ],
     "mentioned_products": [
-      "スマートスピーカー"
+      "アロマディフューザーセット"
     ],
     "media_urls": []
   },
   {
-    "post_id": "SNS-IG-2024-00113",
+    "post_id": "SNS-IG-2026-00113",
     "platform": "instagram",
     "post_type": "mention",
     "username": "@home_satoshi",
     "display_name": "Satoshiのマイホーム記録",
-    "content": "グレイシャースタイルのセールっていつ始まる？吊り下げペンダントライト狙ってる",
-    "posted_at": "2024-12-18T12:32:00+09:00",
+    "content": "グレイシャースタイルのセールっていつ始まる？ガラスシェードペンダント狙ってる",
+    "posted_at": "2026-11-29T18:03:00+09:00",
     "likes": 54,
     "retweets": 0,
     "replies": 40,
@@ -5536,18 +5521,18 @@
       "インテリア"
     ],
     "mentioned_products": [
-      "吊り下げペンダントライト"
+      "ガラスシェードペンダント"
     ],
     "media_urls": []
   },
   {
-    "post_id": "SNS-TW-2024-00166",
+    "post_id": "SNS-TW-2026-00166",
     "platform": "twitter",
     "post_type": "mention",
     "username": "@lifestyle_emi",
     "display_name": "Emi｜暮らしを楽しむ",
-    "content": "配送遅延でスタイリッシュデスクライトが届くの遅れてる。連絡もないし不安",
-    "posted_at": "2024-12-18T16:31:00+09:00",
+    "content": "配送遅延でクリップ式LEDライトが届くの遅れてる。連絡もないし不安",
+    "posted_at": "2026-11-30T04:27:00+09:00",
     "likes": 17,
     "retweets": 6,
     "replies": 12,
@@ -5555,18 +5540,18 @@
       "グレイシャースタイル"
     ],
     "mentioned_products": [
-      "スタイリッシュデスクライト"
+      "クリップ式LEDライト"
     ],
     "media_urls": []
   },
   {
-    "post_id": "SNS-IG-2024-00129",
+    "post_id": "SNS-IG-2026-00129",
     "platform": "instagram",
     "post_type": "mention",
     "username": "@fashion_megumi",
     "display_name": "ファッションMegumi",
     "content": "グレイシャースタイルのサイト、決済エラーが出るで困ってる😭",
-    "posted_at": "2024-12-18T16:54:00+09:00",
+    "posted_at": "2026-11-30T05:27:00+09:00",
     "likes": 49,
     "retweets": 0,
     "replies": 11,
@@ -5574,20 +5559,20 @@
       "グレイシャースタイル"
     ],
     "mentioned_products": [
-      "耐熱ガラスポット"
+      "ダブルウォールグラス"
     ],
     "media_urls": [
       "https://example.com/img/issue_129.jpg"
     ]
   },
   {
-    "post_id": "SNS-IG-2024-00243",
+    "post_id": "SNS-IG-2026-00243",
     "platform": "instagram",
     "post_type": "mention",
     "username": "@eco_daiki",
     "display_name": "エコライフDaiki",
-    "content": "スタイリッシュデスクライトが届いた！ 思ってた以上にクオリティ高くて大満足😊 #GlacierStyle #グレイシャースタイル",
-    "posted_at": "2024-12-18T17:42:00+09:00",
+    "content": "クリップ式LEDライトが届いた！ 思ってた以上にクオリティ高くて大満足😊 #GlacierStyle #グレイシャースタイル",
+    "posted_at": "2026-11-30T07:33:00+09:00",
     "likes": 1560,
     "retweets": 0,
     "replies": 57,
@@ -5598,20 +5583,20 @@
       "GlacierStyle"
     ],
     "mentioned_products": [
-      "スタイリッシュデスクライト"
+      "クリップ式LEDライト"
     ],
     "media_urls": [
       "https://example.com/img/user_post_243.jpg"
     ]
   },
   {
-    "post_id": "SNS-IG-2024-00245",
+    "post_id": "SNS-IG-2026-00245",
     "platform": "instagram",
     "post_type": "post",
     "username": "@room_rina",
     "display_name": "お部屋づくりRina",
-    "content": "リネンシャツをギフトラッピングしてもらった🎀 家族も気に入ってる #グレイシャースタイル",
-    "posted_at": "2024-12-18T19:10:00+09:00",
+    "content": "フランネルパジャマをギフトラッピングしてもらった🎀 家族も気に入ってる #グレイシャースタイル",
+    "posted_at": "2026-11-30T11:22:00+09:00",
     "likes": 705,
     "retweets": 0,
     "replies": 28,
@@ -5624,20 +5609,20 @@
       "プレゼント"
     ],
     "mentioned_products": [
-      "リネンシャツ"
+      "フランネルパジャマ"
     ],
     "media_urls": [
       "https://example.com/img/gift_245.jpg"
     ]
   },
   {
-    "post_id": "SNS-IG-2024-00041",
+    "post_id": "SNS-IG-2026-00041",
     "platform": "instagram",
     "post_type": "post",
     "username": "@design_megumi",
     "display_name": "デザイン好きMegumi",
-    "content": "ずっと気になってた収納付きデスク、ついにゲット🎉 デザインがシンプルで使いやすい #グレイシャースタイル",
-    "posted_at": "2024-12-18T19:27:00+09:00",
+    "content": "ずっと気になってた昇降式ワークデスク、ついにゲット🎉 デザインがシンプルで使いやすい #グレイシャースタイル",
+    "posted_at": "2026-11-30T12:07:00+09:00",
     "likes": 1229,
     "retweets": 0,
     "replies": 33,
@@ -5648,20 +5633,20 @@
       "GlacierStyle"
     ],
     "mentioned_products": [
-      "収納付きデスク"
+      "昇降式ワークデスク"
     ],
     "media_urls": [
       "https://example.com/img/user_post_041.jpg"
     ]
   },
   {
-    "post_id": "SNS-IG-2024-00171",
+    "post_id": "SNS-IG-2026-00171",
     "platform": "instagram",
     "post_type": "post",
     "username": "@modern_mai",
     "display_name": "モダンリビングMai",
-    "content": "グレイシャースタイルで彼氏への母の日プレゼント選び中💝 ワイヤレスイヤホンPro良さそう！",
-    "posted_at": "2024-12-18T22:08:00+09:00",
+    "content": "グレイシャースタイルで彼氏への母の日プレゼント選び中💝 トラベルポーチ 3点セット良さそう！",
+    "posted_at": "2026-11-30T19:07:00+09:00",
     "likes": 510,
     "retweets": 0,
     "replies": 21,
@@ -5674,18 +5659,18 @@
       "プレゼント"
     ],
     "mentioned_products": [
-      "ワイヤレスイヤホンPro"
+      "トラベルポーチ 3点セット"
     ],
     "media_urls": []
   },
   {
-    "post_id": "SNS-TW-2024-00172",
+    "post_id": "SNS-TW-2026-00172",
     "platform": "twitter",
     "post_type": "mention",
     "username": "@interior_ryota",
     "display_name": "Ryotaのインテリア日記",
     "content": "@GlacierStyle_JP 吊り下げペンダントライトの色味について質問です。ギフトラッピングはできますか？",
-    "posted_at": "2024-12-18T23:02:00+09:00",
+    "posted_at": "2026-11-30T21:28:00+09:00",
     "likes": 18,
     "retweets": 0,
     "replies": 7,
@@ -5694,13 +5679,13 @@
     "media_urls": []
   },
   {
-    "post_id": "SNS-TW-2024-00115",
+    "post_id": "SNS-TW-2026-00115",
     "platform": "twitter",
     "post_type": "mention",
     "username": "@minimal_daiki",
     "display_name": "ミニマリストDaiki",
-    "content": "配送遅延で収納付きデスクが届くの遅れてる。連絡もないし不安",
-    "posted_at": "2024-12-18T23:38:00+09:00",
+    "content": "配送遅延で昇降式ワークデスクが届くの遅れてる。連絡もないし不安",
+    "posted_at": "2026-11-30T23:02:00+09:00",
     "likes": 38,
     "retweets": 3,
     "replies": 1,
@@ -5708,7 +5693,7 @@
       "グレイシャースタイル"
     ],
     "mentioned_products": [
-      "収納付きデスク"
+      "昇降式ワークデスク"
     ],
     "media_urls": [
       "https://example.com/img/issue_115.jpg"
