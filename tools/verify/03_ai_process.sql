@@ -3,19 +3,20 @@
 USE SCHEMA GLACIERSTYLE_DEC_DB.EC_ANALYTICS_SCHEMA;
 USE WAREHOUSE GLACIERSTYLE_WH;
 
--- Part1: 音声10件を文字起こしし、文字起こし済み88件と合わせる
-CREATE TABLE IF NOT EXISTS CALL_TRANSCRIPTS AS
-SELECT call_id, call_datetime, customer_id, product_id, transcript_text, '文字起こし済み' AS source
-FROM RAW_CALL_TRANSCRIPTS
-UNION ALL
-SELECT 'CALL-202611-' || REPLACE(SPLIT_PART(relative_path, '/', 2), '.mp3', '') AS call_id,
-       NULL::TIMESTAMP_NTZ, NULL, NULL,
-       AI_TRANSCRIBE(TO_FILE('@DATA_STAGE', relative_path)):text::VARCHAR,
-       '音声'
-FROM DIRECTORY(@DATA_STAGE) WHERE relative_path LIKE 'voice/%.mp3';
+-- Part1: 音声10件を文字起こしして RAW_VOICE_LOGS に保存（文字起こし済み88件は RAW_CALL_TRANSCRIPTS）
+CREATE TABLE IF NOT EXISTS RAW_VOICE_LOGS AS
+WITH transcribed AS (
+  SELECT SPLIT_PART(relative_path, '/', -1) AS audio_file,
+         AI_TRANSCRIBE(TO_FILE('@DATA_STAGE', relative_path)) AS result
+  FROM DIRECTORY(@DATA_STAGE) WHERE relative_path LIKE 'voice/%.mp3'
+)
+SELECT 'VOICE-' || REPLACE(audio_file, '.mp3', '') AS call_id, audio_file,
+       result:audio_duration::NUMBER(10, 1) AS audio_duration_sec,
+       result:text::VARCHAR AS transcript_text
+FROM transcribed;
 
 -- Part1: PDF をページ単位で解析する
-CREATE OR REPLACE TABLE DOC_PARSED AS
+CREATE OR REPLACE TABLE RAW_DOCUMENTS AS
 WITH parsed AS (
   SELECT SPLIT_PART(relative_path, '/', 2) AS file_name,
          AI_PARSE_DOCUMENT(TO_FILE('@DATA_STAGE', relative_path), {'mode': 'LAYOUT', 'page_split': true}) AS doc
@@ -38,7 +39,7 @@ WITH ex AS (
            'product_category': '対象の商品カテゴリを次から1つ: 照明, 家具, 収納, 調理器具, 食器, 文具, トラベル, ギフト, ファッション小物, ルームウェア。特定の商品についての文書でなければ空',
            'product_ids': '対象の商品IDをすべて（例: PRD-LGT-0001）'
          }):response AS r
-  FROM DOC_PARSED
+  FROM RAW_DOCUMENTS
   WHERE page_no = 1
 )
 -- 特定の商品を扱わない文書では AI が余計な値（「None」「空」など）を返すため、
@@ -62,7 +63,14 @@ FROM cleaned;
 
 -- Part2: 通話から項目を抽出し、個人情報をマスクする（商品カテゴリも通話の中身から取り出す）
 CREATE OR REPLACE TABLE CALL_ANALYSIS AS
-WITH ex AS (
+WITH calls AS (
+  SELECT call_id, call_datetime, customer_id, order_id, product_id, transcript_text, '文字起こし済み' AS source
+  FROM RAW_CALL_TRANSCRIPTS
+  UNION ALL
+  SELECT call_id, NULL::TIMESTAMP_NTZ, NULL, NULL, NULL, transcript_text, '音声'
+  FROM RAW_VOICE_LOGS
+),
+ex AS (
   SELECT t.*,
          AI_EXTRACT(text => transcript_text, responseFormat => {
            'inquiry_type': '問い合わせ種別を次から1つ: 商品不具合, 配送遅延, 返品・交換, 注文キャンセル, 商品問い合わせ, 支払い, 会員・ポイント, その他',
@@ -72,18 +80,18 @@ WITH ex AS (
            'churn_risk': '顧客が他社に乗り換えたり利用をやめたりする可能性を次から1つ: 高, 中, 低',
            'summary': '通話内容の要約（60文字以内）'
          }):response AS r
-  FROM CALL_TRANSCRIPTS t
+  FROM calls t
 )
-SELECT call_id, call_datetime, customer_id, product_id, source,
+SELECT call_id, call_datetime, customer_id, order_id, product_id, source,
        r:inquiry_type::VARCHAR AS inquiry_type, r:product_name::VARCHAR AS product_name,
        -- AI が選択肢にない値（商品名など）を返すことがあるため、選択肢以外は空にする
        IFF(r:product_category::VARCHAR IN ('照明', '家具', '収納', '調理器具', '食器', '文具', 'トラベル', 'ギフト', 'ファッション小物', 'ルームウェア'),
            r:product_category::VARCHAR, NULL) AS product_category,
        r:sentiment::VARCHAR AS sentiment, r:churn_risk::VARCHAR AS churn_risk, r:summary::VARCHAR AS summary,
-       AI_REDACT(transcript_text) AS transcript_masked
+       AI_REDACT(transcript_text)::VARCHAR AS transcript_masked
 FROM ex;
 
-SELECT 'CALL_TRANSCRIPTS' t, COUNT(*) n FROM CALL_TRANSCRIPTS
-UNION ALL SELECT 'DOC_PARSED', COUNT(*) FROM DOC_PARSED
+SELECT 'RAW_VOICE_LOGS' t, COUNT(*) n FROM RAW_VOICE_LOGS
+UNION ALL SELECT 'RAW_DOCUMENTS', COUNT(*) FROM RAW_DOCUMENTS
 UNION ALL SELECT 'DOC_ATTRIBUTES', COUNT(*) FROM DOC_ATTRIBUTES
 UNION ALL SELECT 'CALL_ANALYSIS', COUNT(*) FROM CALL_ANALYSIS;

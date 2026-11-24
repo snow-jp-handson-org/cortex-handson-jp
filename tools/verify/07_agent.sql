@@ -4,9 +4,9 @@ USE WAREHOUSE GLACIERSTYLE_WH;
 
 CREATE OR REPLACE SEMANTIC VIEW CS_QUALITY_SV
   TABLES (
-    orders AS ORDERS PRIMARY KEY (order_id) COMMENT = '注文。order_status=returned が返品',
-    products AS PRODUCTS PRIMARY KEY (product_id) COMMENT = '商品マスタ',
-    customers AS CUSTOMERS PRIMARY KEY (customer_id) COMMENT = '顧客マスタ',
+    orders AS FACT_ORDERS PRIMARY KEY (order_id) COMMENT = '注文。order_status=returned が返品',
+    products AS DIM_PRODUCTS PRIMARY KEY (product_id) COMMENT = '商品マスタ',
+    customers AS DIM_CUSTOMERS PRIMARY KEY (customer_id) COMMENT = '顧客マスタ',
     calls AS CALL_ANALYSIS PRIMARY KEY (call_id) COMMENT = 'コールセンター通話の分析結果（AI_EXTRACT）'
   )
   RELATIONSHIPS (

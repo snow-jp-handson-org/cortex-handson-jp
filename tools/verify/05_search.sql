@@ -20,7 +20,7 @@ SELECT d.file_name || '-p' || d.page_no || '-' || c.index AS chunk_id,
        a.title, a.doc_type, a.department, a.audience, a.doc_date,
        a.product_category, a.product_ids,
        NULL
-FROM DOC_PARSED d
+FROM RAW_DOCUMENTS d
 JOIN DOC_ATTRIBUTES a ON a.file_name = d.file_name,
      LATERAL FLATTEN(input => SNOWFLAKE.CORTEX.SPLIT_TEXT_RECURSIVE_CHARACTER(d.page_text, 'markdown', 800, 100)) c;
 

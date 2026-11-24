@@ -142,7 +142,7 @@ SELECT SNOWFLAKE.CORTEX.SEARCH_PREVIEW('KNOWLEDGE_SEARCH', '{
 <div class="table-wrap"><table>
 <thead><tr><th></th><th>ダッシュボードのフィルタ</th><th>Cortex Search のフィルタ（属性）</th></tr></thead>
 <tbody>
-<tr><td>絞り込む対象</td><td>構造化テーブルの行（ORDERS の注文、CALL_ANALYSIS の通話件数）</td><td>通話の文字起こしやPDFを分割した<strong>文章の断片（チャンク）</strong></td></tr>
+<tr><td>絞り込む対象</td><td>構造化テーブルの行（FACT_ORDERS の注文、CALL_ANALYSIS の通話件数）</td><td>通話の文字起こしやPDFを分割した<strong>文章の断片（チャンク）</strong></td></tr>
 <tr><td>返ってくるもの</td><td>集計した数字（返品率 15.4% など）</td><td>文章そのもの（「点灯10分ほどでちらつく」「対象ロットは期限なし」など）</td></tr>
 <tr><td>絞り込みの条件</td><td>テーブルにもともとある列（注文日、商品カテゴリ）</td><td>文章に<strong>後から付けた属性</strong>。PDF の属性（文書の種類・部署・公開範囲・発行日・対象商品）は文書の表紙から、通話の属性（商品カテゴリ・感情）は会話の中身から、<strong>すべて AI_EXTRACT で取り出す</strong></td></tr>
 <tr><td>使いどころ</td><td>「何が起きているか」を数字で見る</td><td>「なぜ起きているか」「どう対応するか」を文書と通話から探す</td></tr>
@@ -235,11 +235,11 @@ SELECT SNOWFLAKE.CORTEX.SEARCH_PREVIEW('KNOWLEDGE_SEARCH', '{
 <div class="table-wrap"><table>
 <thead><tr><th>タイル</th><th>種類</th><th>元テーブル</th><th>メモ</th></tr></thead>
 <tbody>
-<tr><td>今月の通話件数／ネガティブ率／返品率</td><td>スコアカード</td><td>CALL_ANALYSIS, ORDERS</td><td>前月比つき</td></tr>
+<tr><td>今月の通話件数／ネガティブ率／返品率</td><td>スコアカード</td><td>CALL_ANALYSIS, FACT_ORDERS</td><td>前月比つき</td></tr>
 <tr><td>月別 通話件数（問い合わせ種別）</td><td>積み上げ棒</td><td>CALL_ANALYSIS</td><td>11月に配送遅延が最多になる</td></tr>
-<tr><td>商品カテゴリ別 返品率の推移</td><td>折れ線</td><td>ORDERS, PRODUCTS</td><td>照明だけ10月から上がる</td></tr>
-<tr><td>商品別 問い合わせ × 売上 × 返品率</td><td>表</td><td>CALL_ANALYSIS, ORDERS, PRODUCTS</td><td>CoWork での質問の起点</td></tr>
-<tr><td>解約リスクの高い顧客</td><td>表</td><td>CALL_ANALYSIS, CUSTOMERS</td><td>氏名はマスク済みの値を表示</td></tr>
+<tr><td>商品カテゴリ別 返品率の推移</td><td>折れ線</td><td>FACT_ORDERS, DIM_PRODUCTS</td><td>照明だけ10月から上がる</td></tr>
+<tr><td>商品別 問い合わせ × 売上 × 返品率</td><td>表</td><td>CALL_ANALYSIS, FACT_ORDERS, DIM_PRODUCTS</td><td>CoWork での質問の起点</td></tr>
+<tr><td>解約リスクの高い顧客</td><td>表</td><td>CALL_ANALYSIS, DIM_CUSTOMERS</td><td>氏名はマスク済みの値を表示</td></tr>
 </tbody></table></div>
 <p>ダッシュボードのフィルタは <strong>期間</strong> と <strong>商品カテゴリ</strong>。Cortex Search の属性（<code>doc_date</code>, <code>product_category</code>）と同じ軸にそろえる。</p>
 <p class="sub">Snowflake Dashboards は Preview。Snowsight Workspaces で CoCo が .dash ファイルを作り、artifact として共有すると CoWork でタイルに追加質問できる。CoCo Desktop からはダッシュボードの artifact を公開できない。</p>
@@ -249,9 +249,9 @@ SELECT SNOWFLAKE.CORTEX.SEARCH_PREVIEW('KNOWLEDGE_SEARCH', '{
 「CS・品質ダッシュボード」を作ってください。対象期間は2026年6月〜11月です。
 
 使うデータ:
-- 売上・返品: ORDERS（order_status = 'returned' が返品、lot_no がロット番号）と PRODUCTS（category_l2 が商品カテゴリ）
+- 売上・返品: FACT_ORDERS（order_status = 'returned' が返品、lot_no がロット番号）と DIM_PRODUCTS（category_l2 が商品カテゴリ）
 - 問い合わせ: CALL_ANALYSIS（inquiry_type, sentiment, churn_risk, product_id, call_datetime）
-- 顧客: CUSTOMERS（membership_tier が会員ランク）
+- 顧客: DIM_CUSTOMERS（membership_tier が会員ランク）
 
 タイル:
 1. スコアカード3つ（11月の値と前月比）: 通話件数、ネガティブ通話の比率、返品率
@@ -272,9 +272,10 @@ SELECT SNOWFLAKE.CORTEX.SEARCH_PREVIEW('KNOWLEDGE_SEARCH', '{
 <svg viewBox="0 0 1105 450" width="1105" role="img" aria-label="データの流れ: ステージの通話・PDFを AI 関数でテーブル化し、属性付きチャンクから Cortex Search を作る。構造化データと通話分析からセマンティックビューを作り、Agent と Dashboards を経て CoWork で使う" style="min-width:720px;max-width:100%;height:auto">
 <defs><marker id="fl-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="fl-head"/></marker></defs>
 <line class="fl-edge" x1="170" y1="43.0" x2="561" y2="83.0" marker-end="url(#fl-arrow)"/>
-<line class="fl-edge" x1="170" y1="153.0" x2="191" y2="188.0" marker-end="url(#fl-arrow)"/>
-<line class="fl-edge" x1="170" y1="223.0" x2="191" y2="188.0" marker-end="url(#fl-arrow)"/>
-<line class="fl-edge" x1="355" y1="188.0" x2="376" y2="188.0" marker-end="url(#fl-arrow)"/>
+<line class="fl-edge" x1="170" y1="153.0" x2="191" y2="153.0" marker-end="url(#fl-arrow)"/>
+<line class="fl-edge" x1="170" y1="223.0" x2="191" y2="223.0" marker-end="url(#fl-arrow)"/>
+<line class="fl-edge" x1="355" y1="153.0" x2="376" y2="188.0" marker-end="url(#fl-arrow)"/>
+<line class="fl-edge" x1="355" y1="223.0" x2="376" y2="188.0" marker-end="url(#fl-arrow)"/>
 <line class="fl-edge" x1="170" y1="343.0" x2="191" y2="343.0" marker-end="url(#fl-arrow)"/>
 <line class="fl-edge" x1="355" y1="343.0" x2="561" y2="343.0" marker-end="url(#fl-arrow)"/>
 <line class="fl-edge" x1="355" y1="343.0" x2="376" y2="413.0" marker-end="url(#fl-arrow)"/>
@@ -287,9 +288,9 @@ SELECT SNOWFLAKE.CORTEX.SEARCH_PREVIEW('KNOWLEDGE_SEARCH', '{
 <line class="fl-edge" x1="830.0" y1="320" x2="830.0" y2="215" marker-end="url(#fl-arrow)"/>
 <line class="fl-edge" x1="910" y1="43.0" x2="931" y2="118.0" marker-end="url(#fl-arrow)"/>
 <line class="fl-edge" x1="910" y1="188.0" x2="931" y2="118.0" marker-end="url(#fl-arrow)"/>
-<rect class="fl-box fl-src" x="10" y="20" width="160" height="46" rx="6"/>
-<text class="fl-t1" x="90.0" y="39" style="font-size:10px">CUSTOMERS / PRODUCTS</text>
-<text class="fl-t2" x="90.0" y="56">ORDERS（setup）</text>
+<rect class="fl-box fl-tbl" x="10" y="20" width="160" height="46" rx="6"/>
+<text class="fl-t1" x="90.0" y="39" style="font-size:10px">DIM_* / FACT_ORDERS</text>
+<text class="fl-t2" x="90.0" y="56">CSV を COPY INTO</text>
 <rect class="fl-box fl-src" x="10" y="130" width="160" height="46" rx="6"/>
 <text class="fl-t1" x="90.0" y="149">通話 mp3 10件</text>
 <text class="fl-t2" x="90.0" y="166">ステージ</text>
@@ -299,11 +300,14 @@ SELECT SNOWFLAKE.CORTEX.SEARCH_PREVIEW('KNOWLEDGE_SEARCH', '{
 <rect class="fl-box fl-src" x="10" y="320" width="160" height="46" rx="6"/>
 <text class="fl-t1" x="90.0" y="339">PDF 11本</text>
 <text class="fl-t2" x="90.0" y="356">ステージ</text>
-<rect class="fl-box fl-tbl" x="195" y="165" width="160" height="46" rx="6"/>
-<text class="fl-t1" x="275.0" y="184">CALL_TRANSCRIPTS</text>
-<text class="fl-t2" x="275.0" y="201">AI_TRANSCRIBE</text>
+<rect class="fl-box fl-tbl" x="195" y="130" width="160" height="46" rx="6"/>
+<text class="fl-t1" x="275.0" y="149">RAW_VOICE_LOGS</text>
+<text class="fl-t2" x="275.0" y="166">AI_TRANSCRIBE</text>
+<rect class="fl-box fl-tbl" x="195" y="200" width="160" height="46" rx="6"/>
+<text class="fl-t1" x="275.0" y="219" style="font-size:10px">RAW_CALL_TRANSCRIPTS</text>
+<text class="fl-t2" x="275.0" y="236">CSV を COPY INTO</text>
 <rect class="fl-box fl-tbl" x="195" y="320" width="160" height="46" rx="6"/>
-<text class="fl-t1" x="275.0" y="339">DOC_PARSED</text>
+<text class="fl-t1" x="275.0" y="339">RAW_DOCUMENTS</text>
 <text class="fl-t2" x="275.0" y="356">AI_PARSE_DOCUMENT</text>
 <rect class="fl-box fl-tbl" x="380" y="165" width="160" height="46" rx="6"/>
 <text class="fl-t1" x="460.0" y="184">CALL_ANALYSIS</text>
@@ -331,7 +335,7 @@ SELECT SNOWFLAKE.CORTEX.SEARCH_PREVIEW('KNOWLEDGE_SEARCH', '{
 <text class="fl-t2" x="1015.0" y="131">artifact で質問</text>
 </svg>
 </div>
-<p class="sub">色の凡例：灰＝元データ（setup・ステージ）／青＝参加者が作るテーブル／緑＝サービス（セマンティックビュー・Search・Agent）／橙＝利用者の画面（Dashboards・CoWork）。各箱の2行目は使う機能。</p>
+<p class="sub">色の凡例：灰＝元データ（ステージ上のファイル）／青＝参加者が作るテーブル／緑＝サービス（セマンティックビュー・Search・Agent）／橙＝利用者の画面（Dashboards・CoWork）。各箱の2行目は使う機能。</p>
 
 <h2 id="sources">8. データソース一覧（配布するもの）</h2>
 <h3>本編</h3>
@@ -374,14 +378,16 @@ SELECT SNOWFLAKE.CORTEX.SEARCH_PREVIEW('KNOWLEDGE_SEARCH', '{
 <div class="table-wrap"><table>
 <thead><tr><th>テーブル</th><th>作るタイミング</th><th>粒度</th><th>主な列</th></tr></thead>
 <tbody>
-<tr><td>CUSTOMERS / PRODUCTS / ORDERS</td><td>setup.sql</td><td>各1行</td><td>CSVのまま</td></tr>
-<tr><td>CALL_TRANSCRIPTS</td><td>Part1</td><td>通話1件</td><td>call_id, call_datetime, customer_id, product_id, transcript_text, source（音声／文字起こし済み）</td></tr>
-<tr><td>CALL_ANALYSIS</td><td>Part2</td><td>通話1件</td><td>call_id, inquiry_type, product_category, sentiment, churn_risk, summary, transcript_masked（AI_EXTRACT / AI_REDACT の結果）</td></tr>
-<tr><td>DOC_PARSED</td><td>Part1</td><td>PDF1ページ</td><td>file_name, page_no, page_text</td></tr>
+<tr><td>DIM_CUSTOMERS / DIM_PRODUCTS（ディメンション）</td><td>Part1</td><td>各1行</td><td>CSVのまま</td></tr>
+<tr><td>FACT_ORDERS（ファクト）</td><td>Part1</td><td>注文1件</td><td>CSVのまま（order_status, lot_no を含む）</td></tr>
+<tr><td>RAW_CALL_TRANSCRIPTS</td><td>Part1</td><td>通話1件</td><td>call_id, call_datetime, customer_id, order_id, product_id, transcript_text（CSVのまま）</td></tr>
+<tr><td>RAW_VOICE_LOGS</td><td>Part1</td><td>音声1件</td><td>call_id, audio_file, audio_duration_sec, transcript_text（AI_TRANSCRIBE の結果）</td></tr>
+<tr><td>CALL_ANALYSIS</td><td>Part2</td><td>通話1件（RAW_CALL_TRANSCRIPTS と RAW_VOICE_LOGS を合わせる）</td><td>call_id, inquiry_type, product_category, sentiment, churn_risk, summary, transcript_masked（AI_EXTRACT / AI_REDACT の結果）</td></tr>
+<tr><td>RAW_DOCUMENTS</td><td>Part1</td><td>PDF1ページ</td><td>file_name, page_no, page_text</td></tr>
 <tr><td>DOC_ATTRIBUTES</td><td>Part2</td><td>PDF1本</td><td>file_name, title, doc_type, department, audience, doc_date, product_category, product_ids（表紙から AI_EXTRACT）</td></tr>
-<tr><td>KNOWLEDGE_CHUNKS</td><td>Part3</td><td>チャンク1件</td><td>次の章を参照</td></tr>
+<tr><td>KNOWLEDGE_CHUNKS</td><td>Part2</td><td>チャンク1件</td><td>次の章を参照</td></tr>
 </tbody></table></div>
-<p class="sub">参加者が作るのは4テーブル（CALL_TRANSCRIPTS, CALL_ANALYSIS, DOC_PARSED, KNOWLEDGE_CHUNKS）。各パートの後にチェックポイントSQLで追いつけるようにする。検証での件数：CALL_TRANSCRIPTS 98件、CALL_ANALYSIS 98件、DOC_PARSED 99ページ、KNOWLEDGE_CHUNKS 200件。検証用の SQL は <code>tools/verify/</code>。</p>
+<p class="sub">Part1 で raw 層（DIM_ / FACT_ / RAW_）、Part2 で conform 層（CALL_ANALYSIS, DOC_ATTRIBUTES, KNOWLEDGE_CHUNKS）を作る。各パートの後に <code>checkpoint_20261216.sql</code> で追いつける。検証での件数：RAW_CALL_TRANSCRIPTS 88件、RAW_VOICE_LOGS 10件、RAW_DOCUMENTS 99ページ、CALL_ANALYSIS 98件、DOC_ATTRIBUTES 11件、KNOWLEDGE_CHUNKS 200件。検証用の SQL は <code>tools/verify/</code>。</p>
 
 <h2 id="search">10. Cortex Search 用テーブルとサービス</h2>
 <h3>KNOWLEDGE_CHUNKS（通話と PDF を1つにまとめたテーブル）</h3>
@@ -434,7 +440,7 @@ AS SELECT CHUNK_ID, CHUNK_TEXT, TITLE, DOC_TYPE, DEPARTMENT, AUDIENCE, DOC_DATE,
 <div class="table-wrap"><table>
 <thead><tr><th>シグナル</th><th>どのデータに入れたか</th><th>生成結果</th></tr></thead>
 <tbody>
-<tr><td>LEDデスクライト（PRD-LGT-0001）の返品が10月から急増し、売上が減る</td><td>ORDERS（returned の比率、lot_no）、通話（「ちらつく」）</td><td>照明の返品率 6〜9月 3.0% → 10〜11月 12.1%。不具合商品の販売は月50件前後 → 23〜27件</td></tr>
+<tr><td>LEDデスクライト（PRD-LGT-0001）の返品が10月から急増し、売上が減る</td><td>FACT_ORDERS（returned の比率、lot_no）、通話（「ちらつく」）</td><td>照明の返品率 6〜9月 3.0% → 10〜11月 12.1%。不具合商品の販売は月50件前後 → 23〜27件</td></tr>
 <tr><td>原因は LEDドライバの不良ロット LOT-2609-B</td><td>品質報告書PDF（第1報 10/15・第2報 11/20）</td><td>対象商品ID・ロット・原因・暫定対応を記載</td></tr>
 <tr><td>11月セール期に配送遅延が増える</td><td>通話（問い合わせ種別）、注文数（11月は約1.4倍）</td><td>配送遅延の通話 6〜10月 月平1.6件 → 11月 12件</td></tr>
 <tr><td>お客様向けと社内で返品の扱いが違う</td><td>FAQ（不良品は14日以内）、特例対応通達（対象ロットは期限なし・交換優先）</td><td>UC3 の②と③で答えが変わることを確認</td></tr>

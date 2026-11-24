@@ -16,14 +16,14 @@ CREATE STAGE IF NOT EXISTS DATA_STAGE
 CREATE OR REPLACE FILE FORMAT CSV_FF
   TYPE = CSV PARSE_HEADER = TRUE FIELD_OPTIONALLY_ENCLOSED_BY = '"' ENCODING = 'UTF8';
 
--- 構造化データ（setup で用意する想定）
-CREATE OR REPLACE TABLE PRODUCTS (
+-- 構造化データ（ノートブックの Part1 と同じテーブル名）
+CREATE OR REPLACE TABLE DIM_PRODUCTS (
   product_id VARCHAR, product_name VARCHAR, category_l1 VARCHAR, category_l2 VARCHAR, category_l3 VARCHAR,
   brand VARCHAR, list_price NUMBER, cost_price NUMBER, launch_date DATE);
-CREATE OR REPLACE TABLE CUSTOMERS (
+CREATE OR REPLACE TABLE DIM_CUSTOMERS (
   customer_id VARCHAR, last_name VARCHAR, first_name VARCHAR, gender VARCHAR, birth_date DATE, email VARCHAR,
   phone VARCHAR, prefecture VARCHAR, city VARCHAR, registration_date DATE, membership_tier VARCHAR);
-CREATE OR REPLACE TABLE ORDERS (
+CREATE OR REPLACE TABLE FACT_ORDERS (
   order_id VARCHAR, order_datetime TIMESTAMP_NTZ, customer_id VARCHAR, product_id VARCHAR, quantity NUMBER,
   unit_price NUMBER, discount_amount NUMBER, total_amount NUMBER, order_channel VARCHAR, order_status VARCHAR, lot_no VARCHAR);
 CREATE OR REPLACE TABLE RAW_CALL_TRANSCRIPTS (

@@ -11,7 +11,7 @@ SELECT d.file_name,
          'doc_date': '発行日または最終更新日（YYYY-MM-DD）',
          'product_id': '対象の商品ID（例: PRD-LGT-0001）。なければ空'
        }):response AS r
-FROM DOC_PARSED d
+FROM RAW_DOCUMENTS d
 WHERE d.page_no = 1;
 
 SELECT e.file_name,
