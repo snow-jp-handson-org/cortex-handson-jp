@@ -71,7 +71,7 @@ ul { padding-left:1.3em; }
 <body>
 
 <h1>12/16 Cortex ハンズオン 想定ユースケースとデータソース</h1>
-<p class="sub">講師間（Shimada / Jia）の認識合わせ用　｜　2026-11-14 検証済み版　｜　ブランチ <code>develop_20261216_kshimada</code></p>
+<p class="sub">講師間（Shimada / Jia）の認識合わせ用　｜　2026-11-14 検証済み版（11-24 更新）　｜　ブランチ <code>pri_20261216</code></p>
 <div class="callout"><strong>検証済み：</strong>この資料のデータを実際に生成し、検証環境でデータ取り込みから Cortex Agent まで動かしました。数値や回答は、すべて検証で得た実際の値です。結果は<a href="#verification">12章</a>にまとめています。</div>
 
 <h2 id="summary">1. この資料で合意したいこと</h2>
@@ -391,7 +391,7 @@ SELECT SNOWFLAKE.CORTEX.SEARCH_PREVIEW('KNOWLEDGE_SEARCH', '{
 <tr><td>DOC_ATTRIBUTES</td><td>Part2</td><td>PDF1本</td><td>file_name, title, doc_type, department, audience, doc_date, product_category, product_ids（表紙から AI_EXTRACT）</td></tr>
 <tr><td>KNOWLEDGE_CHUNKS</td><td>Part2</td><td>チャンク1件</td><td>次の章を参照</td></tr>
 </tbody></table></div>
-<p class="sub">Part1 で raw 層（DIM_ / FACT_ / RAW_）、Part2 で conform 層（CALL_ANALYSIS, DOC_ATTRIBUTES, KNOWLEDGE_CHUNKS）を作る。各パートの後に <code>checkpoint_20261216.sql</code> で追いつける。検証での件数：RAW_CALL_TRANSCRIPTS 88件、RAW_VOICE_LOGS 10件、RAW_DOCUMENTS 99ページ、CALL_ANALYSIS 98件、DOC_ATTRIBUTES 11件、KNOWLEDGE_CHUNKS 200件。検証用の SQL は <code>tools/verify/</code>。</p>
+<p class="sub">メダリオンアーキテクチャの名前で呼ぶ。Bronze 層＝取り込んだままの生データ（RAW_*、Part1）、Silver 層＝整えて分析に使える形（DIM_ / FACT_ は Part1、CALL_ANALYSIS, DOC_ATTRIBUTES は Part2）、Gold 層＝検索や Agent にそのまま使う形（KNOWLEDGE_CHUNKS は Part2、セマンティックビューは Part4）。各パートの後に <code>checkpoint_20261216.sql</code> で追いつける。検証での件数：RAW_CALL_TRANSCRIPTS 88件、RAW_VOICE_LOGS 10件、RAW_DOCUMENTS 99ページ、CALL_ANALYSIS 98件、DOC_ATTRIBUTES 11件、KNOWLEDGE_CHUNKS 200件。検証用の SQL は <code>tools/verify/</code>。</p>
 
 <h2 id="search">10. Cortex Search 用テーブルとサービス</h2>
 <h3>KNOWLEDGE_CHUNKS（通話と PDF を1つにまとめたテーブル）</h3>
@@ -527,7 +527,7 @@ AS SELECT CHUNK_ID, CHUNK_TEXT, TITLE, DOC_TYPE, DEPARTMENT, AUDIENCE, DOC_DATE,
 <li>セマンティックビューは検証用に手書きした。本番は Autopilot で作る想定のため、同じ質問に答えられるかは別途確認が必要</li>
 <li>FAQ・マニュアル（各の45ページ）を参加者全員が解析するとクレジットと時間がかかる。ページを絞るか、解析済みを配布するかを検討</li>
 <li>UC5（店舗報告PDF）を本編に入れるか、付録にするか（時間配分しだい）</li>
-<li>setup.sql とノートブックの改修（今回は検証用 SQL のみ。本編への反映は後続タスク）</li>
+<li>Part3〜5 のノートブックと、Dashboards・CoWork の手順（setup_20261216.sql と Part1・2 は反映済み。引き継ぎは <code>docs/handoff_part3-5_20261216.md</code>）</li>
 <li><strong>属性の作り方</strong>：AI_EXTRACT で取り出す形に切り替え済み（12章）。属性を取り出す手順を参加者が Part2 で実行するのか、準備済みのものを見せるだけにするのかは、時間配分しだい</li>
 <li>CoWork での「壁打ちの入り口」の質問（5章）は未検証</li>
 </ul>

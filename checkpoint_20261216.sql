@@ -19,7 +19,7 @@ CREATE OR REPLACE FILE FORMAT HANDSON_CHECKPOINT_CSV
   TYPE = CSV SKIP_HEADER = 1 FIELD_OPTIONALLY_ENCLOSED_BY = '"';
 
 -- ============================================================================
--- Part 1 完了時点（raw 層）
+-- Part 1 完了時点（Bronze 層: RAW_* ／ Silver 層: DIM_* ・ FACT_ORDERS）
 -- ============================================================================
 -- 構造化データは part1_20261216.ipynb と同じ手順でロード
 CREATE OR REPLACE FILE FORMAT HANDSON_CSV
@@ -64,7 +64,7 @@ UNION ALL SELECT 'RAW_VOICE_LOGS', COUNT(*), 10 FROM RAW_VOICE_LOGS
 UNION ALL SELECT 'RAW_DOCUMENTS', COUNT(*), 99 FROM RAW_DOCUMENTS;
 
 -- ============================================================================
--- Part 2 完了時点（conform 層）
+-- Part 2 完了時点（Silver 層: CALL_ANALYSIS ・ DOC_ATTRIBUTES ／ Gold 層: KNOWLEDGE_CHUNKS）
 -- ============================================================================
 CREATE OR REPLACE TABLE CALL_ANALYSIS AS
 SELECT $1::VARCHAR AS call_id, $2::TIMESTAMP_NTZ AS call_datetime, $3::VARCHAR AS customer_id,
