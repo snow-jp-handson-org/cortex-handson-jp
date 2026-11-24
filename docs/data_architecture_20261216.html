@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>12/16 ハンズオン Part 1・2 のデータアーキテクチャ</title>
+<style>
+  :root {
+    --stage: #eceff1; --stage-b: #90a4ae;
+    --bronze: #f6e6d6; --bronze-b: #b87333;
+    --silver: #eef1f4; --silver-b: #8a99a8;
+    --gold: #fbf1c7; --gold-b: #c9a227;
+    --next: #e8f4fb; --next-b: #29b5e8;
+    --text: #1f2d3d; --sub: #5b6b7b;
+  }
+  body { font-family: "Hiragino Sans", "Noto Sans JP", sans-serif; color: var(--text); margin: 32px; background: #fff; }
+  h1 { font-size: 22px; margin: 0 0 4px; }
+  .lead { color: var(--sub); font-size: 13px; margin: 0 0 24px; }
+  .flow { display: grid; grid-template-columns: 1fr 40px 1fr 40px 1.25fr 40px 1fr 40px 0.9fr; align-items: stretch; }
+  .col { border-radius: 10px; padding: 14px 12px; display: flex; flex-direction: column; gap: 10px; }
+  .col h2 { font-size: 14px; margin: 0 0 2px; }
+  .col .who { font-size: 11px; color: var(--sub); margin: -6px 0 4px; }
+  .stage { background: var(--stage); border: 2px solid var(--stage-b); }
+  .bronze { background: var(--bronze); border: 2px solid var(--bronze-b); }
+  .silver { background: var(--silver); border: 2px solid var(--silver-b); }
+  .gold { background: var(--gold); border: 2px solid var(--gold-b); }
+  .next { background: var(--next); border: 2px dashed var(--next-b); }
+  .box { background: #fff; border: 1px solid #cfd8dc; border-radius: 6px; padding: 8px 10px; font-size: 12px; line-height: 1.5; }
+  .box b { font-family: Menlo, monospace; font-size: 12px; }
+  .box .n { color: var(--sub); font-size: 11px; }
+  .box .fn { display: inline-block; margin-top: 4px; font-family: Menlo, monospace; font-size: 10.5px; background: #e3f2fd; color: #0d47a1; border-radius: 4px; padding: 1px 6px; }
+  .box .part { float: right; font-size: 10px; color: #fff; background: #607d8b; border-radius: 8px; padding: 0 6px; }
+  .arrow { display: flex; align-items: center; justify-content: center; color: #78909c; font-size: 26px; }
+  .notes { margin-top: 28px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; font-size: 12.5px; line-height: 1.7; }
+  .notes div { border-left: 4px solid; padding: 4px 12px; }
+  .notes .nb { border-color: var(--bronze-b); } .notes .ns { border-color: var(--silver-b); } .notes .ng { border-color: var(--gold-b); }
+  .notes h3 { font-size: 13px; margin: 0 0 4px; }
+  code { font-family: Menlo, monospace; font-size: 11.5px; }
+  .foot { margin-top: 20px; font-size: 11.5px; color: var(--sub); }
+  table.lin { border-collapse: collapse; font-size: 12px; width: 100%; max-width: 1440px; }
+  table.lin th, table.lin td { border: 1px solid #cfd8dc; padding: 6px 10px; text-align: left; vertical-align: top; }
+  table.lin th { background: #eceff1; }
+  table.lin td:first-child { font-family: Menlo, monospace; font-size: 11.5px; white-space: nowrap; }
+</style>
+</head>
+<body>
+<h1>12/16 ハンズオン Part 1・2 のデータアーキテクチャ</h1>
+<p class="lead">メダリオンアーキテクチャ（Bronze → Silver → Gold）。場所: <code>GLACIERSTYLE_DB.EC_ANALYTICS_SCHEMA</code>。Part 2 の補足パートで作る <code>SUP_*</code> は含めていません。</p>
+
+<div class="flow">
+  <div class="col stage">
+    <h2>ステージ</h2>
+    <div class="who">DATA_STAGE（setup で GitHub からコピー）</div>
+    <div class="box"><b>customers / products / orders</b><br><span class="n">CSV</span></div>
+    <div class="box"><b>call_transcripts</b><br><span class="n">CSV・通話88件</span></div>
+    <div class="box"><b>voice_logs/*.mp3</b><br><span class="n">音声10件</span></div>
+    <div class="box"><b>*.pdf</b><br><span class="n">FAQ・マニュアル・品質報告・通達・店舗報告 11本</span></div>
+  </div>
+  <div class="arrow">&#x2192;</div>
+
+  <div class="col bronze">
+    <h2>Bronze 層</h2>
+    <div class="who">取り込んだままの生データ</div>
+    <div class="box"><span class="part">Part 1</span><b>RAW_CALL_TRANSCRIPTS</b><br><span class="n">88件</span><br><span class="fn">COPY INTO</span></div>
+    <div class="box"><span class="part">Part 1</span><b>RAW_VOICE_LOGS</b><br><span class="n">10件</span><br><span class="fn">AI_TRANSCRIBE</span></div>
+    <div class="box"><span class="part">Part 1</span><b>RAW_DOCUMENTS</b><br><span class="n">99ページ</span><br><span class="fn">AI_PARSE_DOCUMENT</span></div>
+  </div>
+  <div class="arrow">&#x2192;</div>
+
+  <div class="col silver">
+    <h2>Silver 層</h2>
+    <div class="who">整えて分析に使える形</div>
+    <div class="box"><span class="part">Part 1</span><b>DIM_CUSTOMERS / DIM_PRODUCTS</b><br><span class="n">300件 / 55件（CSV から直接）</span><br><span class="fn">COPY INTO</span></div>
+    <div class="box"><span class="part">Part 1</span><b>FACT_ORDERS</b><br><span class="n">2,913件・lot_no 付き（CSV から直接）</span><br><span class="fn">COPY INTO</span></div>
+    <div class="box"><span class="part">Part 2</span><b>CALL_ANALYSIS</b><br><span class="n">98件（通話88＋音声10）。種別・商品カテゴリ・感情・解約リスク・要約・マスク済み本文</span><br><span class="fn">AI_EXTRACT</span> <span class="fn">AI_REDACT</span></div>
+    <div class="box"><span class="part">Part 2</span><b>DOC_ATTRIBUTES</b><br><span class="n">11件。文書の種類・部署・公開範囲・発行日・対象商品</span><br><span class="fn">AI_EXTRACT（表紙）</span></div>
+  </div>
+  <div class="arrow">&#x2192;</div>
+
+  <div class="col gold">
+    <h2>Gold 層</h2>
+    <div class="who">検索・AI にそのまま使う形</div>
+    <div class="box"><span class="part">Part 2</span><b>KNOWLEDGE_CHUNKS</b><br><span class="n">200件。通話（1通話＝1チャンク）＋ PDF 本文の分割。属性7列付き</span><br><span class="fn">SPLIT_TEXT_RECURSIVE_CHARACTER</span></div>
+    <div class="box"><span class="n">元にするテーブル: CALL_ANALYSIS、RAW_DOCUMENTS（本文）、DOC_ATTRIBUTES（属性）</span></div>
+  </div>
+  <div class="arrow">&#x21E2;</div>
+
+  <div class="col next">
+    <h2>Part 3 以降</h2>
+    <div class="who">別担当</div>
+    <div class="box"><b>Cortex Search</b><br><span class="n">KNOWLEDGE_CHUNKS を属性で絞り込んで検索</span></div>
+    <div class="box"><b>セマンティックビュー</b><br><span class="n">FACT_ORDERS・DIM_*・CALL_ANALYSIS</span></div>
+    <div class="box"><b>Cortex Agent / CoWork</b><br><span class="n">Search ＋ Analyst</span></div>
+  </div>
+</div>
+
+<div class="notes">
+  <div class="nb"><h3>Bronze（Part 1）</h3>音声と PDF は、AI 関数でテキストにしてからテーブルにします。非構造化データも、ステージに置けば SQL でテーブルにできます。</div>
+  <div class="ns"><h3>Silver（Part 1・Part 2）</h3>CSV は最初から整っているので、<code>DIM_</code>・<code>FACT_</code> は Part 1 で直接ロードします。通話と PDF は、Part 2 で AI_EXTRACT により列を取り出し、注文データと組み合わせて集計できる形にします。</div>
+  <div class="ng"><h3>Gold（Part 2）</h3>通話と PDF の本文を、属性（文書の種類・部署・公開範囲・日付・商品カテゴリ・商品ID・感情）付きのチャンクにします。Part 3 の Cortex Search がこれを使います。</div>
+</div>
+
+<p class="foot">件数は 2026-11-24 の検証環境（AWS 東京）での実行結果。Part 2 の「3. 集計」（ロット別の返品率）は CALL_ANALYSIS と FACT_ORDERS を組み合わせるクエリで、テーブルは作りません。</p>
+
+<h1 style="margin-top:44px">詳細リネージ</h1>
+<p class="lead">テーブル単位の流れ（実線＝Part 1・2 で作る処理、点線＝Part 3 以降で使う先）と、各テーブルの主な列。列の右の印は、その列の出どころです。</p>
+
+<svg viewBox="0 0 1440 600" width="100%" style="max-width:1440px;font-family:'Hiragino Sans','Noto Sans JP',sans-serif">
+  <defs>
+    <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#607d8b"/></marker>
+    <marker id="ar2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#29b5e8"/></marker>
+    <style>
+      .t { font-size: 12px; font-weight: 700; font-family: Menlo, monospace; fill: #1f2d3d; }
+      .c { font-size: 10.5px; font-family: Menlo, monospace; fill: #37474f; }
+      .m { font-size: 10px; fill: #5b6b7b; }
+      .lbl { font-size: 10px; fill: #0d47a1; font-family: Menlo, monospace; }
+      .hdr { font-size: 13px; font-weight: 700; fill: #1f2d3d; }
+      .e { fill: none; stroke: #607d8b; stroke-width: 1.6; }
+      .e2 { fill: none; stroke: #29b5e8; stroke-width: 1.4; stroke-dasharray: 5 4; }
+    </style>
+  </defs>
+
+  <!-- 列見出し -->
+  <text class="hdr" x="10" y="14">ステージ</text>
+  <text class="hdr" x="270" y="14">Bronze（Part 1）</text>
+  <text class="hdr" x="570" y="14">Silver（Part 1・2）</text>
+  <text class="hdr" x="920" y="14">Gold（Part 2）</text>
+  <text class="hdr" x="1250" y="14">Part 3 以降</text>
+
+  <!-- ステージ -->
+  <g><rect x="10" y="30" width="200" height="40" rx="6" fill="#eceff1" stroke="#90a4ae"/><text class="t" x="20" y="55">customers.csv</text></g>
+  <g><rect x="10" y="92" width="200" height="40" rx="6" fill="#eceff1" stroke="#90a4ae"/><text class="t" x="20" y="117">products.csv</text></g>
+  <g><rect x="10" y="154" width="200" height="40" rx="6" fill="#eceff1" stroke="#90a4ae"/><text class="t" x="20" y="179">orders.csv</text></g>
+  <g><rect x="10" y="240" width="200" height="40" rx="6" fill="#eceff1" stroke="#90a4ae"/><text class="t" x="20" y="265">call_transcripts.csv</text></g>
+  <g><rect x="10" y="340" width="200" height="40" rx="6" fill="#eceff1" stroke="#90a4ae"/><text class="t" x="20" y="358">voice_logs/*.mp3</text><text class="m" x="20" y="373">音声10件</text></g>
+  <g><rect x="10" y="470" width="200" height="40" rx="6" fill="#eceff1" stroke="#90a4ae"/><text class="t" x="20" y="488">*.pdf</text><text class="m" x="20" y="503">11本（DIRECTORY で一覧）</text></g>
+
+  <!-- Bronze -->
+  <g><rect x="270" y="220" width="230" height="80" rx="6" fill="#f6e6d6" stroke="#b87333"/>
+    <text class="t" x="280" y="238">RAW_CALL_TRANSCRIPTS</text>
+    <text class="c" x="280" y="255">call_id, call_datetime</text>
+    <text class="c" x="280" y="269">customer_id, order_id, product_id</text>
+    <text class="c" x="280" y="283">transcript_text</text>
+    <text class="m" x="440" y="238">88件</text></g>
+  <g><rect x="270" y="320" width="230" height="80" rx="6" fill="#f6e6d6" stroke="#b87333"/>
+    <text class="t" x="280" y="338">RAW_VOICE_LOGS</text>
+    <text class="c" x="280" y="355">call_id ('VOICE-'+ファイル名)</text>
+    <text class="c" x="280" y="369">audio_file, audio_duration_sec</text>
+    <text class="c" x="280" y="383">transcript_text</text>
+    <text class="m" x="440" y="338">10件</text></g>
+  <g><rect x="270" y="450" width="230" height="66" rx="6" fill="#f6e6d6" stroke="#b87333"/>
+    <text class="t" x="280" y="468">RAW_DOCUMENTS</text>
+    <text class="c" x="280" y="485">file_name, page_no</text>
+    <text class="c" x="280" y="499">page_text</text>
+    <text class="m" x="425" y="468">99ページ</text></g>
+
+  <!-- Silver -->
+  <g><rect x="570" y="26" width="270" height="48" rx="6" fill="#eef1f4" stroke="#8a99a8"/>
+    <text class="t" x="580" y="44">DIM_CUSTOMERS</text><text class="m" x="790" y="44">300件</text>
+    <text class="c" x="580" y="62">customer_id, membership_tier …</text></g>
+  <g><rect x="570" y="88" width="270" height="48" rx="6" fill="#eef1f4" stroke="#8a99a8"/>
+    <text class="t" x="580" y="106">DIM_PRODUCTS</text><text class="m" x="795" y="106">55件</text>
+    <text class="c" x="580" y="124">product_id, category_l1〜l3 …</text></g>
+  <g><rect x="570" y="150" width="270" height="48" rx="6" fill="#eef1f4" stroke="#8a99a8"/>
+    <text class="t" x="580" y="168">FACT_ORDERS</text><text class="m" x="785" y="168">2,913件</text>
+    <text class="c" x="580" y="186">order_status, lot_no, customer_id, product_id</text></g>
+  <g><rect x="570" y="230" width="270" height="170" rx="6" fill="#eef1f4" stroke="#8a99a8"/>
+    <text class="t" x="580" y="248">CALL_ANALYSIS</text><text class="m" x="795" y="248">98件</text>
+    <text class="c" x="580" y="266">call_id, call_datetime     ← Bronze</text>
+    <text class="c" x="580" y="280">customer_id, order_id      ← Bronze</text>
+    <text class="c" x="580" y="294">product_id, source         ← Bronze</text>
+    <text class="c" x="580" y="310">inquiry_type, product_name ← AI_EXTRACT</text>
+    <text class="c" x="580" y="324">product_category           ← AI_EXTRACT</text>
+    <text class="c" x="580" y="338">sentiment, churn_risk      ← AI_EXTRACT</text>
+    <text class="c" x="580" y="352">summary                    ← AI_EXTRACT</text>
+    <text class="c" x="580" y="368">transcript_masked          ← AI_REDACT</text>
+    <text class="m" x="580" y="388">音声の10件は customer_id 等が NULL</text></g>
+  <g><rect x="570" y="420" width="270" height="124" rx="6" fill="#eef1f4" stroke="#8a99a8"/>
+    <text class="t" x="580" y="438">DOC_ATTRIBUTES</text><text class="m" x="795" y="438">11件</text>
+    <text class="c" x="580" y="456">file_name             ← Bronze</text>
+    <text class="c" x="580" y="470">title, doc_type       ← AI_EXTRACT</text>
+    <text class="c" x="580" y="484">department, audience  ← AI_EXTRACT</text>
+    <text class="c" x="580" y="498">doc_date              ← AI_EXTRACT</text>
+    <text class="c" x="580" y="512">product_category      ← AI_EXTRACT</text>
+    <text class="c" x="580" y="526">product_ids (ARRAY)   ← AI_EXTRACT</text></g>
+
+  <!-- Gold -->
+  <g><rect x="920" y="250" width="270" height="200" rx="6" fill="#fbf1c7" stroke="#c9a227"/>
+    <text class="t" x="930" y="268">KNOWLEDGE_CHUNKS</text><text class="m" x="1140" y="268">200件</text>
+    <text class="m" x="930" y="285">通話（1通話＝1チャンク）＋ PDF の分割</text>
+    <text class="c" x="930" y="303">chunk_id</text>
+    <text class="c" x="930" y="317">chunk_text   ← 検索対象</text>
+    <text class="c" x="930" y="331">title        ← 表示用</text>
+    <text class="c" x="930" y="349">doc_type, department</text>
+    <text class="c" x="930" y="363">audience, doc_date</text>
+    <text class="c" x="930" y="377">product_category</text>
+    <text class="c" x="930" y="391">product_ids, sentiment</text>
+    <text class="m" x="930" y="409">↑ 属性7列（Search のフィルタに使う）</text>
+    <text class="m" x="930" y="434">UNION ALL で通話と PDF を同じ列に</text></g>
+
+  <!-- Part 3 以降 -->
+  <g><rect x="1250" y="330" width="180" height="48" rx="6" fill="#e8f4fb" stroke="#29b5e8" stroke-dasharray="5 4"/>
+    <text class="t" x="1260" y="350">KNOWLEDGE_SEARCH</text><text class="m" x="1260" y="367">Cortex Search（Part 3）</text></g>
+  <g><rect x="1250" y="100" width="180" height="48" rx="6" fill="#e8f4fb" stroke="#29b5e8" stroke-dasharray="5 4"/>
+    <text class="t" x="1260" y="120">セマンティックビュー</text><text class="m" x="1260" y="137">Autopilot（Part 4）</text></g>
+  <g><rect x="1250" y="210" width="180" height="48" rx="6" fill="#e8f4fb" stroke="#29b5e8" stroke-dasharray="5 4"/>
+    <text class="t" x="1260" y="230">Cortex Agent</text><text class="m" x="1260" y="247">Analyst＋Search（Part 5）</text></g>
+
+  <!-- Part 1: ロード -->
+  <path class="e" d="M210,50 C390,50 390,50 568,50" marker-end="url(#ar)"/>
+  <path class="e" d="M210,112 C390,112 390,112 568,112" marker-end="url(#ar)"/>
+  <path class="e" d="M210,174 C390,174 390,174 568,174" marker-end="url(#ar)"/>
+  <text class="lbl" x="340" y="44">COPY INTO</text>
+  <path class="e" d="M210,260 L268,260" marker-end="url(#ar)"/>
+  <text class="lbl" x="212" y="232">COPY INTO</text>
+  <path class="e" d="M210,360 L268,360" marker-end="url(#ar)"/>
+  <text class="lbl" x="200" y="332">AI_TRANSCRIBE</text>
+  <path class="e" d="M210,490 L268,485" marker-end="url(#ar)"/>
+  <text class="lbl" x="196" y="460">AI_PARSE_DOCUMENT</text>
+
+  <!-- Part 2: Bronze → Silver -->
+  <path class="e" d="M500,260 C535,260 535,300 568,300" marker-end="url(#ar)"/>
+  <path class="e" d="M500,360 C535,360 535,330 568,330" marker-end="url(#ar)"/>
+  <text class="lbl" x="503" y="316">UNION ALL</text>
+  <path class="e" d="M500,470 C535,470 535,470 568,470" marker-end="url(#ar)"/>
+  <text class="lbl" x="503" y="462">page_no=1</text>
+
+  <!-- Part 2: → Gold -->
+  <path class="e" d="M840,315 C880,315 880,320 918,320" marker-end="url(#ar)"/>
+  <text class="lbl" x="845" y="307">要約＋本文</text>
+  <path class="e" d="M840,480 C880,480 880,420 918,420" marker-end="url(#ar)"/>
+  <text class="lbl" x="845" y="470">属性</text>
+  <path class="e" d="M500,505 C620,585 860,585 918,440" marker-end="url(#ar)"/>
+  <text class="lbl" x="610" y="576">page_text を SPLIT_TEXT_RECURSIVE_CHARACTER（800字・重なり100字）、file_name で DOC_ATTRIBUTES と JOIN</text>
+
+  <!-- Part 3 以降 -->
+  <path class="e2" d="M1190,355 L1248,355" marker-end="url(#ar2)"/>
+  <path class="e2" d="M840,50 C1040,50 1100,118 1248,118" marker-end="url(#ar2)"/>
+  <path class="e2" d="M840,112 C1040,112 1100,124 1248,124" marker-end="url(#ar2)"/>
+  <path class="e2" d="M840,174 C1040,174 1100,130 1248,130" marker-end="url(#ar2)"/>
+  <path class="e2" d="M840,260 C1040,260 1100,136 1248,136" marker-end="url(#ar2)"/>
+  <path class="e2" d="M1340,148 L1340,208" marker-end="url(#ar2)"/>
+  <path class="e2" d="M1340,328 L1340,260" marker-end="url(#ar2)"/>
+</svg>
+
+<h2 style="font-size:16px;margin:28px 0 8px">列単位のリネージ（AI 関数で作る列）</h2>
+<table class="lin">
+  <thead><tr><th>作るテーブル.列</th><th>元の列</th><th>処理</th><th>後処理・備考</th></tr></thead>
+  <tbody>
+    <tr><td>RAW_VOICE_LOGS.transcript_text</td><td>voice_logs/*.mp3</td><td><code>AI_TRANSCRIBE</code> の <code>text</code></td><td><code>audio_duration_sec</code> は同じ結果の <code>audio_duration</code></td></tr>
+    <tr><td>RAW_DOCUMENTS.page_text</td><td>*.pdf</td><td><code>AI_PARSE_DOCUMENT</code>（LAYOUT・page_split）</td><td><code>pages</code> を FLATTEN して1ページ1行</td></tr>
+    <tr><td>CALL_ANALYSIS.inquiry_type / sentiment / churn_risk</td><td rowspan="3">RAW_CALL_TRANSCRIPTS.transcript_text ＋ RAW_VOICE_LOGS.transcript_text（UNION ALL）</td><td rowspan="3"><code>AI_EXTRACT</code>（1回で6項目）</td><td>選択肢を指定して値をそろえる</td></tr>
+    <tr><td>CALL_ANALYSIS.product_name / summary</td><td>自由記述（要約は60文字以内）</td></tr>
+    <tr><td>CALL_ANALYSIS.product_category</td><td>選択肢（照明・家具など10種）以外は NULL にする</td></tr>
+    <tr><td>CALL_ANALYSIS.transcript_masked</td><td>同上</td><td><code>AI_REDACT</code></td><td>VARIANT で返るので <code>::VARCHAR</code></td></tr>
+    <tr><td>DOC_ATTRIBUTES.title / doc_type / department / audience</td><td rowspan="3">RAW_DOCUMENTS.page_text（page_no = 1、表紙）</td><td rowspan="3"><code>AI_EXTRACT</code>（1回で7項目）</td><td>doc_type・department・audience は選択肢を指定</td></tr>
+    <tr><td>DOC_ATTRIBUTES.doc_date</td><td><code>TRY_TO_DATE</code> で日付に変換</td></tr>
+    <tr><td>DOC_ATTRIBUTES.product_ids / product_category</td><td><code>PRD-</code> で始まる値だけ残す。商品IDが取れない文書はカテゴリも NULL</td></tr>
+  </tbody>
+</table>
+
+<h2 style="font-size:16px;margin:28px 0 8px">KNOWLEDGE_CHUNKS の列の出どころ</h2>
+<table class="lin">
+  <thead><tr><th>列</th><th>通話のチャンク（CALL_ANALYSIS から）</th><th>PDF のチャンク（RAW_DOCUMENTS ＋ DOC_ATTRIBUTES から）</th></tr></thead>
+  <tbody>
+    <tr><td>chunk_id</td><td>call_id</td><td>file_name ＋ '-p' ＋ page_no ＋ '-' ＋ 連番</td></tr>
+    <tr><td>chunk_text</td><td>'【要約】' ＋ summary ＋ 改行 ＋ transcript_masked</td><td>page_text を分割したもの</td></tr>
+    <tr><td>title</td><td>inquiry_type ＋ ' / ' ＋ product_name</td><td>DOC_ATTRIBUTES.title</td></tr>
+    <tr><td>doc_type / department / audience</td><td>固定値：'通話' / 'カスタマーサポート部' / '社内限定'</td><td>DOC_ATTRIBUTES の同名の列</td></tr>
+    <tr><td>doc_date</td><td>call_datetime の日付</td><td>DOC_ATTRIBUTES.doc_date</td></tr>
+    <tr><td>product_category</td><td>CALL_ANALYSIS.product_category</td><td>DOC_ATTRIBUTES.product_category</td></tr>
+    <tr><td>product_ids</td><td>[product_id]（なければ空の配列）</td><td>DOC_ATTRIBUTES.product_ids</td></tr>
+    <tr><td>sentiment</td><td>CALL_ANALYSIS.sentiment</td><td>NULL</td></tr>
+  </tbody>
+</table>
+
+<h2 style="font-size:16px;margin:28px 0 8px">テーブル同士のつながり（結合キー）</h2>
+<table class="lin">
+  <thead><tr><th>テーブル</th><th>キー</th><th>相手</th><th>使う場面</th></tr></thead>
+  <tbody>
+    <tr><td>FACT_ORDERS</td><td>customer_id / product_id</td><td>DIM_CUSTOMERS / DIM_PRODUCTS</td><td>会員ランク別、商品カテゴリ別の集計</td></tr>
+    <tr><td>CALL_ANALYSIS</td><td>product_id</td><td>FACT_ORDERS（lot_no）、DIM_PRODUCTS</td><td>Part 2「3. 集計」のロット別返品率と不具合通話</td></tr>
+    <tr><td>CALL_ANALYSIS</td><td>customer_id</td><td>DIM_CUSTOMERS</td><td>解約リスクの高い顧客（Part 5 シーン4）</td></tr>
+    <tr><td>DOC_ATTRIBUTES</td><td>file_name</td><td>RAW_DOCUMENTS</td><td>KNOWLEDGE_CHUNKS の PDF 部分</td></tr>
+  </tbody>
+</table>
+<p class="foot">音声由来の10件（call_id が VOICE- で始まる）は customer_id・order_id・product_id がないため、注文や顧客とは結合されません。</p>
+</body>
+</html>
