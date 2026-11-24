@@ -361,9 +361,13 @@ SELECT SNOWFLAKE.CORTEX.SEARCH_PREVIEW('KNOWLEDGE_SEARCH', '{
 <div class="table-wrap"><table>
 <thead><tr><th>ファイル</th><th>件数</th><th>見せる AI 関数</th><th>新データへの合わせ方</th></tr></thead>
 <tbody>
-<tr><td><code>sns_logs.json</code></td><td>265件（2026/10/15〜11/30）</td><td>AI_SENTIMENT、AI_CLASSIFY、AI_EXTRACT</td><td>言及商品を新しい商品マスタの名前に置換。LEDデスクライト 調光式 の「ちらつき」の声を8件含み、本編のストーリーとつながる（<code>tools/convert_sns_logs.py</code>）</td></tr>
-<tr><td><code>ad_creatives.csv</code>、<code>ad_images/</code>（画像15枚）</td><td>15件（2026/10〜11）</td><td>画像の解析（AI_COMPLETE に画像を渡す）、AI_CLASSIFY</td><td>配信期間とIDのみ2026年に変更。商品名と画像は画像と一体のため変更していない（新しい商品マスタにない商品も含む）</td></tr>
+<tr><td><code>sns_logs.json</code></td><td>265件（2026/10/15〜11/30）</td><td>AI_SENTIMENT、AI_CLASSIFY、AI_EXTRACT、AI_FILTER、AI_SIMILARITY</td><td>言及商品を新しい商品マスタの名前に置換。LEDデスクライト 調光式 の「ちらつき」の声を8件含み、本編のストーリーとつながる（<code>tools/convert_sns_logs.py</code>）。検証: キーワード検索では6件、AI_FILTER では8件すべて取れる</td></tr>
+<tr><td><code>ad_creatives.csv</code>、<code>ad_images/</code>（画像15枚）</td><td>15件（2026/10〜11）</td><td>画像の解析（AI_COMPLETE に画像を渡す）、AI_CLASSIFY</td><td>配信期間とIDのみ2026年に変更。商品名と画像は画像と一体のため変更していない（新しい商品マスタにない商品も含む）。東京リージョンでは Claude 系に画像を渡すと空文字が返るため <code>openai-gpt-5.4-mini</code> を使う</td></tr>
+<tr><td>本編の <code>CALL_ANALYSIS</code></td><td>98件</td><td>AI_AGG、AI_FILTER、AI_TRANSLATE</td><td>新規データなし。AI_FILTER「返送料を当社負担と案内したか」は商品不具合27件だけが該当（他の種別は0件）</td></tr>
+<tr><td>店舗報告 PDF（6本、<code>RAW_DOCUMENTS</code> と同じファイル）</td><td>36行（6店舗×6か月）</td><td>AI_EXTRACT（表の取り出し: <code>schema</code> ＋ <code>column_ordering</code>）</td><td>新規データなし。PDF の数値と全行一致、カテゴリ計＝合計列も全行一致。<code>FACT_ORDERS</code> の EC 売上と月別に並べる</td></tr>
+<tr><td><code>operation_manual_w_images.pdf</code></td><td>画像1枚（5ページ目）</td><td>AI_PARSE_DOCUMENT（<code>extract_images</code>）</td><td>新規データなし。旧 Part 2 のストアドプロシージャで <code>EXTRACTED_IMAGES_STAGE</code> に保存</td></tr>
 </tbody></table></div>
+<p class="sub">補足を全部実行したときの AI クレジットは約 0.62（2026-11-24、東京で計測。AI_EXTRACT 0.31、AI_CLASSIFY 0.17、AI_SENTIMENT 0.07、AI_FILTER 0.04 ほか）。ノートブックには「約 0.7」と記載。</p>
 
 <h3>削除したデータ</h3>
 <div class="table-wrap"><table>

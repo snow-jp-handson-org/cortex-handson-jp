@@ -8,6 +8,9 @@ USE SCHEMA GLACIERSTYLE_DB.EC_ANALYTICS_SCHEMA;
 
 CREATE STAGE IF NOT EXISTS DATA_STAGE DIRECTORY = (ENABLE = TRUE)
   ENCRYPTION = (TYPE = 'SNOWFLAKE_SSE');
+-- Part 2 補足パートで、PDF から取り出した画像を保存する
+CREATE STAGE IF NOT EXISTS EXTRACTED_IMAGES_STAGE DIRECTORY = (ENABLE = TRUE)
+  ENCRYPTION = (TYPE = 'SNOWFLAKE_SSE');
 CREATE API INTEGRATION IF NOT EXISTS GLACIERSTYLE_HANDSON_GIT
   API_PROVIDER = git_https_api
   API_ALLOWED_PREFIXES = ('https://github.com/snow-jp-handson-org/') ENABLED = TRUE;
@@ -16,6 +19,6 @@ CREATE GIT REPOSITORY IF NOT EXISTS GIT_INTEGRATION_FOR_HANDSON
   ORIGIN = 'https://github.com/snow-jp-handson-org/cortex-handson-jp.git';
 ALTER GIT REPOSITORY GIT_INTEGRATION_FOR_HANDSON FETCH;
 COPY FILES INTO @DATA_STAGE FROM @GIT_INTEGRATION_FOR_HANDSON/branches/pri_20261216/data/
-  PATTERN = '(.*/)?((customers|products|orders|call_transcripts)[.]csv|[^/]+[.]pdf|voice_logs/[^/]+[.]mp3)$';
+  PATTERN = '(.*/)?((customers|products|orders|call_transcripts|ad_creatives)[.]csv|sns_logs[.]json|[^/]+[.]pdf|voice_logs/[^/]+[.]mp3|ad_images/[^/]+[.]png)$';
 ALTER STAGE DATA_STAGE REFRESH;
 -- テーブルの作成と CSV のロードは part1_20261216.ipynb で行う。
