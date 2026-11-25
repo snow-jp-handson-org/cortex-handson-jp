@@ -11,9 +11,9 @@ Part 1・2（データの取り込みと AI 関数による加工）は完成し
 
 | ファイル | 状態 | 内容 |
 | --- | --- | --- |
-| `setup_20261216.sql` | 完成 | DB・スキーマ・ウェアハウス・ステージ・Git 連携・データのコピー・クロスリージョン推論・Snowflake Intelligence オブジェクトまで。再実行してもデータは消えない |
-| `part1_20261216.ipynb` | 完成 | CSV のロード、AI_TRANSCRIBE（音声10件）、AI_PARSE_DOCUMENT（PDF 11本・99ページ） |
-| `part2_20261216.ipynb` | 完成 | AI_EXTRACT・AI_REDACT で通話と PDF の属性を取り出し、検索用チャンク `KNOWLEDGE_CHUNKS` を作成。末尾に補足パート（時間が余った人向け） |
+| `setup_20261216.sql` | 完成 | DB・スキーマ・ウェアハウス・ステージ・Git 連携・データのコピー・商品/顧客/注文の CSV ロードと列コメント・クロスリージョン推論・Snowflake Intelligence オブジェクトまで。再実行してもデータは消えない |
+| `part1_20261216.ipynb` | 完成 | CoCo への質問、通話音声 98件の AI_TRANSCRIBE、AI_PARSE_DOCUMENT（PDF 11本・99ページ） |
+| `part2_20261216.ipynb` | 完成 | AI_COMPLETE（構造化出力）で通話の6項目、AI_EXTRACT で PDF の属性を取り出し、AI_REDACT でマスクして検索用チャンク `KNOWLEDGE_CHUNKS` を作成。末尾に補足パート（時間が余った人向け） |
 | `checkpoint_20261216.sql` | Part 1・2 のみ | 各パートの完了時点のテーブルを、検証済みの CSV（`data/checkpoint/`）から復元する |
 | Part 3〜5 のノートブック | **未作成** | 旧教材の `part3_add_metadata.ipynb`・`part4_cortex_search.ipynb`・`part5_cortex_agent.ipynb` は旧データ向けで、そのままは使えない |
 | Dashboards・CoWork の手順 | **未作成** | 作成プロンプトと共有手順は設計資料5・6章にある |
@@ -26,15 +26,16 @@ Part 1・2（データの取り込みと AI 関数による加工）は完成し
 
 | 層 | テーブル | 作成 | 件数 |
 | --- | --- | --- | --- |
-| Bronze | `RAW_CALL_TRANSCRIPTS` / `RAW_VOICE_LOGS` / `RAW_DOCUMENTS` | Part 1 | 88 / 10 / 99ページ |
-| Silver | `DIM_PRODUCTS` / `DIM_CUSTOMERS` / `FACT_ORDERS` | Part 1 | 55 / 300 / 2,913 |
+| Bronze | `RAW_CALL_TRANSCRIPTS` / `RAW_DOCUMENTS` | Part 1 | 98 / 99ページ |
+| Silver | `DIM_PRODUCTS` / `DIM_CUSTOMERS` / `FACT_ORDERS` | setup | 55 / 300 / 2,913 |
 | Silver | `CALL_ANALYSIS` / `DOC_ATTRIBUTES` | Part 2 | 98 / 11 |
 | Gold | `KNOWLEDGE_CHUNKS` | Part 2 | 200 |
 | Gold | セマンティックビュー | Part 4（予定） | — |
 
 - 場所: `GLACIERSTYLE_DB.EC_ANALYTICS_SCHEMA`、ウェアハウス `GLACIERSTYLE_WH`
 - `KNOWLEDGE_CHUNKS` の列: `CHUNK_ID, CHUNK_TEXT, TITLE, DOC_TYPE, DEPARTMENT, AUDIENCE, DOC_DATE, PRODUCT_CATEGORY, PRODUCT_IDS (ARRAY), SENTIMENT`。列の意味と取り得る値は設計資料10章を参照してください
-- `CALL_ANALYSIS` の列: `CALL_ID, CALL_DATETIME, CUSTOMER_ID, ORDER_ID, PRODUCT_ID, SOURCE, INQUIRY_TYPE, PRODUCT_NAME, PRODUCT_CATEGORY, SENTIMENT, CHURN_RISK, SUMMARY, TRANSCRIPT_MASKED`
+- `CALL_ANALYSIS` の列: `CALL_ID, CALL_DATETIME, CUSTOMER_ID, ORDER_ID, PRODUCT_ID, INQUIRY_TYPE, PRODUCT_NAME, PRODUCT_CATEGORY, SENTIMENT, CHURN_RISK, SUMMARY, TRANSCRIPT_MASKED`（98件中10件は注文・商品とつながらない通話で、`ORDER_ID`・`PRODUCT_ID` が NULL）
+- `RAW_CALL_TRANSCRIPTS` の列: `CALL_ID, CALL_DATETIME, CUSTOMER_ID, ORDER_ID, PRODUCT_ID, AGENT_ID, CALL_DURATION_SEC, TRANSCRIPT_TEXT`（本文は AI_TRANSCRIBE の結果そのままで、話者の区別なし）
 - 返品は `FACT_ORDERS.order_status = 'returned'`（キャンセルは `'cancelled'`）、ロットは `FACT_ORDERS.lot_no`、商品カテゴリ（照明など）は `DIM_PRODUCTS.category_l2` です
 - Part 2 の補足パートで作る `SUP_*`・`RAW_SNS_MENTIONS`・`RAW_AD_CREATIVES` は、Part 3 以降で使わないでください（補足は飛ばしてもよい設計のため）
 

@@ -19,14 +19,15 @@ CREATE OR REPLACE FILE FORMAT HANDSON_CHECKPOINT_CSV
   TYPE = CSV SKIP_HEADER = 1 FIELD_OPTIONALLY_ENCLOSED_BY = '"';
 
 -- ============================================================================
--- Part 1 完了時点（Bronze 層: RAW_VOICE_LOGS ・ RAW_DOCUMENTS）
+-- Part 1 完了時点（Bronze 層: RAW_CALL_TRANSCRIPTS ・ RAW_DOCUMENTS）
 -- ============================================================================
--- DIM_* ・ FACT_ORDERS ・ RAW_CALL_TRANSCRIPTS は setup_20261216.sql でロード・コメント付与済みのため復元しない
+-- DIM_* ・ FACT_ORDERS は setup_20261216.sql でロード・コメント付与済みのため復元しない
 -- AI 関数の結果は、検証済みの CSV から復元（AI 関数は実行しない）
-CREATE OR REPLACE TABLE RAW_VOICE_LOGS AS
-SELECT $1::VARCHAR AS call_id, $2::VARCHAR AS audio_file, $3::NUMBER(10, 1) AS audio_duration_sec,
-       $4::VARCHAR AS transcript_text
-FROM @DATA_STAGE/checkpoint/raw_voice_logs.csv (FILE_FORMAT => 'HANDSON_CHECKPOINT_CSV');
+CREATE OR REPLACE TABLE RAW_CALL_TRANSCRIPTS AS
+SELECT $1::VARCHAR AS call_id, $2::TIMESTAMP_NTZ AS call_datetime, $3::VARCHAR AS customer_id,
+       $4::VARCHAR AS order_id, $5::VARCHAR AS product_id, $6::VARCHAR AS agent_id,
+       $7::NUMBER AS call_duration_sec, $8::VARCHAR AS transcript_text
+FROM @DATA_STAGE/checkpoint/raw_call_transcripts.csv (FILE_FORMAT => 'HANDSON_CHECKPOINT_CSV');
 
 CREATE OR REPLACE TABLE RAW_DOCUMENTS AS
 SELECT $1::VARCHAR AS file_name, $2::NUMBER AS page_no, $3::VARCHAR AS page_text
@@ -35,8 +36,7 @@ FROM @DATA_STAGE/checkpoint/raw_documents.csv (FILE_FORMAT => 'HANDSON_CHECKPOIN
 SELECT 'DIM_PRODUCTS' AS table_name, COUNT(*) AS record_count, 55 AS expected FROM DIM_PRODUCTS
 UNION ALL SELECT 'DIM_CUSTOMERS', COUNT(*), 300 FROM DIM_CUSTOMERS
 UNION ALL SELECT 'FACT_ORDERS', COUNT(*), 2913 FROM FACT_ORDERS
-UNION ALL SELECT 'RAW_CALL_TRANSCRIPTS', COUNT(*), 88 FROM RAW_CALL_TRANSCRIPTS
-UNION ALL SELECT 'RAW_VOICE_LOGS', COUNT(*), 10 FROM RAW_VOICE_LOGS
+UNION ALL SELECT 'RAW_CALL_TRANSCRIPTS', COUNT(*), 98 FROM RAW_CALL_TRANSCRIPTS
 UNION ALL SELECT 'RAW_DOCUMENTS', COUNT(*), 99 FROM RAW_DOCUMENTS;
 
 -- ============================================================================
@@ -44,10 +44,10 @@ UNION ALL SELECT 'RAW_DOCUMENTS', COUNT(*), 99 FROM RAW_DOCUMENTS;
 -- ============================================================================
 CREATE OR REPLACE TABLE CALL_ANALYSIS AS
 SELECT $1::VARCHAR AS call_id, $2::TIMESTAMP_NTZ AS call_datetime, $3::VARCHAR AS customer_id,
-       $4::VARCHAR AS order_id, $5::VARCHAR AS product_id, $6::VARCHAR AS source,
-       $7::VARCHAR AS inquiry_type, $8::VARCHAR AS product_name, $9::VARCHAR AS product_category,
-       $10::VARCHAR AS sentiment, $11::VARCHAR AS churn_risk, $12::VARCHAR AS summary,
-       $13::VARCHAR AS transcript_masked
+       $4::VARCHAR AS order_id, $5::VARCHAR AS product_id,
+       $6::VARCHAR AS inquiry_type, $7::VARCHAR AS product_name, $8::VARCHAR AS product_category,
+       $9::VARCHAR AS sentiment, $10::VARCHAR AS churn_risk, $11::VARCHAR AS summary,
+       $12::VARCHAR AS transcript_masked
 FROM @DATA_STAGE/checkpoint/call_analysis.csv (FILE_FORMAT => 'HANDSON_CHECKPOINT_CSV');
 
 CREATE OR REPLACE TABLE DOC_ATTRIBUTES AS

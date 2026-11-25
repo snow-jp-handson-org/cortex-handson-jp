@@ -94,13 +94,13 @@ SELECT '【Step 4】GitHub 連携の設定が完了しました' AS status;
 -- Step 5: GitHub からデータファイルを取得
 -- ============================================================================
 -- ハンズオンで使うファイルだけをステージにコピー
---   本編: customers / products / orders / call_transcripts の CSV、PDF、通話音声（mp3）
+--   本編: customers / products / orders の CSV、PDF、通話音声（mp3）とそのメタデータ（JSON）
 --   Part 2 補足: ad_creatives.csv、sns_logs.json、広告画像（png）
 COPY FILES INTO @DATA_STAGE FROM @GIT_INTEGRATION_FOR_HANDSON/branches/pri_20261216/data/
-  PATTERN = '(.*/)?((customers|products|orders|call_transcripts|ad_creatives)[.]csv|sns_logs[.]json|[^/]+[.]pdf|voice_logs/[^/]+[.]mp3|ad_images/[^/]+[.]png)$';
+  PATTERN = '(.*/)?((customers|products|orders|ad_creatives)[.]csv|sns_logs[.]json|[^/]+[.]pdf|voice_logs/[^/]+[.]mp3|voice_logs/voice_logs_metadata[.]json|ad_images/[^/]+[.]png)$';
 ALTER STAGE DATA_STAGE REFRESH;
 
--- ステージ内のファイル数を確認（CSV 5、JSON 1、PDF 11、音声 10、画像 15）
+-- ステージ内のファイル数を確認（CSV 4、JSON 2、PDF 11、音声 98、画像 15）
 SELECT COUNT(*) AS file_count FROM DIRECTORY(@DATA_STAGE);
 
 SELECT '【Step 5】GitHub からのデータ取得が完了しました' AS status;
@@ -114,6 +114,10 @@ CREATE FILE FORMAT IF NOT EXISTS HANDSON_CSV
     TYPE = CSV
     PARSE_HEADER = TRUE
     FIELD_OPTIONALLY_ENCLOSED_BY = '"';
+-- JSON の配列を1要素ずつの行として読むファイル形式（Part 1 で通話のメタデータを読むときに使う）
+CREATE FILE FORMAT IF NOT EXISTS HANDSON_JSON
+    TYPE = JSON
+    STRIP_OUTER_ARRAY = TRUE;
 
 -- 商品マスタ
 CREATE TABLE IF NOT EXISTS DIM_PRODUCTS (
@@ -136,12 +140,6 @@ CREATE TABLE IF NOT EXISTS FACT_ORDERS (
     order_channel VARCHAR, order_status VARCHAR, lot_no VARCHAR
 );
 
--- 文字起こし済みの通話
-CREATE TABLE IF NOT EXISTS RAW_CALL_TRANSCRIPTS (
-    call_id VARCHAR, call_datetime TIMESTAMP_NTZ, customer_id VARCHAR, order_id VARCHAR,
-    product_id VARCHAR, agent_id VARCHAR, call_duration_sec NUMBER, transcript_text VARCHAR
-);
-
 -- CSV の列名とテーブルの列名を対応させてロード（ロード済みのファイルはスキップ）
 COPY INTO DIM_PRODUCTS FROM @DATA_STAGE FILES = ('products.csv')
     FILE_FORMAT = (FORMAT_NAME = HANDSON_CSV) MATCH_BY_COLUMN_NAME = CASE_INSENSITIVE;
@@ -149,14 +147,11 @@ COPY INTO DIM_CUSTOMERS FROM @DATA_STAGE FILES = ('customers.csv')
     FILE_FORMAT = (FORMAT_NAME = HANDSON_CSV) MATCH_BY_COLUMN_NAME = CASE_INSENSITIVE;
 COPY INTO FACT_ORDERS FROM @DATA_STAGE FILES = ('orders.csv')
     FILE_FORMAT = (FORMAT_NAME = HANDSON_CSV) MATCH_BY_COLUMN_NAME = CASE_INSENSITIVE;
-COPY INTO RAW_CALL_TRANSCRIPTS FROM @DATA_STAGE FILES = ('call_transcripts.csv')
-    FILE_FORMAT = (FORMAT_NAME = HANDSON_CSV) MATCH_BY_COLUMN_NAME = CASE_INSENSITIVE;
 
--- 件数を確認（商品 55、顧客 300、注文 2,913、通話 88）
+-- 件数を確認（商品 55、顧客 300、注文 2,913）
 SELECT 'DIM_PRODUCTS' AS table_name, COUNT(*) AS record_count FROM DIM_PRODUCTS
 UNION ALL SELECT 'DIM_CUSTOMERS', COUNT(*) FROM DIM_CUSTOMERS
-UNION ALL SELECT 'FACT_ORDERS', COUNT(*) FROM FACT_ORDERS
-UNION ALL SELECT 'RAW_CALL_TRANSCRIPTS', COUNT(*) FROM RAW_CALL_TRANSCRIPTS;
+UNION ALL SELECT 'FACT_ORDERS', COUNT(*) FROM FACT_ORDERS;
 
 SELECT '【Step 6】構造化データのロードが完了しました' AS status;
 
@@ -234,7 +229,7 @@ SELECT '
 スキーマ: EC_ANALYTICS_SCHEMA
 ウェアハウス: GLACIERSTYLE_WH
 ステージ: DATA_STAGE（データファイル格納済み）、EXTRACTED_IMAGES_STAGE
-テーブル: DIM_PRODUCTS / DIM_CUSTOMERS / FACT_ORDERS（コメント付与済み）、RAW_CALL_TRANSCRIPTS
+テーブル: DIM_PRODUCTS / DIM_CUSTOMERS / FACT_ORDERS（コメント付与済み）
 GitHub 連携: GIT_INTEGRATION_FOR_HANDSON
 Snowflake Intelligence: SNOWFLAKE_INTELLIGENCE_OBJECT_DEFAULT
 

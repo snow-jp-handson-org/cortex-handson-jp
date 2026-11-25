@@ -1,7 +1,8 @@
 """
 12/16 ハンズオン用サンプルデータ生成スクリプト
 - 構造化: customers.csv / products.csv / orders.csv
-- 通話: call_transcripts.csv（文字起こし済み）、voice_logs_metadata.json の日付更新
+- 通話: tools/call_scripts.csv（音声の台本）、voice_logs_metadata.json の既存10件の日付更新
+  台本を変えたら tools/generate_voice.py → tools/build_voice_metadata.py の順に実行する
 - 期間: 2026-06-01 〜 2026-11-30
 固定シードで再現可能。ユースケース（docs/usecase_and_data_20261216.html）のシグナルを仕込み、最後に assert で確認する。
 
@@ -340,10 +341,14 @@ def build_calls(products, customers, orders):
 
 
 def update_voice_metadata(customers):
-    """既存 mp3 10件のメタデータを 2026年11月に寄せる（音声内容は変更しない）"""
+    """既存 mp3 10件のメタデータを 2026年11月に寄せる（音声内容は変更しない）
+
+    台本から生成した88件（audio_file が CALL-...mp3）は build_voice_metadata.py が作るので触らない
+    """
     path = DATA / "voice_logs" / "voice_logs_metadata.json"
     meta = json.loads(path.read_text(encoding="utf-8"))
-    for i, m in enumerate(meta):
+    originals = [m for m in meta if m["audio_file"].startswith("CALL_")]
+    for i, m in enumerate(sorted(originals, key=lambda x: x["audio_file"])):
         old = datetime.fromisoformat(m["call_start_time"])
         new = old.replace(year=2026, month=11)
         dur = timedelta(seconds=m["call_duration_sec"])
@@ -352,7 +357,7 @@ def update_voice_metadata(customers):
         m["call_id"] = f"CALL-{new:%Y%m%d}-V{i + 1:03d}"
         if m.get("customer_id"):
             m["customer_id"] = customers[i * 7]["customer_id"]
-    path.write_text(json.dumps(meta, ensure_ascii=False, indent=2), encoding="utf-8")
+    path.write_text(json.dumps(meta, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     return meta
 
 
@@ -376,7 +381,7 @@ def main():
     write_csv(DATA / "orders.csv", orders)
     for c in calls:
         c["call_datetime"] = c["call_datetime"].strftime("%Y-%m-%d %H:%M:%S")
-    write_csv(DATA / "call_transcripts.csv", calls,
+    write_csv(ROOT / "tools" / "call_scripts.csv", calls,
               ["call_id", "call_datetime", "customer_id", "order_id", "product_id", "agent_id", "call_duration_sec", "transcript_text"])
     # 正解ラベル（検証用。参加者には配布しない）
     write_csv(ROOT / "tools" / "expected_call_labels.csv", calls, ["call_id", "_inquiry", "_sentiment"])
