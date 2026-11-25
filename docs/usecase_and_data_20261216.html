@@ -88,7 +88,7 @@ ul { padding-left:1.3em; }
 <thead><tr><th>#</th><th>価値</th><th>内容</th><th>見せる場面</th></tr></thead>
 <tbody>
 <tr><td><span class="tag">1</span></td><td>非構造化データもテーブルと同じように扱える</td><td>音声やPDFも、テーブルと同じ場所に置いて、同じSQLで扱えます。</td><td>Part1：通話・PDFをステージに置き、AI_TRANSCRIBE／AI_PARSE_DOCUMENT でテーブル化（UC5 の店舗報告PDFも）</td></tr>
-<tr><td><span class="tag">2</span></td><td>大量の非構造化データを、Cortex AIで簡単に分析できる形に</td><td>これまで非構造化データは構造化データのように分析することが困難でした。Cortex AIなら大量の音声や文書から日時・数値・個人情報などを取り出して構造化データに変換でき、通常のデータと同じ感覚で集計・可視化できます。</td><td>Part2：通話から AI_EXTRACT で種別・感情・解約リスクを抽出、AI_REDACT でマスク。ダッシュボード（UC1）の通話系タイルの元データ</td></tr>
+<tr><td><span class="tag">2</span></td><td>大量の非構造化データを、Cortex AIで簡単に分析できる形に</td><td>これまで非構造化データは構造化データのように分析することが困難でした。Cortex AIなら大量の音声や文書から日時・数値・個人情報などを取り出して構造化データに変換でき、通常のデータと同じ感覚で集計・可視化できます。</td><td>Part2：通話から AI_COMPLETE で種別・感情・解約リスクを抽出、AI_REDACT でマスク。ダッシュボード（UC1）の通話系タイルの元データ</td></tr>
 <tr><td><span class="tag">3</span></td><td>Cortex Searchは「属性で絞り込める検索」</td><td>チャンク分割した文書に属性（種別・日付・カテゴリなど）を付けて、条件で絞り込んで検索できます。属性はアプリのフィルタ機能にもそのまま使えます。</td><td>UC3（同じ質問を3通りで検索）、シーン1・2（Agent が属性フィルタを自動で組み立てる）、UC4（フィルタを固定したツール）</td></tr>
 <tr><td><span class="tag">4</span></td><td>セマンティックビューは画面操作だけで作れて、精度も高い</td><td>Autopilotを使えば、SQLを書かずに数分で作成できます。自然言語での質問にも正確に答えます。</td><td>Part4：Autopilot で作成。シーン4（ロット×解約リスク×会員ランクの集計）の数値を支える</td></tr>
 <tr><td><span class="tag">5</span></td><td>Cortex Agentでノーコードに近いAIアシスタントを作り、社内公開</td><td>設定は宣言型で、ツールの使い分けは自然言語で指示するだけ。リフレクションは自動、データには利用者本人の権限でアクセスします。AnalystとCortex Searchを組み合わせ、数値データと文書をまたいで回答します。</td><td>UC2（シーン1〜4）。シーン4では SQL エラーを自動で直して再実行した（リフレクション）。UC4（権限デモ）</td></tr>
@@ -144,7 +144,7 @@ SELECT SNOWFLAKE.CORTEX.SEARCH_PREVIEW('KNOWLEDGE_SEARCH', '{
 <tbody>
 <tr><td>絞り込む対象</td><td>構造化テーブルの行（FACT_ORDERS の注文、CALL_ANALYSIS の通話件数）</td><td>通話の文字起こしやPDFを分割した<strong>文章の断片（チャンク）</strong></td></tr>
 <tr><td>返ってくるもの</td><td>集計した数字（返品率 15.4% など）</td><td>文章そのもの（「点灯10分ほどでちらつく」「対象ロットは期限なし」など）</td></tr>
-<tr><td>絞り込みの条件</td><td>テーブルにもともとある列（注文日、商品カテゴリ）</td><td>文章に<strong>後から付けた属性</strong>。PDF の属性（文書の種類・部署・公開範囲・発行日・対象商品）は文書の表紙から、通話の属性（商品カテゴリ・感情）は会話の中身から、<strong>すべて AI_EXTRACT で取り出す</strong></td></tr>
+<tr><td>絞り込みの条件</td><td>テーブルにもともとある列（注文日、商品カテゴリ）</td><td>文章に<strong>後から付けた属性</strong>。PDF の属性（文書の種類・部署・公開範囲・発行日・対象商品）は文書の表紙から、通話の属性（商品カテゴリ・感情）は会話の中身から、<strong>すべて AI_COMPLETE で取り出す</strong></td></tr>
 <tr><td>使いどころ</td><td>「何が起きているか」を数字で見る</td><td>「なぜ起きているか」「どう対応するか」を文書と通話から探す</td></tr>
 <tr><td>絞らないとどうなるか</td><td>全期間・全カテゴリの数字になる</td><td>お客様向けFAQと社内通達、過去の通話が混ざり、<strong>間違った案内につながる</strong>（UC3 の①）</td></tr>
 </tbody></table></div>
@@ -155,7 +155,7 @@ SELECT SNOWFLAKE.CORTEX.SEARCH_PREVIEW('KNOWLEDGE_SEARCH', '{
 <span class="tag">DOC_TYPE: 品質報告</span><span class="tag">DEPARTMENT: 品質管理部</span><span class="tag">AUDIENCE: 社内限定</span><span class="tag">DOC_DATE: 2026-10-15</span><span class="tag">PRODUCT_CATEGORY: 照明</span><span class="tag">PRODUCT_IDS: [PRD-LGT-0001]</span>
 </div>
 <p>CoWork では、Agent が質問からこの属性フィルタを自分で組み立てる。当日は、回答の「思考過程」で実際に使われたフィルタを見せると、「文章を属性で絞った」ことが伝わりやすい。検証時の実例：<code>{"@and":[{"@eq":{"PRODUCT_CATEGORY":"照明"}},{"@eq":{"DOC_TYPE":"通話"}},{"@gte":{"DOC_DATE":"2026-10-01"}}]}</code></p>
-<p class="sub">属性は手で作らず、すべて AI_EXTRACT で非構造化データから取り出している。PDF 11本の属性は、用意した正解と全項目一致した（12章）。</p>
+<p class="sub">属性は手で作らず、すべて AI_COMPLETE で非構造化データから取り出している。PDF 11本の属性は、用意した正解と全項目一致した（12章）。</p>
 
 <h2 id="prompts">5. CoWork のプロンプトと期待する回答</h2>
 
@@ -185,7 +185,7 @@ SELECT SNOWFLAKE.CORTEX.SEARCH_PREVIEW('KNOWLEDGE_SEARCH', '{
 <ul>
 <li>Agent の動き：Analyst → Search（フィルタ <code>PRODUCT_CATEGORY=照明</code> かつ <code>DOC_DATE≥2026-09-15</code> を<strong>自分で組み立てた</strong>）→ ロット別の返品率を SQL で集計</li>
 <li>回答：「原因は LEDデスクライト 調光式のロット LOT-2609-B。返品率は9月 1.9% → 10月 36.1% → 11月 48.1%。他の照明は2〜4%で変化なし。通話の訴え（点灯10分ほどでちらつく）は品質報告の症状と一致」</li>
-<li>データ上の件数：10月以降の不具合通話は26件（うち同じ顧客からの再入電3件）</li>
+<li>データ上の件数：10月以降の不具合通話は28件（うち LOT-2609-B の LEDデスクライト 26件、うち同じ顧客からの再入電3件）</li>
 </ul>
 </div>
 
@@ -272,10 +272,8 @@ SELECT SNOWFLAKE.CORTEX.SEARCH_PREVIEW('KNOWLEDGE_SEARCH', '{
 <svg viewBox="0 0 1105 450" width="1105" role="img" aria-label="データの流れ: ステージの通話・PDFを AI 関数でテーブル化し、属性付きチャンクから Cortex Search を作る。構造化データと通話分析からセマンティックビューを作り、Agent と Dashboards を経て CoWork で使う" style="min-width:720px;max-width:100%;height:auto">
 <defs><marker id="fl-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="fl-head"/></marker></defs>
 <line class="fl-edge" x1="170" y1="43.0" x2="561" y2="83.0" marker-end="url(#fl-arrow)"/>
-<line class="fl-edge" x1="170" y1="153.0" x2="191" y2="153.0" marker-end="url(#fl-arrow)"/>
-<line class="fl-edge" x1="170" y1="223.0" x2="191" y2="223.0" marker-end="url(#fl-arrow)"/>
-<line class="fl-edge" x1="355" y1="153.0" x2="376" y2="188.0" marker-end="url(#fl-arrow)"/>
-<line class="fl-edge" x1="355" y1="223.0" x2="376" y2="188.0" marker-end="url(#fl-arrow)"/>
+<line class="fl-edge" x1="170" y1="188.0" x2="191" y2="188.0" marker-end="url(#fl-arrow)"/>
+<line class="fl-edge" x1="355" y1="188.0" x2="376" y2="188.0" marker-end="url(#fl-arrow)"/>
 <line class="fl-edge" x1="170" y1="343.0" x2="191" y2="343.0" marker-end="url(#fl-arrow)"/>
 <line class="fl-edge" x1="355" y1="343.0" x2="561" y2="343.0" marker-end="url(#fl-arrow)"/>
 <line class="fl-edge" x1="355" y1="343.0" x2="376" y2="413.0" marker-end="url(#fl-arrow)"/>
@@ -290,31 +288,25 @@ SELECT SNOWFLAKE.CORTEX.SEARCH_PREVIEW('KNOWLEDGE_SEARCH', '{
 <line class="fl-edge" x1="910" y1="188.0" x2="931" y2="118.0" marker-end="url(#fl-arrow)"/>
 <rect class="fl-box fl-tbl" x="10" y="20" width="160" height="46" rx="6"/>
 <text class="fl-t1" x="90.0" y="39" style="font-size:10px">DIM_* / FACT_ORDERS</text>
-<text class="fl-t2" x="90.0" y="56">CSV を COPY INTO</text>
-<rect class="fl-box fl-src" x="10" y="130" width="160" height="46" rx="6"/>
-<text class="fl-t1" x="90.0" y="149">通話 mp3 10件</text>
-<text class="fl-t2" x="90.0" y="166">ステージ</text>
-<rect class="fl-box fl-src" x="10" y="200" width="160" height="46" rx="6"/>
-<text class="fl-t1" x="90.0" y="219">文字起こし済み 88件</text>
-<text class="fl-t2" x="90.0" y="236">ステージ</text>
+<text class="fl-t2" x="90.0" y="56">setup で COPY INTO</text>
+<rect class="fl-box fl-src" x="10" y="165" width="160" height="46" rx="6"/>
+<text class="fl-t1" x="90.0" y="184">通話 mp3 98件</text>
+<text class="fl-t2" x="90.0" y="201">ステージ＋メタデータJSON</text>
 <rect class="fl-box fl-src" x="10" y="320" width="160" height="46" rx="6"/>
 <text class="fl-t1" x="90.0" y="339">PDF 11本</text>
 <text class="fl-t2" x="90.0" y="356">ステージ</text>
-<rect class="fl-box fl-tbl" x="195" y="130" width="160" height="46" rx="6"/>
-<text class="fl-t1" x="275.0" y="149">RAW_VOICE_LOGS</text>
-<text class="fl-t2" x="275.0" y="166">AI_TRANSCRIBE</text>
-<rect class="fl-box fl-tbl" x="195" y="200" width="160" height="46" rx="6"/>
-<text class="fl-t1" x="275.0" y="219" style="font-size:10px">RAW_CALL_TRANSCRIPTS</text>
-<text class="fl-t2" x="275.0" y="236">CSV を COPY INTO</text>
+<rect class="fl-box fl-tbl" x="195" y="165" width="160" height="46" rx="6"/>
+<text class="fl-t1" x="275.0" y="184" style="font-size:10px">RAW_CALL_TRANSCRIPTS</text>
+<text class="fl-t2" x="275.0" y="201">AI_TRANSCRIBE</text>
 <rect class="fl-box fl-tbl" x="195" y="320" width="160" height="46" rx="6"/>
 <text class="fl-t1" x="275.0" y="339">RAW_DOCUMENTS</text>
 <text class="fl-t2" x="275.0" y="356">AI_PARSE_DOCUMENT</text>
 <rect class="fl-box fl-tbl" x="380" y="165" width="160" height="46" rx="6"/>
 <text class="fl-t1" x="460.0" y="184">CALL_ANALYSIS</text>
-<text class="fl-t2" x="460.0" y="201">AI_EXTRACT・AI_REDACT</text>
+<text class="fl-t2" x="460.0" y="201">AI_COMPLETE・AI_REDACT</text>
 <rect class="fl-box fl-tbl" x="380" y="390" width="160" height="46" rx="6"/>
 <text class="fl-t1" x="460.0" y="409">DOC_ATTRIBUTES</text>
-<text class="fl-t2" x="460.0" y="426">AI_EXTRACT（表紙）</text>
+<text class="fl-t2" x="460.0" y="426">AI_COMPLETE（表紙）</text>
 <rect class="fl-box fl-tbl" x="565" y="320" width="160" height="46" rx="6"/>
 <text class="fl-t1" x="645.0" y="339">KNOWLEDGE_CHUNKS</text>
 <text class="fl-t2" x="645.0" y="356">属性付きチャンク</text>
@@ -345,14 +337,14 @@ SELECT SNOWFLAKE.CORTEX.SEARCH_PREVIEW('KNOWLEDGE_SEARCH', '{
 <tr><td>構造化</td><td><code>customers.csv</code></td><td>300件</td><td>顧客ID、氏名、電話、都道府県、会員ランク</td><td>再生成（現行100件）</td></tr>
 <tr><td>構造化</td><td><code>products.csv</code></td><td>55件</td><td>商品ID、商品名、カテゴリL1〜L3、価格</td><td>再生成（現行576件）</td></tr>
 <tr><td>構造化</td><td><code>orders.csv</code></td><td>2,913件</td><td>2026/6〜11の注文。返品は <code>order_status=returned</code>。<code>lot_no</code> 列あり</td><td>再生成（現行500件・2024年）</td></tr>
-<tr><td>通話</td><td><code>voice_logs/*.mp3</code></td><td>10件</td><td>AI_TRANSCRIBE の実演用</td><td>流用（メタデータの日付を2026年11月に更新）</td></tr>
-<tr><td>通話</td><td><code>call_transcripts.csv</code></td><td>88件</td><td>通話ID、日時、顧客ID、注文ID、商品ID、本文（個人情報を含む）</td><td class="new">新規</td></tr>
+<tr><td>通話</td><td><code>voice_logs/*.mp3</code></td><td>98件</td><td>AI_TRANSCRIBE で文字起こしし RAW_CALL_TRANSCRIPTS を作る（個人情報を含む会話）</td><td>既存10件は流用（日付を2026年11月に更新）、88件は台本から macOS say で新規生成（<code>tools/generate_voice.py</code>）</td></tr>
+<tr><td>通話</td><td><code>voice_logs/voice_logs_metadata.json</code></td><td>98件</td><td>通話ID、音声ファイル名、日時、通話秒数、担当者ID、顧客ID、注文ID、商品ID</td><td class="new">更新</td></tr>
 <tr><td>PDF</td><td><code>faq_document.pdf</code></td><td>45ページ</td><td>社外公開。返品・配送の案内</td><td>日付を2026年に更新（表紙・例示の行）</td></tr>
 <tr><td>PDF</td><td><code>operation_manual_w_images.pdf</code></td><td>45ページ</td><td>社内限定。CS部の手順</td><td>日付を2026年に更新（表紙・改訂履歴・例示）</td></tr>
 <tr><td>PDF</td><td><code>documents/quality_report_202610.pdf</code>, <code>_202611.pdf</code></td><td>2本</td><td>品質管理部。不具合の原因、対象商品とロット</td><td class="new">新規</td></tr>
 <tr><td>PDF</td><td><code>documents/cs_notice_202610.pdf</code></td><td>1本</td><td>CS部。対象ロットの特例対応（FAQ との差を作る文書）</td><td class="new">新規</td></tr>
 <tr><td>PDF</td><td><code>documents/store_report_202606.pdf</code> 〜 <code>202611</code></td><td>6本</td><td>店舗運営部。店舗別売上の表と所感（UC5）</td><td class="new">新規</td></tr>
-<tr><td>正解</td><td><code>tools/expected_document_attributes.csv</code></td><td>11行</td><td>PDF の属性の正解。AI_EXTRACT の結果の確認用で、参加者には配布しない</td><td class="new">新規</td></tr>
+<tr><td>正解</td><td><code>tools/expected_document_attributes.csv</code></td><td>11行</td><td>PDF の属性の正解。AI_COMPLETE の結果の確認用で、参加者には配布しない</td><td class="new">新規</td></tr>
 <tr><td>生成</td><td><code>tools/generate_data.py</code>, <code>tools/generate_pdfs.py</code></td><td>—</td><td>固定シードで再生成できる。シグナルを assert で確認</td><td class="new">新規</td></tr>
 </tbody></table></div>
 
@@ -382,16 +374,15 @@ SELECT SNOWFLAKE.CORTEX.SEARCH_PREVIEW('KNOWLEDGE_SEARCH', '{
 <div class="table-wrap"><table>
 <thead><tr><th>テーブル</th><th>作るタイミング</th><th>粒度</th><th>主な列</th></tr></thead>
 <tbody>
-<tr><td>DIM_CUSTOMERS / DIM_PRODUCTS（ディメンション）</td><td>Part1</td><td>各1行</td><td>CSVのまま</td></tr>
-<tr><td>FACT_ORDERS（ファクト）</td><td>Part1</td><td>注文1件</td><td>CSVのまま（order_status, lot_no を含む）</td></tr>
-<tr><td>RAW_CALL_TRANSCRIPTS</td><td>Part1</td><td>通話1件</td><td>call_id, call_datetime, customer_id, order_id, product_id, transcript_text（CSVのまま）</td></tr>
-<tr><td>RAW_VOICE_LOGS</td><td>Part1</td><td>音声1件</td><td>call_id, audio_file, audio_duration_sec, transcript_text（AI_TRANSCRIBE の結果）</td></tr>
-<tr><td>CALL_ANALYSIS</td><td>Part2</td><td>通話1件（RAW_CALL_TRANSCRIPTS と RAW_VOICE_LOGS を合わせる）</td><td>call_id, inquiry_type, product_category, sentiment, churn_risk, summary, transcript_masked（AI_EXTRACT / AI_REDACT の結果）</td></tr>
+<tr><td>DIM_CUSTOMERS / DIM_PRODUCTS（ディメンション）</td><td>setup</td><td>各1行</td><td>CSVのまま（列コメント付き）</td></tr>
+<tr><td>FACT_ORDERS（ファクト）</td><td>setup</td><td>注文1件</td><td>CSVのまま（order_status, lot_no を含む）</td></tr>
+<tr><td>RAW_CALL_TRANSCRIPTS</td><td>Part1</td><td>通話1件</td><td>call_id, call_datetime, customer_id, order_id, product_id, agent_id, call_duration_sec, transcript_text（mp3 を AI_TRANSCRIBE し、メタデータ JSON と結合）</td></tr>
+<tr><td>CALL_ANALYSIS</td><td>Part2</td><td>通話1件</td><td>call_id, inquiry_type, product_category, sentiment, churn_risk, summary, transcript_masked（AI_COMPLETE / AI_REDACT の結果）</td></tr>
 <tr><td>RAW_DOCUMENTS</td><td>Part1</td><td>PDF1ページ</td><td>file_name, page_no, page_text</td></tr>
-<tr><td>DOC_ATTRIBUTES</td><td>Part2</td><td>PDF1本</td><td>file_name, title, doc_type, department, audience, doc_date, product_category, product_ids（表紙から AI_EXTRACT）</td></tr>
+<tr><td>DOC_ATTRIBUTES</td><td>Part2</td><td>PDF1本</td><td>file_name, title, doc_type, department, audience, doc_date, product_category, product_ids（表紙から AI_COMPLETE）</td></tr>
 <tr><td>KNOWLEDGE_CHUNKS</td><td>Part2</td><td>チャンク1件</td><td>次の章を参照</td></tr>
 </tbody></table></div>
-<p class="sub">メダリオンアーキテクチャの名前で呼ぶ。Bronze 層＝取り込んだままの生データ（RAW_*、Part1）、Silver 層＝整えて分析に使える形（DIM_ / FACT_ は Part1、CALL_ANALYSIS, DOC_ATTRIBUTES は Part2）、Gold 層＝検索や Agent にそのまま使う形（KNOWLEDGE_CHUNKS は Part2、セマンティックビューは Part4）。各パートの後に <code>checkpoint_20261216.sql</code> で追いつける。検証での件数：RAW_CALL_TRANSCRIPTS 88件、RAW_VOICE_LOGS 10件、RAW_DOCUMENTS 99ページ、CALL_ANALYSIS 98件、DOC_ATTRIBUTES 11件、KNOWLEDGE_CHUNKS 200件。検証用の SQL は <code>tools/verify/</code>。</p>
+<p class="sub">メダリオンアーキテクチャの名前で呼ぶ。Bronze 層＝取り込んだままの生データ（RAW_*、Part1）、Silver 層＝整えて分析に使える形（DIM_ / FACT_ は setup、CALL_ANALYSIS, DOC_ATTRIBUTES は Part2）、Gold 層＝検索や Agent にそのまま使う形（KNOWLEDGE_CHUNKS は Part2、セマンティックビューは Part4）。各パートの後に <code>checkpoint_20261216.sql</code> で追いつける。検証での件数：RAW_CALL_TRANSCRIPTS 98件、RAW_DOCUMENTS 99ページ、CALL_ANALYSIS 98件、DOC_ATTRIBUTES 11件、KNOWLEDGE_CHUNKS 200件。検証用の SQL は <code>tools/verify/</code>。</p>
 
 <h2 id="search">10. Cortex Search 用テーブルとサービス</h2>
 <h3>KNOWLEDGE_CHUNKS（通話と PDF を1つにまとめたテーブル）</h3>
@@ -401,13 +392,13 @@ SELECT SNOWFLAKE.CORTEX.SEARCH_PREVIEW('KNOWLEDGE_SEARCH', '{
 <tr><td>CHUNK_ID</td><td>VARCHAR</td><td>主キー</td><td>CALL-0123 / FAQ-p3-02</td><td>call_id</td><td>ファイル名＋ページ＋連番</td></tr>
 <tr><td>CHUNK_TEXT</td><td>VARCHAR</td><td>検索対象</td><td>—</td><td>マスク済みの要約＋本文</td><td>ページ本文を分割したもの</td></tr>
 <tr><td>TITLE</td><td>VARCHAR</td><td>表示用</td><td>LEDデスクライト ちらつき</td><td>問い合わせ種別＋商品名</td><td>文書名＋見出し</td></tr>
-<tr><td>DOC_TYPE</td><td>VARCHAR</td><td>属性</td><td>通話 / FAQ / マニュアル / 品質報告 / 通達 / 店舗報告</td><td>通話（出どころで決まる）</td><td>表紙から AI_EXTRACT</td></tr>
-<tr><td>DEPARTMENT</td><td>VARCHAR</td><td>属性</td><td>カスタマーサポート部 / 品質管理部 / 店舗運営部</td><td>カスタマーサポート部（同上）</td><td>表紙から AI_EXTRACT（選択肢を指定）</td></tr>
-<tr><td>AUDIENCE</td><td>VARCHAR</td><td>属性</td><td>社外公開 / 社内限定</td><td>社内限定（同上）</td><td>表紙から AI_EXTRACT</td></tr>
+<tr><td>DOC_TYPE</td><td>VARCHAR</td><td>属性</td><td>通話 / FAQ / マニュアル / 品質報告 / 通達 / 店舗報告</td><td>通話（出どころで決まる）</td><td>表紙から AI_COMPLETE</td></tr>
+<tr><td>DEPARTMENT</td><td>VARCHAR</td><td>属性</td><td>カスタマーサポート部 / 品質管理部 / 店舗運営部</td><td>カスタマーサポート部（同上）</td><td>表紙から AI_COMPLETE（選択肢を指定）</td></tr>
+<tr><td>AUDIENCE</td><td>VARCHAR</td><td>属性</td><td>社外公開 / 社内限定</td><td>社内限定（同上）</td><td>表紙から AI_COMPLETE</td></tr>
 <tr><td>DOC_DATE</td><td>DATE</td><td>属性</td><td>2026-10-14</td><td>通話日</td><td>発行日</td></tr>
-<tr><td>PRODUCT_CATEGORY</td><td>VARCHAR</td><td>属性</td><td>照明 / 家具 / …（商品の中カテゴリ）</td><td>会話の中身から AI_EXTRACT（商品の話でなければ NULL）</td><td>表紙から AI_EXTRACT（特定の商品の文書でなければ NULL）</td></tr>
-<tr><td>PRODUCT_IDS</td><td>ARRAY</td><td>属性</td><td>["PRD-LGT-0001"]</td><td>[product_id]（注文との紐付け）</td><td>表紙から AI_EXTRACT</td></tr>
-<tr><td>SENTIMENT</td><td>VARCHAR</td><td>属性</td><td>ネガティブ / 中立 / ポジティブ</td><td>AI_EXTRACT の結果</td><td>NULL</td></tr>
+<tr><td>PRODUCT_CATEGORY</td><td>VARCHAR</td><td>属性</td><td>照明 / 家具 / …（商品の中カテゴリ）</td><td>会話の中身から AI_COMPLETE（商品の話でなければ NULL）</td><td>表紙から AI_COMPLETE（特定の商品の文書でなければ NULL）</td></tr>
+<tr><td>PRODUCT_IDS</td><td>ARRAY</td><td>属性</td><td>["PRD-LGT-0001"]</td><td>[product_id]（注文との紐付け）</td><td>表紙から AI_COMPLETE</td></tr>
+<tr><td>SENTIMENT</td><td>VARCHAR</td><td>属性</td><td>ネガティブ / 中立 / ポジティブ</td><td>AI_COMPLETE の結果</td><td>NULL</td></tr>
 </tbody></table></div>
 
 <h3>KNOWLEDGE_SEARCH（サービスは1つだけ）</h3>
@@ -528,7 +519,7 @@ AS SELECT CHUNK_ID, CHUNK_TEXT, TITLE, DOC_TYPE, DEPARTMENT, AUDIENCE, DOC_DATE,
 <li>FAQ・マニュアル（各の45ページ）を参加者全員が解析するとクレジットと時間がかかる。ページを絞るか、解析済みを配布するかを検討</li>
 <li>UC5（店舗報告PDF）を本編に入れるか、付録にするか（時間配分しだい）</li>
 <li>Part3〜5 のノートブックと、Dashboards・CoWork の手順（setup_20261216.sql と Part1・2 は反映済み。引き継ぎは <code>docs/handoff_part3-5_20261216.md</code>）</li>
-<li><strong>属性の作り方</strong>：AI_EXTRACT で取り出す形に切り替え済み（12章）。属性を取り出す手順を参加者が Part2 で実行するのか、準備済みのものを見せるだけにするのかは、時間配分しだい</li>
+<li><strong>属性の作り方</strong>：AI_COMPLETE で取り出す形に切り替え済み（12章の検証は AI_EXTRACT 時点のもの）。属性を取り出す手順を参加者が Part2 で実行するのか、準備済みのものを見せるだけにするのかは、時間配分しだい</li>
 <li>CoWork での「壁打ちの入り口」の質問（5章）は未検証</li>
 </ul>
 
