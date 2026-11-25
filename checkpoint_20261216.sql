@@ -19,33 +19,9 @@ CREATE OR REPLACE FILE FORMAT HANDSON_CHECKPOINT_CSV
   TYPE = CSV SKIP_HEADER = 1 FIELD_OPTIONALLY_ENCLOSED_BY = '"';
 
 -- ============================================================================
--- Part 1 完了時点（Bronze 層: RAW_* ／ Silver 層: DIM_* ・ FACT_ORDERS）
+-- Part 1 完了時点（Bronze 層: RAW_VOICE_LOGS ・ RAW_DOCUMENTS）
 -- ============================================================================
--- 構造化データは part1_20261216.ipynb と同じ手順でロード
-CREATE OR REPLACE FILE FORMAT HANDSON_CSV
-  TYPE = CSV PARSE_HEADER = TRUE FIELD_OPTIONALLY_ENCLOSED_BY = '"';
-CREATE OR REPLACE TABLE DIM_PRODUCTS (
-  product_id VARCHAR, product_name VARCHAR, category_l1 VARCHAR, category_l2 VARCHAR, category_l3 VARCHAR,
-  brand VARCHAR, list_price NUMBER, cost_price NUMBER, launch_date DATE);
-CREATE OR REPLACE TABLE DIM_CUSTOMERS (
-  customer_id VARCHAR, last_name VARCHAR, first_name VARCHAR, gender VARCHAR, birth_date DATE,
-  email VARCHAR, phone VARCHAR, prefecture VARCHAR, city VARCHAR, registration_date DATE, membership_tier VARCHAR);
-CREATE OR REPLACE TABLE FACT_ORDERS (
-  order_id VARCHAR, order_datetime TIMESTAMP_NTZ, customer_id VARCHAR, product_id VARCHAR,
-  quantity NUMBER, unit_price NUMBER, discount_amount NUMBER, total_amount NUMBER,
-  order_channel VARCHAR, order_status VARCHAR, lot_no VARCHAR);
-CREATE OR REPLACE TABLE RAW_CALL_TRANSCRIPTS (
-  call_id VARCHAR, call_datetime TIMESTAMP_NTZ, customer_id VARCHAR, order_id VARCHAR,
-  product_id VARCHAR, agent_id VARCHAR, call_duration_sec NUMBER, transcript_text VARCHAR);
-COPY INTO DIM_PRODUCTS FROM @DATA_STAGE FILES = ('products.csv')
-  FILE_FORMAT = (FORMAT_NAME = HANDSON_CSV) MATCH_BY_COLUMN_NAME = CASE_INSENSITIVE;
-COPY INTO DIM_CUSTOMERS FROM @DATA_STAGE FILES = ('customers.csv')
-  FILE_FORMAT = (FORMAT_NAME = HANDSON_CSV) MATCH_BY_COLUMN_NAME = CASE_INSENSITIVE;
-COPY INTO FACT_ORDERS FROM @DATA_STAGE FILES = ('orders.csv')
-  FILE_FORMAT = (FORMAT_NAME = HANDSON_CSV) MATCH_BY_COLUMN_NAME = CASE_INSENSITIVE;
-COPY INTO RAW_CALL_TRANSCRIPTS FROM @DATA_STAGE FILES = ('call_transcripts.csv')
-  FILE_FORMAT = (FORMAT_NAME = HANDSON_CSV) MATCH_BY_COLUMN_NAME = CASE_INSENSITIVE;
-
+-- DIM_* ・ FACT_ORDERS ・ RAW_CALL_TRANSCRIPTS は setup_20261216.sql でロード・コメント付与済みのため復元しない
 -- AI 関数の結果は、検証済みの CSV から復元（AI 関数は実行しない）
 CREATE OR REPLACE TABLE RAW_VOICE_LOGS AS
 SELECT $1::VARCHAR AS call_id, $2::VARCHAR AS audio_file, $3::NUMBER(10, 1) AS audio_duration_sec,
